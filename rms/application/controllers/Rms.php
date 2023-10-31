@@ -535,7 +535,8 @@ class Rms extends CI_Controller
             'nama_rekening' => $nama_rekening,
             'bank' => $bank,
             'jenis_pajak' => $jenis_pajak,
-            'no_pajak' => $no_pajak,
+            'no_pajak' => $no_pajak,,
+            'status' => '1',
         );
 
 
