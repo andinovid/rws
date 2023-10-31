@@ -82,6 +82,8 @@
                     <th>No</th>
                     <th>Nama</th>
                     <th>No Rekening</th>
+                    <th>Nama Rekening</th>
+                    <th>Bank</th>
                     <th>Jenis Pajak</th>
                     <th>No Pajak</th>
                     <th>Nama Pajak</th>
@@ -150,18 +152,17 @@
                     <input type="text" class="form-control" id="no_pajak" name="no_pajak" placeholder="Input nama rekening">
                   </div>
                 </div>
-                  <div class="form-group">
-                    <label for="no_pajak">Nama Pajak</label>
-                    <input type="text" class="form-control" id="no_pajak" name="no_pajak" placeholder="Input nama rekening">
-                  </div>
+                <div class="form-group">
+                  <label for="no_pajak">Nama Pajak</label>
+                  <input type="text" class="form-control" id="no_pajak" name="no_pajak" placeholder="Input nama rekening">
                 </div>
               </div>
             </div>
-            <div class="modal-footer" style="justify-content: flex-start;">
-              <button type="submit" class="btn btn-primary">Save changes</button>
-              <div class="loading" style="display: none;">
-                <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
-              </div>
+          </div>
+          <div class="modal-footer" style="justify-content: flex-start;">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <div class="loading" style="display: none;">
+              <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
             </div>
           </div>
         </form>
@@ -169,13 +170,6 @@
       </div>
       <!-- /.modal-dialog -->
     </div>
-
-
-
-
-
-
-
   </section>
 </div>
 
