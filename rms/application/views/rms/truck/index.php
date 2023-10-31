@@ -92,7 +92,7 @@
 
 
                           <td>
-                            <?php if ($row->pajak_tahunan){ ?>
+                            <?php if ($row->pajak_tahunan !=""){ ?>
                             <?php echo shortdate_indo($row->pajak_tahunan); ?><br>
                             <small> Sisa
                               <?php
@@ -123,7 +123,7 @@
                           </td>
 
                           <td>
-                          <?php if ($row->pajak_5_tahunan){ ?>
+                          <?php if ($row->pajak_5_tahunan !=""){ ?>
                             <?php echo shortdate_indo($row->pajak_5_tahunan); ?><br>
                             <small>Sisa
                               <?php
