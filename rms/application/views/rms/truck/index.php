@@ -92,6 +92,7 @@
 
 
                           <td>
+                            <?php if ($row->pajak_tahunan){ ?>
                             <?php echo shortdate_indo($row->pajak_tahunan); ?><br>
                             <small> Sisa
                               <?php
@@ -118,9 +119,11 @@
                               }
                               ?>
                             </small>
+                            <?php }else{ echo "-"; } ?>
                           </td>
 
                           <td>
+                          <?php if ($row->pajak_5_tahunan){ ?>
                             <?php echo shortdate_indo($row->pajak_5_tahunan); ?><br>
                             <small>Sisa
                               <?php
@@ -147,6 +150,7 @@
                               }
                               ?>
                             </small>
+                            <?php }else{ echo "-"; } ?>
                           </td>
 
                           <td class="project-actions text-right">
