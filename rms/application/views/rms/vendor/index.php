@@ -152,7 +152,7 @@
                   </div>
                   <div class="form-group">
                     <label for="no_pajak">Nama Pajak</label>
-                    <input type="text" class="form-control" id="no_pajak" name="no_pajak" placeholder="Input nama rekening">
+                    <input type="text" class="form-control" id="nama_pajak" name="nama_pajak" placeholder="Input nama rekening">
                   </div>
                 </div>
               </div>
