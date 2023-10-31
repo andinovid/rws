@@ -1,26 +1,21 @@
 .DS_Store
 
-application/cache/*
-!application/cache/index.html
+rms/application/cache/*
+!rms/application/cache/index.html
 
-application/logs/*
-!application/logs/index.html
+rms/application/logs/*
+!rms/application/logs/index.html
 
-!application/*/.htaccess
+!rms/application/*/.htaccess
 
 composer.lock
 tests/mocks/database/ci_test.sqlite
 
-user_guide_src/build/*
-user_guide_src/cilexer/build/*
-user_guide_src/cilexer/dist/*
-user_guide_src/cilexer/pycilexer.egg-info/*
-/vendor/
-
-
-!rms/application/config/database.php
-rms/application/config/database.php
-/rms/application/config/database.php
+rms/user_guide_src/build/*
+rms/user_guide_src/cilexer/build/*
+rms/user_guide_src/cilexer/dist/*
+rms/user_guide_src/cilexer/pycilexer.egg-info/*
+rms//vendor/
 
 # IDE Files
 #-------------------------
