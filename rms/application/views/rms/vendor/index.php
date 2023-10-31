@@ -130,13 +130,13 @@
                     <label for="nama_rekening">Nama Rekening</label>
                     <input type="text" class="form-control" id="nama_rekening" name="nama_rekening" placeholder="Input nama rekening">
                   </div>
-
-                </div>
-                <div class="col-md-6">
                   <div class="form-group">
                     <label for="bank">Bank</label>
                     <input type="text" class="form-control" id="bank" name="bank" placeholder="Input nama bank">
                   </div>
+                </div>
+                <div class="col-md-6">
+
                   <div class="form-group">
                     <label for="jenis_pajak">Jenis Pajak</label>
                     <select id="colorselector" class="form-control" name="jenis_pajak">
@@ -146,23 +146,22 @@
                       <option value="skb">SKB</option>
                     </select>
                   </div>
-
                   <div class="form-group">
                     <label for="no_pajak">Nomor Pajak</label>
                     <input type="text" class="form-control" id="no_pajak" name="no_pajak" placeholder="Input nama rekening">
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="no_pajak">Nama Pajak</label>
-                  <input type="text" class="form-control" id="no_pajak" name="no_pajak" placeholder="Input nama rekening">
+                  <div class="form-group">
+                    <label for="no_pajak">Nama Pajak</label>
+                    <input type="text" class="form-control" id="no_pajak" name="no_pajak" placeholder="Input nama rekening">
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="modal-footer" style="justify-content: flex-start;">
-            <button type="submit" class="btn btn-primary">Save changes</button>
-            <div class="loading" style="display: none;">
-              <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
+            <div class="modal-footer" style="justify-content: flex-start;">
+              <button type="submit" class="btn btn-primary">Save changes</button>
+              <div class="loading" style="display: none;">
+                <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
+              </div>
             </div>
           </div>
         </form>
