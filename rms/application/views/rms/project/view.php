@@ -225,12 +225,12 @@
                       <td><?php echo $row->nama_supir; ?></td>
                       <td><?php echo $row->nopol; ?></td>
                       <td><?php echo $row->nama_tujuan; ?></td>
-                      <td><?php if($project->timbang_kebun_bag != NULL){ echo number_format($row->timbang_kebun_bag, 0, "", ".");  }else{ echo "0"; }  ?></td>
-                      <td><?php if($project->timbang_kebun_kg != NULL){ echo number_format($row->timbang_kebun_kg, 0, "", ".");  }else{ echo "0"; }  ?> Kg</td>
-                      <td><?php if($project->qty_kirim_bag != NULL){ echo number_format($row->qty_kirim_bag, 0, "", "."); }else{ echo "0"; }  ?></td>
-                      <td><?php if($project->qty_kirim_kg != NULL){ echo number_format($row->qty_kirim_kg, 0, "", "."); }else{ echo "0"; }  ?> Kg</td>
-                      <td><?php if($project->m_susut != NULL){ echo number_format($row->m_susut, 0, "", "."); }else{ echo "0"; } ?> Kg</td>
-                      <td><?php if($project->c_claim != NULL){ echo number_format($row->c_claim, 0, "", "."); }else{ echo "0"; }  ?> Kg</td>
+                      <td><?php if($row->timbang_kebun_bag != NULL){ echo number_format($row->timbang_kebun_bag, 0, "", ".");  }else{ echo "0"; }  ?></td>
+                      <td><?php if($row->timbang_kebun_kg != NULL){ echo number_format($row->timbang_kebun_kg, 0, "", ".");  }else{ echo "0"; }  ?> Kg</td>
+                      <td><?php if($row->qty_kirim_bag != NULL){ echo number_format($row->qty_kirim_bag, 0, "", "."); }else{ echo "0"; }  ?></td>
+                      <td><?php if($row->qty_kirim_kg != NULL){ echo number_format($row->qty_kirim_kg, 0, "", "."); }else{ echo "0"; }  ?> Kg</td>
+                      <td><?php if($row->m_susut != NULL){ echo number_format($row->m_susut, 0, "", "."); }else{ echo "0"; } ?> Kg</td>
+                      <td><?php if($row->c_claim != NULL){ echo number_format($row->c_claim, 0, "", "."); }else{ echo "0"; }  ?> Kg</td>
                       <td><span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span></td>
 
                       <td class="project-actions text-right">
