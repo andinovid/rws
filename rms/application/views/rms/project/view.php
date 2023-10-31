@@ -145,13 +145,13 @@
 
                     <div class="info-box-content">
                       <span class="info-box-text">Status Project</span>
-                      <span class="info-box-number">Terkirim <?php echo number_format($project->total_terkirim, 0, "", "."); ?> kg dari <?php echo number_format($project->qty, 0, "", "."); ?> kg</span>
+                      <span class="info-box-number">Terkirim <?php if($project->total_terkirim != NULL){ echo number_format($project->total_terkirim, 0, "", "."); }else{ echo "-"; } ?> kg dari <?php if($project->total_terkirim != NULL){ echo number_format($project->qty, 0, "", "."); }else{ echo "-"; } ?> kg</span>
 
                       <div class="progress">
                         <div class="progress-bar" style="width: <?php echo $project->persentase_terkirim; ?>%"></div>
                       </div>
                       <span class="progress-description">
-                        <?php echo $project->persentase_terkirim; ?>% Terkirim | Sisa kirim <?php echo number_format($project->sisa_kirim, 0, "", "."); ?> Kg
+                        <?php echo $project->persentase_terkirim; ?>% Terkirim | Sisa kirim <?php if($project->total_terkirim != NULL){ echo number_format($project->sisa_kirim, 0, "", ".");  }else{ echo "-"; } ?> Kg
                       </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -225,12 +225,12 @@
                       <td><?php echo $row->nama_supir; ?></td>
                       <td><?php echo $row->nopol; ?></td>
                       <td><?php echo $row->nama_tujuan; ?></td>
-                      <td><?php echo number_format($row->timbang_kebun_bag, 0, "", "."); ?></td>
-                      <td><?php echo number_format($row->timbang_kebun_kg, 0, "", "."); ?> Kg</td>
-                      <td><?php echo number_format($row->qty_kirim_bag, 0, "", "."); ?></td>
-                      <td><?php echo number_format($row->qty_kirim_kg, 0, "", "."); ?> Kg</td>
-                      <td><?php echo number_format($row->m_susut, 0, "", "."); ?> Kg</td>
-                      <td><?php echo number_format($row->c_claim, 0, "", "."); ?> Kg</td>
+                      <td><?php if($project->timbang_kebun_bag != NULL){ echo number_format($row->timbang_kebun_bag, 0, "", ".");  }else{ echo "0"; }  ?></td>
+                      <td><?php if($project->timbang_kebun_kg != NULL){ echo number_format($row->timbang_kebun_kg, 0, "", ".");  }else{ echo "0"; }  ?> Kg</td>
+                      <td><?php if($project->qty_kirim_bag != NULL){ echo number_format($row->qty_kirim_bag, 0, "", "."); }else{ echo "0"; }  ?></td>
+                      <td><?php if($project->qty_kirim_kg != NULL){ echo number_format($row->qty_kirim_kg, 0, "", "."); }else{ echo "0"; }  ?> Kg</td>
+                      <td><?php if($project->m_susut != NULL){ echo number_format($row->m_susut, 0, "", "."); }else{ echo "0"; } ?> Kg</td>
+                      <td><?php if($project->c_claim != NULL){ echo number_format($row->c_claim, 0, "", "."); }else{ echo "0"; }  ?> Kg</td>
                       <td><span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span></td>
 
                       <td class="project-actions text-right">
