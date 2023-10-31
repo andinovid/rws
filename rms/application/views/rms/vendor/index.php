@@ -39,6 +39,7 @@
                     <th>Bank</th>
                     <th>Jenis Pajak</th>
                     <th>No Pajak</th>
+                    <th>Nama Pajak</th>
                     <th>Jumlah Truk</th>
                     <th></th>
                   </tr>
@@ -57,6 +58,7 @@
                       <td><?php echo $row->bank; ?></td>
                       <td><?php echo $row->jenis_pajak; ?></td>
                       <td><?php echo $row->no_pajak; ?></td>
+                      <td><?php echo $row->nama_pajak; ?></td>
                       <td><?php echo $row->total_truck; ?></td>
                       <td class="project-actions text-right">
                         <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/vendor/view/<?php echo $row->id; ?>" data-toggle="tooltip" data-placement="top" title="Detail Vendor">
@@ -82,6 +84,7 @@
                     <th>No Rekening</th>
                     <th>Jenis Pajak</th>
                     <th>No Pajak</th>
+                    <th>Nama Pajak</th>
                     <th>Jumlah Truk</th>
                     <th></th>
                   </tr>
@@ -144,6 +147,11 @@
 
                   <div class="form-group">
                     <label for="no_pajak">Nomor Pajak</label>
+                    <input type="text" class="form-control" id="no_pajak" name="no_pajak" placeholder="Input nama rekening">
+                  </div>
+                </div>
+                  <div class="form-group">
+                    <label for="no_pajak">Nama Pajak</label>
                     <input type="text" class="form-control" id="no_pajak" name="no_pajak" placeholder="Input nama rekening">
                   </div>
                 </div>
@@ -238,6 +246,7 @@
           $('[name="bank"]').val(data[i].bank);
           $('[name="jenis_pajak"]').val(data[i].jenis_pajak).change();
           $('[name="no_pajak"]').val(data[i].no_pajak);
+          $('[name="nama_pajak"]').val(data[i].nama_pajak);
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {

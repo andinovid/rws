@@ -529,13 +529,15 @@ class Rms extends CI_Controller
         $bank = $this->input->POST('bank');
         $jenis_pajak = $this->input->POST('jenis_pajak');
         $no_pajak = $this->input->POST('no_pajak');
+        $nama_pajak = $this->input->POST('nama_pajak');
         $data = array(
             'nama' => $nama,
             'no_rekening' => $no_rekening,
             'nama_rekening' => $nama_rekening,
             'bank' => $bank,
             'jenis_pajak' => $jenis_pajak,
-            'no_pajak' => $no_pajak,,
+            'no_pajak' => $no_pajak,
+            'nama_pajak' => $nama_pajak,
             'status' => '1',
         );
 
