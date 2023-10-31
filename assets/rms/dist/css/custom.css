@@ -1,0 +1,42 @@
+.sidebar-mini .nav-legacy>.nav-item .nav-link .nav-icon, .sidebar-mini-md .nav-legacy>.nav-item .nav-link .nav-icon, .sidebar-mini-xs .nav-legacy>.nav-item .nav-link .nav-icon{
+    margin-left: 0px !important;
+  }
+
+  .list-inline-item img{
+    border-radius: 50%;
+    display: inline;
+    width: 2.5rem;
+    border: 3px solid #FFF;
+  }
+
+  .list-inline-item:not(:first-child) {
+    margin-left: -30px;
+}
+
+.underline{
+    border-bottom: 1px solid #CCC;
+}
+
+.dark-grey{
+    color: #666;
+}
+
+.vertical-align-top{
+  vertical-align: top;
+}
+
+.modal-body, .modal-header, .modal-footer{
+  padding: 1rem 2rem;
+}
+
+.layout-navbar-fixed.layout-fixed .wrapper .sidebar {
+  margin-top: calc(6.6rem + 1px);
+}
+
+.layout-fixed .wrapper .sidebar {
+  height: calc(100vh - (6.6rem + 1px));
+}
+
+.bootstrap-datetimepicker-widget{
+  z-index: 9999;
+}

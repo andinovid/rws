@@ -1,0 +1,147 @@
+@media (max-width: 769px) {
+    .navbar .navbar-collapse.in {
+        display: block;
+    }
+    .navbar-nav {
+        background: #FFF;
+        padding-bottom: 10px;
+        margin-top: 15px;
+    }
+    .navbar-nav li.btn-login-li {
+        display: none;
+    }
+    .navbar-nav li a {
+        padding: 10px 20px;
+        display: block;
+    }
+    .navbar-header {
+        width: 100%;
+    }
+    .brand {
+        display: block;
+        padding-top: 10px;
+    }
+    .navbar-light .navbar-toggler {
+        position: absolute;
+        top: 30px;
+        left: 20px;
+    }
+    .brand-img-white {
+        width: 130px;
+    }
+    .navbar {
+        padding: 0px !important;
+    }
+    .masthead-video {
+        height: auto;
+    }
+    .lead .wow {
+        font-size: 24px;
+        text-align: center;
+    }
+    .opener {
+        padding: 150px 0px 100px;
+    }
+    .lead-text,
+    .lead-controls {
+        text-align: center;
+    }
+    .section,
+    .section-lg {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .box-project .box-content {
+        padding: 20px;
+    }
+    #reviews {
+        margin-top: 50px;
+    }
+    .affix .navbar-toggler {
+        top: 20px;
+    }
+    .float-nav {
+        display: block;
+    }
+    .col-form-label {
+        text-align: left !important;
+    }
+    .inner-page .wow {
+        font-size: 24px;
+        margin-bottom: 0px;
+    }
+    .content-inner .wow {
+        font-size: 20px;
+    }
+    form h2 {
+        font-size: 18px;
+    }
+    #kondisi_alokon table {
+        width: 1000px;
+    }
+    #gudang_alokon table {
+        width: 700px;
+    }
+    #kondisi_bangunan table {
+        width: 700px;
+    }
+    #kondisi_kendaraan table {
+        width: 900px;
+    }
+    #kondisi_staf table {
+        width: 700px;
+    }
+    #kondisi_faskes table {
+        width: 1000px;
+    }
+    #kondisi_kampung_kb table {
+        width: 700px;
+    }
+    #stok_alokon table {
+        width: 1000px;
+    }
+    button.btn {
+        width: 100%;
+        display: block;
+    }
+    button.btn[class*="btn-light"] {
+        width: 49%;
+        display: inline;
+    }
+    button.btn[class*="btn-light"]+button.btn {
+        width: 49%;
+        display: inline;
+    }
+    .mt-xs-5 {
+        margin-top: 3rem!important;
+    }
+    .inner-page {
+        padding: 50px 0 50px;
+        text-align: center;
+    }
+    .content-inner {
+        padding-top: 30px;
+    }
+    .post-header h2 {
+        font-size: 20px;
+        margin-top: 20px;
+        margin-bottom: 0px;
+    }
+    .btn-post-read {
+        display: block;
+    }
+    .tbl-list_survey {
+        width: 1200px;
+    }
+    .register-link {
+        display: block;
+        text-align: center;
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #1cbac8;
+        border-radius: 5px;
+    }
+    .logout-link {
+        display: block;
+    }
+}
