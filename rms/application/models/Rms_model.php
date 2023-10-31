@@ -100,7 +100,7 @@ class Rms_model extends CI_Model
     function delete_truck($id)
     {
         $this->db->delete('tbl_truck', array('id' => $id));
-        $this->db->delete('tbl_pengisian_bbm', array('tbl_truck' => $id));
+        $this->db->delete('tbl_pengisian_bbm', array('id_truck' => $id));
         return TRUE;
     }
 }
