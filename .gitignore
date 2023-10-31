@@ -20,6 +20,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 !rms/application/config/database.php
 rms/application/config/database.php
+/rms/application/config/database.php
 
 # IDE Files
 #-------------------------
