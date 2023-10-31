@@ -70,32 +70,32 @@
                       <div class="text-muted">
 
                         <p class="text-sm">Total Susut
-                          <b class="d-block"><?php echo number_format($project->total_susut, 0, "", "."); ?> kg</b>
+                          <b class="d-block"><?php if($project->total_susut != NULL){ echo number_format($project->total_susut, 0, "", "."); }else{ echo "-"; }  ?> kg</b>
                         </p>
                         <p class="text-sm">Total Uang Sangu
-                          <b class="d-block">Rp <?php echo number_format($project->total_uang_sangu, 0, "", "."); ?></b>
+                          <b class="d-block">Rp <?php if($project->total_uang_sangu != NULL){ echo number_format($project->total_uang_sangu, 0, "", "."); }else{ echo "-"; } ?></b>
                         </p>
                         <p class="text-sm">Biaya Claim
-                          <b class="d-block">Rp <?php echo number_format($project->harga_claim_satuan, 0, "", "."); ?></b>
+                          <b class="d-block">Rp <?php if($project->harga_claim_satuan != NULL){ echo number_format($project->harga_claim_satuan, 0, "", "."); }else{ echo "-"; } ?></b>
                         </p>
                         <p class="text-sm">Jasa Muat
-                          <b class="d-block">Rp <?php echo number_format($project->estimasi_total_harga_jasa_muat, 0, "", "."); ?></b>
+                          <b class="d-block">Rp <?php if($project->estimasi_total_harga_jasa_muat != NULL){ echo number_format($project->estimasi_total_harga_jasa_muat, 0, "", "."); }else{ echo "-"; }  ?></b>
                         </p>
                         <p class="text-sm">Jasa Bongkar
-                          <b class="d-block">Rp <?php echo number_format($project->estimasi_total_harga_jasa_bongkar, 0, "", "."); ?></b>
+                          <b class="d-block">Rp <?php if($project->estimasi_total_harga_jasa_muat != NULL){ echo number_format($project->estimasi_total_harga_jasa_bongkar, 0, "", "."); }else{ echo "-"; } ?></b>
                         </p>
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="text-muted">
                         <p class="text-sm">Total Claim
-                          <b class="d-block"><?php echo number_format($project->total_claim, 0, "", "."); ?> Kg</b>
+                          <b class="d-block"><?php if($project->total_claim != NULL){ echo number_format($project->total_claim, 0, "", ".");  }else{ echo "-"; } ?> Kg</b>
                         </p>
                         <p class="text-sm">Total Biaya Claim
-                          <b class="d-block">Rp <?php echo number_format($project->total_biaya_claim, 0, "", "."); ?></b>
+                          <b class="d-block">Rp <?php if($project->total_biaya_claim != NULL){ echo number_format($project->total_biaya_claim, 0, "", ".");  }else{ echo "-"; } ?></b>
                         </p>
                         <p class="text-sm">Total Replas
-                          <b class="d-block">Rp <?php echo number_format($project->total_pengeluaran, 0, "", "."); ?></b>
+                          <b class="d-block">Rp <?php if($project->total_pengeluaran != NULL){ echo number_format($project->total_pengeluaran, 0, "", ".");  }else{ echo "-"; } ?></b>
                         </p>
                         <p class="text-sm">Status
                           <b class="d-block text-green"><?php echo $project->nama_status; ?></b>
