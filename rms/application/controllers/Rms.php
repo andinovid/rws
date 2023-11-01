@@ -536,10 +536,10 @@ class Rms extends CI_Controller
     public function save_klien()
     {
         $id = $this->input->POST('id');
-        $nama_perusahaan = $this->input->POST('nama');
-        $alamat = $this->input->POST('nomor_rekening');
-        $email = $this->input->POST('nama_rekening');
-        $no_tlp = $this->input->POST('bank');
+        $nama_perusahaan = $this->input->POST('nama_perusahaan');
+        $alamat = $this->input->POST('alamat');
+        $email = $this->input->POST('email');
+        $no_tlp = $this->input->POST('no_tlp');
         $data = array(
             'nama_perusahaan' => $nama_perusahaan,
             'alamat' => $alamat,

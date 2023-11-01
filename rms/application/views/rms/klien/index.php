@@ -108,7 +108,7 @@
                     <label for="nama">Nama</label>
 
                     <input type="hidden" class="form-control" name="id" id="id" placeholder="id">
-                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Input nama klien">
+                    <input type="text" class="form-control" id="nama_perusahaan" name="nama_perusahaan" placeholder="Input nama klien">
                   </div>
                   <div class="form-group">
                     <label for="nomor_rekening">Alamat</label>

@@ -19,60 +19,60 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <?php if($truck->kategori == '1'){ ?>
-          <div class="row">
-            <div class="col-12 col-sm-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-success"><img src="<?php echo base_url(); ?>assets/rms/dist/img/engine-oil.png" width="40" /> </span>
-                <div class="info-box-content">
-                  <div class="d-flex justify-content-md-between">
-                    <span class="info-box-text">Oli Mesin</span>
-                    <span class="info-box-number mt-0"><?php echo $truck->persentase_penggunaan_oli_mesin; ?>%</span>
+          <?php if ($truck->kategori == '1') { ?>
+            <div class="row">
+              <div class="col-12 col-sm-4">
+                <div class="info-box">
+                  <span class="info-box-icon bg-success"><img src="<?php echo base_url(); ?>assets/rms/dist/img/engine-oil.png" width="40" /> </span>
+                  <div class="info-box-content">
+                    <div class="d-flex justify-content-md-between">
+                      <span class="info-box-text">Oli Mesin</span>
+                      <span class="info-box-number mt-0"><?php echo $truck->persentase_penggunaan_oli_mesin; ?>%</span>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar bg-green" style="width: <?php echo $truck->persentase_penggunaan_oli_mesin; ?>%"></div>
+                    </div>
+                    <span class="info-box-number"><img src="<?php echo base_url(); ?>assets/rms/dist/img/dashboard2.png" width="25" class="mr-2" style="margin-top: -3px;" /><?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?>/<?php echo number_format($truck->pergantian_oli_mesin_selanjutnya, 0, "", "."); ?> KM | Kurang <?php echo number_format($truck->kurang_oli_mesin, 0, "", "."); ?> KM</span>
+                    <span style="font-size: 14px; font-style:italic;">Terakhir ganti oli mesin pada <b>KM <?php echo number_format($truck->oddo_terakhir_oli_mesin, 0, "", "."); ?></b></span>
                   </div>
-                  <div class="progress">
-                    <div class="progress-bar bg-green" style="width: <?php echo $truck->persentase_penggunaan_oli_mesin; ?>%"></div>
-                  </div>
-                  <span class="info-box-number"><img src="<?php echo base_url(); ?>assets/rms/dist/img/dashboard2.png" width="25" class="mr-2" style="margin-top: -3px;" /><?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?>/<?php echo number_format($truck->pergantian_oli_mesin_selanjutnya, 0, "", "."); ?> KM | Kurang <?php echo number_format($truck->kurang_oli_mesin, 0, "", "."); ?> KM</span>
-                  <span style="font-size: 14px; font-style:italic;">Terakhir ganti oli mesin pada <b>KM <?php echo number_format($truck->oddo_terakhir_oli_mesin, 0, "", "."); ?></b></span>
+                  <!-- /.info-box-content -->
                 </div>
-                <!-- /.info-box-content -->
+              </div>
+              <div class="col-12 col-sm-4">
+                <div class="info-box">
+                  <span class="info-box-icon bg-success"><img src="<?php echo base_url(); ?>assets/rms/dist/img/engine-oil.png" width="40" /> </span>
+                  <div class="info-box-content">
+                    <div class="d-flex justify-content-md-between">
+                      <span class="info-box-text">Oli Gardan</span>
+                      <span class="info-box-number mt-0"><?php echo $truck->persentase_penggunaan_oli_gardan; ?>%</span>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar bg-green" style="width: <?php echo $truck->persentase_penggunaan_oli_gardan; ?>%"></div>
+                    </div>
+                    <span class="info-box-number"><img src="<?php echo base_url(); ?>assets/rms/dist/img/dashboard2.png" width="25" class="mr-1" style="margin-top: -3px;" /> <?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?>/<?php echo number_format($truck->pergantian_oli_gardan_selanjutnya, 0, "", "."); ?> KM | Kurang <?php echo number_format($truck->kurang_oli_gardan, 0, "", "."); ?> KM</span>
+                    <span style="font-size: 14px; font-style:italic;">Terakhir ganti oli gardan pada <b>KM <?php echo number_format($truck->oddo_terakhir_oli_gardan, 0, "", "."); ?></b></span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+              </div>
+              <div class="col-12 col-sm-4">
+                <div class="info-box">
+                  <span class="info-box-icon bg-success"><img src="<?php echo base_url(); ?>assets/rms/dist/img/engine-oil.png" width="40" /> </span>
+                  <div class="info-box-content">
+                    <div class="d-flex justify-content-md-between">
+                      <span class="info-box-text">Oli Transmisi</span>
+                      <span class="info-box-number mt-0"><?php echo $truck->persentase_penggunaan_oli_transmisi; ?>%</span>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar bg-green" style="width: <?php echo $truck->persentase_penggunaan_oli_transmisi; ?>%"></div>
+                    </div>
+                    <span class="info-box-number"><img src="<?php echo base_url(); ?>assets/rms/dist/img/dashboard2.png" width="25" class="mr-1" style="margin-top: -3px;" /> <?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?>/<?php echo number_format($truck->pergantian_oli_transmisi_selanjutnya, 0, "", "."); ?> KM | Kurang <?php echo number_format($truck->kurang_oli_transmisi, 0, "", "."); ?> KM</span>
+                    <span style="font-size: 14px; font-style:italic;">Terakhir ganti oli transmisi pada <b>KM <?php echo number_format($truck->oddo_terakhir_oli_transmisi, 0, "", "."); ?></b></span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
               </div>
             </div>
-            <div class="col-12 col-sm-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-success"><img src="<?php echo base_url(); ?>assets/rms/dist/img/engine-oil.png" width="40" /> </span>
-                <div class="info-box-content">
-                  <div class="d-flex justify-content-md-between">
-                    <span class="info-box-text">Oli Gardan</span>
-                    <span class="info-box-number mt-0"><?php echo $truck->persentase_penggunaan_oli_gardan; ?>%</span>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-bar bg-green" style="width: <?php echo $truck->persentase_penggunaan_oli_gardan; ?>%"></div>
-                  </div>
-                  <span class="info-box-number"><img src="<?php echo base_url(); ?>assets/rms/dist/img/dashboard2.png" width="25" class="mr-1" style="margin-top: -3px;" /> <?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?>/<?php echo number_format($truck->pergantian_oli_gardan_selanjutnya, 0, "", "."); ?> KM | Kurang <?php echo number_format($truck->kurang_oli_gardan, 0, "", "."); ?> KM</span>
-                  <span style="font-size: 14px; font-style:italic;">Terakhir ganti oli gardan pada <b>KM <?php echo number_format($truck->oddo_terakhir_oli_gardan, 0, "", "."); ?></b></span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-            </div>
-            <div class="col-12 col-sm-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-success"><img src="<?php echo base_url(); ?>assets/rms/dist/img/engine-oil.png" width="40" /> </span>
-                <div class="info-box-content">
-                  <div class="d-flex justify-content-md-between">
-                    <span class="info-box-text">Oli Transmisi</span>
-                    <span class="info-box-number mt-0"><?php echo $truck->persentase_penggunaan_oli_transmisi; ?>%</span>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-bar bg-green" style="width: <?php echo $truck->persentase_penggunaan_oli_transmisi; ?>%"></div>
-                  </div>
-                  <span class="info-box-number"><img src="<?php echo base_url(); ?>assets/rms/dist/img/dashboard2.png" width="25" class="mr-1" style="margin-top: -3px;" /> <?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?>/<?php echo number_format($truck->pergantian_oli_transmisi_selanjutnya, 0, "", "."); ?> KM | Kurang <?php echo number_format($truck->kurang_oli_transmisi, 0, "", "."); ?> KM</span>
-                  <span style="font-size: 14px; font-style:italic;">Terakhir ganti oli transmisi pada <b>KM <?php echo number_format($truck->oddo_terakhir_oli_transmisi, 0, "", "."); ?></b></span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-            </div>
-          </div>
           <?php } ?>
 
           <div class="row">
@@ -131,85 +131,88 @@
               </div>
             </div>
 
-            <?php if($truck->kategori == '1'){ ?>
-            <div class="col-md-7">
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="card-title mt-2">Riwayat Perbaikan Truk</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                  <table class="table table-striped table-valign-middle data-table-default">
-                    <thead>
-                      <tr>
-                        <th class="align-middle">Tanggal Muat</th>
-                        <th class="align-middle">Tanggal Bongkar</th>
-                        <th class="align-middle">Jenis Perbaikan</th>
-                        <th class="align-middle">Supir</th>
-                        <th class="align-middle">Harga</th>
-                        <th class="align-middle">status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      foreach ($perbaikan as $row) : ?>
+            <?php if ($truck->kategori == '1') { ?>
+              <div class="col-md-7">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title mt-2">Riwayat Perbaikan Truk</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table class="table table-striped table-valign-middle data-table-default">
+                      <thead>
                         <tr>
-                          <td><?php if ($row->tanggal_perbaikan) {
-                                echo shortdate_indo($row->tanggal_perbaikan);
-                              } ?></td>
-                          <td><?php echo $row->nama_supir; ?></td>
-                          <td><?php echo $row->harga; ?></td>
-                          <td>
-                            <?php if ($row->status == '0') { ?>
-                              <span class="badge badge-secondary"><?php echo $row->nama_status; ?></span>
-                            <?php } elseif ($row->status == '1') { ?>
-                              <span class="badge badge-warning"><?php echo $row->nama_status; ?></span>
-                            <?php } elseif ($row->status == '2') { ?>
-                              <span class="badge badge-success"><?php echo $row->nama_status; ?></span>
-                            <?php } ?>
-                          </td>
+                          <th class="align-middle">Tanggal Muat</th>
+                          <th class="align-middle">Tanggal Bongkar</th>
+                          <th class="align-middle">Jenis Perbaikan</th>
+                          <th class="align-middle">Supir</th>
+                          <th class="align-middle">Harga</th>
+                          <th class="align-middle">status</th>
                         </tr>
-                      <?php endforeach; ?>
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        <?php
+                        foreach ($perbaikan as $row) : ?>
+                          <tr>
+                            <td><?php if ($row->tanggal_perbaikan) {
+                                  echo shortdate_indo($row->tanggal_perbaikan);
+                                } ?></td>
+                            <td><?php echo $row->nama_supir; ?></td>
+                            <td><?php echo $row->harga; ?></td>
+                            <td>
+                              <?php if ($row->status == '0') { ?>
+                                <span class="badge badge-secondary"><?php echo $row->nama_status; ?></span>
+                              <?php } elseif ($row->status == '1') { ?>
+                                <span class="badge badge-warning"><?php echo $row->nama_status; ?></span>
+                              <?php } elseif ($row->status == '2') { ?>
+                                <span class="badge badge-success"><?php echo $row->nama_status; ?></span>
+                              <?php } ?>
+                            </td>
+                          </tr>
+                        <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
                 </div>
-                <!-- /.card-body -->
               </div>
-            </div>
-            <div class="col-md-5">
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="card-title mt-2">Riwayat Pengisian BBM</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                  <table class="table table-striped table-valign-middle data-table-default">
-                    <thead>
-                      <tr>
-                        <th class="align-middle">Tanggal</th>
-                        <th class="align-middle">Jumlah liter</th>
-                        <th class="align-middle">Jumlah harga</th>
-                        <th class="align-middle">Supir</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      foreach ($bbm as $row) : ?>
+              <div class="col-md-5">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title mt-2">Riwayat Pengisian BBM</h3>
+                    <div class="card-tools mr-1">
+                      <button type="button" class="btn btn-block btn-primary btn-sm" onclick="input_riwayat_bbm()"><i class="fas fa-plus mr-1"></i> Input</button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table class="table table-striped table-valign-middle data-table-default">
+                      <thead>
                         <tr>
-                          <td><?php if ($row->tanggal) {
-                                echo shortdate_indo($row->tanggal);
-                              } ?></td>
-                          <td><?php echo $row->jumlah_liter; ?></td>
-                          <td><?php echo $row->jumlah_harga; ?></td>
-                          <td><?php echo $row->nama_supir; ?></td>
+                          <th class="align-middle">Tanggal</th>
+                          <th class="align-middle">Jumlah liter</th>
+                          <th class="align-middle">Jumlah harga</th>
+                          <th class="align-middle">Supir</th>
                         </tr>
-                      <?php endforeach; ?>
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        <?php
+                        foreach ($bbm as $row) : ?>
+                          <tr>
+                            <td><?php if ($row->tanggal) {
+                                  echo shortdate_indo($row->tanggal);
+                                } ?></td>
+                            <td><?php echo $row->jumlah_liter; ?></td>
+                            <td><?php echo $row->jumlah_harga; ?></td>
+                            <td><?php echo $row->nama_supir; ?></td>
+                          </tr>
+                        <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
                 </div>
-                <!-- /.card-body -->
               </div>
-            </div>
             <?php } ?>
           </div>
         </div>
