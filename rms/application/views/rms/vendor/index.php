@@ -182,12 +182,7 @@
     });
   });
 
-  function validate(id) {
-    var thisId = document.getElementById(id);
-    // console.log("inside validate "+thisId);
-    var remChars = thisId.value.replace(/[^0-9\.]/g, ''); // this is to remove alphabates and special characters
-      thisId.value = remChars.replace(/\./g, ''); // this is to remove "DOT"
-  }
+  
 
   function input_vendor() {
     $('#form_vendor')[0].reset();

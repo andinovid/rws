@@ -123,7 +123,7 @@
                   </div>
                   <div class="form-group">
                     <label for="no_wa">No Telepon</label>
-                    <input type="text" class="form-control" id="no_wa" name="no_wa" placeholder="Input nomor telepon">
+                    <input type="text" class="form-control" id="no_wa" onkeyup="validate(this.id);" name="no_wa" placeholder="Input nomor telepon">
                   </div>
                 </div>
                 <div class="col-md-7">

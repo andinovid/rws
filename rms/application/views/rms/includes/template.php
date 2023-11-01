@@ -56,7 +56,7 @@
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-       
+
         <li class="nav-item">
           <a class="nav-link" data-widget="fullscreen" href="#" role="button">
             <i class="fas fa-expand-arrows-alt"></i>
@@ -247,6 +247,13 @@
       })
 
     })
+
+    function validate(id) {
+      var thisId = document.getElementById(id);
+      // console.log("inside validate "+thisId);
+      var remChars = thisId.value.replace(/[^0-9\.]/g, ''); // this is to remove alphabates and special characters
+      thisId.value = remChars.replace(/\./g, ''); // this is to remove "DOT"
+    }
   </script>
 </body>
 
