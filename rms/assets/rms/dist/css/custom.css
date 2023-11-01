@@ -40,3 +40,9 @@
 .bootstrap-datetimepicker-widget{
   z-index: 9999;
 }
+
+@media (max-width: 576px) {
+  .dt-buttons{
+    display: none;
+  }
+}
