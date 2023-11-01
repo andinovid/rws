@@ -320,7 +320,7 @@ class Rms extends CI_Controller
                 'id_tujuan' => $post['tujuan'][$i],
                 'tanggal_muat' => $post['tanggal_muat'][$i],
                 'uang_sangu' => $post['uang_sangu'][$i],
-                'status' => '0',
+                'status' => '1',
             );
             $save = $this->db->insert('tbl_rekap', $data);
             if ($save) {
