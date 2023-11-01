@@ -193,6 +193,7 @@
                           <th class="align-middle">Jumlah liter</th>
                           <th class="align-middle">Jumlah harga</th>
                           <th class="align-middle">Supir</th>
+                          <th class="align-middle"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -203,8 +204,18 @@
                                   echo shortdate_indo($row->tanggal);
                                 } ?></td>
                             <td><?php echo $row->jumlah_liter; ?></td>
-                            <td><?php echo $row->jumlah_harga; ?></td>
+                            <td>Rp <?php echo number_format($row->jumlah_harga, 0, "", "."); ?></td>
                             <td><?php echo $row->nama_supir; ?></td>
+                            <td class="project-actions text-right">
+                              <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <i class="fas fa-pencil-alt">
+                                </i>
+                              </a>
+                              <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_data(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
+                                <i class="fas fa-trash">
+                                </i>
+                              </a>
+                            </td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>
@@ -222,32 +233,126 @@
       <!-- /.col -->
     </div>
     <!-- /.row -->
-</div>
-<!-- /.container-fluid -->
+    <!-- /.container-fluid -->
 
-<div class="modal fade" id="input-replas">
-  <div class="modal-dialog modal-lg">
-    <form id="form_replas" class="form-horizontal" method="post" enctype="multipart/form-data">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Input Replas</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
+    <div class="modal fade" id="input-replas">
+      <div class="modal-dialog modal-lg">
+        <form id="form_replas" class="form-horizontal" method="post" enctype="multipart/form-data">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Input Replas</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
 
-          <div class="row">
-            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="hidden" class="form-control" name="id" id="id" placeholder="id">
+                    <input type="hidden" class="form-control" name="id_project" id="id_project" placeholder="id_project" value="<?php echo $project->id_project; ?>">
+
+                    <label for="no_replas">Nomor Replas</label>
+                    <input type="text" class="form-control" id="no_replas" name="no_replas" placeholder="Input nomor replas">
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Tanggal Replas</label>
+                    <div class="input-group date reservationdate" data-target-input="nearest">
+                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate" data-toggle="datetimepicker" name="tanggal" id="tanggal" />
+                      <div class="input-group-append" data-target=".reservationdate" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Supir</label>
+                    <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
+                      <option value="0">Pilih supir</option>
+                      <?php foreach ($supir as $row) : ?>
+                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Truck</label>
+                    <select class="form-control select2" style="width: 100%;" name="truck" id="truck">
+                      <option value="0">Pilih truk</option>
+                      <?php foreach ($truck as $row) : ?>
+                        <option value="<?php echo $row->id; ?>"><?php echo $row->nopol; ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Tujuan</label>
+                    <select class="form-control select2" style="width: 100%;" name="tujuan" id="tujuan">
+                      <option value="0">Pilih tujuan</option>
+                      <?php foreach ($tujuan as $row) : ?>
+                        <option value="<?php echo $row->id; ?>"><?php echo $row->kode_tujuan; ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Qty Kirim</label>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Bag" name="qty_kirim_bag" id="qty_kirim_bag">
+                      </div>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Kg" name="qty_kirim_kg" id="qty_kirim_kg">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Timbang Kebun</label>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" name="timbang_kebun_bag" id="timbang_kebun_bag" placeholder="Bag">
+                      </div>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Kg">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Uang Sangu</label>
+                    <input type="text" class="form-control" name="uang_sangu" id="uang_sangu" placeholder="Uang Sangu">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer" style="justify-content: flex-start;">
+              <button type="submit" class="btn btn-primary">Save changes</button>
+              <div class="loading" style="display: none;">
+                <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" id="input-riwayat-bbm">
+      <div class="modal-dialog modal-md">
+        <form id="form_riwayat_bbm" class="form-horizontal" method="post" enctype="multipart/form-data">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Input Riwayat BBM</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
               <div class="form-group">
                 <input type="hidden" class="form-control" name="id" id="id" placeholder="id">
-                <input type="hidden" class="form-control" name="id_project" id="id_project" placeholder="id_project" value="<?php echo $project->id_project; ?>">
-
-                <label for="no_replas">Nomor Replas</label>
-                <input type="text" class="form-control" id="no_replas" name="no_replas" placeholder="Input nomor replas">
-              </div>
-              <div class="form-group">
-                <label for="no_replas">Tanggal Replas</label>
+                <input type="hidden" class="form-control" name="id_truck" id="id_truck" placeholder="id_truck" value="<?php echo $truck->id_truck; ?>">
+                <label for="no_replas">Tanggal Pengisian</label>
                 <div class="input-group date reservationdate" data-target-input="nearest">
                   <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate" data-toggle="datetimepicker" name="tanggal" id="tanggal" />
                   <div class="input-group-append" data-target=".reservationdate" data-toggle="datetimepicker">
@@ -255,6 +360,15 @@
                   </div>
                 </div>
               </div>
+              <div class="form-group">
+                <label for="no_replas">Jumlah Liter</label>
+                <input type="text" class="form-control" id="jumlah_liter" name="jumlah_liter" placeholder="Input jumlah liter">
+              </div>
+              <div class="form-group">
+                <label for="no_replas">Jumlah Harga</label>
+                <input type="text" class="form-control number" id="jumlah_harga" name="jumlah_harga" placeholder="Input jumlah harga">
+              </div>
+
               <div class="form-group">
                 <label>Supir</label>
                 <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
@@ -264,94 +378,43 @@
                   <?php endforeach; ?>
                 </select>
               </div>
-              <div class="form-group">
-                <label>Truck</label>
-                <select class="form-control select2" style="width: 100%;" name="truck" id="truck">
-                  <option value="0">Pilih truk</option>
-                  <?php foreach ($truck as $row) : ?>
-                    <option value="<?php echo $row->id; ?>"><?php echo $row->nopol; ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
 
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Tujuan</label>
-                <select class="form-control select2" style="width: 100%;" name="tujuan" id="tujuan">
-                  <option value="0">Pilih tujuan</option>
-                  <?php foreach ($tujuan as $row) : ?>
-                    <option value="<?php echo $row->id; ?>"><?php echo $row->kode_tujuan; ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="no_replas">Qty Kirim</label>
-                <div class="row">
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" placeholder="Bag" name="qty_kirim_bag" id="qty_kirim_bag">
-                  </div>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" placeholder="Kg" name="qty_kirim_kg" id="qty_kirim_kg">
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="no_replas">Timbang Kebun</label>
-                <div class="row">
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" name="timbang_kebun_bag" id="timbang_kebun_bag" placeholder="Bag">
-                  </div>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Kg">
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="no_replas">Uang Sangu</label>
-                <input type="text" class="form-control" name="uang_sangu" id="uang_sangu" placeholder="Uang Sangu">
+            <div class="modal-footer" style="justify-content: flex-start;">
+              <button type="submit" class="btn btn-primary">Save changes</button>
+              <div class="loading" style="display: none;">
+                <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
               </div>
             </div>
           </div>
-
-        </div>
-        <div class="modal-footer" style="justify-content: flex-start;">
-          <button type="submit" class="btn btn-primary">Save changes</button>
-          <div class="loading" style="display: none;">
-            <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
-          </div>
-        </div>
+        </form>
+        <!-- /.modal-content -->
       </div>
-    </form>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-</section>
+      <!-- /.modal-dialog -->
+    </div>
+  </section>
 </div>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-  function input_replas(id) {
-    $('#form_replas')[0].reset();
+  function input_riwayat_bbm(id) {
+    $('#form_riwayat_bbm')[0].reset();
     $("#supir").val(0).change();
-    $('#tujuan').val(0).change();
-    $('#truck').val(0).change();
-    $("#input-replas").modal('show');
+    $("#input-riwayat-bbm").modal('show');
   }
 
-  $('#form_replas').on('submit', function(event) {
+  $('#form_riwayat_bbm').on('submit', function(event) {
     event.preventDefault();
-    var formData = new FormData($('#form_replas')[0]);
+    var formData = new FormData($('#form_riwayat_bbm')[0]);
     $('.loading').show();
     $.ajax({
       type: 'POST',
-      url: '<?php echo base_url(); ?>rms/save_replas/',
+      url: '<?php echo base_url(); ?>rms/save_pengisian_bbm/',
       data: formData,
       processData: false,
       contentType: false,
       success: function(data) {
-        $('#form_replas')[0].reset();
+        $('#form_riwayat_bbm')[0].reset();
         $('.loading').hide();
         if (data.status = "true") {
           Swal.fire({
@@ -370,7 +433,7 @@
   });
 
   function edit(id) {
-    $("#input-replas").modal('show');
+    $("#input-riwayat-bbm").modal('show');
     $('.modal-title').html('Edit Replas');
     $('input[name=id]').val(id);
     $.ajax({
@@ -378,24 +441,18 @@
       type: "POST",
       data: {
         'id': id,
-        tbl: "tbl_rekap"
+        tbl: "tbl_pengisian_bbm"
       },
       dataType: "JSON",
       beforeSend: function() {
-        $('#form_replas')[0].reset();
+        $('#form_riwayat_bbm')[0].reset();
       },
       success: function(data) {
         for (var i = 0; i < data.length; i++) {
-          $('[name="no_replas"]').val(data[i].no_replas);
           $('[name="tanggal"]').val(data[i].tanggal);
+          $('[name="jumlah_liter"]').val(data[i].jumlah_liter);
+          $('[name="jumlah_harga"]').val($.number(data[i].jumlah_harga).replace(/\,/g, '.'));
           $('[name="supir"]').val(data[i].id_supir).change();
-          $('[name="truck"]').val(data[i].id_truck).change();
-          $('[name="tujuan"]').val(data[i].id_tujuan).change();
-          $('[name="qty_kirim_bag"]').val(data[i].qty_kirim_bag);
-          $('[name="qty_kirim_kg"]').val(data[i].qty_kirim_kg);
-          $('[name="timbang_kebun_bag"]').val(data[i].timbang_kebun_bag);
-          $('[name="timbang_kebun_kg"]').val(data[i].timbang_kebun_kg);
-          $('[name="uang_sangu"]').val(data[i].uang_sangu);
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -419,7 +476,7 @@
         type: "POST",
         data: {
           id: id,
-          tbl: "tbl_rekap"
+          tbl: "tbl_pengisian_bbm"
         },
         dataType: "JSON",
         success: function(data) {

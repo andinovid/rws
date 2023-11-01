@@ -351,6 +351,43 @@ class Rms extends CI_Controller
         $this->load->view('rms/includes/template', $data);
     }
 
+    public function save_pengisian_bbm()
+    {
+        $id = $this->input->POST('id');
+        $truck = $this->input->POST('id_truck');
+        $supir = $this->input->POST('supir');
+        $tanggal = $this->input->POST('tanggal');
+        $jumlah_liter = $this->input->POST('jumlah_liter');
+        $jumlah_harga = $this->input->POST('jumlah_harga');
+        $data = array(
+            'id_truck' => $truck,
+            'id_supir' => $supir,
+            'tanggal' => $tanggal,
+            'jumlah_liter' => $jumlah_liter,
+            'jumlah_harga' => str_replace('.', '', $jumlah_harga),
+        );
+
+
+
+        if ($id == "") {
+            $save = $this->rms_model->insert("tbl_pengisian_bbm", $data);
+            if ($save) {
+                echo json_encode(array(
+                    "status" => TRUE,
+                    "target" => TRUE
+                ));
+            }
+        } else {
+            $save = $this->rms_model->update("tbl_pengisian_bbm", $data, $id);
+            if ($save) {
+                echo json_encode(array(
+                    "status" => TRUE,
+                    "target" => TRUE
+                ));
+            }
+        }
+    }
+
     public function save_truk()
     {
         $id = $this->input->POST('id');
