@@ -520,6 +520,49 @@ class Rms extends CI_Controller
         $this->load->view('rms/includes/template', $data);
     }
 
+    function klien()
+    {
+        $data['klien'] = $this->rms_model->get("tbl_klien")->result();
+        $data['content'] = 'rms/klien/index';
+        $this->load->view('rms/includes/template', $data);
+    }
+
+    public function save_klien()
+    {
+        $id = $this->input->POST('id');
+        $nama_perusahaan = $this->input->POST('nama');
+        $alamat = $this->input->POST('nomor_rekening');
+        $email = $this->input->POST('nama_rekening');
+        $no_tlp = $this->input->POST('bank');
+        $data = array(
+            'nama_perusahaan' => $nama_perusahaan,
+            'alamat' => $alamat,
+            'email' => $email,
+            'no_tlp' => $no_tlp,
+            'status' => '1',
+        );
+
+
+
+        if ($id == "") {
+            $save = $this->rms_model->insert("tbl_klien", $data);
+            if ($save) {
+                echo json_encode(array(
+                    "status" => TRUE,
+                    "target" => TRUE
+                ));
+            }
+        } else {
+            $save = $this->rms_model->update("tbl_klien", $data, $id);
+            if ($save) {
+                echo json_encode(array(
+                    "status" => TRUE,
+                    "target" => TRUE
+                ));
+            }
+        }
+    }
+
     public function save_vendor()
     {
         $id = $this->input->POST('id');

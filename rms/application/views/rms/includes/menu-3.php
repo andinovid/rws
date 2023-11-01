@@ -88,6 +88,15 @@
             </p>
           </a>
         </li>
+        
+        <li class="nav-item">
+          <a href="<?php echo base_url(); ?>rms/klien/" class="nav-link <?php if ($this->uri->segment(2) == "klien") { ?>active <?php } ?>">
+            <i class="nav-icon fas fa-map"></i>
+            <p>
+              Data Klien
+            </p>
+          </a>
+        </li>
 
         <li class="nav-header">KEUANGAN</li>
         <li class="nav-item">
