@@ -123,7 +123,7 @@
                     <span class="info-box-icon bg-success"><i class="fa fa-money-bill"></i></span>
                     <div class="info-box-content">
                       <span class="info-box-text">Nilai Project</span>
-                      <span class="info-box-number">Rp <?php if($row->total_nilai != NULL){ echo number_format($project->total_nilai, 0, "", "."); }else{ echo "-"; } ?></span>
+                      <span class="info-box-number">Rp <?php if($project->total_nilai != NULL){ echo number_format($project->total_nilai, 0, "", "."); }else{ echo "-"; } ?></span>
                     </div>
                     <!-- /.info-box-content -->
                   </div>
