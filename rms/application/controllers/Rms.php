@@ -382,6 +382,11 @@ class Rms extends CI_Controller
         } else {
             $pajak_5_tahunan = "";
         }
+        if (isset($_POST['kir_terakhir'])) {
+            $kir_terakhir = $this->input->POST('kir_terakhir');
+        } else {
+            $kir_terakhir = "";
+        }
         if (isset($_POST['oddo_terakhir'])) {
             $oddo_terakhir = $this->input->POST('oddo_terakhir');
         } else {
@@ -415,8 +420,9 @@ class Rms extends CI_Controller
             'cicilan' => str_replace('.', '', $cicilan),
             'nomor_rangka' => $nomor_rangka,
             'nomor_mesin' => $nomor_mesin,
-            'pajak_tahunan' => str_replace('.', '', $pajak_tahunan),
-            'pajak_5_tahunan' => str_replace('.', '', $pajak_5_tahunan),
+            'kir_terakhir' => $kir_terakhir,
+            'pajak_tahunan' => $pajak_tahunan,
+            'pajak_5_tahunan' => $pajak_5_tahunan,
             'oddo_terakhir' => str_replace('.', '', $oddo_terakhir),
             'oddo_terakhir_oli_mesin' => str_replace('.', '', $oddo_terakhir_oli_mesin),
             'oddo_terakhir_oli_gardan' => str_replace('.', '', $oddo_terakhir_oli_gardan),

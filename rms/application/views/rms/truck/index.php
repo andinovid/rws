@@ -49,6 +49,7 @@
                         <th>Oli Transmisi</th>
                         <th>Pajak Tahunan</th>
                         <th>Pajak 5 Tahunan</th>
+                        <th>KIR</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -92,65 +93,102 @@
 
 
                           <td>
-                            <?php if ($row->pajak_tahunan !=""){ ?>
-                            <?php echo shortdate_indo($row->pajak_tahunan); ?><br>
-                            <small> Sisa
-                              <?php
-                              $days = $row->sisa_hari_pajak_tahunan;
-                              $start_date = new DateTime();
-                              $end_date = (new $start_date)->add(new DateInterval("P{$days}D"));
-                              $dd = date_diff($start_date, $end_date);
-                              if ($dd->y != 0 and $dd->m != 0 and $dd->d != 0) {
-                                echo $dd->y . " tahun " . $dd->m . " bulan " . $dd->d . " hari";
-                              } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d != 0) {
-                                echo $dd->m . " bulan " . $dd->d . " hari";
-                              } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d != 0) {
-                                echo $dd->d . " hari";
-                              } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d == 0) {
-                                echo $dd->m . " bulan ";
-                              } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d == 0) {
-                                echo $dd->y . " tahun ";
-                              } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d != 0) {
-                                echo $dd->y . " tahun "  . $dd->d . " hari";
-                              } elseif ($dd->y != 0 and $dd->m != 0 and $dd->d == 0) {
-                                echo $dd->y . " tahun " . $dd->m . " bulan ";
-                              } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d == 0) {
-                                echo "Sudah habis";
-                              }
-                              ?>
-                            </small>
-                            <?php }else{ echo "-"; } ?>
+                            <?php if ($row->pajak_tahunan != "") { ?>
+                              <?php echo shortdate_indo($row->pajak_tahunan); ?><br>
+                              <small> Sisa
+                                <?php
+                                $days = $row->sisa_hari_pajak_tahunan;
+                                $start_date = new DateTime();
+                                $end_date = (new $start_date)->add(new DateInterval("P{$days}D"));
+                                $dd = date_diff($start_date, $end_date);
+                                if ($dd->y != 0 and $dd->m != 0 and $dd->d != 0) {
+                                  echo $dd->y . " tahun " . $dd->m . " bulan " . $dd->d . " hari";
+                                } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d != 0) {
+                                  echo $dd->m . " bulan " . $dd->d . " hari";
+                                } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d != 0) {
+                                  echo $dd->d . " hari";
+                                } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d == 0) {
+                                  echo $dd->m . " bulan ";
+                                } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d == 0) {
+                                  echo $dd->y . " tahun ";
+                                } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d != 0) {
+                                  echo $dd->y . " tahun "  . $dd->d . " hari";
+                                } elseif ($dd->y != 0 and $dd->m != 0 and $dd->d == 0) {
+                                  echo $dd->y . " tahun " . $dd->m . " bulan ";
+                                } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d == 0) {
+                                  echo "Sudah habis";
+                                }
+                                ?>
+                              </small>
+                            <?php } else {
+                              echo "-";
+                            } ?>
                           </td>
 
                           <td>
-                          <?php if ($row->pajak_5_tahunan !=""){ ?>
-                            <?php echo shortdate_indo($row->pajak_5_tahunan); ?><br>
-                            <small>Sisa
-                              <?php
-                              $days = $row->sisa_hari_pajak_5_tahunan;
-                              $start_date = new DateTime();
-                              $end_date = (new $start_date)->add(new DateInterval("P{$days}D"));
-                              $dd = date_diff($start_date, $end_date);
-                              if ($dd->y != 0 and $dd->m != 0 and $dd->d != 0) {
-                                echo $dd->y . " tahun " . $dd->m . " bulan " . $dd->d . " hari";
-                              } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d != 0) {
-                                echo $dd->m . " bulan " . $dd->d . " hari";
-                              } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d != 0) {
-                                echo $dd->d . " hari";
-                              } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d == 0) {
-                                echo $dd->m . " bulan ";
-                              } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d == 0) {
-                                echo $dd->y . " tahun ";
-                              } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d != 0) {
-                                echo $dd->y . " tahun "  . $dd->d . " hari";
-                              } elseif ($dd->y != 0 and $dd->m != 0 and $dd->d == 0) {
-                                echo $dd->y . " tahun " . $dd->m . " bulan ";
-                              } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d == 0) {
-                                echo "Sudah habis";
-                              }
-                              ?>
-                            </small>
-                            <?php }else{ echo "-"; } ?>
+                            <?php if ($row->pajak_5_tahunan != "") { ?>
+                              <?php echo shortdate_indo($row->pajak_5_tahunan); ?><br>
+                              <small>Sisa
+                                <?php
+                                $days = $row->sisa_hari_pajak_5_tahunan;
+                                $start_date = new DateTime();
+                                $end_date = (new $start_date)->add(new DateInterval("P{$days}D"));
+                                $dd = date_diff($start_date, $end_date);
+                                if ($dd->y != 0 and $dd->m != 0 and $dd->d != 0) {
+                                  echo $dd->y . " tahun " . $dd->m . " bulan " . $dd->d . " hari";
+                                } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d != 0) {
+                                  echo $dd->m . " bulan " . $dd->d . " hari";
+                                } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d != 0) {
+                                  echo $dd->d . " hari";
+                                } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d == 0) {
+                                  echo $dd->m . " bulan ";
+                                } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d == 0) {
+                                  echo $dd->y . " tahun ";
+                                } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d != 0) {
+                                  echo $dd->y . " tahun "  . $dd->d . " hari";
+                                } elseif ($dd->y != 0 and $dd->m != 0 and $dd->d == 0) {
+                                  echo $dd->y . " tahun " . $dd->m . " bulan ";
+                                } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d == 0) {
+                                  echo "Sudah habis";
+                                }
+                                ?>
+                              </small>
+                            <?php } else {
+                              echo "-";
+                            } ?>
+                          </td>
+
+                          <td>
+                            <?php if ($row->kir_selanjutnya != "") { ?>
+                              <?php echo shortdate_indo($row->kir_selanjutnya); ?><br>
+                              <small>Sisa
+                                <?php
+                                $days = $row->sisa_hari_kir;
+                                $start_date = new DateTime();
+                                $end_date = (new $start_date)->add(new DateInterval("P{$days}D"));
+                                $dd = date_diff($start_date, $end_date);
+                                if ($dd->y != 0 and $dd->m != 0 and $dd->d != 0) {
+                                  echo $dd->y . " tahun " . $dd->m . " bulan " . $dd->d . " hari";
+                                } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d != 0) {
+                                  echo $dd->m . " bulan " . $dd->d . " hari";
+                                } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d != 0) {
+                                  echo $dd->d . " hari";
+                                } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d == 0) {
+                                  echo $dd->m . " bulan ";
+                                } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d == 0) {
+                                  echo $dd->y . " tahun ";
+                                } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d != 0) {
+                                  echo $dd->y . " tahun "  . $dd->d . " hari";
+                                } elseif ($dd->y != 0 and $dd->m != 0 and $dd->d == 0) {
+                                  echo $dd->y . " tahun " . $dd->m . " bulan ";
+                                } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d == 0) {
+                                  echo "Sudah habis";
+                                }
+                                ?>
+                              </small>
+                            <?php } else {
+                              echo "-";
+                            } ?>
                           </td>
 
                           <td class="project-actions text-right">
@@ -179,6 +217,7 @@
                         <th>Oli Transmisi</th>
                         <th>Pajak Tahunan</th>
                         <th>Pajak 5 Tahunan</th>
+                        <th>KIR</th>
                         <th></th>
                       </tr>
                     </tfoot>
@@ -285,6 +324,16 @@
                     <div class="form-group">
                       <label for="no_replas">Nomor Mesin</label>
                       <input type="text" class="form-control" id="nomor_mesin" name="nomor_mesin" placeholder="Input nomor mesin">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="no_replas">Update KIR terakhir</label>
+                      <div class="input-group date reservationdate reservationdate3" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate3" data-toggle="datetimepicker" name="kir_terakhir" id="kir_terakhir" />
+                        <div class="input-group-append" data-target=".reservationdate3" data-toggle="datetimepicker">
+                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                      </div>
                     </div>
                     <div class="form-group">
                       <label for="no_replas">Masa berlaku pajak tahunan</label>
@@ -441,6 +490,7 @@
             $('[name="nomor_mesin"]').val(data[i].nomor_mesin);
             $('[name="pajak_tahunan"]').val(data[i].pajak_tahunan);
             $('[name="pajak_5_tahunan"]').val(data[i].pajak_5_tahunan);
+            $('[name="kir_terakhir"]').val(data[i].kir_terakhir);
             $('[name="oddo_terakhir"]').val($.number(data[i].oddo_terakhir).replace(/\,/g, '.'));
             $('[name="oddo_terakhir_oli_mesin"]').val($.number(data[i].oddo_terakhir_oli_mesin).replace(/\,/g, '.'));
             $('[name="oddo_terakhir_oli_gardan"]').val($.number(data[i].oddo_terakhir_oli_gardan).replace(/\,/g, '.'));
@@ -450,20 +500,6 @@
             $('#kategori-1').hide();
             $('[name="vendor"]').val(data[i].id_vendor).change();
           }
-
-
-          $('[name="no_sto"]').val(data[i].no_sto);
-          $('[name="no_do"]').val(data[i].no_do);
-          $('[name="klien"]').val(data[i].id_klien).change();
-          $('[name="tanggal_angkut"]').val(data[i].tanggal_angkut);
-          $('[name="tanggal_selesai"]').val(data[i].tanggal_selesai);
-          $('[name="komoditas"]').val(data[i].id_komoditas).change();
-          $('[name="qty"]').val(data[i].qty);
-          $('[name="harga_unit"]').val(data[i].harga_unit);
-          $('[name="toleransi_susut"]').val(data[i].toleransi_susut);
-          $('[name="claim"]').val(data[i].claim);
-          $('#file_spk_label').html(data[i].file_spk);
-          $('#file_do_label').html(data[i].file_do);
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -492,7 +528,7 @@
         success: function(data) {
           Swal.fire(
             'Deleted!',
-            'Your file has been deleted.',
+            'Truck has been deleted.',
             'success'
           ).then((result) => {
             location.reload();
