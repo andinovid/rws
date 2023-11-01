@@ -48,7 +48,7 @@
                   ?>
                     <tr>
                       <td><?php echo $no; ?></td>
-                      <td><?php echo $row->nama; ?></td>
+                      <td><?php echo $row->nama_perusahaan; ?></td>
                       <td><?php echo $row->alamat; ?></td>
                       <td><?php echo $row->email; ?></td>
                       <td><?php echo $row->no_tlp; ?></td>

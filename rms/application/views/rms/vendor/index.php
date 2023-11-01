@@ -124,7 +124,7 @@
                   </div>
                   <div class="form-group">
                     <label for="nomor_rekening">Nomor Rekening</label>
-                    <input type="text" class="form-control" id="nomor_rekening" name="nomor_rekening" placeholder="Input nomor rekening">
+                    <input type="text" class="form-control" id="nomor_rekening" onkeyup='validate(this.id);' name="nomor_rekening" placeholder="Input nomor rekening">
                   </div>
                   <div class="form-group">
                     <label for="nama_rekening">Nama Rekening</label>
@@ -181,6 +181,13 @@
       $('#kategori-' + $(this).val()).show();
     });
   });
+
+  function validate(id) {
+    var thisId = document.getElementById(id);
+    // console.log("inside validate "+thisId);
+    var remChars = thisId.value.replace(/[^0-9\.]/g, ''); // this is to remove alphabates and special characters
+      thisId.value = remChars.replace(/\./g, ''); // this is to remove "DOT"
+  }
 
   function input_vendor() {
     $('#form_vendor')[0].reset();
