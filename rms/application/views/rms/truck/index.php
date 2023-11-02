@@ -93,7 +93,7 @@
 
 
                           <td>
-                            <?php if ($row->sisa_hari_pajak_tahunan != NULL OR $row->sisa_hari_pajak_tahunan < 0) { ?>
+                            <?php if ($row->sisa_hari_pajak_tahunan > 0) { ?>
                               <?php echo shortdate_indo($row->pajak_tahunan); ?><br>
                               <small> Sisa
                                 <?php
@@ -126,7 +126,7 @@
                           </td>
 
                           <td>
-                            <?php if ($row->sisa_hari_pajak_5_tahunan != NULL OR $row->sisa_hari_pajak_tahunan < 0) { ?>
+                            <?php if ($row->sisa_hari_pajak_tahunan > 0) { ?>
                               <?php echo shortdate_indo($row->pajak_5_tahunan); ?><br>
                               <small>Sisa
                                 <?php
@@ -159,7 +159,7 @@
                           </td>
 
                           <td>
-                            <?php if ($row->sisa_hari_kir != NULL OR $row->sisa_hari_pajak_tahunan < 0) { ?>
+                            <?php if ($row->sisa_hari_pajak_tahunan > 0) { ?>
                               <?php echo shortdate_indo($row->kir_selanjutnya); ?><br>
                               <small>Sisa
                                 <?php
