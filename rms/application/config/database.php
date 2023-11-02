@@ -99,10 +99,10 @@ if ($_SERVER["SERVER_ADDR"] != '127.0.0.1') {
 } else {
 	$db['default'] = array(
 		'dsn'	=> '',
-		'hostname' => 'localhost',
-		'username' => 'root',
-		'password' => 'root',
-		'database' => 'rws_db',
+		'hostname' => '154.41.240.52',
+		'username' => 'u856234669_rws',
+		'password' => '8YzN6E/p*[p[',
+		'database' => 'u856234669_rws',
 		'dbdriver' => 'mysqli',
 		'dbprefix' => '',
 		'pconnect' => FALSE,

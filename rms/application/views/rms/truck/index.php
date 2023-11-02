@@ -44,6 +44,7 @@
                       <tr>
                         <th>No</th>
                         <th>Nopol</th>
+                        <th>Jenis Truk</th>
                         <th>Oli Mesin</th>
                         <th>Oli Gardan</th>
                         <th>Oli Transmisi</th>
@@ -63,6 +64,7 @@
                         <tr>
                           <td><?php echo $no; ?></td>
                           <td><?php echo $row->nopol; ?></td>
+                          <td><?php echo $row->jenis_truck; ?></td>
                           <td class="project_progress">
                             <div class="progress progress-sm">
                               <div class="progress-bar bg-green" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_mesin; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_mesin; ?>%">
@@ -212,6 +214,7 @@
                       <tr>
                         <th>No</th>
                         <th>Nopol</th>
+                        <th>Jenis Truk</th>
                         <th>Oli Mesin</th>
                         <th>Oli Gardan</th>
                         <th>Oli Transmisi</th>
@@ -310,13 +313,19 @@
                 </select>
               </div>
               <div id="kategori-1" class="kategori">
-                <div class="form-group">
-                  <label for="cicilan">Cicilan</label>
-                  <input type="text" class="form-control number" id="cicilan" name="cicilan" placeholder="Input cicilan truk">
-                </div>
+
                 <div class="row">
                   <div class="col-md-6">
 
+                    <div class="form-group">
+                      <label for="kategori">Jenis Truk</label>
+                      <select id="jenis_truck" class="form-control" name="jenis_truck">
+                        <option value="">Pilih Jenis Truk</option>
+                        <option value="1">Euro 3</option>
+                        <option value="2">Euro 4</option>
+                        <option value="3">Isuzu Diesel</option>
+                      </select>
+                    </div>
                     <div class="form-group">
                       <label for="no_replas">Nomor Rangka</label>
                       <input type="text" class="form-control" id="nomor_rangka" name="nomor_rangka" placeholder="Input nomor rangka">
@@ -325,7 +334,7 @@
                       <label for="no_replas">Nomor Mesin</label>
                       <input type="text" class="form-control" id="nomor_mesin" name="nomor_mesin" placeholder="Input nomor mesin">
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="no_replas">Update KIR terakhir</label>
                       <div class="input-group date reservationdate reservationdate3" data-target-input="nearest">
@@ -356,6 +365,10 @@
 
                   </div>
                   <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="cicilan">Cicilan</label>
+                      <input type="text" class="form-control number" id="cicilan" name="cicilan" placeholder="Input cicilan truk">
+                    </div>
                     <div class="form-group">
                       <label for="oddo_terakhir">Oddo saat ini</label>
                       <input type="text" class="form-control number" id="no_sto" name="oddo_terakhir" placeholder="Input oddo saat ini">
@@ -486,6 +499,7 @@
             $('#kategori-1').show();
             $('#kategori-2').hide();
             $('[name="cicilan"]').val($.number(data[i].cicilan).replace(/\,/g, '.'));
+          $('[name="jenis_truck"]').val(data[i].jenis_truck).change();
             $('[name="nomor_rangka"]').val(data[i].nomor_rangka);
             $('[name="nomor_mesin"]').val(data[i].nomor_mesin);
             $('[name="pajak_tahunan"]').val(data[i].pajak_tahunan);

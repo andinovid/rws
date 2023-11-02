@@ -399,6 +399,11 @@ class Rms extends CI_Controller
         } else {
             $vendor = "";
         }
+        if (isset($_POST['jenis_truck'])) {
+            $jenis_truck = $this->input->POST('jenis_truck');
+        } else {
+            $jenis_truck = "";
+        }
         if (isset($_POST['nomor_rangka'])) {
             $nomor_rangka = $this->input->POST('nomor_rangka');
         } else {
@@ -455,6 +460,7 @@ class Rms extends CI_Controller
             'kategori' => $kategori,
             'id_vendor' => $vendor,
             'cicilan' => str_replace('.', '', $cicilan),
+            'jenis_truck' => $jenis_truck,
             'nomor_rangka' => $nomor_rangka,
             'nomor_mesin' => $nomor_mesin,
             'kir_terakhir' => $kir_terakhir,
