@@ -900,8 +900,57 @@ class Rms extends CI_Controller
         }
     }
 
+    
+    function keuangan()
+    {
+        $data['keuangan'] = $this->rms_model->get("tbl_keuangan")->result();
+        $data['saldo'] = $this->rms_model->get_by_query("SELECT SUM(jumlah) as total FROM tbl_keuangan")->row();
+        $data['content'] = 'rms/keuangan/index';
+        $this->load->view('rms/includes/template', $data);
+    }
 
 
+    public function save_keuangan()
+    {
+        $id = $this->input->POST('id');
+        $jenis = $this->input->POST('jenis');
+        $jumlah = $this->input->POST('jumlah');
+        $keterangan = $this->input->POST('keterangan');
+        $tanggal = $this->input->POST('tanggal');
+
+        if ($jenis == '2') {
+			$jumlah = '-' . $jumlah;
+		} else {
+			$jumlah = $jumlah;
+		}
+
+        $data = array(
+            'tanggal' => $tanggal,
+            'jumlah' => str_replace('.', '', $jumlah),
+            'jenis' => $jenis,
+            'keterangan' => $keterangan,
+        );
+
+
+
+        if ($id == "") {
+            $save = $this->rms_model->insert("tbl_keuangan", $data);
+            if ($save) {
+                echo json_encode(array(
+                    "status" => TRUE,
+                    "target" => TRUE
+                ));
+            }
+        } else {
+            $save = $this->rms_model->update("tbl_keuangan", $data, $id);
+            if ($save) {
+                echo json_encode(array(
+                    "status" => TRUE,
+                    "target" => TRUE
+                ));
+            }
+        }
+    }
 
 
 

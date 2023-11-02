@@ -116,16 +116,9 @@
             <i class="nav-icon fas fa-credit-card"></i>
             <p>
               Pinjaman
-              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?php echo base_url(); ?>rms/kas/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Tambah Pinjaman</p>
-              </a>
-            </li>
             <li class="nav-item">
               <a href="<?php echo base_url(); ?>rms/kas-masuk/" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
@@ -141,33 +134,12 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a href="pages/widgets.html" class="nav-link">
+          <a href="<?php echo base_url(); ?>rms/keuangan/" class="nav-link">
             <i class="nav-icon fas fa-wallet"></i>
             <p>
-              Kas Perusahaan
-              <i class="right fas fa-angle-left"></i>
+              Keuangan
             </p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?php echo base_url(); ?>rms/kas/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Semua Kas</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?php echo base_url(); ?>rms/kas-masuk/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Kas Masuk</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?php echo base_url(); ?>rms/kas-keluar/" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Kas Keluar</p>
-              </a>
-            </li>
-          </ul>
         </li>
 
         <li class="nav-item">
