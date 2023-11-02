@@ -900,7 +900,7 @@ class Rms extends CI_Controller
         }
     }
 
-    
+
     function keuangan()
     {
         $data['keuangan'] = $this->rms_model->get("tbl_keuangan")->result();
@@ -919,10 +919,10 @@ class Rms extends CI_Controller
         $tanggal = $this->input->POST('tanggal');
 
         if ($jenis == '2') {
-			$jumlah = '-' . $jumlah;
-		} else {
-			$jumlah = $jumlah;
-		}
+            $jumlah = '-' . $jumlah;
+        } else {
+            $jumlah = $jumlah;
+        }
 
         $data = array(
             'tanggal' => $tanggal,
@@ -949,6 +949,61 @@ class Rms extends CI_Controller
                     "target" => TRUE
                 ));
             }
+        }
+    }
+
+
+    public function setting()
+    {
+        $data['content'] = 'rms/setting/index';
+        $this->load->view('rms/includes/template', $data);
+    }
+
+    public function get_setting()
+    {
+        $data = $this->rms_model->get("tbl_adm_setting", "");
+        $detail = $data->result();
+        echo json_encode($detail);
+    }
+
+    public function update_setting()
+    {
+        $id = '5';
+        $biaya_admin = $_POST["biaya_admin"];
+        $pph_skb = $_POST["pph_skb"];
+        $pph_npwp = $_POST["pph_npwp"];
+        $max_oli_mesin_euro3 = $_POST["max_oli_mesin_euro3"];
+        $max_oli_mesin_euro4 = $_POST["max_oli_mesin_euro4"];
+        $max_oli_mesin_isuzu = $_POST["max_oli_mesin_isuzu"];
+        $max_oli_gardan_euro3 = $_POST["max_oli_gardan_euro3"];
+        $max_oli_gardan_euro4 = $_POST["max_oli_gardan_euro4"];
+        $max_oli_gardan_isuzu = $_POST["max_oli_gardan_isuzu"];
+        $max_oli_transmisi_euro3 = $_POST["max_oli_transmisi_euro3"];
+        $max_oli_transmisi_euro4 = $_POST["max_oli_transmisi_euro4"];
+        $max_oli_transmisi_isuzu = $_POST["max_oli_transmisi_isuzu"];
+
+
+        $data = array(
+            'biaya_admin' => str_replace('.', '', $biaya_admin),
+            'pph_skb' => $pph_skb,
+            'pph_npwp' => $pph_npwp,
+            'max_oli_mesin_euro3' => str_replace('.', '', $max_oli_mesin_euro3),
+            'max_oli_mesin_euro4' => str_replace('.', '', $max_oli_mesin_euro4),
+            'max_oli_mesin_isuzu' => str_replace('.', '', $max_oli_mesin_isuzu),
+            'max_oli_gardan_euro3' => str_replace('.', '', $max_oli_gardan_euro3),
+            'max_oli_gardan_euro4' => str_replace('.', '', $max_oli_gardan_euro4),
+            'max_oli_gardan_isuzu' => str_replace('.', '', $max_oli_gardan_isuzu),
+            'max_oli_transmisi_euro3' => str_replace('.', '', $max_oli_transmisi_euro3),
+            'max_oli_transmisi_euro4' => str_replace('.', '', $max_oli_transmisi_euro4),
+            'max_oli_transmisi_isuzu' => str_replace('.', '', $max_oli_transmisi_isuzu),
+        );
+
+        $save = $this->rms_model->update("tbl_adm_setting", $data, $id);
+        if ($save) {
+            echo json_encode(array(
+                "status" => TRUE,
+                "target" => TRUE
+            ));
         }
     }
 
@@ -1338,11 +1393,6 @@ class Rms extends CI_Controller
         }
     }
 
-    public function setting()
-    {
-        $data['content'] = 'rms/web_setting/index';
-        $this->load->view('rms/includes/template', $data);
-    }
 
     public function banner()
     {
@@ -1356,118 +1406,9 @@ class Rms extends CI_Controller
         echo json_encode($detail);
     }
 
-    public function get_web_setting()
-    {
-        $data = $this->admin_model->get("tbl_web_setting", "");
-        $detail = $data->result();
-        echo json_encode($detail);
-    }
 
-    public function update_web_setting()
-    {
-        $id = '1';
-        $judul_web = $_POST["judul_web"];
-        $alamat = $_POST["alamat"];
-        $tlp = $_POST["tlp"];
-        $email = $_POST["email"];
-        $file_pedoman = $_FILES['file_pedoman']['name'];
-        $file_petunjuk = $_FILES['file_petunjuk']['name'];
 
-        if (empty($file_pedoman) && empty($file_petunjuk)) {
-            $data = array(
-                'judul_web' => $judul_web,
-                'alamat' => $alamat,
-                'tlp' => $tlp,
-                'email' => $email,
-            );
-        } elseif (!empty($file_pedoman) && empty($file_petunjuk)) {
-            $image = preg_replace("/[^a-zA-Z0-9.]/", "_", $file_pedoman);
-            $filename = str_replace(' ', '_', time() . $image);
-            $this->load->library('upload');
-            $config['upload_path'] = 'assets/main/uploads/';
-            $config['allowed_types'] = 'pdf|doc|docx|xls|xlsx|jpg|png';
-            $config['file_name'] = $filename;
-            $config['max_size'] = '1000000';
-            $this->upload->initialize($config);
-            if ($this->upload->do_upload('file_pedoman')) {
-                $data = $this->upload->data();
-            } else {
-                echo $this->upload->display_errors();
-            }
-            $data = array(
-                'judul_web' => $judul_web,
-                'alamat' => $alamat,
-                'tlp' => $tlp,
-                'email' => $email,
-                'file_pedoman' => $filename,
-            );
-        } elseif (empty($file_pedoman) && !empty($file_petunjuk)) {
-            $image = preg_replace("/[^a-zA-Z0-9.]/", "_", $file_petunjuk);
-            $filename = str_replace(' ', '_', time() . $image);
-            $this->load->library('upload');
-            $config['upload_path'] = 'assets/main/uploads/';
-            $config['allowed_types'] = 'pdf|doc|docx|xls|xlsx|jpg|png';
-            $config['file_name'] = $filename;
-            $config['max_size'] = '1000000';
-            $this->upload->initialize($config);
-            if ($this->upload->do_upload('file_petunjuk')) {
-                $data = $this->upload->data();
-            } else {
-                echo $this->upload->display_errors();
-            }
-            $data = array(
-                'judul_web' => $judul_web,
-                'alamat' => $alamat,
-                'tlp' => $tlp,
-                'email' => $email,
-                'file_petunjuk' => $filename,
-            );
-        } elseif (!empty($file_pedoman) && !empty($file_petunjuk)) {
-            $image = preg_replace("/[^a-zA-Z0-9.]/", "_", $file_pedoman);
-            $filename = str_replace(' ', '_', time() . $image);
-            $this->load->library('upload');
-            $config['upload_path'] = 'assets/main/uploads/';
-            $config['allowed_types'] = 'pdf|doc|docx|xls|xlsx|jpg|png';
-            $config['file_name'] = $filename;
-            $config['max_size'] = '1000000';
-            $this->upload->initialize($config);
-            if ($this->upload->do_upload('file_pedoman')) {
-                $this->upload->data();
-            } else {
-                echo $this->upload->display_errors();
-            }
 
-            $image2 = preg_replace("/[^a-zA-Z0-9.]/", "_", $file_petunjuk);
-            $filename2 = str_replace(' ', '_', time() . $image2);
-            $this->load->library('upload');
-            $config['upload_path'] = 'assets/main/uploads/';
-            $config['allowed_types'] = 'pdf|doc|docx|xls|xlsx|jpg|png';
-            $config['file_name'] = $filename2;
-            $config['max_size'] = '1000000';
-            $this->upload->initialize($config);
-            if ($this->upload->do_upload('file_petunjuk')) {
-                $this->upload->data();
-            } else {
-                echo $this->upload->display_errors();
-            }
-            $data = array(
-                'judul_web' => $judul_web,
-                'alamat' => $alamat,
-                'tlp' => $tlp,
-                'email' => $email,
-                'file_pedoman' => $filename,
-                'file_petunjuk' => $filename2,
-            );
-        }
-
-        $save = $this->admin_model->update("tbl_web_setting", $data, $id);
-        if ($save) {
-            echo json_encode(array(
-                "status" => TRUE,
-                "target" => TRUE
-            ));
-        }
-    }
 
     public function update_banner()
     {
