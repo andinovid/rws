@@ -73,29 +73,29 @@
                           <b class="d-block"><?php if($project->total_susut != NULL){ echo number_format($project->total_susut, 0, "", "."); }else{ echo "-"; }  ?> kg</b>
                         </p>
                         <p class="text-sm">Total Uang Sangu
-                          <b class="d-block">Rp <?php if($project->total_uang_sangu != NULL){ echo number_format($project->total_uang_sangu, 0, "", "."); }else{ echo "-"; } ?></b>
+                          <b class="d-block">Rp <?php if($project->total_uang_sangu != NULL){ echo number_format($project->total_uang_sangu, 0, "", "."); }else{ echo "0"; } ?></b>
                         </p>
                         <p class="text-sm">Biaya Claim
-                          <b class="d-block">Rp <?php if($project->harga_claim_satuan != NULL){ echo number_format($project->harga_claim_satuan, 0, "", "."); }else{ echo "-"; } ?></b>
+                          <b class="d-block">Rp <?php if($project->harga_claim_satuan != NULL){ echo number_format($project->harga_claim_satuan, 0, "", "."); }else{ echo "0"; } ?></b>
                         </p>
                         <p class="text-sm">Jasa Muat
-                          <b class="d-block">Rp <?php if($project->estimasi_total_harga_jasa_muat != NULL){ echo number_format($project->estimasi_total_harga_jasa_muat, 0, "", "."); }else{ echo "-"; }  ?></b>
+                          <b class="d-block">Rp <?php if($project->estimasi_total_harga_jasa_muat != NULL){ echo number_format($project->estimasi_total_harga_jasa_muat, 0, "", "."); }else{ echo "0"; }  ?></b>
                         </p>
                         <p class="text-sm">Jasa Bongkar
-                          <b class="d-block">Rp <?php if($project->estimasi_total_harga_jasa_muat != NULL){ echo number_format($project->estimasi_total_harga_jasa_bongkar, 0, "", "."); }else{ echo "-"; } ?></b>
+                          <b class="d-block">Rp <?php if($project->estimasi_total_harga_jasa_muat != NULL){ echo number_format($project->estimasi_total_harga_jasa_bongkar, 0, "", "."); }else{ echo "0"; } ?></b>
                         </p>
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="text-muted">
                         <p class="text-sm">Total Claim
-                          <b class="d-block"><?php if($project->total_claim != NULL){ echo number_format($project->total_claim, 0, "", ".");  }else{ echo "-"; } ?> Kg</b>
+                          <b class="d-block"><?php if($project->total_claim != NULL){ echo number_format($project->total_claim, 0, "", ".");  }else{ echo "0"; } ?> Kg</b>
                         </p>
                         <p class="text-sm">Total Biaya Claim
-                          <b class="d-block">Rp <?php if($project->total_biaya_claim != NULL){ echo number_format($project->total_biaya_claim, 0, "", ".");  }else{ echo "-"; } ?></b>
+                          <b class="d-block">Rp <?php if($project->total_biaya_claim != NULL){ echo number_format($project->total_biaya_claim, 0, "", ".");  }else{ echo "0"; } ?></b>
                         </p>
                         <p class="text-sm">Total Replas
-                          <b class="d-block">Rp <?php if($project->total_pengeluaran != NULL){ echo number_format($project->total_pengeluaran, 0, "", ".");  }else{ echo "-"; } ?></b>
+                          <b class="d-block">Rp <?php if($project->total_pengeluaran != NULL){ echo number_format($project->total_pengeluaran, 0, "", ".");  }else{ echo "0"; } ?></b>
                         </p>
                         <p class="text-sm">Status
                           <b class="d-block text-green"><?php echo $project->nama_status; ?></b>
@@ -123,7 +123,7 @@
                     <span class="info-box-icon bg-success"><i class="fa fa-money-bill"></i></span>
                     <div class="info-box-content">
                       <span class="info-box-text">Nilai Project</span>
-                      <span class="info-box-number">Rp <?php if($project->total_nilai != NULL){ echo number_format($project->total_nilai, 0, "", "."); }else{ echo "-"; } ?></span>
+                      <span class="info-box-number">Rp <?php if($project->total_nilai != NULL){ echo number_format($project->total_nilai, 0, "", "."); }else{ echo "0"; } ?></span>
                     </div>
                     <!-- /.info-box-content -->
                   </div>
@@ -145,13 +145,13 @@
 
                     <div class="info-box-content">
                       <span class="info-box-text">Status Project</span>
-                      <span class="info-box-number">Terkirim <?php if($project->total_terkirim != NULL){ echo number_format($project->total_terkirim, 0, "", "."); }else{ echo "-"; } ?> kg dari <?php if($project->total_terkirim != NULL){ echo number_format($project->qty, 0, "", "."); }else{ echo "-"; } ?> kg</span>
+                      <span class="info-box-number">Terkirim <?php if($project->total_terkirim != NULL){ echo number_format($project->total_terkirim, 0, "", "."); }else{ echo "0"; } ?> kg dari <?php if($project->total_terkirim != NULL){ echo number_format($project->qty, 0, "", "."); }else{ echo "0"; } ?> kg</span>
 
                       <div class="progress">
                         <div class="progress-bar" style="width: <?php echo $project->persentase_terkirim; ?>%"></div>
                       </div>
                       <span class="progress-description">
-                        <?php echo $project->persentase_terkirim; ?>% Terkirim | Sisa kirim <?php if($project->total_terkirim != NULL){ echo number_format($project->sisa_kirim, 0, "", ".");  }else{ echo "-"; } ?> Kg
+                        <?php echo $project->persentase_terkirim; ?>% Terkirim | Sisa kirim <?php if($project->total_terkirim != NULL){ echo number_format($project->sisa_kirim, 0, "", ".");  }else{ echo "0"; } ?> Kg
                       </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -166,11 +166,9 @@
                   <a href="<?php echo base_url(); ?>assets/rms/documents/spk/<?php echo $project->file_spk; ?>" class="link-black text-sm mr-3"><i class="fas fa-file mr-1"></i> File SPK</a>
                   <a href="<?php echo base_url(); ?>assets/rms/documents/do/<?php echo $project->file_do; ?>" class="link-black text-sm mr-3"><i class="fas fa-file mr-1"></i> File DO</a>
                   <a href="#" class="text-sm btn btn-danger btn-sm text-sm mr-1"><i class="fas fa-print mr-1"></i> Cetak Invoice</a>
-                  <a href="#" class="text-sm btn btn-success btn-sm text-sm"><i class="fas fa-print mr-1"></i> Cetak Kwitansi</a>
+                  <a href="<?php echo base_url(); ?>rms/kwitansi/<?php echo $project->id_project; ?>" class="text-sm btn btn-success btn-sm text-sm"><i class="fas fa-print mr-1"></i> Kwitansi</a>
                 </div>
               </div>
-
-
             </div>
 
             <!-- /.card-body -->
@@ -391,7 +389,7 @@
                   </div>
                   <div class="form-group">
                     <label for="no_replas">Tanggal Muat</label>
-                    <div class="input-group date reservationdate1" data-target-input="nearest">
+                    <div class="input-group date reservationdate reservationdate1" data-target-input="nearest">
                       <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate1" data-toggle="datetimepicker" name="tanggal_muat" id="tanggal_muat" />
                       <div class="input-group-append" data-target=".reservationdate1" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -400,7 +398,7 @@
                   </div>
                   <div class="form-group">
                     <label for="no_replas">Tanggal Bongkar</label>
-                    <div class="input-group date reservationdate2" data-target-input="nearest">
+                    <div class="input-group date reservationdate reservationdate2" data-target-input="nearest">
                       <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate2" data-toggle="datetimepicker" name="tanggal_bongkar" id="tanggal_bongkar" />
                       <div class="input-group-append" data-target=".reservationdate2" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -438,30 +436,30 @@
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="no_replas">Qty Kirim</label>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Bag" name="qty_kirim_bag" id="qty_kirim_bag">
-                      </div>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Kg" name="qty_kirim_kg" id="qty_kirim_kg">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Timbang Kebun</label>
+                    <label for="no_replas">Qty Awal</label>
                     <div class="row">
                       <div class="col-md-6">
                         <input type="text" class="form-control" name="timbang_kebun_bag" id="timbang_kebun_bag" placeholder="Bag">
                       </div>
                       <div class="col-md-6">
-                        <input type="text" class="form-control" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Kg">
+                        <input type="text" class="form-control number" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Kg">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Qty Akhir</label>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Bag" name="qty_kirim_bag" id="qty_kirim_bag">
+                      </div>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control number" placeholder="Kg" name="qty_kirim_kg" id="qty_kirim_kg">
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="no_replas">Uang Sangu</label>
-                    <input type="text" class="form-control" name="uang_sangu" id="uang_sangu" placeholder="Uang Sangu">
+                    <input type="text" class="form-control number" name="uang_sangu" id="uang_sangu" placeholder="Uang Sangu">
                   </div>
                 </div>
               </div>
@@ -511,9 +509,9 @@
                   </div>
                   <div class="form-group">
                     <label for="tanggal_pembayaran">Tanggal Pembayaran</label>
-                    <div class="input-group date reservationdate" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate" data-toggle="datetimepicker" name="tanggal_pembayaran" id="tanggal_pembayaran" />
-                      <div class="input-group-append" data-target=".reservationdate" data-toggle="datetimepicker">
+                    <div class="input-group date reservationdate3" data-target-input="nearest">
+                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate3" data-toggle="datetimepicker" name="tanggal_pembayaran" id="tanggal_pembayaran" />
+                      <div class="input-group-append" data-target=".reservationdate3" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                       </div>
                     </div>
@@ -783,16 +781,16 @@
       success: function(data) {
         for (var i = 0; i < data.length; i++) {
           $('[name="no_replas"]').val(data[i].no_replas);
-          $('[name="tanggal"]').val(data[i].tanggal_muat);
-          $('[name="tanggal"]').val(data[i].tanggal_bongkar);
+          $('[name="tanggal_muat"]').val(data[i].tanggal_muat);
+          $('[name="tanggal_bongkar"]').val(data[i].tanggal_bongkar);
           $('[name="supir"]').val(data[i].id_supir).change();
           $('[name="truck"]').val(data[i].id_truck).change();
           $('[name="tujuan"]').val(data[i].id_tujuan).change();
           $('[name="qty_kirim_bag"]').val(data[i].qty_kirim_bag);
-          $('[name="qty_kirim_kg"]').val(data[i].qty_kirim_kg);
+          $('[name="qty_kirim_kg"]').val($.number(data[i].qty_kirim_kg).replace(/\,/g, '.'));
           $('[name="timbang_kebun_bag"]').val(data[i].timbang_kebun_bag);
-          $('[name="timbang_kebun_kg"]').val(data[i].timbang_kebun_kg);
-          $('[name="uang_sangu"]').val(data[i].uang_sangu);
+          $('[name="timbang_kebun_kg"]').val($.number(data[i].timbang_kebun_kg).replace(/\,/g, '.'));
+          $('[name="uang_sangu"]').val($.number(data[i].uang_sangu).replace(/\,/g, '.'));
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
