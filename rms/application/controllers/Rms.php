@@ -1156,10 +1156,10 @@ class Rms extends CI_Controller
             if ($data->jenis_pajak == 'skb') {
                 $pph = '0.5%';
                 $jenis_pajak = "SKB";
-            }elseif ($data->jenis_pajak == 'ktp'){
+            } elseif ($data->jenis_pajak == 'ktp') {
                 $pph = '4%';
                 $jenis_pajak = "KTP";
-            }elseif ($data->jenis_pajak == 'npwp'){
+            } elseif ($data->jenis_pajak == 'npwp') {
                 $pph = '2%';
                 $jenis_pajak = "NPWP";
             }
@@ -1182,7 +1182,7 @@ class Rms extends CI_Controller
             $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, 'Rp ' . number_format($data->biaya_admin, 0, "", "."));
             $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, 'Rp ' . number_format($data->grand_total, 0, "", "."));
             //$excel->setActiveSheetIndex(0)->insertNewRowBefore(2,1); 
-            $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow2, $jenis_pajak .' '. $data->no_pajak .' - '. $data->nama_pajak);
+            $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow2, $jenis_pajak . ' ' . $data->no_pajak . ' - ' . $data->nama_pajak);
             $excel->getActiveSheet()->mergeCells('M' . $numrow2 . ':' . 'Q' . $numrow2); // Set Merge Cell pada kolom A1 sampai E1
             $excel->getActiveSheet()->getStyle('A' . $numrow2 . ':' . 'Q' . $numrow2)->applyFromArray($style_row);
 
@@ -1226,12 +1226,12 @@ class Rms extends CI_Controller
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, 'Total');
-        $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, 'Rp '.number_format($detail_kwitansi->grand_total, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
         $excel->getActiveSheet()->getStyle('P' . $numrow)->applyFromArray($style_row);
         $excel->getActiveSheet()->getStyle('Q' . $numrow)->applyFromArray($style_row);
 
         $excel->setActiveSheetIndex(0)->setCellValue('A' . $sebesar, 'Sebesar');
-        $excel->setActiveSheetIndex(0)->setCellValue('D' . $sebesar, 'Rp '.number_format($detail_kwitansi->grand_total, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('D' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('G' . $sebesar, 'Sampit, ' . shortdate_indo(date('Y-m-d')));
@@ -1314,6 +1314,28 @@ class Rms extends CI_Controller
 
 
 
+    function invoice()
+    {
+        $data['invoice'] = $this->rms_model->get("v_project")->result();
+        $data['content'] = 'rms/invoice/index';
+        $this->load->view('rms/includes/template', $data);
+    }
+
+
+    function cetak_invoice()
+    {
+        $id_project = $this->input->POST('id_project_invoice');
+        $data['pph'] = $this->input->POST('pph');
+        $data['ppn'] = $this->input->POST('ppn');
+        $data['project'] = $this->rms_model->get("v_project", "WHERE id_project IN ($id_project)")->result();
+        $data['detail_project'] = $this->rms_model->get("v_project", "WHERE id_project IN ($id_project) GROUP BY id_klien")->result();
+        $this->load->library('pdf');
+        error_reporting(0); // AGAR ERROR MASALAH VERSI PHP TIDAK MUNCUL
+
+        $html = $this->load->view('rms/invoice/pdf', $data, true);
+        $filename = "data_peserta(" . $data['date'] . ").pdf";
+        $this->pdf->createPDF($html, $filename, true);
+    }
 
 
 
