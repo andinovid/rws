@@ -179,8 +179,13 @@ class Rms extends CI_Controller
             'status' => '0',
         );
 
+        $data2 = array(
+            'status' => '1',
+        );
+
         if ($id == "") {
             $save = $this->rms_model->insert("tbl_rekap", $data);
+            $this->rms_model->update("tbl_project", $data2, $id_project);
             if ($save) {
                 echo json_encode(array(
                     "status" => TRUE,

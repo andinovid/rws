@@ -458,6 +458,10 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label for="no_replas">Toleransi Susut</label>
+                    <input type="text" class="form-control" name="toleransi_susut" id="toleransi_susut" placeholder="Toleransi Susut">
+                  </div>
+                  <div class="form-group">
                     <label for="no_replas">Uang Sangu</label>
                     <input type="text" class="form-control number" name="uang_sangu" id="uang_sangu" placeholder="Uang Sangu">
                   </div>
@@ -790,6 +794,7 @@
           $('[name="qty_kirim_kg"]').val($.number(data[i].qty_kirim_kg).replace(/\,/g, '.'));
           $('[name="timbang_kebun_bag"]').val(data[i].timbang_kebun_bag);
           $('[name="timbang_kebun_kg"]').val($.number(data[i].timbang_kebun_kg).replace(/\,/g, '.'));
+          $('[name="toleransi_susut"]').val(data[i].toleransi_susut);
           $('[name="uang_sangu"]').val($.number(data[i].uang_sangu).replace(/\,/g, '.'));
         }
       },
