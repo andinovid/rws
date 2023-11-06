@@ -39,7 +39,7 @@
                     <th>Qty</th>
                     <th>Progress</th>
                     <th>Status</th>
-                    <th></th>
+                    <th style="width: 15%;"></th>
                   </tr>
                 </thead>
                 <tbody>
