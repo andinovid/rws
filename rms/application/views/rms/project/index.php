@@ -33,6 +33,7 @@
                   <tr>
                     <th>No</th>
                     <th>No Kontrak</th>
+                    <th>No DO</th>
                     <th>Klien</th>
                     <th>Komoditas</th>
                     <th>Qty</th>
@@ -51,6 +52,7 @@
                     <tr>
                       <td><?php echo $no; ?></td>
                       <td><?php echo $row->no_kontrak; ?></td>
+                      <td><?php echo $row->no_do; ?></td>
                       <td><?php echo $row->nama_perusahaan; ?></td>
                       <td><?php echo $row->komoditas; ?></td>
                       <td><?php echo number_format($row->qty, 0, "", "."); ?></td>
@@ -236,7 +238,7 @@
 
 
     <div class="modal fade" id="input-truck">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-lg" style="min-width: 60%;">
         <form id="form_pilih_truck" class="form-horizontal" method="post" enctype="multipart/form-data">
           <div class="modal-content">
             <div class="modal-header">
@@ -251,9 +253,9 @@
                 <table class="table" id="dynamic_field">
                   <thead class="thead-dark">
                     <tr>
-                      <th>Nopol</th>
-                      <th>Supir</th>
-                      <th>Tujuan</th>
+                      <th style="width: 20%;">Nopol</th>
+                      <th style="width: 20%;">Supir</th>
+                      <th style="width: 20%;">Tujuan</th>
                       <th>Tanggal muat</th>
                       <th>Uang Sangu</th>
                       <th></th>
@@ -261,7 +263,7 @@
                   </thead>
                   <tr>
                     <td>
-                      <select class="form-control select2" style="width: 100%;" name="truck[]" id="klien">
+                      <select class="form-control select2" style="width: 100%;" name="truck[]" id="truck">
                         <option value="0">Pilih Truck</option>
                         <?php foreach ($truck as $row) : ?>
                           <option value="<?php echo $row->id; ?>"><?php echo $row->nopol; ?></option>
@@ -269,7 +271,7 @@
                       </select>
                     </td>
                     <td>
-                      <select class="form-control select2" style="width: 100%;" name="supir[]" id="klien">
+                      <select class="form-control select2" style="width: 100%;" name="supir[]" id="supir">
                         <option value="0">Pilih Supir</option>
                         <?php foreach ($supir as $row) : ?>
                           <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
@@ -277,10 +279,10 @@
                       </select>
                     </td>
                     <td>
-                      <select class="form-control select2" style="width: 100%;" name="supir[]" id="klien">
+                      <select class="form-control select2" style="width: 100%;" name="tujuan[]" id="tujuan">
                         <option value="0">Pilih Tujuan</option>
                         <?php foreach ($tujuan as $row) : ?>
-                          <option value="<?php echo $row->id; ?>"><?php echo $row->nama_tujuan; ?></option>
+                          <option value="<?php echo $row->id; ?>"><?php echo $row->kode_tujuan; ?></option>
                         <?php endforeach; ?>
                       </select>
                     </td>
@@ -295,7 +297,7 @@
                       </div>
                     </td>
                     <td>
-                      <input type="text" name="uang_sangu[]" placeholder="Uang Sangu" class="form-control" />
+                      <input type="text" name="uang_sangu[]" placeholder="Uang Sangu" class="form-control number" />
                     </td>
                     <td><button type="button" name="add" id="add" class="btn btn-success">+</button></td>
                   </tr>
@@ -323,8 +325,11 @@
     var i = 1;
 
     $('#add').click(function() {
+      setTimeout(function() {
+        $('.select2').select2();
+      }, 100);
       i++;
-      $('#dynamic_field').append('<tr id="row' + i + '" class="dynamic-added"><td><select class="form-control select2" style="width: 100%;" name="truck[]" id="truck"><option value="0">Pilih Truck</option><?php foreach ($truck as $row) : ?><option value="<?php echo $row->id; ?>"><?php echo $row->nopol; ?></option><?php endforeach; ?></select></td><td><select class="form-control select2" style="width: 100%;" name="supir[]" id="supir"><option value="0">Pilih Supir</option><?php foreach ($supir as $row) : ?><option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option><?php endforeach; ?></select></td><td><select class="form-control select2" style="width: 100%;" name="tujuan[]" id="tujuan"><option value="0">Pilih Tujuan</option><?php foreach ($tujuan as $row) : ?><option value="<?php echo $row->id; ?>"><?php echo $row->nama_tujuan; ?></option><?php endforeach; ?></select></td><td><div class="form-group"><div class="input-group date reservationdate reservationdate' + i + '" data-target-input="nearest"><input type="text" class="form-control datetimepicker-input" data-target=".reservationdate' + i + '" data-toggle="datetimepicker" name="tanggal_muat[]" id="tanggal_muat_' + i + '" /><div class="input-group-append" data-target=".reservationdate' + i + '" data-toggle="datetimepicker"><div class="input-group-text"><i class="fa fa-calendar"></i></div></div></div></div></td><td><input type="text" name="uang_sangu[]" placeholder="Uang Sangu" class="form-control" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">x</button></td></tr>');
+      $('#dynamic_field').append('<tr id="row' + i + '" class="dynamic-added"><td><select class="form-control select2" style="width: 100%;" name="truck[]" id="truck' + i + '"><option value="0">Pilih Truck</option><?php foreach ($truck as $row) : ?><option value="<?php echo $row->id; ?>"><?php echo $row->nopol; ?></option><?php endforeach; ?></select></td><td><select class="form-control select2" style="width: 100%;" name="supir[]" id="supir' + i + '"><option value="0">Pilih Supir</option><?php foreach ($supir as $row) : ?><option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option><?php endforeach; ?></select></td><td><select class="form-control select2" style="width: 100%;" name="tujuan[]" id="tujuan' + i + '"><option value="0">Pilih Tujuan</option><?php foreach ($tujuan as $row) : ?><option value="<?php echo $row->id; ?>"><?php echo $row->nama_tujuan; ?></option><?php endforeach; ?></select></td><td><div class="form-group"><div class="input-group date reservationdate reservationdate' + i + '" data-target-input="nearest"><input type="text" class="form-control datetimepicker-input" data-target=".reservationdate' + i + '" data-toggle="datetimepicker" name="tanggal_muat[]" id="tanggal_muat_' + i + '" /><div class="input-group-append" data-target=".reservationdate' + i + '" data-toggle="datetimepicker"><div class="input-group-text"><i class="fa fa-calendar"></i></div></div></div></div></td><td><input type="text" name="uang_sangu[]" placeholder="Uang Sangu" class="form-control" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">x</button></td></tr>');
       $('.reservationdate' + i + '').datetimepicker({
         format: 'Y-M-DD'
       })

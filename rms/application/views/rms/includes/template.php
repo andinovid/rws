@@ -171,13 +171,15 @@
         "responsive": true,
         "lengthChange": false,
         "autoWidth": true,
-        "ordering": false
+        "ordering": false,
+        "pageLength": 50
       })
 
       $(".data-table").DataTable({
         "responsive": true,
         "lengthChange": false,
         "autoWidth": false,
+        "pageLength": 20,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#DataTables_Table_0_wrapper .col-md-6:eq(0)');
       $('[data-toggle="tooltip"]').tooltip()
