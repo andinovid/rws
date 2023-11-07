@@ -54,8 +54,20 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 
-$route['rms/project/view/(:any)'] = 'rms/view_project/$1';
-$route['rms/truck/view/(:any)'] = 'rms/view_truck/$1';
-$route['rms/vendor/view/(:any)'] = 'rms/view_vendor/$1';
-$route['rms/sparepart/view/(:any)'] = 'rms/view_sparepart/$1';
-$route['rms/supir/view/(:any)'] = 'rms/view_supir/$1';
+$route['project'] = 'rms/project';
+$route['project/view/(:any)'] = 'rms/view_project/$1';
+$route['truck/view/(:any)'] = 'rms/view_truck/$1';
+$route['vendor/view/(:any)'] = 'rms/view_vendor/$1';
+$route['sparepart/view/(:any)'] = 'rms/view_sparepart/$1';
+$route['supir/view/(:any)'] = 'rms/view_supir/$1';
+$route['invoice/generate'] = 'rms/generate_invoice';
+$route['truck'] = 'rms/truck';
+$route['invoice/data'] = 'rms/invoice';
+$route['perbaikan'] = 'rms/perbaikan';
+$route['vendor'] = 'rms/vendor';
+$route['sparepart'] = 'rms/sparepart';
+$route['supir'] = 'rms/supir';
+$route['tujuan'] = 'rms/tujuan';
+$route['klien'] = 'rms/klien';
+$route['keuangan'] = 'rms/keuangan';
+$route['setting'] = 'rms/setting';

@@ -76,7 +76,7 @@
                       </td>
                       </td>
                       <td class="project-actions text-right">
-                        <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/project/view/<?php echo $row->id_project; ?>" data-toggle="tooltip" data-placement="top" title="Detail Project">
+                        <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>project/view/<?php echo $row->id_project; ?>" data-toggle="tooltip" data-placement="top" title="Detail Project">
                           <i class="fas fa-folder">
                           </i>
                         </a>
@@ -98,8 +98,9 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>No </th>
+                    <th>No</th>
                     <th>No Kontrak</th>
+                    <th>No DO</th>
                     <th>Klien</th>
                     <th>Komoditas</th>
                     <th>Qty</th>
@@ -174,7 +175,13 @@
                       </div>
                     </div>
                   </div>
+                  <div class="form-group">
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea name="deskripsi" id="deskripsi" class="form-control" rows="2"></textarea>
+                  </div>
 
+                </div>
+                <div class="col-md-6">
                   <div class="form-group">
                     <label for="no_replas">Komoditas</label>
                     <select class="form-control select2" style="width: 100%;" name="komoditas" id="komoditas">
@@ -184,9 +191,6 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
-                </div>
-                <div class="col-md-6">
-
 
                   <div class="form-group">
                     <label for="no_replas">Qty</label>
@@ -443,6 +447,7 @@
           $('[name="harga_unit"]').val(data[i].harga_unit);
           $('[name="toleransi_susut"]').val(data[i].toleransi_susut);
           $('[name="claim"]').val(data[i].claim);
+          $('[name="deskripsi"]').val(data[i].deskripsi);
           $('#file_spk_label').html(data[i].file_spk);
           $('#file_do_label').html(data[i].file_do);
         }

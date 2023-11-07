@@ -242,13 +242,13 @@
                       $no = 0;
                       foreach ($truck_vendor as $row) :
                         $no++;
-                      ?>
+                      ?> 
                         <tr>
                           <td><?php echo $no; ?></td>
                           <td><?php echo $row->nopol; ?></td>
                           <td><?php echo $row->nama_vendor; ?></td>
                           <td class="project-actions text-right">
-                            <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/truck/view/<?php echo $row->id_truck; ?>" data-toggle="tooltip" data-placement="top" title="Detail Truk">
+                            <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>truck/view/<?php echo $row->id_truck; ?>" data-toggle="tooltip" data-placement="top" title="Detail Truk">
                               <i class="fas fa-folder">
                               </i>
                             </a>

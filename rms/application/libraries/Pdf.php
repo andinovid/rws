@@ -9,6 +9,8 @@ class Pdf
         $dompdf = new Dompdf\Dompdf();
         $dompdf->load_html($html);
         $dompdf->set_paper($paper, $orientation);
+        $dompdf->set_option('isHtml5ParserEnabled', true);
+    $dompdf->set_option('isRemoteEnabled', true);   
         $dompdf->render();
         if($download)
             $dompdf->stream($filename.'.pdf', array('Attachment' => 1));

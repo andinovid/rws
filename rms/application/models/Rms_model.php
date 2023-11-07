@@ -26,6 +26,14 @@ class Rms_model extends CI_Model
         return $return;
     }
 
+    public function update_in($table, $data, $param)
+    {
+        $return = FALSE;
+        $this->db->where_in("id", $param);
+        $this->db->update($table, $data);
+        return $return;
+    }
+
     function delete($tbl, $id)
     {
         $this->db->where('id', $id);

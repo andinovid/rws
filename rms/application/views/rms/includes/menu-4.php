@@ -37,7 +37,7 @@
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         <li class="nav-item <?php if ($this->uri->segment(2) == "dashboard") { ?>menu-open <?php } ?>">
-          <a href="<?php echo base_url(); ?>rms/dashboard/" class="nav-link <?php if ($this->uri->segment(2) == "dashboard") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>dashboard/" class="nav-link <?php if ($this->uri->segment(2) == "dashboard") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -46,7 +46,7 @@
 
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/rekapitulasi/" class="nav-link <?php if ($this->uri->segment(2) == "rekapitulasi") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>rekapitulasi/" class="nav-link <?php if ($this->uri->segment(2) == "rekapitulasi") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-th"></i>
             <p>
               Rekapitulasi Data
@@ -54,7 +54,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/truck/" class="nav-link <?php if ($this->uri->segment(2) == "truck") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>truck/" class="nav-link <?php if ($this->uri->segment(2) == "truck") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-truck"></i>
             <p>
               Truck
@@ -62,7 +62,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/perbaikan/" class="nav-link <?php if ($this->uri->segment(2) == "perbaikan") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>perbaikan/" class="nav-link <?php if ($this->uri->segment(2) == "perbaikan") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-tools"></i>
             <p>
               Perbaikan
@@ -70,7 +70,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/sparepart/" class="nav-link <?php if ($this->uri->segment(2) == "sparepart") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>sparepart/" class="nav-link <?php if ($this->uri->segment(2) == "sparepart") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-warehouse"></i>
             <p>
               Sparepart
@@ -78,7 +78,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/supir/" class="nav-link <?php if ($this->uri->segment(2) == "supir") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>supir/" class="nav-link <?php if ($this->uri->segment(2) == "supir") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-id-card"></i>
             <p>
               Supir

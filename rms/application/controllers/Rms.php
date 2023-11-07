@@ -236,6 +236,7 @@ class Rms extends CI_Controller
         $toleransi_susut = $this->input->POST('toleransi_susut');
         $harga_unit = $this->input->POST('harga_unit');
         $claim = $this->input->POST('claim');
+        $deskripsi = $this->input->POST('deskripsi');
 
         $file_spk = $_FILES['file_spk']['name'];
         $file_do = $_FILES['file_do']['name'];
@@ -252,6 +253,7 @@ class Rms extends CI_Controller
             'toleransi_susut' => $toleransi_susut,
             'harga_unit' => str_replace('.', '', $harga_unit),
             'claim' => str_replace('.', '', $claim),
+            'deskripsi' => $deskripsi,
             'status' => '0',
         );
 
@@ -1314,21 +1316,62 @@ class Rms extends CI_Controller
 
 
 
-    function invoice()
+    function generate_invoice()
     {
         $data['invoice'] = $this->rms_model->get("v_project")->result();
+        $data['content'] = 'rms/invoice/generate';
+        $this->load->view('rms/includes/template', $data);
+    }
+
+    function save_generate_invoice()
+    {
+        $id_project = $this->input->POST('id_project_invoice');
+        $no_invoice = $this->input->POST('no_invoice');
+        $remark = $this->input->POST('remark');
+        $pph = $this->input->POST('pph');
+        $ppn = $this->input->POST('ppn');
+
+        $projectArray = explode(',', $id_project);
+
+        for ($i = 0; $i < count($projectArray); $i++) {
+
+            $item = array('no_invoice' => $no_invoice, 'id_project' => $projectArray[$i]);
+            $this->rms_model->insert("tbl_generate_invoice", $item);
+        }
+
+        $data = array(
+            'no_invoice' => $no_invoice,
+            'remark' => $remark,
+            'ppn' => $ppn,
+            'pph' => $pph,
+            'status' => '0',
+        );
+
+        $save_invoice = $this->rms_model->insert("tbl_invoice", $data);
+
+        if ($save_invoice) {
+            echo json_encode(array(
+                "status" => TRUE,
+                "target" => TRUE
+            ));
+        }
+    }
+
+    function invoice()
+    {
+        $data['invoice'] = $this->rms_model->get("v_invoice")->result();
         $data['content'] = 'rms/invoice/index';
         $this->load->view('rms/includes/template', $data);
     }
 
 
-    function cetak_invoice()
+    function cetak_invoice($id)
     {
-        $id_project = $this->input->POST('id_project_invoice');
-        $data['pph'] = $this->input->POST('pph');
-        $data['ppn'] = $this->input->POST('ppn');
-        $data['project'] = $this->rms_model->get("v_project", "WHERE id_project IN ($id_project)")->result();
-        $data['detail_project'] = $this->rms_model->get("v_project", "WHERE id_project IN ($id_project) GROUP BY id_klien")->result();
+
+        $data['invoice'] = $this->rms_model->get("v_invoice", "WHERE id_invoice = '$id'")->row();
+        $no_invoice = $data['invoice']->no_invoice;
+        $data['project'] = $this->rms_model->get("v_generate_invoice", "WHERE no_invoice = '$no_invoice'")->result();
+
         $this->load->library('pdf');
         error_reporting(0); // AGAR ERROR MASALAH VERSI PHP TIDAK MUNCUL
 

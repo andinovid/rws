@@ -57,7 +57,7 @@
 
 
                       <td class="project-actions text-right">
-                        <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/supir/view/<?php echo $row->id; ?>" data-toggle="tooltip" data-placement="top" title="Detail supir">
+                        <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>supir/view/<?php echo $row->id; ?>" data-toggle="tooltip" data-placement="top" title="Detail supir">
                           <i class="fas fa-folder">
                           </i>
                         </a>

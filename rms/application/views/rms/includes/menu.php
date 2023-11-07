@@ -35,8 +35,8 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-        <li class="nav-item <?php if ($this->uri->segment(2) == "dashboard") { ?>menu-open <?php } ?>">
-          <a href="<?php echo base_url(); ?>rms/dashboard/" class="nav-link <?php if ($this->uri->segment(2) == "dashboard") { ?>active <?php } ?>">
+        <li class="nav-item">
+          <a href="<?php echo base_url(); ?>dashboard/" class="nav-link <?php if ($this->uri->segment(2) == "dashboard") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -45,7 +45,7 @@
 
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/project/" class="nav-link <?php if ($this->uri->segment(2) == "project") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>project/" class="nav-link <?php if ($this->uri->segment(1) == "project") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-th"></i>
             <p>
               Project
@@ -53,16 +53,16 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/truck/" class="nav-link <?php if ($this->uri->segment(2) == "truck") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>truck/" class="nav-link <?php if ($this->uri->segment(1) == "truck") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-truck"></i>
             <p>
               Truck
             </p>
           </a>
-          
+
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/perbaikan/" class="nav-link <?php if ($this->uri->segment(2) == "perbaikan") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>perbaikan/" class="nav-link <?php if ($this->uri->segment(1) == "perbaikan") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-tools"></i>
             <p>
               Perbaikan
@@ -70,7 +70,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/vendor/" class="nav-link <?php if ($this->uri->segment(2) == "vendor") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>vendor/" class="nav-link <?php if ($this->uri->segment(1) == "vendor") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-building"></i>
             <p>
               Vendor Truck
@@ -78,7 +78,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/sparepart/" class="nav-link <?php if ($this->uri->segment(2) == "sparepart") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>sparepart/" class="nav-link <?php if ($this->uri->segment(1) == "sparepart") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-warehouse"></i>
             <p>
               Sparepart
@@ -86,7 +86,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/supir/" class="nav-link <?php if ($this->uri->segment(2) == "supir") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>supir/" class="nav-link <?php if ($this->uri->segment(1) == "supir") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-id-card"></i>
             <p>
               Supir
@@ -94,7 +94,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/tujuan/" class="nav-link <?php if ($this->uri->segment(2) == "tujuan") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>tujuan/" class="nav-link <?php if ($this->uri->segment(1) == "tujuan") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-map"></i>
             <p>
               Data Tujuan
@@ -102,7 +102,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/klien/" class="nav-link <?php if ($this->uri->segment(2) == "klien") { ?>active <?php } ?>">
+          <a href="<?php echo base_url(); ?>klien/" class="nav-link <?php if ($this->uri->segment(1) == "klien") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-user-tie"></i>
             <p>
               Data Klien
@@ -111,7 +111,7 @@
         </li>
 
         <li class="nav-header">KEUANGAN</li>
-        <li class="nav-item">
+        <!--li class="nav-item">
           <a href="pages/widgets.html" class="nav-link">
             <i class="nav-icon fas fa-credit-card"></i>
             <p>
@@ -120,21 +120,21 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?php echo base_url(); ?>rms/kas-masuk/" class="nav-link">
+              <a href="<?php echo base_url(); ?>kas-masuk/" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Data Pinjaman</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url(); ?>rms/kas-keluar/" class="nav-link">
+              <a href="<?php echo base_url(); ?>kas-keluar/" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Data Pembayaran</p>
               </a>
             </li>
           </ul>
-        </li>
+        </li-->
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/keuangan/" class="nav-link">
+          <a href="<?php echo base_url(); ?>keuangan/" class="nav-link <?php if ($this->uri->segment(1) == "keuangan") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-wallet"></i>
             <p>
               Keuangan
@@ -142,16 +142,31 @@
           </a>
         </li>
 
-        <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/invoice/" class="nav-link">
+        <li class="nav-item <?php if ($this->uri->segment(1) == "invoice") { ?>menu-open <?php } ?>">
+          <a href="<?php echo base_url(); ?>invoice/" class="nav-link <?php if ($this->uri->segment(1) == "invoice") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-copy"></i>
             <p>
               Invoice
+              <i class="fas fa-angle-right right"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ">
+              <a href="<?php echo base_url(); ?>invoice/generate" class="nav-link <?php if ($this->uri->segment(2) == "generate") { ?>active <?php } ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Generate Invoice</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url(); ?>invoice/data" class="nav-link <?php if ($this->uri->segment(2) == "data") { ?>active <?php } ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Data Invoice</p>
+              </a>
+            </li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/kwitansi/" class="nav-link">
+        <!--li class="nav-item">
+          <a href="<?php echo base_url(); ?>kwitansi/" class="nav-link">
             <i class="nav-icon fas fa-table"></i>
             <p>
               Kwitansi
@@ -159,16 +174,16 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/laporan/" class="nav-link">
+          <a href="<?php echo base_url(); ?>laporan/" class="nav-link">
             <i class="nav-icon fas fa-book"></i>
             <p>
               Laporan
             </p>
           </a>
-        </li>
+        </li-->
         <li class="nav-header">PENGATURAN</li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/setting/" class="nav-link">
+          <a href="<?php echo base_url(); ?>setting/" class="nav-link">
             <i class="nav-icon fas fa-wrench"></i>
             <p>
               Setting
@@ -176,7 +191,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>rms/users/" class="nav-link">
+          <a href="<?php echo base_url(); ?>users/" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
             <p>
               Users

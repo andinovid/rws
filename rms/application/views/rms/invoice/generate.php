@@ -22,6 +22,9 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Invoice</h3>
+              <div class="card-tools mr-1">
+                <button type="button" class="btn btn-block btn-primary btn-sm" onclick="generate_invoice()"><i class="fas fa-print mr-1"></i> Generate Invoice</button>
+              </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -29,14 +32,14 @@
               <table class="table table-bordered table-striped data-table" id="tbl-invoice">
                 <thead>
                   <tr>
+                    <th></th>
                     <th>No</th>
-                    <th>No Invoice</th>
+                    <th>No Kontrak</th>
+                    <th>No DO</th>
                     <th>Nama Perusahaan</th>
+                    <th>Jumlah Replas</th>
                     <th>Total Nilai</th>
-                    <th>PPh</th>
-                    <th>PPn</th>
                     <th>Claim Susut</th>
-                    <th>Grand Total</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -47,17 +50,17 @@
                     $no++;
                   ?>
                     <tr>
+                      <td><input type="checkbox" name="id[]" value="<?php echo $row->id_project; ?>" /></td>
                       <td><?php echo $no; ?></td>
-                      <td><?php echo $row->no_invoice; ?></td>
+                      <td><?php echo $row->no_kontrak; ?></td>
+                      <td><?php echo $row->no_do; ?></td>
                       <td><?php echo $row->nama_perusahaan; ?></td>
-                      <td>Rp <?php echo number_format($row->total, 0, "", "."); ?></td>
-                      <td><?php if($row->pph){ ?><span class="badge badge-danger"><?php echo $row->pph . '%'; ?></span> <?php echo 'Rp' . number_format($row->total_pph, 0, "", "."); ?> <?php } ?></td>
-                      <td><?php if($row->ppn){ ?><span class="badge badge-danger"><?php echo $row->ppn . '%'; ?></span> <?php echo 'Rp' . number_format($row->total_ppn, 0, "", "."); ?> <?php } ?></td>
-                      <td>Rp <?php echo number_format($row->total_claim, 0, "", "."); ?></td>
-                      <td>Rp <?php echo number_format($row->grand_total, 0, "", "."); ?></td>
+                      <td><?php echo $row->total_replas; ?></td>
+                      <td>Rp <?php echo number_format($row->total_nilai, 0, "", "."); ?></td>
+                      <td>Rp <?php echo number_format($row->total_biaya_claim, 0, "", "."); ?></td>
                       <td class="project-actions text-right">
-                        <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/cetak_invoice/<?php echo $row->id_invoice; ?>" target="_blank" data-toggle="tooltip" data-placement="top" title="Cetak Invoice">
-                          <i class="fas fa-print">
+                        <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/project/view/<?php echo $row->id_project; ?>" data-toggle="tooltip" data-placement="top" title="Detail Project">
+                          <i class="fas fa-folder">
                           </i>
                         </a>
                       </td>
@@ -71,9 +74,9 @@
                     <th>No Kontrak</th>
                     <th>No DO</th>
                     <th>Nama Perusahaan</th>
+                    <th>Jumlah Replas</th>
                     <th>Total Nilai</th>
                     <th>Claim Susut</th>
-                    <th>Grand Total</th>
                     <th></th>
                   </tr>
                 </tfoot>
@@ -89,12 +92,12 @@
     </div>
     <!-- /.container-fluid -->
 
-    <div class="modal fade" id="cetak-invoice">
-      <div class="modal-dialog modal-sm">
-        <form action="<?php echo base_url(); ?>rms/cetak_invoice" id="cetak_invoice1" class="form-horizontal" method="post" enctype="multipart/form-data">
+    <div class="modal fade" id="generate-invoice">
+      <div class="modal-dialog modal-md">
+        <form id="form_generate_invoice" class="form-horizontal" method="post" enctype="multipart/form-data">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Cetak Invoice</h4>
+              <h4 class="modal-title">Generate Invoice</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -108,18 +111,28 @@
                     <input type="text" class="form-control" id="no_invoice" name="no_invoice" placeholder="Input Nomor Invoice">
                   </div>
                   <div class="form-group">
-                    <label for="nama">PPh %</label>
-                    <input type="text" class="form-control" id="pph" name="pph" placeholder="Input PPh">
+                    <label for="nama">Remark</label>
+                    <textarea class="form-control" name="remark" rows="3"></textarea>
                   </div>
-                  <div class="form-group">
-                    <label for="nama">PPn %</label>
-                    <input type="text" class="form-control" id="ppn" name="ppn" placeholder="Input PPn">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="nama">PPh %</label>
+                        <input type="text" class="form-control" id="pph" name="pph" placeholder="Input PPh">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="nama">PPn %</label>
+                        <input type="text" class="form-control" id="ppn" name="ppn" placeholder="Input PPn">
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="modal-footer" style="justify-content: flex-start;">
-              <button type="submit" class="btn btn-primary">Cetak</button>
+              <button type="submit" class="btn btn-primary">Generate</button>
               <div class="loading" style="display: none;">
                 <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
               </div>
@@ -136,7 +149,7 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-  function cetak_invoice() {
+  function generate_invoice() {
 
     event.preventDefault();
     var searchIDs = $("#tbl-invoice input:checkbox:checked").map(function() {
@@ -145,8 +158,8 @@
 
     if (searchIDs != "") {
       $('[name="id_project_invoice"]').val(searchIDs);
-      $('#cetak_invoice1')[0].reset();
-      $("#cetak-invoice").modal('show');
+      $('#form_generate_invoice')[0].reset();
+      $("#generate-invoice").modal('show');
     } else {
       Swal.fire({
         icon: "error",
@@ -157,28 +170,18 @@
   }
 
 
-
-
-
-
-
-
-
-
-
-
-  $('#form_tujuan').on('submit', function(event) {
+  $('#form_generate_invoice').on('submit', function(event) {
     event.preventDefault();
-    var formData = new FormData($('#form_tujuan')[0]);
+    var formData = new FormData($('#form_generate_invoice')[0]);
     $('.loading').show();
     $.ajax({
       type: 'POST',
-      url: '<?php echo base_url(); ?>rms/cetak_invoice/',
+      url: '<?php echo base_url(); ?>rms/save_generate_invoice',
       data: formData,
       processData: false,
       contentType: false,
       success: function(data) {
-        $('#form_tujuan')[0].reset();
+        $('#form_generate_invoice')[0].reset();
         $('.loading').hide();
         if (data.status = "true") {
           Swal.fire({
@@ -195,65 +198,5 @@
       }
     });
   });
-
-  function edit(id) {
-    $("#input-tujuan").modal('show');
-    $('.modal-title').html('Edit tujuan');
-    $('input[name=id]').val(id);
-    $.ajax({
-      url: "<?php echo base_url(); ?>rms/edit",
-      type: "POST",
-      data: {
-        'id': id,
-        tbl: "tbl_tujuan"
-      },
-      dataType: "JSON",
-      beforeSend: function() {
-        $('#form_tujuan')[0].reset();
-      },
-      success: function(data) {
-        for (var i = 0; i < data.length; i++) {
-          $('[name="kode_tujuan"]').val(data[i].kode_tujuan);
-          $('[name="nama_tujuan"]').val(data[i].nama_tujuan);
-          $('[name="harga"]').val($.number(data[i].harga).replace(/\,/g, '.'));
-        }
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        alert('Error get data from ajax');
-      }
-    });
-  }
-
-  function delete_tujuan(id) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        $.ajax({
-          url: "<?php echo base_url() ?>rms/delete",
-          type: "POST",
-          data: {
-            id: id,
-            tbl: "tbl_tujuan",
-          },
-          dataType: "JSON",
-          success: function(data) {
-            Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            ).then((result) => {
-              location.reload();
-            });
-          }
-        });
-      }
-    })
-  }
+  
 </script>
