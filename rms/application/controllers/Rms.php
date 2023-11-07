@@ -1318,7 +1318,7 @@ class Rms extends CI_Controller
 
     function generate_invoice()
     {
-        $data['invoice'] = $this->rms_model->get("v_project")->result();
+        $data['invoice'] = $this->rms_model->get("v_project", "WHERE total_terkirim >= qty")->result();
         $data['content'] = 'rms/invoice/generate';
         $this->load->view('rms/includes/template', $data);
     }

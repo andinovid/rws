@@ -209,8 +209,8 @@
                 </thead>
                 <tbody>
                   <?php $no = 0;
-                  $no++;
-                  foreach ($rekap as $row) : ?>
+                  
+                  foreach ($rekap as $row) : $no++;?>
                     <tr>
                       <td><?php echo $no; ?></td>
                       <td><?php echo $row->no_replas; ?></td>
