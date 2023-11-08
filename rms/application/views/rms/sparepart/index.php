@@ -49,7 +49,7 @@
                     <tr>
                       <td><?php echo $no; ?></td>
                       <td><?php echo $row->nama; ?></td>
-                      <td><?php if($row->foto){ ?> <img src="<?php echo base_url(); ?>assets/rms/documents/sparepart/<?php echo $row->foto; ?>" <?php } ?></td>
+                      <td><?php if($row->foto){ ?> <img src="<?php echo base_url(); ?>assets/rms/documents/sparepart/<?php echo $row->foto; ?>"/> <?php }else{ ?> <img src="<?php echo base_url(); ?>assets/rms/dist/img/no-photo.jpg"/>  <?php } ?></td>
                       <td><?php echo number_format($row->qty, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($row->harga, 0, "", "."); ?></td>
                       <td class="project-actions text-right">
@@ -73,6 +73,7 @@
                   <tr>
                     <th>No</th>
                     <th>Nama</th>
+                    <th>Foto</th>
                     <th>Qty</th>
                     <th>Harga</th>
                     <th></th>
