@@ -458,7 +458,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="no_replas">Toleransi Susut</label>
+                    <label for="no_replas">Toleransi Susut (kg)</label>
                     <input type="text" class="form-control" name="toleransi_susut" id="toleransi_susut" placeholder="Toleransi Susut">
                   </div>
                   <div class="form-group">

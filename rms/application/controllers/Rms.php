@@ -154,6 +154,8 @@ class Rms extends CI_Controller
         } else {
             $id_project = NULL;
         }
+        
+        $tanggal_bongkar = $this->input->POST('tanggal_bongkar');
         $supir = $this->input->POST('supir');
         $truck = $this->input->POST('truck');
         $tujuan = $this->input->POST('tujuan');
@@ -162,6 +164,7 @@ class Rms extends CI_Controller
         $timbang_kebun_bag = $this->input->POST('timbang_kebun_bag');
         $timbang_kebun_kg = $this->input->POST('timbang_kebun_kg');
         $uang_sangu = $this->input->POST('uang_sangu');
+        $toleransi_susut = $this->input->POST('toleransi_susut');
 
         $data = array(
             'no_replas' => $no_replas,
@@ -175,6 +178,7 @@ class Rms extends CI_Controller
             'qty_kirim_kg' => str_replace('.', '', $qty_kirim_kg),
             'timbang_kebun_bag' => $timbang_kebun_bag,
             'timbang_kebun_kg' => str_replace('.', '', $timbang_kebun_kg),
+            'toleransi_susut' => $toleransi_susut,
             'uang_sangu' => str_replace('.', '', $uang_sangu),
             'status' => '0',
         );
