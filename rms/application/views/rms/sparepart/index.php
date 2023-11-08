@@ -34,6 +34,7 @@
                   <tr>
                     <th>No</th>
                     <th>Nama</th>
+                    <th>Foto</th>
                     <th>Qty</th>
                     <th>Harga</th>
                     <th></th>
@@ -48,6 +49,7 @@
                     <tr>
                       <td><?php echo $no; ?></td>
                       <td><?php echo $row->nama; ?></td>
+                      <td><?php if($row->foto){ ?> <img src="<?php echo base_url(); ?>assets/rms/documents/sparepart/<?php echo $row->foto; ?>" <?php } ?></td>
                       <td><?php echo number_format($row->qty, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($row->harga, 0, "", "."); ?></td>
                       <td class="project-actions text-right">
@@ -115,6 +117,13 @@
                     <label for="nama_rekening">Harga</label>
                     <input type="text" class="form-control number" id="harga" name="harga" placeholder="Input harga sparepart">
                   </div>
+                  <div class="form-group">
+                    <label for="no_replas">Foto</label>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="foto" name="foto">
+                      <label class="custom-file-label" for="foto">Pilih file pdf/jpg</label>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -147,6 +156,9 @@
     $("#input-sparepart").modal('show');
   }
 
+  $(function() {
+    bsCustomFileInput.init();
+  });
   $('#form_sparepart').on('submit', function(event) {
     event.preventDefault();
     var formData = new FormData($('#form_sparepart')[0]);

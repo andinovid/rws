@@ -698,11 +698,31 @@ class Rms extends CI_Controller
         $nama = $this->input->POST('nama');
         $qty = $this->input->POST('qty');
         $harga = $this->input->POST('harga');
+        
+        $foto = $_FILES['foto']['name'];
         $data = array(
             'nama' => $nama,
             'qty' => str_replace('.', '', $qty),
             'harga' => str_replace('.', '', $harga),
         );
+
+        if (!empty($foto)) {
+            $this->load->library('upload');
+            $foto = preg_replace("/[^a-zA-Z0-9.]/", "_", $foto);
+            $filename_spk = str_replace(' ', '_', time() . $foto);
+            $config['upload_path'] = 'assets/rms/documents/spk/';
+            $config['allowed_types'] = 'pdf|jpg|png|jpeg';
+            $config['file_name'] = $filename_spk;
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('file_spk')) {
+                $data = $this->upload->data();
+            } else {
+                echo $this->upload->display_errors();
+            }
+            $data += array(
+                'foto' => $filename_spk
+            );
+        }
 
         if ($id == "") {
             $save = $this->rms_model->insert("tbl_sparepart", $data);

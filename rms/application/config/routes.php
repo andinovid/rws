@@ -71,3 +71,4 @@ $route['tujuan'] = 'rms/tujuan';
 $route['klien'] = 'rms/klien';
 $route['keuangan'] = 'rms/keuangan';
 $route['setting'] = 'rms/setting';
+$route['project/kwitansi/(:any)'] = 'rms/kwitansi/$1';
