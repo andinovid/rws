@@ -622,6 +622,7 @@ class Rms extends CI_Controller
     {
         $id = $this->input->POST('id');
         $nama = $this->input->POST('nama');
+        $no_hp = $this->input->POST('no_hp');
         $no_rekening = $this->input->POST('nomor_rekening');
         $nama_rekening = $this->input->POST('nama_rekening');
         $bank = $this->input->POST('bank');
@@ -630,6 +631,7 @@ class Rms extends CI_Controller
         $nama_pajak = $this->input->POST('nama_pajak');
         $data = array(
             'nama' => $nama,
+            'no_hp' => $no_hp,
             'no_rekening' => $no_rekening,
             'nama_rekening' => $nama_rekening,
             'bank' => $bank,

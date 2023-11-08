@@ -123,6 +123,10 @@
                     <input type="text" class="form-control" id="nama" name="nama" placeholder="Input nama vendor">
                   </div>
                   <div class="form-group">
+                    <label for="no_hp">Nomor HP</label>
+                    <input type="text" class="form-control" id="no_hp" onkeyup='validate(this.id);' name="no_hp" placeholder="Input nomor hp">
+                  </div>
+                  <div class="form-group">
                     <label for="nomor_rekening">Nomor Rekening</label>
                     <input type="text" class="form-control" id="nomor_rekening" onkeyup='validate(this.id);' name="nomor_rekening" placeholder="Input nomor rekening">
                   </div>
@@ -236,6 +240,7 @@
       success: function(data) {
         for (var i = 0; i < data.length; i++) {
           $('[name="nama"]').val(data[i].nama);
+          $('[name="no_hp"]').val(data[i].no_hp);
           $('[name="nomor_rekening"]').val(data[i].no_rekening);
           $('[name="nama_rekening"]').val(data[i].nama_rekening);
           $('[name="bank"]').val(data[i].bank);
