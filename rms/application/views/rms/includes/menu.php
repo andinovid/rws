@@ -66,6 +66,7 @@
               </a>
             </li>
           </ul>
+        </li>
         <li class="nav-item">
           <a href="<?php echo base_url(); ?>truck/" class="nav-link <?php if ($this->uri->segment(1) == "truck") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-truck"></i>

@@ -36,91 +36,98 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered" id="tbl_replas">
-                <thead class="thead-dark">
-                  <tr>
-                    <th rowspan="2" class="text-center align-middle">#</th>
-                    <th rowspan="2" class="text-center align-middle">No Replas</th>
-                    <th rowspan="2" class="text-center align-middle">Tanggal Input</th>
-                    <th rowspan="2" class="text-center align-middle">Tanggal Muat</th>
-                    <th rowspan="2" class="text-center align-middle">Tanggal Bongkar</th>
-                    <th rowspan="2" class="text-center align-middle">Supir</th>
-                    <th rowspan="2" class="text-center align-middle">Nopol</th>
-                    <th rowspan="2" class="text-center align-middle">Tujuan</th>
-                    <th colspan="2" class="text-center align-middle">Qty Awal</th>
-                    <th colspan="2" class="text-center align-middle">Qty Akhir</th>
-                    <th colspan="2" class="text-center align-middle">Susut</th>
-                    <th rowspan="2" class="text-center align-middle">Status</th>
-                  </tr>
-                  <tr>
-                    <th class="text-center align-middle">Bag</th>
-                    <th class="text-center align-middle">Kg</th>
-                    <th class="text-center align-middle">Bag</th>
-                    <th class="text-center align-middle">Kg</th>
-                    <th class="text-center align-middle">M</th>
-                    <th class="text-center align-middle">C</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php $no = 0;
-
-                  foreach ($rekap as $row) : $no++; 
-                  $old_date = $row->tanggal_input;
-                  $old_date_timestamp = strtotime($old_date);
-
-                  
-                  ?>
-                  
+              <div class="table-responsive">
+                <table class="table table-bordered " id="tbl_replas">
+                  <thead class="thead-dark">
                     <tr>
-                      <td><?php echo $no; ?></td>
-                      <td><?php echo $row->no_replas; ?></td>
-                      <td><?php echo date('Y-m-d', $old_date_timestamp); ?></td>
-                      <td><?php if ($row->tanggal_muat) {
-                            echo shortdate_indo($row->tanggal_muat);
-                          } ?></td>
-                      <td><?php if ($row->tanggal_bongkar) {
-                            echo shortdate_indo($row->tanggal_bongkar);
-                          } ?></td>
-                      <td><?php echo $row->nama_supir; ?></td>
-                      <td><?php echo $row->nopol; ?></td>
-                      <td><?php echo $row->nama_tujuan; ?></td>
-                      <td><?php if ($row->timbang_kebun_bag != NULL) {
-                            echo number_format($row->timbang_kebun_bag, 0, "", ".");
-                          } else {
-                            echo "0";
-                          }  ?></td>
-                      <td><?php if ($row->timbang_kebun_kg != NULL) {
-                            echo number_format($row->timbang_kebun_kg, 0, "", ".");
-                          } else {
-                            echo "0";
-                          }  ?> Kg</td>
-                      <td><?php if ($row->qty_kirim_bag != NULL) {
-                            echo number_format($row->qty_kirim_bag, 0, "", ".");
-                          } else {
-                            echo "0";
-                          }  ?></td>
-                      <td><?php if ($row->qty_kirim_kg != NULL) {
-                            echo number_format($row->qty_kirim_kg, 0, "", ".");
-                          } else {
-                            echo "0";
-                          }  ?> Kg</td>
-                      <td><?php if ($row->m_susut != NULL) {
-                            echo number_format($row->m_susut, 0, "", ".");
-                          } else {
-                            echo "0";
-                          } ?> Kg</td>
-                      <td><?php if ($row->c_claim != NULL) {
-                            echo number_format($row->c_claim, 0, "", ".");
-                          } else {
-                            echo "0";
-                          }  ?> Kg</td>
-                      <td><span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span></td>
-
-
+                      <th rowspan="2" class="text-center align-middle">#</th>
+                      <th rowspan="2" class="text-center align-middle">No Replas</th>
+                      <th rowspan="2" class="text-center align-middle">Tanggal Input</th>
+                      <th rowspan="2" class="text-center align-middle">No DO</th>
+                      <th rowspan="2" class="text-center align-middle">Tanggal Input</th>
+                      <th rowspan="2" class="text-center align-middle">Tanggal Muat</th>
+                      <th rowspan="2" class="text-center align-middle">Supir</th>
+                      <th rowspan="2" class="text-center align-middle">Nopol</th>
+                      <th rowspan="2" class="text-center align-middle">Tujuan</th>
+                      <th colspan="2" class="text-center align-middle">Qty Awal</th>
+                      <th colspan="2" class="text-center align-middle">Qty Akhir</th>
+                      <th colspan="2" class="text-center align-middle">Susut</th>
+                      <th rowspan="2" class="text-center align-middle">Total</th>
+                      <th rowspan="2" class="text-center align-middle">Grand Total</th>
+                      <th rowspan="2" class="text-center align-middle">Status</th>
                     </tr>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
+                    <tr>
+                      <th class="text-center align-middle">Bag</th>
+                      <th class="text-center align-middle">Kg</th>
+                      <th class="text-center align-middle">Bag</th>
+                      <th class="text-center align-middle">Kg</th>
+                      <th class="text-center align-middle">M</th>
+                      <th class="text-center align-middle">C</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php $no = 0;
+
+                    foreach ($rekap as $row) : $no++;
+                      $old_date = $row->tanggal_input;
+                      $old_date_timestamp = strtotime($old_date);
+
+
+                    ?>
+
+                      <tr>
+                        <td><?php echo $no; ?></td>
+                        <td><?php echo $row->no_replas; ?></td>
+                        <td><?php echo date('Y-m-d', $old_date_timestamp); ?></td>
+                        <td><?php echo $row->no_do; ?></td>
+                        <td><?php echo shortdate_indo($row->tanggal_input); ?></td>
+                        <td><?php if ($row->tanggal_muat) {
+                              echo shortdate_indo($row->tanggal_muat);
+                            } ?></td>
+                        <td><?php echo $row->nama_supir; ?></td>
+                        <td><?php echo $row->nopol; ?></td>
+                        <td><?php echo $row->nama_tujuan; ?></td>
+                        <td><?php if ($row->timbang_kebun_bag != NULL) {
+                              echo number_format($row->timbang_kebun_bag, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?></td>
+                        <td><?php if ($row->timbang_kebun_kg != NULL) {
+                              echo number_format($row->timbang_kebun_kg, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?> Kg</td>
+                        <td><?php if ($row->qty_kirim_bag != NULL) {
+                              echo number_format($row->qty_kirim_bag, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?></td>
+                        <td><?php if ($row->qty_kirim_kg != NULL) {
+                              echo number_format($row->qty_kirim_kg, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?> Kg</td>
+                        <td><?php if ($row->m_susut != NULL) {
+                              echo number_format($row->m_susut, 0, "", ".");
+                            } else {
+                              echo "0";
+                            } ?> Kg</td>
+                        <td><?php if ($row->c_claim != NULL) {
+                              echo number_format($row->c_claim, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?> Kg</td>
+                            
+                        <td><?php echo 'Rp ' . number_format($row->total, 0, "", "."); ?></td>
+                        <td><?php echo 'Rp ' . number_format($row->grand_total, 0, "", "."); ?></td>
+                        <td><span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span></td>
+
+
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
             <!-- /.card-body -->
           </div>
@@ -257,7 +264,12 @@
 
 
     var table = $("#tbl_replas").DataTable({
-
+      "columnDefs": [{
+        "visible": false,
+        "searchable": true,
+        "targets": 2
+      }],
+      "ordering":false,
       "responsive": true,
       "lengthChange": false,
       "autoWidth": false,
@@ -272,7 +284,6 @@
     date = $("#date-filter").val();
     startdate = date.substring(0, 10);
     enddate = date.substring(13, 23);
-    alert(enddate);
 
     $.fn.dataTable.ext.search.push(
       function(settings, data, dataIndex) {

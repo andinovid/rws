@@ -122,6 +122,7 @@
                         <option value="<?php echo $row->id; ?>"><?php echo $row->nopol; ?></option>
                       <?php endforeach; ?>
                     </select>
+                    <input type="hidden" class="form-control" id="nopol" name="nopol">
                   </div>
                   <div class="form-group">
                     <label>Supir</label>
@@ -131,6 +132,7 @@
                         <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
                       <?php endforeach; ?>
                     </select>
+                    <input type="hidden" class="form-control" id="nama_supir" name="nama_supir">
                   </div>
 
                   <div class="form-group">
@@ -153,6 +155,14 @@
                     <label for="cicilan">Jumlah</label>
                     <input type="text" class="form-control number" id="jumlah" name="jumlah" placeholder="Input jumlah biaya perbaikan">
                   </div>
+
+                  <div class="form-group">
+                    <label for="no_replas">Foto Nota</label>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="nota" name="nota">
+                      <label class="custom-file-label" for="nota" id="label-nota">Pilih file pdf/jpg</label>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <label for="kategori">Status</label>
                     <select id="colorselector" class="form-control" name="status">
@@ -160,13 +170,6 @@
                       <option value="0">Belum dibayar</option>
                       <option value="1">Sudah dibayar</option>
                     </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Foto Nota</label>
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="nota" name="nota">
-                      <label class="custom-file-label" for="nota" id="label-nota">Pilih file pdf/jpg</label>
-                    </div>
                   </div>
                 </div>
 
@@ -253,6 +256,13 @@
       $('.kategori').hide();
       $('#kategori-' + $(this).val()).show();
     });
+
+    $('#truck').change(function() {
+      $('#nopol').val($(this).find('option:selected').text());
+    });
+    $('#supir').change(function() {
+      $('#nama_supir').val($(this).find('option:selected').text());
+    });
   });
 
 
@@ -329,7 +339,9 @@
         for (var i = 0; i < data.length; i++) {
 
           $('[name="truck"]').val(data[i].id_truck).change();
+          $('[name="nopol"]').val(data[i].nopol);
           $('[name="supir"]').val(data[i].id_supir).change();
+          $('[name="nama_supir"]').val(data[i].nama_supir);
           $('[name="jenis"]').val(data[i].jenis);
           $('[name="tanggal"]').val(data[i].tanggal);
           $('[name="jumlah"]').val($.number(data[i].jumlah).replace(/\,/g, '.'));

@@ -29,8 +29,7 @@ class Rms_model extends CI_Model
     public function update_in($table, $data, $param)
     {
         $return = FALSE;
-        $this->db->where_in("id", $param);
-        $this->db->update($table, $data);
+        $this->db->update_batch($table, $data, $param);
         return $return;
     }
 

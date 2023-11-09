@@ -550,12 +550,16 @@ class Rms extends CI_Controller
         $jenis = $this->input->POST('jenis');
         $jumlah = $this->input->POST('jumlah');
         $status = $this->input->POST('status');
+        $nopol = $this->input->POST('nopol');
+        $nama_supir = $this->input->POST('nama_supir');
         
         $nota = $_FILES['nota']['name'];
 
         $data_array = array(
             'id_truck' => $truck,
+            'nopol' => $nopol,
             'id_supir' => $supir,
+            'nama_supir' => $nama_supir,
             'tanggal' => $tanggal,
             'jumlah' => str_replace('.', '', $jumlah),
             'jenis' => $jenis,
@@ -578,6 +582,16 @@ class Rms extends CI_Controller
             $data_array += array(
                 'nota' => $filename_spk,
             );
+        }
+
+        if ($status == '1'){
+            $data_keuangan = array(
+                'jenis' => '2',
+                'keterangan' => 'BAYAR NOTA ' . $nama_supir . ' - ' . $nopol,
+                'jumlah' => str_replace('.', '', $jumlah),
+                'tanggal' => date('Y-m-d'),
+            );
+            $this->rms_model->insert("tbl_keuangan", $data_keuangan);
         }
 
 
@@ -1391,11 +1405,15 @@ class Rms extends CI_Controller
         $ppn = $this->input->POST('ppn');
 
         $projectArray = explode(',', $id_project);
-
+        $data_project = array(
+            'status' => '2',
+        );
+        
         for ($i = 0; $i < count($projectArray); $i++) {
 
             $item = array('no_invoice' => $no_invoice, 'id_project' => $projectArray[$i]);
             $this->rms_model->insert("tbl_generate_invoice", $item);
+            $this->rms_model->update("tbl_project", $data_project, $projectArray[$i]);
         }
 
         $data = array(
@@ -1406,9 +1424,11 @@ class Rms extends CI_Controller
             'status' => '0',
         );
 
+        
         $save_invoice = $this->rms_model->insert("tbl_invoice", $data);
 
         if ($save_invoice) {
+            
             echo json_encode(array(
                 "status" => TRUE,
                 "target" => TRUE
