@@ -38,6 +38,7 @@
                     <th>Supir</th>
                     <th>Tanggal Perbaikan</th>
                     <th>Jumlah</th>
+                    <th>Nota</th>
                     <th>Status</th>
                     <th></th>
                   </tr>
@@ -56,6 +57,7 @@
                       <td><?php echo $row->nama_supir; ?></td>
                       <td><?php echo shortdate_indo($row->tanggal_perbaikan); ?></td>
                       <td><?php echo number_format($row->jumlah, 0, "", "."); ?></td>
+                      <td><?php if ($row->nota) { ?> <a href="javascript:void(0);" class="lihat-nota" data-rel="<?php echo base_url(); ?>assets/rms/documents/nota_perbaikan/<?php echo $row->nota; ?>">Lihat nota</a> <?php } else { ?> - <?php } ?></td>
                       <td>
                         <span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span>
                       </td>
@@ -81,6 +83,7 @@
                     <th>Supir</th>
                     <th>Tanggal Perbaikan</th>
                     <th>Jumlah</th>
+                    <th>Nota</th>
                     <th>Status</th>
                     <th></th>
                   </tr>
@@ -132,10 +135,8 @@
 
                   <div class="form-group">
                     <label>Jenis Perbaikan</label>
-                    <textarea class="form-control" name="jenis" rows="3"></textarea>
+                    <textarea class="form-control" name="jenis" rows="2"></textarea>
                   </div>
-                </div>
-                <div class="col-md-6">
                   <div class="form-group">
                     <label for="no_replas">Tanggal perbaikan</label>
                     <div class="input-group date reservationdate reservationdate1" data-target-input="nearest">
@@ -145,6 +146,9 @@
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class="col-md-6">
+
                   <div class="form-group">
                     <label for="cicilan">Jumlah</label>
                     <input type="text" class="form-control number" id="jumlah" name="jumlah" placeholder="Input jumlah biaya perbaikan">
@@ -156,6 +160,13 @@
                       <option value="0">Belum dibayar</option>
                       <option value="1">Sudah dibayar</option>
                     </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Foto Nota</label>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="nota" name="nota">
+                      <label class="custom-file-label" for="nota" id="label-nota">Pilih file pdf/jpg</label>
+                    </div>
                   </div>
                 </div>
 
@@ -207,6 +218,28 @@
 
 
 
+    <div class="modal fade" id="modal-nota">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Nota</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modal-body-nota">
+
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+
+
+
+
 
 
   </section>
@@ -223,6 +256,16 @@
   });
 
 
+  $(function() {
+    bsCustomFileInput.init();
+  });
+
+
+  $(".lihat-nota").click(function() {
+    $("#modal-nota").modal('show');
+    var imgUrl = $(this).data('rel');
+    $("#modal-body-nota").html("<img src='" + imgUrl + "' style='width:100%;'/>");
+  });
 
   function input_perbaikan() {
     $('#form_perbaikan')[0].reset();
@@ -290,6 +333,7 @@
           $('[name="jenis"]').val(data[i].jenis);
           $('[name="tanggal"]').val(data[i].tanggal);
           $('[name="jumlah"]').val($.number(data[i].jumlah).replace(/\,/g, '.'));
+          $('#label-nota').html(data[i].nota);
           $('[name="status"]').val(data[i].status).change();
         }
       },

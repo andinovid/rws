@@ -44,14 +44,28 @@
           </a>
 
         </li>
-        <li class="nav-item">
-          <a href="<?php echo base_url(); ?>project/" class="nav-link <?php if ($this->uri->segment(1) == "project") { ?>active <?php } ?>">
+        <li class="nav-item <?php if ($this->uri->segment(1) == "project") { ?>menu-open <?php } ?>">
+          <a href="#" class="nav-link <?php if ($this->uri->segment(1) == "project") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-th"></i>
             <p>
               Project
+              <i class="fas fa-angle-right right"></i>
             </p>
           </a>
-        </li>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ">
+              <a href="<?php echo base_url(); ?>project/data" class="nav-link <?php if ($this->uri->segment(2) == "data") { ?>active <?php } ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Data Project</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url(); ?>project/replas" class="nav-link <?php if ($this->uri->segment(2) == "replas") { ?>active <?php } ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Data Replas</p>
+              </a>
+            </li>
+          </ul>
         <li class="nav-item">
           <a href="<?php echo base_url(); ?>truck/" class="nav-link <?php if ($this->uri->segment(1) == "truck") { ?>active <?php } ?>">
             <i class="nav-icon fas fa-truck"></i>

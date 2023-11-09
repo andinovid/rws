@@ -102,6 +102,18 @@ class Rms extends CI_Controller
         $this->load->view('rms/includes/template', $data);
     }
 
+    function replas()
+    {
+        $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE no_replas != ''")->result();
+        $data['klien'] = $this->rms_model->get("tbl_klien")->result();
+        $data['truck'] = $this->rms_model->get("tbl_truck")->result();
+        $data['supir'] = $this->rms_model->get("tbl_supir")->result();
+        $data['tujuan'] = $this->rms_model->get("tbl_tujuan")->result();
+        $data['komoditas'] = $this->rms_model->get("tbl_komoditas")->result();
+        $data['content'] = 'rms/project/replas';
+        $this->load->view('rms/includes/template', $data);
+    }
+
     function view_project($id_project)
     {
         $data['project'] = $this->rms_model->get("v_project", "WHERE id_project = $id_project")->row();
@@ -538,7 +550,10 @@ class Rms extends CI_Controller
         $jenis = $this->input->POST('jenis');
         $jumlah = $this->input->POST('jumlah');
         $status = $this->input->POST('status');
-        $data = array(
+        
+        $nota = $_FILES['nota']['name'];
+
+        $data_array = array(
             'id_truck' => $truck,
             'id_supir' => $supir,
             'tanggal' => $tanggal,
@@ -547,10 +562,28 @@ class Rms extends CI_Controller
             'status' => $status,
         );
 
+        if (!empty($nota)) {
+            $this->load->library('upload');
+            $nota = preg_replace("/[^a-zA-Z0-9.]/", "_", $nota);
+            $filename_spk = str_replace(' ', '_', time() . $nota);
+            $config['upload_path'] = './assets/rms/documents/nota_perbaikan/';
+            $config['allowed_types'] = 'pdf|jpg|png|jpeg';
+            $config['file_name'] = $filename_spk;
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('nota')) {
+                $data = $this->upload->data();
+            } else {
+                echo $this->upload->display_errors();
+            }
+            $data_array += array(
+                'nota' => $filename_spk,
+            );
+        }
+
 
 
         if ($id == "") {
-            $save = $this->rms_model->insert("tbl_perbaikan", $data);
+            $save = $this->rms_model->insert("tbl_perbaikan", $data_array);
             if ($save) {
                 echo json_encode(array(
                     "status" => TRUE,
@@ -558,7 +591,7 @@ class Rms extends CI_Controller
                 ));
             }
         } else {
-            $save = $this->rms_model->update("tbl_perbaikan", $data, $id);
+            $save = $this->rms_model->update("tbl_perbaikan", $data_array, $id);
             if ($save) {
                 echo json_encode(array(
                     "status" => TRUE,
@@ -700,7 +733,7 @@ class Rms extends CI_Controller
         $harga = $this->input->POST('harga');
         
         $foto = $_FILES['foto']['name'];
-        $data = array(
+        $data_array = array(
             'nama' => $nama,
             'qty' => str_replace('.', '', $qty),
             'harga' => str_replace('.', '', $harga),
@@ -710,22 +743,22 @@ class Rms extends CI_Controller
             $this->load->library('upload');
             $foto = preg_replace("/[^a-zA-Z0-9.]/", "_", $foto);
             $filename_spk = str_replace(' ', '_', time() . $foto);
-            $config['upload_path'] = 'assets/rms/documents/spk/';
+            $config['upload_path'] = 'assets/rms/documents/sparepart/';
             $config['allowed_types'] = 'pdf|jpg|png|jpeg';
             $config['file_name'] = $filename_spk;
             $this->upload->initialize($config);
-            if ($this->upload->do_upload('file_spk')) {
+            if ($this->upload->do_upload('foto')) {
                 $data = $this->upload->data();
             } else {
                 echo $this->upload->display_errors();
             }
-            $data += array(
+            $data_array += array(
                 'foto' => $filename_spk
             );
         }
 
         if ($id == "") {
-            $save = $this->rms_model->insert("tbl_sparepart", $data);
+            $save = $this->rms_model->insert("tbl_sparepart", $data_array);
             if ($save) {
                 echo json_encode(array(
                     "status" => TRUE,
@@ -733,7 +766,7 @@ class Rms extends CI_Controller
                 ));
             }
         } else {
-            $save = $this->rms_model->update("tbl_sparepart", $data, $id);
+            $save = $this->rms_model->update("tbl_sparepart", $data_array, $id);
             if ($save) {
                 echo json_encode(array(
                     "status" => TRUE,

@@ -122,7 +122,7 @@
                     <label for="no_replas">Foto</label>
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="foto" name="foto">
-                      <label class="custom-file-label" for="foto">Pilih file pdf/jpg</label>
+                      <label class="custom-file-label" for="foto" id="label-foto">Pilih file pdf/jpg</label>
                     </div>
                   </div>
                 </div>
@@ -209,6 +209,7 @@
           $('[name="nama"]').val(data[i].nama);
           $('[name="qty"]').val($.number(data[i].qty).replace(/\,/g, '.'));
           $('[name="harga"]').val($.number(data[i].harga).replace(/\,/g, '.'));
+          $('#label-foto').html(data[i].foto);
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {

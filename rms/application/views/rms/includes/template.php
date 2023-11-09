@@ -154,6 +154,33 @@
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 
   <script>
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+      $('#reportrange input').val(start.format('Y-MM-DD') + ' - ' + end.format('Y-MM-DD'));
+    }
+
+    $('#reportrange').daterangepicker({
+      startDate: start,
+      endDate: end,
+      ranges: {
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      }
+    }, cb);
+
+    function reset() {
+      $('#date-filter').val('');
+      $('#pilihan').val('0');
+      $('#jenis').val('0');
+    }
+
+
     $(function() {
 
       $('.number').mask('000.000.000.000', {
