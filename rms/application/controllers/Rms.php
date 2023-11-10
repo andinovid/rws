@@ -122,6 +122,7 @@ class Rms extends CI_Controller
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
         $data['truck'] = $this->rms_model->get("tbl_truck")->result();
         $data['tujuan'] = $this->rms_model->get("tbl_tujuan")->result();
+        $data['vendor'] = $this->rms_model->get("tbl_vendor_truck")->result();
         $data['content'] = 'rms/project/view';
         $this->load->view('rms/includes/template', $data);
     }
@@ -169,6 +170,7 @@ class Rms extends CI_Controller
         $tanggal_bongkar = $this->input->POST('tanggal_bongkar');
         $supir = $this->input->POST('supir');
         $truck = $this->input->POST('truck');
+        $vendor_pajak = $this->input->POST('vendor_pajak');
         $tujuan = $this->input->POST('tujuan');
         $qty_kirim_bag = $this->input->POST('qty_kirim_bag');
         $qty_kirim_kg = $this->input->POST('qty_kirim_kg');
@@ -184,6 +186,7 @@ class Rms extends CI_Controller
             'tanggal_bongkar' => $tanggal_bongkar,
             'id_supir' => $supir,
             'id_truck' => $truck,
+            'id_vendor_pajak' => $vendor_pajak,
             'id_tujuan' => $tujuan,
             'qty_kirim_bag' => $qty_kirim_bag,
             'qty_kirim_kg' => str_replace('.', '', $qty_kirim_kg),

@@ -424,6 +424,15 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
+                  <div class="form-group">
+                    <label>Vendor Pajak</label>
+                    <select class="form-control select2" style="width: 100%;" name="vendor_pajak" id="vendor_pajak">
+                      <option value="0">Pilih vendor pajak</option>
+                      <?php foreach ($vendor as $row) : ?>
+                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
 
                 </div>
                 <div class="col-md-6">
