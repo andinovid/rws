@@ -54,7 +54,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item ">
-              <a href="<?php echo base_url(); ?>project/data" class="nav-link <?php if ($this->uri->segment(2) == "data") { ?>active <?php } ?>">
+              <a href="<?php echo base_url(); ?>project/data" class="nav-link <?php if ($this->uri->segment(2) == "data" || $this->uri->segment(2) == "view") { ?>active <?php } ?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Data Project</p>
               </a>

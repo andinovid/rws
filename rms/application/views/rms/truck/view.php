@@ -23,7 +23,7 @@
             <div class="row">
               <div class="col-12 col-sm-4">
                 <div class="info-box">
-                  <span class="info-box-icon bg-success"><img src="<?php echo base_url(); ?>assets/rms/dist/img/engine-oil.png" width="40" /> </span>
+                  <span class="info-box-icon <?php if($truck->persentase_penggunaan_oli_mesin > '90'){echo 'bg-danger';}elseif($truck->persentase_penggunaan_oli_mesin > '80' AND $truck->persentase_penggunaan_oli_mesin < '90'){echo 'bg-warning';}else{echo 'bg-success';} ?>"><img src="<?php echo base_url(); ?>assets/rms/dist/img/engine-oil.png" width="40" /> </span>
                   <div class="info-box-content">
                     <div class="d-flex justify-content-md-between">
                       <span class="info-box-text">Oli Mesin</span>
@@ -40,7 +40,7 @@
               </div>
               <div class="col-12 col-sm-4">
                 <div class="info-box">
-                  <span class="info-box-icon bg-success"><img src="<?php echo base_url(); ?>assets/rms/dist/img/engine-oil.png" width="40" /> </span>
+                  <span class="info-box-icon <?php if($truck->persentase_penggunaan_oli_gardan > '90'){echo 'bg-danger';}elseif($truck->persentase_penggunaan_oli_gardan > '80' AND $truck->persentase_penggunaan_oli_gardan < '90'){echo 'bg-warning';}else{echo 'bg-success';} ?>"><img src="<?php echo base_url(); ?>assets/rms/dist/img/engine-oil.png" width="40" /> </span>
                   <div class="info-box-content">
                     <div class="d-flex justify-content-md-between">
                       <span class="info-box-text">Oli Gardan</span>
@@ -57,7 +57,7 @@
               </div>
               <div class="col-12 col-sm-4">
                 <div class="info-box">
-                  <span class="info-box-icon bg-success"><img src="<?php echo base_url(); ?>assets/rms/dist/img/engine-oil.png" width="40" /> </span>
+                  <span class="info-box-icon <?php if($truck->persentase_penggunaan_oli_transmisi > '90'){echo 'bg-danger';}elseif($truck->persentase_penggunaan_oli_transmisi > '80' AND $truck->persentase_penggunaan_oli_transmisi < '90'){echo 'bg-warning';}else{echo 'bg-success';} ?>"><img src="<?php echo base_url(); ?>assets/rms/dist/img/engine-oil.png" width="40" /> </span>
                   <div class="info-box-content">
                     <div class="d-flex justify-content-md-between">
                       <span class="info-box-text">Oli Transmisi</span>
@@ -68,6 +68,134 @@
                     </div>
                     <span class="info-box-number"><img src="<?php echo base_url(); ?>assets/rms/dist/img/dashboard2.png" width="25" class="mr-1" style="margin-top: -3px;" /> <?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?>/<?php echo number_format($truck->pergantian_oli_transmisi_selanjutnya, 0, "", "."); ?> KM | Kurang <?php echo number_format($truck->kurang_oli_transmisi, 0, "", "."); ?> KM</span>
                     <span style="font-size: 14px; font-style:italic;">Terakhir ganti oli transmisi pada <b>KM <?php echo number_format($truck->oddo_terakhir_oli_transmisi, 0, "", "."); ?></b></span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="info-box mb-3 <?php if ($truck->sisa_hari_pajak_tahunan > 0 AND $truck->sisa_hari_pajak_tahunan < '30') { echo 'bg-danger'; }elseif ($truck->sisa_hari_pajak_tahunan >= '30' AND $truck->sisa_hari_pajak_tahunan < '60') { echo 'bg-warning'; }else{echo 'bg-success';} ?>">
+                  <span class="info-box-icon"><i class="fas fa-money-check"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Pajak Tahunan</span>
+                    <span class="info-box-number mt-0">
+                      <?php if ($truck->sisa_hari_pajak_tahunan > 0) { ?>
+                        <?php echo shortdate_indo($truck->pajak_tahunan); ?><br>
+                        <small style="font-style:italic;"> Sisa
+                          <?php
+                          $days = $truck->sisa_hari_pajak_tahunan;
+                          $start_date = new DateTime();
+                          $end_date = (new $start_date)->add(new DateInterval("P{$days}D"));
+                          $dd = date_diff($start_date, $end_date);
+                          if ($dd->y != 0 and $dd->m != 0 and $dd->d != 0) {
+                            echo $dd->y . " tahun " . $dd->m . " bulan " . $dd->d . " hari";
+                          } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d != 0) {
+                            echo $dd->m . " bulan " . $dd->d . " hari";
+                          } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d != 0) {
+                            echo $dd->d . " hari";
+                          } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d == 0) {
+                            echo $dd->m . " bulan ";
+                          } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d == 0) {
+                            echo $dd->y . " tahun ";
+                          } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d != 0) {
+                            echo $dd->y . " tahun "  . $dd->d . " hari";
+                          } elseif ($dd->y != 0 and $dd->m != 0 and $dd->d == 0) {
+                            echo $dd->y . " tahun " . $dd->m . " bulan ";
+                          } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d == 0) {
+                            echo "Sudah habis";
+                          }
+                          ?>
+                        </small>
+                      <?php } else {
+                        echo "-";
+                      } ?>
+                    </span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="info-box mb-3 <?php if ($truck->sisa_hari_pajak_5_tahunan > 0 AND $truck->sisa_hari_pajak_5_tahunan < '30') { echo 'bg-danger'; }elseif ($truck->sisa_hari_pajak_5_tahunan >= '30' AND $truck->sisa_hari_pajak_5_tahunan < '60') { echo 'bg-warning'; }else{echo 'bg-success';} ?>">
+                  <span class="info-box-icon"><i class="fas fa-money-check"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Pajak 5 Tahunan</span>
+                    <span class="info-box-number mt-0">
+                      <?php if ($truck->sisa_hari_pajak_5_tahunan > 0) { ?>
+                        <?php echo shortdate_indo($truck->pajak_5_tahunan); ?><br>
+                        <small style="font-style:italic;">Sisa
+                          <?php
+                          $days = $truck->sisa_hari_pajak_5_tahunan;
+                          $start_date = new DateTime();
+                          $end_date = (new $start_date)->add(new DateInterval("P{$days}D"));
+                          $dd = date_diff($start_date, $end_date);
+                          if ($dd->y != 0 and $dd->m != 0 and $dd->d != 0) {
+                            echo $dd->y . " tahun " . $dd->m . " bulan " . $dd->d . " hari";
+                          } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d != 0) {
+                            echo $dd->m . " bulan " . $dd->d . " hari";
+                          } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d != 0) {
+                            echo $dd->d . " hari";
+                          } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d == 0) {
+                            echo $dd->m . " bulan ";
+                          } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d == 0) {
+                            echo $dd->y . " tahun ";
+                          } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d != 0) {
+                            echo $dd->y . " tahun "  . $dd->d . " hari";
+                          } elseif ($dd->y != 0 and $dd->m != 0 and $dd->d == 0) {
+                            echo $dd->y . " tahun " . $dd->m . " bulan ";
+                          } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d == 0) {
+                            echo "Sudah habis";
+                          }
+                          ?>
+                        </small>
+                      <?php } else {
+                        echo "-";
+                      } ?>
+                    </span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="info-box mb-3 <?php if ($truck->sisa_hari_kir > 0 AND $truck->sisa_hari_kir < '7') { echo 'bg-danger'; }elseif ($truck->sisa_hari_kir >= '7' AND $truck->sisa_hari_kir < '30') { echo 'bg-warning'; }else{echo 'bg-success';} ?>">
+                  <span class="info-box-icon"><i class="fas fa-money-check"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Kir</span>
+                    <span class="info-box-number mt-0">
+                      <?php if ($truck->sisa_hari_kir > 0) { ?>
+                        <?php echo shortdate_indo($truck->kir_selanjutnya); ?><br>
+                        <small style="font-style:italic;">Sisa
+                          <?php
+                          $days = $truck->sisa_hari_kir;
+                          $start_date = new DateTime();
+                          $end_date = (new $start_date)->add(new DateInterval("P{$days}D"));
+                          $dd = date_diff($start_date, $end_date);
+                          if ($dd->y != 0 and $dd->m != 0 and $dd->d != 0) {
+                            echo $dd->y . " tahun " . $dd->m . " bulan " . $dd->d . " hari";
+                          } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d != 0) {
+                            echo $dd->m . " bulan " . $dd->d . " hari";
+                          } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d != 0) {
+                            echo $dd->d . " hari";
+                          } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d == 0) {
+                            echo $dd->m . " bulan ";
+                          } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d == 0) {
+                            echo $dd->y . " tahun ";
+                          } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d != 0) {
+                            echo $dd->y . " tahun "  . $dd->d . " hari";
+                          } elseif ($dd->y != 0 and $dd->m != 0 and $dd->d == 0) {
+                            echo $dd->y . " tahun " . $dd->m . " bulan ";
+                          } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d == 0) {
+                            echo "Sudah habis";
+                          }
+                          ?>
+                        </small>
+                      <?php } else {
+                        echo "-";
+                      } ?>
+                    </span>
                   </div>
                   <!-- /.info-box-content -->
                 </div>
@@ -235,108 +363,7 @@
     <!-- /.row -->
     <!-- /.container-fluid -->
 
-    <div class="modal fade" id="input-replas">
-      <div class="modal-dialog modal-lg">
-        <form id="form_replas" class="form-horizontal" method="post" enctype="multipart/form-data">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Input Replas</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
 
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="hidden" class="form-control" name="id" id="id" placeholder="id">
-                    <input type="hidden" class="form-control" name="id_project" id="id_project" placeholder="id_project" value="<?php echo $project->id_project; ?>">
-
-                    <label for="no_replas">Nomor Replas</label>
-                    <input type="text" class="form-control" id="no_replas" name="no_replas" placeholder="Input nomor replas">
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Tanggal Replas</label>
-                    <div class="input-group date reservationdate" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate" data-toggle="datetimepicker" name="tanggal" id="tanggal" />
-                      <div class="input-group-append" data-target=".reservationdate" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label>Supir</label>
-                    <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
-                      <option value="0">Pilih supir</option>
-                      <?php foreach ($supir as $row) : ?>
-                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
-                      <?php endforeach; ?>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label>Truck</label>
-                    <select class="form-control select2" style="width: 100%;" name="truck" id="truck">
-                      <option value="0">Pilih truk</option>
-                      <?php foreach ($truck as $row) : ?>
-                        <option value="<?php echo $row->id; ?>"><?php echo $row->nopol; ?></option>
-                      <?php endforeach; ?>
-                    </select>
-                  </div>
-
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Tujuan</label>
-                    <select class="form-control select2" style="width: 100%;" name="tujuan" id="tujuan">
-                      <option value="0">Pilih tujuan</option>
-                      <?php foreach ($tujuan as $row) : ?>
-                        <option value="<?php echo $row->id; ?>"><?php echo $row->kode_tujuan; ?></option>
-                      <?php endforeach; ?>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Qty Kirim</label>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Bag" name="qty_kirim_bag" id="qty_kirim_bag">
-                      </div>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Kg" name="qty_kirim_kg" id="qty_kirim_kg">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Timbang Kebun</label>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" name="timbang_kebun_bag" id="timbang_kebun_bag" placeholder="Bag">
-                      </div>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Kg">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Uang Sangu</label>
-                    <input type="text" class="form-control" name="uang_sangu" id="uang_sangu" placeholder="Uang Sangu">
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            <div class="modal-footer" style="justify-content: flex-start;">
-              <button type="submit" class="btn btn-primary">Save changes</button>
-              <div class="loading" style="display: none;">
-                <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
-              </div>
-            </div>
-          </div>
-        </form>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
 
     <div class="modal fade" id="input-riwayat-bbm">
       <div class="modal-dialog modal-md">
@@ -377,6 +404,7 @@
                     <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
                   <?php endforeach; ?>
                 </select>
+                <input type="hidden" class="form-control" id="nama_supir" name="nama_supir">
               </div>
 
             </div>
@@ -402,6 +430,11 @@
     $("#supir").val(0).change();
     $("#input-riwayat-bbm").modal('show');
   }
+  $(function() {
+    $('#supir').change(function() {
+      $('#nama_supir').val($(this).find('option:selected').text());
+    });
+  });
 
   $('#form_riwayat_bbm').on('submit', function(event) {
     event.preventDefault();

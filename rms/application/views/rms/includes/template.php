@@ -72,15 +72,7 @@
     </nav>
     <!-- /.navbar -->
 
-    <?php if ($this->sess->role == '1') { ?>
-      <?php $this->load->view("rms/includes/menu"); ?>
-    <?php } elseif ($this->sess->role == '2') { ?>
-      <?php $this->load->view("rms/includes/menu-2"); ?>
-    <?php } elseif ($this->sess->role == '3') { ?>
-      <?php $this->load->view("rms/includes/menu-3"); ?>
-    <?php } elseif ($this->sess->role == '4') { ?>
-      <?php $this->load->view("rms/includes/menu-4"); ?>
-    <?php } ?>
+    <?php $this->load->view("rms/includes/menu"); ?>
     <?php $this->load->view($content); ?>
 
     <footer class="main-footer">

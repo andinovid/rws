@@ -67,7 +67,7 @@
                           <td><?php echo $row->jenis_truck; ?></td>
                           <td class="project_progress">
                             <div class="progress progress-sm">
-                              <div class="progress-bar bg-green" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_mesin; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_mesin; ?>%">
+                              <div class="progress-bar <?php if($row->persentase_penggunaan_oli_mesin > '90'){echo 'bg-danger';}elseif($row->persentase_penggunaan_oli_mesin > '80' AND $row->persentase_penggunaan_oli_mesin < '90'){echo 'bg-warning';}else{echo 'bg-green';} ?>" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_mesin; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_mesin; ?>%">
                               </div>
                             </div>
                             <small>
@@ -76,7 +76,7 @@
                           </td>
                           <td class="project_progress">
                             <div class="progress progress-sm">
-                              <div class="progress-bar bg-green" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_gardan; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_gardan; ?>%">
+                              <div class="progress-bar <?php if($row->persentase_penggunaan_oli_gardan > '90'){echo 'bg-danger';}elseif($row->persentase_penggunaan_oli_gardan > '80' AND $row->persentase_penggunaan_oli_gardan < '90'){echo 'bg-warning';}else{echo 'bg-green';} ?>" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_gardan; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_gardan; ?>%">
                               </div>
                             </div>
                             <small>
@@ -85,7 +85,7 @@
                           </td>
                           <td class="project_progress">
                             <div class="progress progress-sm">
-                              <div class="progress-bar bg-green" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_transmisi; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_transmisi; ?>%">
+                              <div class="progress-bar <?php if($row->persentase_penggunaan_oli_transmisi > '90'){echo 'bg-danger';}elseif($row->persentase_penggunaan_oli_transmisi > '80' AND $row->persentase_penggunaan_oli_transmisi < '90'){echo 'bg-warning';}else{echo 'bg-green';} ?>" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_transmisi; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_transmisi; ?>%">
                               </div>
                             </div>
                             <small>
@@ -128,7 +128,7 @@
                           </td>
 
                           <td>
-                            <?php if ($row->sisa_hari_pajak_tahunan > 0) { ?>
+                            <?php if ($row->sisa_hari_pajak_5_tahunan > 0) { ?>
                               <?php echo shortdate_indo($row->pajak_5_tahunan); ?><br>
                               <small>Sisa
                                 <?php
@@ -161,7 +161,7 @@
                           </td>
 
                           <td>
-                            <?php if ($row->sisa_hari_pajak_tahunan > 0) { ?>
+                            <?php if ($row->sisa_hari_kir > 0) { ?>
                               <?php echo shortdate_indo($row->kir_selanjutnya); ?><br>
                               <small>Sisa
                                 <?php
@@ -194,7 +194,7 @@
                           </td>
 
                           <td class="project-actions text-right">
-                            <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/truck/view/<?php echo $row->id_truck; ?>" data-toggle="tooltip" data-placement="top" title="Detail Truk">
+                            <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>truck/view/<?php echo $row->id_truck; ?>" data-toggle="tooltip" data-placement="top" title="Detail Truk">
                               <i class="fas fa-folder">
                               </i>
                             </a>

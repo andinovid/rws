@@ -66,15 +66,14 @@ class Rms extends CI_Controller
 
     function dashboard()
     {
-        if ($this->sess->role == '1') {
-            $data['content'] = 'rms/dashboard/dashboard1';
-        } elseif ($this->sess->role == '2') {
-            $data['content'] = 'rms/dashboard/dashboard2';
-        } elseif ($this->sess->role == '3') {
-            $data['content'] = 'rms/dashboard/dashboard3';
-        } elseif ($this->sess->role == '4') {
-            $data['content'] = 'rms/dashboard/dashboard4';
-        }
+
+        $data['content'] = 'rms/dashboard/dashboard';
+        $data['all_project'] = $this->rms_model->get("v_project")->num_rows();
+        $data['project_on_progress'] = $this->rms_model->get("v_project", "WHERE status = '0' OR status = '1'")->num_rows();
+        $data['project_complete'] = $this->rms_model->get("v_project", "WHERE status = '2'")->num_rows();
+        $data['saldo'] = $this->rms_model->get_by_query("SELECT SUM(jumlah) as total FROM tbl_keuangan")->row();
+        $data['project_on_progress_list'] = $this->rms_model->get("v_project", "WHERE (status = '0' OR status = '1') AND total_terkirim > 0 LIMIT 8")->result();
+        $data['truck'] = $this->rms_model->get("v_truck", "WHERE kategori = '1' LIMIT 8")->result();
         $this->load->view('rms/includes/template', $data);
     }
 
@@ -166,7 +165,7 @@ class Rms extends CI_Controller
         } else {
             $id_project = NULL;
         }
-        
+
         $tanggal_bongkar = $this->input->POST('tanggal_bongkar');
         $supir = $this->input->POST('supir');
         $truck = $this->input->POST('truck');
@@ -362,6 +361,7 @@ class Rms extends CI_Controller
     function view_truck($id_truck)
     {
         $data['truck'] = $this->rms_model->get("v_truck", "WHERE id_truck = $id_truck")->row();
+        $data['supir'] = $this->rms_model->get("tbl_supir")->result();
         $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE id_truck = $id_truck")->result();
         $data['perbaikan'] = $this->rms_model->get("v_perbaikan", "WHERE id_truck = $id_truck")->result();
         $data['bbm'] = $this->rms_model->get("v_bbm", "WHERE id_truck = $id_truck ORDER BY tanggal DESC")->result();
@@ -377,6 +377,7 @@ class Rms extends CI_Controller
         $tanggal = $this->input->POST('tanggal');
         $jumlah_liter = $this->input->POST('jumlah_liter');
         $jumlah_harga = $this->input->POST('jumlah_harga');
+        $nama_supir = $this->input->POST('nama_supir');
         $data = array(
             'id_truck' => $truck,
             'id_supir' => $supir,
@@ -385,7 +386,11 @@ class Rms extends CI_Controller
             'jumlah_harga' => str_replace('.', '', $jumlah_harga),
         );
 
+        $data_update_truck = array(
+            'bbm_terakhir' => shortdate_indo($tanggal) . ' | ' . $jumlah_liter . 'L ' . ' | ' . $jumlah_harga . ' | ' . $nama_supir,
+        );
 
+        $save = $this->rms_model->update("tbl_truck", $data_update_truck, $truck);
 
         if ($id == "") {
             $save = $this->rms_model->insert("tbl_pengisian_bbm", $data);
@@ -552,7 +557,7 @@ class Rms extends CI_Controller
         $status = $this->input->POST('status');
         $nopol = $this->input->POST('nopol');
         $nama_supir = $this->input->POST('nama_supir');
-        
+
         $nota = $_FILES['nota']['name'];
 
         $data_array = array(
@@ -584,7 +589,7 @@ class Rms extends CI_Controller
             );
         }
 
-        if ($status == '1'){
+        if ($status == '1') {
             $data_keuangan = array(
                 'jenis' => '2',
                 'keterangan' => 'BAYAR NOTA ' . $nama_supir . ' - ' . $nopol,
@@ -745,7 +750,7 @@ class Rms extends CI_Controller
         $nama = $this->input->POST('nama');
         $qty = $this->input->POST('qty');
         $harga = $this->input->POST('harga');
-        
+
         $foto = $_FILES['foto']['name'];
         $data_array = array(
             'nama' => $nama,
@@ -1408,7 +1413,7 @@ class Rms extends CI_Controller
         $data_project = array(
             'status' => '2',
         );
-        
+
         for ($i = 0; $i < count($projectArray); $i++) {
 
             $item = array('no_invoice' => $no_invoice, 'id_project' => $projectArray[$i]);
@@ -1424,11 +1429,11 @@ class Rms extends CI_Controller
             'status' => '0',
         );
 
-        
+
         $save_invoice = $this->rms_model->insert("tbl_invoice", $data);
 
         if ($save_invoice) {
-            
+
             echo json_encode(array(
                 "status" => TRUE,
                 "target" => TRUE
