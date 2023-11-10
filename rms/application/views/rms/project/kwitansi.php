@@ -33,7 +33,6 @@
                     <th>No</th>
                     <th>No Kontrak</th>
                     <th>No DO</th>
-                    <th>NO STO</th>
                     <th>Vendor</th>
                     <th>Jumlah Replas</th>
                     <th>Total</th>
@@ -50,7 +49,6 @@
                       <td><?php echo $no; ?></td>
                       <td><?php echo $row->no_kontrak; ?></td>
                       <td><?php echo $row->no_do; ?></td>
-                      <td><?php echo $row->no_sto; ?></td>
                       <td><?php echo $row->vendor; ?></td>
                       <td><?php echo $row->total_replas; ?></td>
                       <td>Rp <?php echo number_format($row->grand_total, 0, "", "."); ?></td>
@@ -71,7 +69,6 @@
                     <th>No</th>
                     <th>No Kontrak</th>
                     <th>No DO</th>
-                    <th>NO STO</th>
                     <th>Vendor</th>
                     <th>Jumlah Replas</th>
                     <th>Total</th>

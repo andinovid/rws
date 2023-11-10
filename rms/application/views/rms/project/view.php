@@ -166,7 +166,7 @@
                 <div class="card-body">
                   <a href="<?php echo base_url(); ?>assets/rms/documents/spk/<?php echo $project->file_spk; ?>" class="link-black text-sm mr-3"><i class="fas fa-file mr-1"></i> File SPK</a>
                   <a href="<?php echo base_url(); ?>assets/rms/documents/do/<?php echo $project->file_do; ?>" class="link-black text-sm mr-3"><i class="fas fa-file mr-1"></i> File DO</a>
-                  <a href="#" class="text-sm btn btn-danger btn-sm text-sm mr-1"><i class="fas fa-print mr-1"></i> Cetak Invoice</a>
+                  <!--a href="#" class="text-sm btn btn-danger btn-sm text-sm mr-1"><i class="fas fa-print mr-1"></i> Cetak Invoice</a-->
                   <a href="<?php echo base_url(); ?>project/kwitansi/<?php echo $project->id_project; ?>" class="text-sm btn btn-success btn-sm text-sm"><i class="fas fa-print mr-1"></i> Kwitansi</a>
                 </div>
               </div>

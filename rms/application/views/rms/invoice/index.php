@@ -66,12 +66,12 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th></th>
                     <th>No</th>
-                    <th>No Kontrak</th>
-                    <th>No DO</th>
+                    <th>No Invoice</th>
                     <th>Nama Perusahaan</th>
                     <th>Total Nilai</th>
+                    <th>PPh</th>
+                    <th>PPn</th>
                     <th>Claim Susut</th>
                     <th>Grand Total</th>
                     <th></th>
