@@ -396,9 +396,9 @@
         $('table#perbaikan_sparepart #tbody2').html('');
         for (var i = 0; i < data.length; i++) {
           var html = '<tr>';
-          html += '<td class="table_data" data-row_id="' + data[i].id + '" data-column_name="nama" >' + data[i].nama + '</td>';
+          html += '<td class="table_data" data-row_id="' + data[i].id + '" data-column_name="nama" >' + data[i].nama_sparepart + '</td>';
           html += '<td class="table_data" data-row_id="' + data[i].id + '" data-column_name="jumlah" >' + data[i].jumlah + '</td>';
-          html += '<td><button type="button" name="delete_btn" id="' + data[i].id + '" data-id="' + id + '" class="btn btn-xs btn-danger btn_delete"><i class="fa fa-times"></i></button></td></tr>';
+          html += '<td><button type="button" name="delete_btn" id="' + data[i].id + '" data-id="' + id + '" data-id-sparepart="' + data[i].id_sparepart + '" data-jumlah="' + data[i].jumlah + '" class="btn btn-xs btn-danger btn_delete"><i class="fa fa-times"></i></button></td></tr>';
           $('table#perbaikan_sparepart #tbody2').append(html);
         }
 
@@ -428,6 +428,8 @@
     $(document).on('click', '.btn_delete', function() {
       var id = $(this).attr('id');
       var id_perbaikan = $(this).attr('data-id');
+      var id_sparepart = $(this).attr('data-id-sparepart');
+      var jumlah = $(this).attr('data-jumlah');
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -439,13 +441,13 @@
       }).then((result) => {
         if (result.isConfirmed) {
           $.ajax({
-            url: "<?php echo base_url() ?>rms/delete",
+            url: "<?php echo base_url() ?>rms/delete_perbaikan_sparepart",
             type: "POST",
             data: {
               id: id,
-              tbl: "tbl_perbaikan_sparepart",
+              id_sparepart: id_sparepart,
+              jumlah: jumlah,
             },
-            dataType: "JSON",
             success: function(data) {
               Swal.fire(
                 'Deleted!',

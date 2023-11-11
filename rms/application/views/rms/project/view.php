@@ -71,32 +71,64 @@
                       <div class="text-muted">
 
                         <p class="text-sm">Total Susut
-                          <b class="d-block"><?php if($project->total_susut != NULL){ echo number_format($project->total_susut, 0, "", "."); }else{ echo "-"; }  ?> kg</b>
+                          <b class="d-block"><?php if ($project->total_susut != NULL) {
+                                                echo number_format($project->total_susut, 0, "", ".");
+                                              } else {
+                                                echo "-";
+                                              }  ?> kg</b>
                         </p>
                         <p class="text-sm">Total Uang Sangu
-                          <b class="d-block">Rp <?php if($project->total_uang_sangu != NULL){ echo number_format($project->total_uang_sangu, 0, "", "."); }else{ echo "0"; } ?></b>
+                          <b class="d-block">Rp <?php if ($project->total_uang_sangu != NULL) {
+                                                  echo number_format($project->total_uang_sangu, 0, "", ".");
+                                                } else {
+                                                  echo "0";
+                                                } ?></b>
                         </p>
                         <p class="text-sm">Biaya Claim
-                          <b class="d-block">Rp <?php if($project->harga_claim_satuan != NULL){ echo number_format($project->harga_claim_satuan, 0, "", "."); }else{ echo "0"; } ?></b>
+                          <b class="d-block">Rp <?php if ($project->harga_claim_satuan != NULL) {
+                                                  echo number_format($project->harga_claim_satuan, 0, "", ".");
+                                                } else {
+                                                  echo "0";
+                                                } ?></b>
                         </p>
                         <p class="text-sm">Jasa Muat
-                          <b class="d-block">Rp <?php if($project->estimasi_total_harga_jasa_muat != NULL){ echo number_format($project->estimasi_total_harga_jasa_muat, 0, "", "."); }else{ echo "0"; }  ?></b>
+                          <b class="d-block">Rp <?php if ($project->estimasi_total_harga_jasa_muat != NULL) {
+                                                  echo number_format($project->estimasi_total_harga_jasa_muat, 0, "", ".");
+                                                } else {
+                                                  echo "0";
+                                                }  ?></b>
                         </p>
                         <p class="text-sm">Jasa Bongkar
-                          <b class="d-block">Rp <?php if($project->estimasi_total_harga_jasa_muat != NULL){ echo number_format($project->estimasi_total_harga_jasa_bongkar, 0, "", "."); }else{ echo "0"; } ?></b>
+                          <b class="d-block">Rp <?php if ($project->estimasi_total_harga_jasa_muat != NULL) {
+                                                  echo number_format($project->estimasi_total_harga_jasa_bongkar, 0, "", ".");
+                                                } else {
+                                                  echo "0";
+                                                } ?></b>
                         </p>
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="text-muted">
                         <p class="text-sm">Total Claim
-                          <b class="d-block"><?php if($project->total_claim != NULL){ echo number_format($project->total_claim, 0, "", ".");  }else{ echo "0"; } ?> Kg</b>
+                          <b class="d-block"><?php if ($project->total_claim != NULL) {
+                                                echo number_format($project->total_claim, 0, "", ".");
+                                              } else {
+                                                echo "0";
+                                              } ?> Kg</b>
                         </p>
                         <p class="text-sm">Total Biaya Claim
-                          <b class="d-block">Rp <?php if($project->total_biaya_claim != NULL){ echo number_format($project->total_biaya_claim, 0, "", ".");  }else{ echo "0"; } ?></b>
+                          <b class="d-block">Rp <?php if ($project->total_biaya_claim != NULL) {
+                                                  echo number_format($project->total_biaya_claim, 0, "", ".");
+                                                } else {
+                                                  echo "0";
+                                                } ?></b>
                         </p>
                         <p class="text-sm">Total Replas
-                          <b class="d-block">Rp <?php if($project->total_pengeluaran != NULL){ echo number_format($project->total_pengeluaran, 0, "", ".");  }else{ echo "0"; } ?></b>
+                          <b class="d-block">Rp <?php if ($project->total_pengeluaran != NULL) {
+                                                  echo number_format($project->total_pengeluaran, 0, "", ".");
+                                                } else {
+                                                  echo "0";
+                                                } ?></b>
                         </p>
                         <p class="text-sm">Status
                           <b class="d-block text-green"><?php echo $project->nama_status; ?></b>
@@ -124,7 +156,11 @@
                     <span class="info-box-icon bg-success"><i class="fa fa-money-bill"></i></span>
                     <div class="info-box-content">
                       <span class="info-box-text">Nilai Project</span>
-                      <span class="info-box-number">Rp <?php if($project->total_nilai != NULL){ echo number_format($project->total_nilai, 0, "", "."); }else{ echo "0"; } ?></span>
+                      <span class="info-box-number">Rp <?php if ($project->total_nilai != NULL) {
+                                                          echo number_format($project->total_nilai, 0, "", ".");
+                                                        } else {
+                                                          echo "0";
+                                                        } ?></span>
                     </div>
                     <!-- /.info-box-content -->
                   </div>
@@ -146,13 +182,25 @@
 
                     <div class="info-box-content">
                       <span class="info-box-text">Status Project</span>
-                      <span class="info-box-number">Terkirim <?php if($project->total_terkirim != NULL){ echo number_format($project->total_terkirim, 0, "", "."); }else{ echo "0"; } ?> kg dari <?php if($project->total_terkirim != NULL){ echo number_format($project->qty, 0, "", "."); }else{ echo "0"; } ?> kg</span>
+                      <span class="info-box-number">Terkirim <?php if ($project->total_terkirim != NULL) {
+                                                                echo number_format($project->total_terkirim, 0, "", ".");
+                                                              } else {
+                                                                echo "0";
+                                                              } ?> kg dari <?php if ($project->total_terkirim != NULL) {
+                                                                              echo number_format($project->qty, 0, "", ".");
+                                                                            } else {
+                                                                              echo "0";
+                                                                            } ?> kg</span>
 
                       <div class="progress">
                         <div class="progress-bar" style="width: <?php echo $project->persentase_terkirim; ?>%"></div>
                       </div>
                       <span class="progress-description">
-                        <?php echo $project->persentase_terkirim; ?>% Terkirim | Sisa kirim <?php if($project->total_terkirim != NULL){ echo number_format($project->sisa_kirim, 0, "", ".");  }else{ echo "0"; } ?> Kg
+                        <?php echo $project->persentase_terkirim; ?>% Terkirim | Sisa kirim <?php if ($project->total_terkirim != NULL) {
+                                                                                              echo number_format($project->sisa_kirim, 0, "", ".");
+                                                                                            } else {
+                                                                                              echo "0";
+                                                                                            } ?> Kg
                       </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -210,8 +258,8 @@
                 </thead>
                 <tbody>
                   <?php $no = 0;
-                  
-                  foreach ($rekap as $row) : $no++;?>
+
+                  foreach ($rekap as $row) : $no++; ?>
                     <tr>
                       <td><?php echo $no; ?></td>
                       <td><?php echo $row->no_replas; ?></td>
@@ -224,12 +272,36 @@
                       <td><?php echo $row->nama_supir; ?></td>
                       <td><?php echo $row->nopol; ?></td>
                       <td><?php echo $row->nama_tujuan; ?></td>
-                      <td><?php if($row->timbang_kebun_bag != NULL){ echo number_format($row->timbang_kebun_bag, 0, "", ".");  }else{ echo "0"; }  ?></td>
-                      <td><?php if($row->timbang_kebun_kg != NULL){ echo number_format($row->timbang_kebun_kg, 0, "", ".");  }else{ echo "0"; }  ?> Kg</td>
-                      <td><?php if($row->qty_kirim_bag != NULL){ echo number_format($row->qty_kirim_bag, 0, "", "."); }else{ echo "0"; }  ?></td>
-                      <td><?php if($row->qty_kirim_kg != NULL){ echo number_format($row->qty_kirim_kg, 0, "", "."); }else{ echo "0"; }  ?> Kg</td>
-                      <td><?php if($row->m_susut != NULL){ echo number_format($row->m_susut, 0, "", "."); }else{ echo "0"; } ?> Kg</td>
-                      <td><?php if($row->c_claim != NULL){ echo number_format($row->c_claim, 0, "", "."); }else{ echo "0"; }  ?> Kg</td>
+                      <td><?php if ($row->timbang_kebun_bag != NULL) {
+                            echo number_format($row->timbang_kebun_bag, 0, "", ".");
+                          } else {
+                            echo "0";
+                          }  ?></td>
+                      <td><?php if ($row->timbang_kebun_kg != NULL) {
+                            echo number_format($row->timbang_kebun_kg, 0, "", ".");
+                          } else {
+                            echo "0";
+                          }  ?> Kg</td>
+                      <td><?php if ($row->qty_kirim_bag != NULL) {
+                            echo number_format($row->qty_kirim_bag, 0, "", ".");
+                          } else {
+                            echo "0";
+                          }  ?></td>
+                      <td><?php if ($row->qty_kirim_kg != NULL) {
+                            echo number_format($row->qty_kirim_kg, 0, "", ".");
+                          } else {
+                            echo "0";
+                          }  ?> Kg</td>
+                      <td><?php if ($row->m_susut != NULL) {
+                            echo number_format($row->m_susut, 0, "", ".");
+                          } else {
+                            echo "0";
+                          } ?> Kg</td>
+                      <td><?php if ($row->c_claim != NULL) {
+                            echo number_format($row->c_claim, 0, "", ".");
+                          } else {
+                            echo "0";
+                          }  ?> Kg</td>
                       <td><span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span></td>
 
                       <td class="project-actions text-right">
@@ -510,14 +582,15 @@
                   <div class="form-group">
                     <input type="hidden" class="form-control" name="id" id="id">
                     <input type="hidden" class="form-control" name="id_project" id="id_project" placeholder="id_project" value="<?php echo $project->id_project; ?>">
-
-                    <div class="form-group">
-                      <label>Jenis</label>
-                      <select class="form-control" style="width: 100%;" name="jenis" id="jenis">
-                        <option value="1">Bongkar</option>
-                        <option value="2">Muat</option>
-                      </select>
-                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Jenis</label>
+                    <select class="form-control" style="width: 100%;" name="jenis" id="jenis">
+                      <option value="1">Bongkar</option>
+                      <option value="2">Muat</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
                     <label for="no_replas">Jumlah</label>
                     <input type="text" class="form-control number" id="jumlah" name="jumlah" placeholder="Input jumlah pembayaran">
                   </div>

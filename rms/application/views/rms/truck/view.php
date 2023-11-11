@@ -270,10 +270,9 @@
                     <table class="table table-striped table-valign-middle data-table-default">
                       <thead>
                         <tr>
-                          <th class="align-middle">Tanggal Muat</th>
-                          <th class="align-middle">Tanggal Bongkar</th>
-                          <th class="align-middle">Jenis Perbaikan</th>
+                          <th class="align-middle">Tanggal Perbaikan</th>
                           <th class="align-middle">Supir</th>
+                          <th class="align-middle">Jenis Perbaikan</th>
                           <th class="align-middle">Harga</th>
                           <th class="align-middle">status</th>
                         </tr>
@@ -286,7 +285,8 @@
                                   echo shortdate_indo($row->tanggal_perbaikan);
                                 } ?></td>
                             <td><?php echo $row->nama_supir; ?></td>
-                            <td><?php echo $row->harga; ?></td>
+                            <td><?php echo $row->jenis_perbaikan; ?></td>
+                            <td><?php echo $row->jumlah; ?></td>
                             <td>
                               <?php if ($row->status == '0') { ?>
                                 <span class="badge badge-secondary"><?php echo $row->nama_status; ?></span>

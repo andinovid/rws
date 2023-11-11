@@ -97,7 +97,7 @@
                           <td>
                             <?php if ($row->sisa_hari_pajak_tahunan > 0) { ?>
                               <?php echo shortdate_indo($row->pajak_tahunan); ?><br>
-                              <small> Sisa
+                              <small class="badge <?php if ($row->sisa_hari_pajak_tahunan > 0 AND $row->sisa_hari_pajak_tahunan < '30') { echo 'badge-danger'; }elseif ($row->sisa_hari_pajak_tahunan >= '30' AND $row->sisa_hari_pajak_tahunan < '60') { echo 'badge-warning'; }else{echo 'badge-success';} ?>"> Sisa
                                 <?php
                                 $days = $row->sisa_hari_pajak_tahunan;
                                 $start_date = new DateTime();
@@ -130,7 +130,7 @@
                           <td>
                             <?php if ($row->sisa_hari_pajak_5_tahunan > 0) { ?>
                               <?php echo shortdate_indo($row->pajak_5_tahunan); ?><br>
-                              <small>Sisa
+                              <small class="badge <?php if ($row->sisa_hari_pajak_5_tahunan > 0 AND $row->sisa_hari_pajak_5_tahunan < '30') { echo 'badge-danger'; }elseif ($row->sisa_hari_pajak_5_tahunan >= '30' AND $row->sisa_hari_pajak_5_tahunan < '60') { echo 'badge-warning'; }else{echo 'badge-success';} ?>">Sisa
                                 <?php
                                 $days = $row->sisa_hari_pajak_5_tahunan;
                                 $start_date = new DateTime();
@@ -163,7 +163,7 @@
                           <td>
                             <?php if ($row->sisa_hari_kir > 0) { ?>
                               <?php echo shortdate_indo($row->kir_selanjutnya); ?><br>
-                              <small>Sisa
+                              <small class="badge <?php if ($row->sisa_hari_kir > 0 AND $row->sisa_hari_kir < '7') { echo 'badge-danger'; }elseif ($row->sisa_hari_kir >= '7' AND $row->sisa_hari_kir < '30') { echo 'badge-warning'; }else{echo 'badge-success';} ?>">Sisa
                                 <?php
                                 $days = $row->sisa_hari_kir;
                                 $start_date = new DateTime();

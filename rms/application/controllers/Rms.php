@@ -11,6 +11,7 @@ class Rms extends CI_Controller
         parent::__construct();
         $this->load->model('rms_model');
         $this->sess = $this->session->userdata('admin');
+
         if (!$this->sess) {
             redirect(base_url() . 'auth/login/', 'refresh');
             exit();
@@ -540,13 +541,40 @@ class Rms extends CI_Controller
 
     function insert_sparepart_perbaikan()
     {
+        $id_sparepart = $this->input->post('id_sparepart');
         $data = array(
             'id_perbaikan'  => $this->input->post('id_perbaikan'),
             'id_sparepart' => $this->input->post('id_sparepart'),
             'jumlah'   => $this->input->post('jumlah')
         );
+        $sparepart = $this->rms_model->get("tbl_sparepart", "WHERE id = $id_sparepart")->row();
 
+        $qty = $sparepart - $this->input->post('jumlah');
+        $data_update = array(
+            'qty'   => $qty,
+        );
+        $this->rms_model->update("tbl_sparepart", $data_update, $id_sparepart);
         $this->rms_model->insert("tbl_perbaikan_sparepart", $data);
+    }
+
+    function delete_perbaikan_sparepart()
+    {
+        $id = $this->input->POST('id');
+        $id_sparepart = $this->input->POST('id_sparepart');
+        $jumlah = $this->input->POST('jumlah');
+
+        $sparepart = $this->rms_model->get("tbl_sparepart", "WHERE id = '$id_sparepart'")->row();
+        $qty = $sparepart + $jumlah;
+
+        $data_update = array(
+            'qty'   => $qty,
+        );
+        $this->rms_model->update("tbl_sparepart", $data_update, $id_sparepart);
+
+        $delete = $this->rms_model->delete_data("tbl_perbaikan_sparepart", $id);
+        if ($delete) {
+            echo json_encode(array("status" => TRUE));
+        }
     }
 
     public function save_perbaikan()
@@ -961,6 +989,31 @@ class Rms extends CI_Controller
                     "target" => TRUE
                 ));
             }
+        }
+    }
+
+    public function save_pembayaran_invoice()
+    {
+        $id = $this->input->POST('id');
+        $tanggal_bayar = $this->input->POST('tanggal_pembayaran');
+        $status = $this->input->POST('status');
+
+        $data = array(
+            'id_invoice' => $id,
+            'tanggal' => $tanggal_bayar,
+            'status' => $status,
+        );
+        $this->rms_model->insert("tbl_pembayaran_invoice", $data);
+        $data_update = array(
+            'status' => $status,
+        );
+
+        $save = $this->rms_model->update("tbl_invoice", $data_update, $id);
+        if ($save) {
+            echo json_encode(array(
+                "status" => TRUE,
+                "target" => TRUE
+            ));
         }
     }
 
@@ -1397,6 +1450,16 @@ class Rms extends CI_Controller
 
 
 
+    public function get_invoice()
+    {
+        $id = $this->input->POST('id');
+        $data = $this->rms_model->get("v_invoice", "WHERE id_invoice = $id");
+        $detail = $data->result();
+        echo json_encode($detail);
+    }
+
+
+
     function generate_invoice()
     {
         $data['invoice'] = $this->rms_model->get("v_project", "WHERE total_terkirim >= qty")->result();
@@ -1465,6 +1528,15 @@ class Rms extends CI_Controller
         $html = $this->load->view('rms/invoice/pdf', $data, true);
         $filename = "data_peserta(" . $data['date'] . ").pdf";
         $this->pdf->createPDF($html, $filename, true);
+    }
+
+
+    function view_invoice($id)
+    {
+        $data['pembayaran_invoice'] = $this->rms_model->get("tbl_pembayaran_invoice a", "LEFT JOIN tbl_invoice b ON a.id_invoice = b.id WHERE a.id_invoice = '$id'")->result();
+        $data['invoice'] = $this->rms_model->get("v_invoice", "WHERE id_invoice = '$id'")->row();
+        $data['content'] = 'rms/invoice/view';
+        $this->load->view('rms/includes/template', $data);
     }
 
 
