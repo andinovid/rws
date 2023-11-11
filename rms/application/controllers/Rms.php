@@ -1524,9 +1524,9 @@ class Rms extends CI_Controller
 
         $this->load->library('pdf');
         error_reporting(0); // AGAR ERROR MASALAH VERSI PHP TIDAK MUNCUL
-
+        $cetak_no = str_replace('/', '-', $no_invoice);
         $html = $this->load->view('rms/invoice/pdf', $data, true);
-        $filename = "data_peserta(" . $data['date'] . ").pdf";
+        $filename = "INVOICE(" . $cetak_no . ").pdf";
         $this->pdf->createPDF($html, $filename, true);
     }
 

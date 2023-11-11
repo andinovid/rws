@@ -48,6 +48,7 @@
             <label style="vertical-align:top;"><?php echo $invoice->no_invoice; ?></label>
         </div>
     </div>
+    <?php if($invoice->remark){ ?>
     <div style="margin-top:10px;">
         <div style="display: inline-table; width:20%; vertical-align:top;">
             <label style=" vertical-align:top; vertical-align:top;">Re</label>
@@ -59,6 +60,7 @@
             <label style="vertical-align:top;"><?php echo $invoice->remark; ?></label>
         </div>
     </div>
+    <?php } ?>
     <div style="margin-top:10px;">
         <div style="display: inline-table; width:20%; vertical-align:top;">
             <label style="vertical-align:top;">To</label>
