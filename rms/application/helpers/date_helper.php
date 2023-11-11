@@ -4,7 +4,8 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 
-function array_date($start, $end) {
+function array_date($start, $end)
+{
     $range = array();
     if (is_string($start) === true)
         $start = strtotime($start);
@@ -21,7 +22,8 @@ function array_date($start, $end) {
 
 if (!function_exists('tgl_indo')) {
 
-    function date_indo($tgl) {
+    function date_indo($tgl)
+    {
         $ubah = gmdate($tgl, time() + 60 * 60 * 8);
         $pecah = explode("-", $ubah);
         $tanggal = $pecah[2];
@@ -29,12 +31,12 @@ if (!function_exists('tgl_indo')) {
         $tahun = $pecah[0];
         return $tanggal . ' ' . $bulan . ' ' . $tahun;
     }
-
 }
 
 if (!function_exists('bulan')) {
 
-    function bulan($bln) {
+    function bulan($bln)
+    {
         switch ($bln) {
             case 1:
                 return "Januari";
@@ -74,12 +76,12 @@ if (!function_exists('bulan')) {
                 break;
         }
     }
-
 }
 
 if (!function_exists('bulan_eng')) {
 
-    function bulan_eng($bln) {
+    function bulan_eng($bln)
+    {
         switch ($bln) {
             case 1:
                 return "January";
@@ -119,14 +121,14 @@ if (!function_exists('bulan_eng')) {
                 break;
         }
     }
-
 }
 
 //Format Shortdate
 if (!function_exists('shortdate_indo')) {
 
-    function shortdate_indo($tgl) {
-        
+    function shortdate_indo($tgl)
+    {
+
         $date = date("Y-m-d", strtotime($tgl));
         $ubah = gmdate($date, time() + 60 * 60 * 8);
         $pecah = explode("-", $ubah);
@@ -135,12 +137,12 @@ if (!function_exists('shortdate_indo')) {
         $tahun = $pecah[0];
         return $tanggal . ' ' . $bulan . ' ' . $tahun;
     }
-
 }
 
 if (!function_exists('short_bulan')) {
 
-    function short_bulan($bln) {
+    function short_bulan($bln)
+    {
         switch ($bln) {
             case 1:
                 return "01";
@@ -180,13 +182,13 @@ if (!function_exists('short_bulan')) {
                 break;
         }
     }
-
 }
 
 //Format Medium date
 if (!function_exists('mediumdate_indo')) {
 
-    function mediumdate_indo($tgl) {
+    function mediumdate_indo($tgl)
+    {
         $ubah = gmdate($tgl, time() + 60 * 60 * 8);
         $pecah = explode("-", $ubah);
         $tanggal = $pecah[2];
@@ -194,12 +196,12 @@ if (!function_exists('mediumdate_indo')) {
         $tahun = $pecah[0];
         return $tanggal . '-' . $bulan . '-' . $tahun;
     }
-
 }
 
 if (!function_exists('medium_bulan')) {
 
-    function medium_bulan($bln) {
+    function medium_bulan($bln)
+    {
         switch ($bln) {
             case 1:
                 return "Jan";
@@ -239,13 +241,13 @@ if (!function_exists('medium_bulan')) {
                 break;
         }
     }
-
 }
 
 //Long date indo Format
 if (!function_exists('longdate_indo')) {
 
-    function longdate_indo($tanggal) {
+    function longdate_indo($tanggal)
+    {
         $ubah = gmdate($tanggal, time() + 60 * 60 * 8);
         $pecah = explode("-", $ubah);
         $tgl = $pecah[2];
@@ -272,13 +274,13 @@ if (!function_exists('longdate_indo')) {
         }
         return $nama_hari . ',' . $tgl . ' ' . $bulan . ' ' . $thn;
     }
-
 }
 
 if (!function_exists('longdate')) {
 
-    function longdate($tanggal) {
-        
+    function longdate($tanggal)
+    {
+
         $date = date("Y-m-d", strtotime($tanggal));
         $ubah = gmdate($date, time() + 60 * 60 * 8);
         $pecah = explode("-", $ubah);
@@ -287,8 +289,31 @@ if (!function_exists('longdate')) {
         $thn = $pecah[0];
         $bulan = bulan_eng($pecah[1]);
 
-        
+
         return $bulan . ' ' . $tgl . ', ' . $thn;
     }
+}
 
+if (!function_exists('terbilang')) {
+    function terbilang($x)
+    {
+        $angka = ["", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"];
+
+        if ($x < 12)
+            return " " . $angka[$x];
+        elseif ($x < 20)
+            return terbilang($x - 10) . " belas";
+        elseif ($x < 100)
+            return terbilang($x / 10) . " puluh" . terbilang($x % 10);
+        elseif ($x < 200)
+            return "seratus" . terbilang($x - 100);
+        elseif ($x < 1000)
+            return terbilang($x / 100) . " ratus" . terbilang($x % 100);
+        elseif ($x < 2000)
+            return "seribu" . terbilang($x - 1000);
+        elseif ($x < 1000000)
+            return terbilang($x / 1000) . " ribu" . terbilang($x % 1000);
+        elseif ($x < 1000000000)
+            return terbilang($x / 1000000) . " juta" . terbilang($x % 1000000);
+    }
 }

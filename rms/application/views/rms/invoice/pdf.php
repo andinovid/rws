@@ -138,6 +138,17 @@
         </div>
     </div>
     <div style="margin-top:10px;">
+        <div style="display: inline-table; width:20%; vertical-align:top;">
+            <label style=" vertical-align:top; vertical-align:top;">Total Tagihan</label>
+        </div>
+        <div style="display: inline-table; width:2%; vertical-align:top;">
+            <label style="vertical-align:top;">:</label>
+        </div>
+        <div style="display: inline-table; width:50%; vertical-align:top;">
+            <label style="vertical-align:top;"><?php echo ucwords(terbilang($invoice->grand_total)); ?></label>
+        </div>
+    </div>
+    <div style="margin-top:10px;">
         <div style="display: inline-table; width:50%;">
             Seluruh pembayaran dapat dilakukan melalue transfer ke :
         </div>
