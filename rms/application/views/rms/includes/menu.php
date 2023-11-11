@@ -65,6 +65,12 @@
                   <p>Data Replas</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>project/non_do" class="nav-link <?php if ($this->uri->segment(2) == "non_do") { ?>active <?php } ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Non DO</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">

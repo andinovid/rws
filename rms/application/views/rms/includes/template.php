@@ -198,6 +198,7 @@
         "responsive": true,
         "lengthChange": false,
         "autoWidth": false,
+        "ordering": false,
         "pageLength": 20,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#DataTables_Table_0_wrapper .col-md-6:eq(0)');

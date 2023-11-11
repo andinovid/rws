@@ -114,10 +114,23 @@ class Rms extends CI_Controller
         $this->load->view('rms/includes/template', $data);
     }
 
+    function non_do()
+    {
+        $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE no_replas != ''")->result();
+        $data['klien'] = $this->rms_model->get("tbl_klien")->result();
+        $data['truck'] = $this->rms_model->get("tbl_truck")->result();
+        $data['supir'] = $this->rms_model->get("tbl_supir")->result();
+        $data['tujuan'] = $this->rms_model->get("tbl_tujuan")->result();
+        $data['komoditas'] = $this->rms_model->get("tbl_komoditas")->result();
+        $data['content'] = 'rms/project/replas';
+        $this->load->view('rms/includes/template', $data);
+    }
+
     function view_project($id_project)
     {
         $data['project'] = $this->rms_model->get("v_project", "WHERE id_project = $id_project")->row();
         $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE id_project = $id_project")->result();
+        $data['total'] = $this->rms_model->get_by_query("SELECT SUM(timbang_kebun_bag) as total_qty_awal_bag, SUM(timbang_kebun_kg) as total_qty_awal_kg, SUM(qty_kirim_bag) as total_qty_akhir_bag, SUM(qty_kirim_kg) as total_qty_akhir_kg  FROM v_rekap WHERE id_project = $id_project")->row();
         $data['pembayaran_replas'] = $this->rms_model->get("v_rekap", "WHERE id_project = $id_project AND status ='1'")->result();
         $data['pembayaran_bongkar_muat'] = $this->rms_model->get("tbl_pembayaran_bongkar_muat", "WHERE id_project = $id_project")->result();
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
