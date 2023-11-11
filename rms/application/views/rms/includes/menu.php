@@ -35,7 +35,6 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-        <?php if ($this->sess->role != '2' or $this->sess->role != '5') { ?>
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>dashboard/" class="nav-link <?php if ($this->uri->segment(2) == "dashboard") { ?>active <?php } ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -92,9 +91,6 @@
               </p>
             </a>
           </li>
-        <?php } ?>
-
-        <?php if ($this->sess->role == '2' or $this->sess->role == '5' or $this->sess->role == '1') { ?>
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>truck/" class="nav-link <?php if ($this->uri->segment(1) == "truck") { ?>active <?php } ?>">
               <i class="nav-icon fas fa-truck"></i>
@@ -130,9 +126,6 @@
             </a>
           </li>
 
-        <?php } ?>
-
-        <?php if ($this->sess->role == '1' or $this->sess->role == '4') { ?>
           <li class="nav-header">KEUANGAN</li>
           <!--li class="nav-item">
           <a href="pages/widgets.html" class="nav-link">
@@ -221,7 +214,6 @@
               </p>
             </a>
           </li>
-        <?php } ?>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
