@@ -334,7 +334,7 @@
                     <td>Total : <?php echo number_format($total->total_qty_awal_kg, 0, "", "."); ?> Kg</td>
                     <td>Total : <?php echo number_format($total->total_qty_akhir_bag, 0, "", "."); ?> Bag</td>
                     <td>Total : <?php echo number_format($total->total_qty_akhir_kg, 0, "", "."); ?> Kg</td>
-                    <td></td>
+                    <td>Total : <?php echo number_format($total->total_susut, 0, "", "."); ?> Kg</td>
                     <td></td>
                     <td></td>
                     <td></td>
