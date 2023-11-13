@@ -80,10 +80,10 @@
                           <i class="fas fa-folder">
                           </i>
                         </a>
-                        <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="pilih_truck(<?php echo $row->id_project; ?>)" data-toggle="tooltip" data-placement="top" title="Pilih Truck">
+                        <!--a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="pilih_truck(<?php echo $row->id_project; ?>)" data-toggle="tooltip" data-placement="top" title="Pilih Truck">
                           <i class="fas fa-truck">
                           </i>
-                        </a>
+                        </a-->
                         <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_project; ?>)" data-toggle="tooltip" data-placement="top" title="Edit Project">
                           <i class="fas fa-pencil-alt">
                           </i>
