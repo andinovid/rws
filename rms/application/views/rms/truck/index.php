@@ -45,6 +45,7 @@
                         <th>No</th>
                         <th>Nopol</th>
                         <th>Jenis Truk</th>
+                        <th>Oddo saat ini</th>
                         <th>Oli Mesin</th>
                         <th>Oli Gardan</th>
                         <th>Oli Transmisi</th>
@@ -65,6 +66,7 @@
                           <td><?php echo $no; ?></td>
                           <td><?php echo $row->nopol; ?></td>
                           <td><?php echo $row->jenis_truck; ?></td>
+                          <td><img src="http://rws.local/assets/rms/dist/img/dashboard2.png" width="25" class="mr-2" style="margin-top: -3px;"><?php echo number_format($row->oddo_terakhir, 0, "", "."); ?> KM</td>
                           <td class="project_progress">
                             <div class="progress progress-sm">
                               <div class="progress-bar <?php if($row->persentase_penggunaan_oli_mesin > '90'){echo 'bg-danger';}elseif($row->persentase_penggunaan_oli_mesin > '80' AND $row->persentase_penggunaan_oli_mesin < '90'){echo 'bg-warning';}else{echo 'bg-green';} ?>" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_mesin; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_mesin; ?>%">

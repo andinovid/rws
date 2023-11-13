@@ -1327,7 +1327,7 @@ class Rms extends CI_Controller
             $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, 'Rp ' . number_format($data->total, 0, "", "."));
             $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, 'Rp ' . number_format($data->claim, 0, "", "."));
             $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, 'Rp ' . number_format($data->total_claim, 0, "", "."));
-            $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, $pph);
+            $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, 'Rp ' . number_format($data->pph, 0, "", "."));
             $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, 'Rp ' . number_format($data->biaya_admin, 0, "", "."));
             $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, 'Rp ' . number_format($data->grand_total, 0, "", "."));
             //$excel->setActiveSheetIndex(0)->insertNewRowBefore(2,1); 
@@ -1455,7 +1455,7 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0);
         // Proses file excel
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="kwitansi.xlsx"'); // Set nama file excel nya
+        header('Content-Disposition: attachment; filename="kwitansi_'.$detail_kwitansi->vendor.'.xlsx"'); // Set nama file excel nya
         header('Cache-Control: max-age=0');
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');
