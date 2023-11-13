@@ -56,6 +56,8 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['project/data'] = 'rms/project';
 $route['project/replas'] = 'rms/replas';
+$route['project/non_do'] = 'rms/non_do';
+$route['project/non_do/kwitansi'] = 'rms/kwitansi_non_do';
 $route['project/view/(:any)'] = 'rms/view_project/$1';
 $route['truck/view/(:any)'] = 'rms/view_truck/$1';
 $route['vendor/view/(:any)'] = 'rms/view_vendor/$1';

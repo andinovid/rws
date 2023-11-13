@@ -6,10 +6,13 @@
           <h1 class="m-0">Rekapitulasi Data</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Project</li>
-          </ol>
+          <a class="btn btn-success btn-sm float-sm-right ml-1" href="<?php echo base_url(); ?>project/non_do/kwitansi/" data-toggle="tooltip" data-placement="top" title="Cetak Kwitansi">
+            <i class="fas fa-print">
+            </i>
+            Cetak Kwitansi
+          </a>
+          <button type="button" class="btn btn-primary btn-sm float-sm-right" onclick="input_replas()"><i class="fas fa-plus mr-1"></i> Tambah Angkutan</button>
+
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -31,6 +34,7 @@
                   </div>
                   <input type="text" id="date-filter" class="form-control float-right" value=""> <b class="caret"></b>
                   <button class="btn btn-dark btn-flat float-right" onclick="filterData()">Filter</button>
+
                 </div>
               </div>
             </div>
@@ -40,89 +44,59 @@
                 <table class="table table-bordered " id="tbl_replas">
                   <thead class="thead-dark">
                     <tr>
-                      <th rowspan="2" class="text-center align-middle">#</th>
-                      <th rowspan="2" class="text-center align-middle">No Replas</th>
-                      <th rowspan="2" class="text-center align-middle">Tanggal Input</th>
-                      <th rowspan="2" class="text-center align-middle">No DO</th>
-                      <th rowspan="2" class="text-center align-middle">Tanggal Input</th>
-                      <th rowspan="2" class="text-center align-middle">Tanggal Muat</th>
-                      <th rowspan="2" class="text-center align-middle">Supir</th>
-                      <th rowspan="2" class="text-center align-middle">Nopol</th>
-                      <th rowspan="2" class="text-center align-middle">Tujuan</th>
-                      <th colspan="2" class="text-center align-middle">Qty Awal</th>
-                      <th colspan="2" class="text-center align-middle">Qty Akhir</th>
-                      <th colspan="2" class="text-center align-middle">Susut</th>
-                      <th rowspan="2" class="text-center align-middle">Total</th>
-                      <th rowspan="2" class="text-center align-middle">Grand Total</th>
-                      <th rowspan="2" class="text-center align-middle">Status</th>
-                    </tr>
-                    <tr>
-                      <th class="text-center align-middle">Bag</th>
-                      <th class="text-center align-middle">Kg</th>
-                      <th class="text-center align-middle">Bag</th>
-                      <th class="text-center align-middle">Kg</th>
-                      <th class="text-center align-middle">M</th>
-                      <th class="text-center align-middle">C</th>
+                      <th class="text-center align-middle">#</th>
+                      <th class="text-center align-middle">Tanggal Input</th>
+                      <th class="text-center align-middle">Tanggal Input</th>
+                      <th class="text-center align-middle">Supir</th>
+                      <th class="text-center align-middle">Nopol</th>
+                      <th class="text-center align-middle">Komoditas</th>
+                      <th class="text-center align-middle">Tujuan</th>
+                      <th class="text-center align-middle">Qty</th>
+                      <th class="text-center align-middle">Harga</th>
+                      <th class="text-center align-middle">Harga Supir</th>
+                      <th class="text-center align-middle">Potongan</th>
+                      <th class="text-center align-middle">Uang Sangu</th>
+                      <th class="text-center align-middle">Grand Total</th>
+                      <th class="text-center align-middle">Total Bayar Supir</th>
+                      <th class="text-center align-middle">Keuntungan</th>
+                      <th class="text-center align-middle">Status</th>
+                      <th class="text-center align-middle" style="width: 10%;"></th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php $no = 0;
-
                     foreach ($rekap as $row) : $no++;
                       $old_date = $row->tanggal_input;
                       $old_date_timestamp = strtotime($old_date);
-
-
                     ?>
-
                       <tr>
                         <td><?php echo $no; ?></td>
-                        <td><?php echo $row->no_replas; ?></td>
                         <td><?php echo date('Y-m-d', $old_date_timestamp); ?></td>
-                        <td><?php echo $row->no_do; ?></td>
                         <td><?php echo shortdate_indo($row->tanggal_input); ?></td>
-                        <td><?php if ($row->tanggal_muat) {
-                              echo shortdate_indo($row->tanggal_muat);
-                            } ?></td>
-                        <td><?php echo $row->nama_supir; ?></td>
+                        <td><?php echo $row->nama; ?></td>
                         <td><?php echo $row->nopol; ?></td>
-                        <td><?php echo $row->nama_tujuan; ?></td>
-                        <td><?php if ($row->timbang_kebun_bag != NULL) {
-                              echo number_format($row->timbang_kebun_bag, 0, "", ".");
-                            } else {
-                              echo "0";
-                            }  ?></td>
-                        <td><?php if ($row->timbang_kebun_kg != NULL) {
-                              echo number_format($row->timbang_kebun_kg, 0, "", ".");
-                            } else {
-                              echo "0";
-                            }  ?> Kg</td>
-                        <td><?php if ($row->qty_kirim_bag != NULL) {
-                              echo number_format($row->qty_kirim_bag, 0, "", ".");
-                            } else {
-                              echo "0";
-                            }  ?></td>
-                        <td><?php if ($row->qty_kirim_kg != NULL) {
-                              echo number_format($row->qty_kirim_kg, 0, "", ".");
-                            } else {
-                              echo "0";
-                            }  ?> Kg</td>
-                        <td><?php if ($row->m_susut != NULL) {
-                              echo number_format($row->m_susut, 0, "", ".");
-                            } else {
-                              echo "0";
-                            } ?> Kg</td>
-                        <td><?php if ($row->c_claim != NULL) {
-                              echo number_format($row->c_claim, 0, "", ".");
-                            } else {
-                              echo "0";
-                            }  ?> Kg</td>
-                            
+                        <td><?php echo $row->komoditas; ?></td>
+                        <td><?php echo $row->kode_tujuan; ?></td>
+                        <td><?php echo $row->qty; ?> Kg</td>
+                        <td><?php echo 'Rp ' . number_format($row->harga, 0, "", "."); ?></td>
+                        <td><?php echo 'Rp ' . number_format($row->harga_supir, 0, "", "."); ?></td>
+                        <td><?php echo 'Rp ' . number_format($row->potongan, 0, "", "."); ?></td>
+                        <td><?php echo 'Rp ' . number_format($row->uang_sangu, 0, "", "."); ?></td>
                         <td><?php echo 'Rp ' . number_format($row->total, 0, "", "."); ?></td>
-                        <td><?php echo 'Rp ' . number_format($row->grand_total, 0, "", "."); ?></td>
-                        <td><span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span></td>
+                        <td><?php echo 'Rp ' . number_format($row->total_supir, 0, "", "."); ?></td>
+                        <td><?php echo 'Rp ' . number_format($row->total_keuntungan, 0, "", "."); ?></td>
+                        <td><span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php if ($row->status == '0') { ?>Belum dibayar <?php } else { ?> Sudah dibayar <?php } ?></span></td>
+                        <td class="project-actions text-right">
 
-
+                          <a class="btn btn-warning btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                          </a>
+                          <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_data(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
+                            <i class="fas fa-trash">
+                            </i>
+                          </a>
+                        </td>
                       </tr>
                     <?php endforeach; ?>
                   </tbody>
@@ -155,29 +129,6 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <input type="hidden" class="form-control" name="id" id="id" placeholder="id">
-
-                    <label for="no_replas">Nomor Replas</label>
-                    <input type="text" class="form-control" id="no_replas" name="no_replas" placeholder="Input nomor replas">
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Tanggal Muat</label>
-                    <div class="input-group date reservationdate1" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate1" data-toggle="datetimepicker" name="tanggal_muat" id="tanggal_muat" />
-                      <div class="input-group-append" data-target=".reservationdate1" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Tanggal Bongkar</label>
-                    <div class="input-group date reservationdate2" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate2" data-toggle="datetimepicker" name="tanggal_bongkar" id="tanggal_bongkar" />
-                      <div class="input-group-append" data-target=".reservationdate2" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
                     <label>Supir</label>
                     <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
                       <option value="0">Pilih supir</option>
@@ -195,9 +146,19 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
-
-                </div>
-                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Komoditas</label>
+                    <select class="form-control select2" style="width: 100%;" name="komoditas" id="komoditas">
+                      <option value="0">Pilih komoditas</option>
+                      <?php foreach ($komoditas as $row) : ?>
+                        <option value="<?php echo $row->id; ?>"><?php echo $row->komoditas; ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Qty</label>
+                    <input type="text" class="form-control" placeholder="Bag" name="qty" id="qty">
+                  </div>
                   <div class="form-group">
                     <label>Tujuan</label>
                     <select class="form-control select2" style="width: 100%;" name="tujuan" id="tujuan">
@@ -207,31 +168,31 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
+                </div>
+                <div class="col-md-6">
+
                   <div class="form-group">
-                    <label for="no_replas">Qty Kirim</label>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Bag" name="qty_kirim_bag" id="qty_kirim_bag">
-                      </div>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Kg" name="qty_kirim_kg" id="qty_kirim_kg">
-                      </div>
-                    </div>
+                    <label for="no_replas">Harga</label>
+                    <input type="text" class="form-control" name="harga" id="harga" placeholder="Harga Satuan">
                   </div>
                   <div class="form-group">
-                    <label for="no_replas">Timbang Kebun</label>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" name="timbang_kebun_bag" id="timbang_kebun_bag" placeholder="Bag">
-                      </div>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Kg">
-                      </div>
-                    </div>
+                    <label for="no_replas">Harga vendor</label>
+                    <input type="text" class="form-control" name="harga_supir" id="harga_supir" placeholder="Harga untuk vendor">
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Biaya admin</label>
+                    <input type="text" class="form-control number" name="potongan" id="potongan" placeholder="Biaya admin">
                   </div>
                   <div class="form-group">
                     <label for="no_replas">Uang Sangu</label>
-                    <input type="text" class="form-control" name="uang_sangu" id="uang_sangu" placeholder="Uang Sangu">
+                    <input type="text" class="form-control number" name="uang_sangu" id="uang_sangu" placeholder="Uang Sangu">
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Status</label>
+                    <select class="form-control select2" style="width: 100%;" name="status" id="status">
+                      <option value="0">Belum dibayar</option>
+                      <option value="1">Sudah dibayar</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -267,9 +228,9 @@
       "columnDefs": [{
         "visible": false,
         "searchable": true,
-        "targets": 2
+        "targets": 1
       }],
-      "ordering":false,
+      "ordering": false,
       "responsive": true,
       "lengthChange": false,
       "autoWidth": false,
@@ -319,7 +280,7 @@
     $('.loading').show();
     $.ajax({
       type: 'POST',
-      url: '<?php echo base_url(); ?>rms/save_replas/',
+      url: '<?php echo base_url(); ?>rms/save_replas_non_do/',
       data: formData,
       processData: false,
       contentType: false,
@@ -351,7 +312,7 @@
       type: "POST",
       data: {
         'id': id,
-        tbl: "tbl_rekap"
+        tbl: "tbl_rekap_non_do"
       },
       dataType: "JSON",
       beforeSend: function() {
@@ -359,16 +320,16 @@
       },
       success: function(data) {
         for (var i = 0; i < data.length; i++) {
-          $('[name="no_replas"]').val(data[i].no_replas);
-          $('[name="tanggal"]').val(data[i].tanggal_muat);
-          $('[name="tanggal"]').val(data[i].tanggal_bongkar);
+
           $('[name="supir"]').val(data[i].id_supir).change();
           $('[name="truck"]').val(data[i].id_truck).change();
           $('[name="tujuan"]').val(data[i].id_tujuan).change();
-          $('[name="qty_kirim_bag"]').val(data[i].qty_kirim_bag);
-          $('[name="qty_kirim_kg"]').val(data[i].qty_kirim_kg);
-          $('[name="timbang_kebun_bag"]').val(data[i].timbang_kebun_bag);
-          $('[name="timbang_kebun_kg"]').val(data[i].timbang_kebun_kg);
+          $('[name="komoditas"]').val(data[i].id_komoditas).change();
+
+          $('[name="qty"]').val(data[i].qty);
+          $('[name="harga"]').val(data[i].harga);
+          $('[name="harga_supir"]').val(data[i].harga_supir);
+          $('[name="potongan"]').val(data[i].potongan);
           $('[name="uang_sangu"]').val(data[i].uang_sangu);
         }
       },
@@ -394,7 +355,7 @@
           type: "POST",
           data: {
             id: id,
-            tbl: "tbl_rekap"
+            tbl: "tbl_rekap_non_do"
           },
           dataType: "JSON",
           success: function(data) {

@@ -217,6 +217,7 @@
                         <th>No</th>
                         <th>Nopol</th>
                         <th>Jenis Truk</th>
+                        <th>Oddo saat ini</th>
                         <th>Oli Mesin</th>
                         <th>Oli Gardan</th>
                         <th>Oli Transmisi</th>
