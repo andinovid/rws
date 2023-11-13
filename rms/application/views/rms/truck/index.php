@@ -324,7 +324,7 @@
                       <label for="kategori">Jenis Truk</label>
                       <select id="jenis_truck" class="form-control" name="jenis_truck">
                         <option value="">Pilih Jenis Truk</option>
-                        <option value="1">Euro 3</option>
+                        <option value="1">Euro 2</option>
                         <option value="2">Euro 4</option>
                         <option value="3">Isuzu Diesel</option>
                       </select>
