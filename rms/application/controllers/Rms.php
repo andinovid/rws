@@ -1512,10 +1512,10 @@ class Rms extends CI_Controller
         $write->save('php://output');
     }
 
-    public function print_kwitansi_non_do($id_project, $id_vendor)
+    public function print_kwitansi_non_do($id_vendor)
     {
 
-        $detail_kwitansi = $this->rms_model->get_by_query("SELECT * FROM v_kwitansi WHERE id_project = '$id_project' AND id_vendor = '$id_vendor'")->row();
+        $detail_kwitansi = $this->rms_model->get_by_query("SELECT *, SUM(total_supir) AS grand_total_supir, SUM(qty) AS total_qty FROM v_rekap_non_do WHERE id_vendor = '$id_vendor' GROUP BY id_vendor")->row();
         include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
         $excel = new PHPExcel();
         $excel->getProperties()->setCreator('Rajawali System')
@@ -1617,7 +1617,8 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('N8', "TTL CLAIM");
         $excel->setActiveSheetIndex(0)->setCellValue('O8', "Pph %");
         $excel->setActiveSheetIndex(0)->setCellValue('P8', "ADM");
-        $excel->setActiveSheetIndex(0)->setCellValue('Q8', "GRAND TOTAL");
+        $excel->setActiveSheetIndex(0)->setCellValue('Q8', "SANGO");
+        $excel->setActiveSheetIndex(0)->setCellValue('R8', "GRAND TOTAL");
         // Apply style header yang telah kita buat tadi ke masing-masing kolom header
         $excel->getActiveSheet()->getStyle('A8')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('B8')->applyFromArray($style_col);
@@ -1636,8 +1637,9 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('O8')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('P8')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('Q8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('R8')->applyFromArray($style_col);
 
-        $kwitansi = $this->rms_model->get("v_rekap", "WHERE id_project = '$id_project' AND id_vendor = '$id_vendor'")->result();
+        $kwitansi = $this->rms_model->get("v_rekap_non_do", "WHERE id_vendor = '$id_vendor'")->result();
 
 
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
@@ -1656,27 +1658,28 @@ class Rms extends CI_Controller
                 $jenis_pajak = "NPWP";
             }
 
+            $old_date = $data->tanggal_input;
+            $old_date_timestamp = strtotime($old_date);
+
             $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
-            $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, mediumdate_indo($data->tanggal_muat));
-            $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->timbang_kebun_kg);
-            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->qty_kirim_kg);
+            $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, mediumdate_indo(date('Y-m-d', $old_date_timestamp)));
+            $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->qty);
+            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->qty);
             $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->nama_supir);
             $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->nopol);
             $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->komoditas);
             $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->kode_tujuan);
-            $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->m_susut);
-            $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->c_claim);
-            $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, 'Rp ' . number_format($data->harga, 0, "", "."));
-            $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, 'Rp ' . number_format($data->total, 0, "", "."));
-            $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, 'Rp ' . number_format($data->claim, 0, "", "."));
-            $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, 'Rp ' . number_format($data->total_claim, 0, "", "."));
-            $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, 'Rp ' . number_format($data->pph, 0, "", "."));
-            $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, 'Rp ' . number_format($data->biaya_admin, 0, "", "."));
-            $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, 'Rp ' . number_format($data->grand_total, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, '-');
+            $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, '-');
+            $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, 'Rp ' . number_format($data->harga_supir, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, 'Rp ' . number_format($data->total_harga_supir, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, '-');
+            $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, '-');
+            $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, '-');
+            $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, 'Rp ' . number_format($data->uang_sangu, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, 'Rp ' . number_format($data->potongan, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('R' . $numrow, 'Rp ' . number_format($data->total_supir, 0, "", "."));
             //$excel->setActiveSheetIndex(0)->insertNewRowBefore(2,1); 
-            $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow2, $jenis_pajak . ' ' . $data->no_pajak . ' - ' . $data->nama_pajak);
-            $excel->getActiveSheet()->mergeCells('M' . $numrow2 . ':' . 'Q' . $numrow2); // Set Merge Cell pada kolom A1 sampai E1
-            $excel->getActiveSheet()->getStyle('A' . $numrow2 . ':' . 'Q' . $numrow2)->applyFromArray($style_row);
 
             // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
             $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
@@ -1696,9 +1699,10 @@ class Rms extends CI_Controller
             $excel->getActiveSheet()->getStyle('O' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('P' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('Q' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('R' . $numrow)->applyFromArray($style_row);
 
             $no++; // Tambah 1 setiap kali looping
-            $numrow = $numrow + 2; // Tambah 1 setiap kali looping
+            $numrow++; // Tambah 1 setiap kali looping
             $numrow2 = $numrow2 + 2;
         }
 
@@ -1709,21 +1713,21 @@ class Rms extends CI_Controller
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, 'Total Qty');
-        $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $detail_kwitansi->qty_awal);
-        $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $detail_kwitansi->qty_akhir);
+        $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $detail_kwitansi->total_qty);
+        $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $detail_kwitansi->total_qty);
         $excel->getActiveSheet()->getStyle('A' . $numrow . ':' . 'Q' . $numrow)->applyFromArray($style_row);
 
 
 
 
 
-        $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, 'Total');
-        $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
-        $excel->getActiveSheet()->getStyle('P' . $numrow)->applyFromArray($style_row);
+        $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, 'Total');
+        $excel->setActiveSheetIndex(0)->setCellValue('R' . $numrow, 'Rp ' . number_format($detail_kwitansi->grand_total_supir, 0, "", "."));
         $excel->getActiveSheet()->getStyle('Q' . $numrow)->applyFromArray($style_row);
+        $excel->getActiveSheet()->getStyle('R' . $numrow)->applyFromArray($style_row);
 
         $excel->setActiveSheetIndex(0)->setCellValue('A' . $sebesar, 'Sebesar');
-        $excel->setActiveSheetIndex(0)->setCellValue('D' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('D' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total_supir, 0, "", "."));
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('G' . $sebesar, 'Sampit, ' . shortdate_indo(date('Y-m-d')));
@@ -1788,6 +1792,7 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getColumnDimension('O')->setWidth(15); // Set width kolom E
         $excel->getActiveSheet()->getColumnDimension('P')->setWidth(15); // Set width kolom E
         $excel->getActiveSheet()->getColumnDimension('Q')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('R')->setWidth(15); // Set width kolom E
 
         // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
         $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);

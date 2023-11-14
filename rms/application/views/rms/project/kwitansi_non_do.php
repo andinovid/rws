@@ -45,12 +45,12 @@
                   ?>
                     <tr>
                       <td><?php echo $no; ?></td>
-                      <td><?php echo $row->nama_vendor; ?></td>
+                      <td><?php echo $row->vendor; ?></td>
                       <td><?php echo $row->total_replas; ?></td>
                       <td>Rp <?php echo number_format($row->total_supir, 0, "", "."); ?></td>
                       </td>
                       <td class="project-actions text-right">
-                        <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/print_kwitansi/<?php echo $row->id_vendor; ?>" data-toggle="tooltip" data-placement="top" title="Cetak Kwitansi">
+                        <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/print_kwitansi_non_do/<?php echo $row->id_vendor; ?>" data-toggle="tooltip" data-placement="top" title="Cetak Kwitansi">
                           <i class="fas fa-print">
                           </i>
                         </a>

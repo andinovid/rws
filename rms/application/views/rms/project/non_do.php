@@ -73,7 +73,7 @@
                         <td><?php echo $no; ?></td>
                         <td><?php echo date('Y-m-d', $old_date_timestamp); ?></td>
                         <td><?php echo shortdate_indo($row->tanggal_input); ?></td>
-                        <td><?php echo $row->nama; ?></td>
+                        <td><?php echo $row->nama_supir; ?></td>
                         <td><?php echo $row->nopol; ?></td>
                         <td><?php echo $row->komoditas; ?></td>
                         <td><?php echo $row->kode_tujuan; ?></td>
