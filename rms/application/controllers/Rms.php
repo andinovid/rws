@@ -541,6 +541,12 @@ class Rms extends CI_Controller
             $cicilan = "";
         }
 
+        if (isset($_POST['air_radiator'])) {
+            $air_radiator = $this->input->POST('air_radiator');
+        } else {
+            $air_radiator = "";
+        }
+
         $data = array(
             'nopol' => $nopol,
             'kategori' => $kategori,
@@ -555,10 +561,9 @@ class Rms extends CI_Controller
             'oddo_terakhir' => str_replace('.', '', $oddo_terakhir),
             'oddo_terakhir_oli_mesin' => str_replace('.', '', $oddo_terakhir_oli_mesin),
             'oddo_terakhir_oli_gardan' => str_replace('.', '', $oddo_terakhir_oli_gardan),
-            'oddo_terakhir_oli_transmisi' => str_replace('.', '', $oddo_terakhir_oli_transmisi)
+            'oddo_terakhir_oli_transmisi' => str_replace('.', '', $oddo_terakhir_oli_transmisi),
+            'air_radiator_terakhir' => $air_radiator
         );
-
-
 
         if ($id == "") {
             $save = $this->rms_model->insert("tbl_truck", $data);

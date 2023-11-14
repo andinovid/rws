@@ -388,6 +388,15 @@
                       <label for="oddo_terakhir_oli_transmisi">Oddo terakhir pergantian oli transmisi </label>
                       <input type="text" class="form-control number" id="oddo_terakhir_oli_transmisi" name="oddo_terakhir_oli_transmisi" placeholder="Input oddo terakhir pergantian oli transmisi">
                     </div>
+                    <div class="form-group">
+                      <label for="no_replas">Tanggal terakhir ganti air radiator</label>
+                      <div class="input-group date reservationdate reservationdate4" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate4" data-toggle="datetimepicker" name="air_raidator" id="air_raidator" />
+                        <div class="input-group-append" data-target=".reservationdate4" data-toggle="datetimepicker">
+                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

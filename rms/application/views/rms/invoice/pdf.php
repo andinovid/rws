@@ -22,21 +22,20 @@
         }
 
         tr,
-        td {
+        td,th {
             border: 1px solid #111;
-
-        }
-
-        td {
-            padding-top: 0px;
-            padding-bottom: 0px;
+            padding: 0px;
+            border-spacing: 0px;
+            padding-top: 2px !important;
+            padding-bottom: 2px !important;
+            border-spacing:0;
         }
     </style>
 </head>
 
 <body>
     <img src="https://rms.rajawalisampit.com/assets/rms/dist/img/kop.png" style="width: 100%;">
-    <h1 style="text-align:center;font-size:22px;margin-top:20px;">INVOICE</h1>
+    <h1 style="text-align:center;font-size:22px;margin-top:30px;">INVOICE</h1>
 
     <div style="margin-top:30px;">
         <div style="display: inline-table; width:20%;vertical-align:top;">
@@ -49,7 +48,7 @@
             <label style="vertical-align:top;"><?php echo $invoice->no_invoice; ?></label>
         </div>
     </div>
-    <div style="margin-top:10px;">
+    <div style="margin-top:5px;">
         <div style="display: inline-table; width:20%; vertical-align:top;">
             <label style="vertical-align:top;">KEPADA YTH.</label>
         </div>
@@ -61,7 +60,7 @@
         </div>
     </div>
     <?php if ($invoice->remark) { ?>
-        <div style="margin-top:10px;">
+        <div style="margin-top:5px;">
             <div style="display: inline-table; width:20%; vertical-align:top;">
                 <label style=" vertical-align:top; vertical-align:top;">RE</label>
             </div>
@@ -75,36 +74,43 @@
     <?php } ?>
 
     <?php if ($invoice->no_kontrak) { ?>
-        <div style="margin-top:30px;">
+        <div style="margin-top:5px;">
             <div style="display: inline-table; width:20%;vertical-align:top;">
                 <label style="vertical-align:top;">NO. KONTRAK</label>
             </div>
-            <div style="display: inline-table; width:2%;">
+            <div style="display: inline-table; width:2%;vertical-align:top;">
                 <label style="vertical-align:top;">:</label>
             </div>
-            <div style="display: inline-table;">
-                <label style="vertical-align:top;"><?php echo $invoice->no_kontrak; ?></label>
+            <div style="display: inline-table; vertical-align:top;">
+                <label style="vertical-align:top;">
+                    <?php foreach ($project as $do) : ?>
+                        <?php echo $do->no_kontrak; ?><br>
+                    <?php endforeach; ?>
+                </label>
             </div>
         </div>
     <?php } ?>
 
     <?php if ($invoice->id_komoditas == '2' || $invoice->id_komoditas == '4') { ?>
-        <div style="margin-top:30px;">
+        <div style="margin-top:5px;">
             <div style="display: inline-table; width:20%;vertical-align:top;">
                 <label style="vertical-align:top;">NO. DO</label>
             </div>
-            <div style="display: inline-table; width:2%;">
+            <div style="display: inline-table; width:2%;vertical-align:top;">
                 <label style="vertical-align:top;">:</label>
             </div>
-            <div style="display: inline-table;">
-                <?php foreach ($project as $do) : ?>
-                    <label style="vertical-align:top;"><?php echo $do->no_do; ?></label>
-                <?php endforeach; ?>
+            <div style="display: inline-table;vertical-align:top;">
+                <label style="vertical-align:top;">
+                    <?php foreach ($project as $do) : ?>
+                        <?php echo $do->no_do; ?><br>
+                    <?php endforeach; ?>
+                </label>
+
             </div>
         </div>
     <?php } ?>
 
-    <table class="table table-hover" style="width:100%; margin-top:50px;">
+    <table class="table table-hover" cellpadding="0" style="width:100%; margin-top:20px; cell-margin:0px; border-spacing:0;">
         <thead style="background-color: #EEE;">
             <tr style="border: 1px solid #111;">
                 <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:5%;">No</th>
@@ -140,27 +146,37 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td colspan="3">Potongan Claim Susut</td>
+                    <?php if ($invoice->id_komoditas == '1') { ?>
+                        <td colspan="3">Potongan Claim Susut</td>
+                    <?php } else { ?>
+                        <td colspan="2">Potongan Claim Susut</td>
+                    <?php } ?>
+
                     <td></td>
                     <td>Rp <?php echo number_format($row->total_biaya_susut, 0, "", "."); ?></td>
                 </tr>
             <?php endforeach; ?>
             <tr style="border: none;">
-                <td style="border: none; text-align:right;" colspan="4"></td>
+                <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
                 <td style="text-align:right;">Total</td>
                 <td>Rp <?php echo number_format($invoice->total, 0, "", "."); ?></td>
             </tr>
+            <?php if($invoice->$total_pph !='0'){ ?>
             <tr style="border: none;">
-                <td style="border: none; text-align:right;" colspan="4"></td>
+                <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
                 <td style="text-align:right;">PPh <?php echo $invoice->$pph; ?> %</td>
                 <td>Rp <?php echo number_format($invoice->total_pph, 0, "", "."); ?></td>
+            </tr>
+            <?php } ?>
+            <?php if($invoice->$total_ppn !='0'){ ?>
             <tr style="border: none;">
-                <td style="border: none; text-align:right;" colspan="4"></td>
+                <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
                 <td style="text-align:right;">PPn <?php echo $invoice->$ppn; ?> %</td>
                 <td>Rp <?php echo number_format($invoice->total_ppn, 0, "", "."); ?></td>
             </tr>
+            <?php } ?>
             <tr style="border: none;">
-                <td style="border: none; text-align:right;" colspan="4"></td>
+                <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
                 <td style="text-align:right;">Grand Total</td>
                 <td>Rp <?php echo number_format($invoice->grand_total, 0, "", "."); ?></td>
             </tr>

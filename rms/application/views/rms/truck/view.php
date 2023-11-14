@@ -74,7 +74,49 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
+            <div class="col-md-3">
+                <div class="info-box mb-3 <?php if ($truck->sisa_hari_air_radiator > 0 AND $truck->sisa_hari_air_radiator < '30') { echo 'bg-danger'; }elseif ($truck->sisa_hari_air_radiator >= '30' AND $truck->sisa_hari_air_radiator < '60') { echo 'bg-warning'; }else{echo 'bg-success';} ?>">
+                  <span class="info-box-icon"><i class="fas fa-temperature-low"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Air Radiator</span>
+                    <span class="info-box-number mt-0">
+                      <?php if ($truck->sisa_hari_air_radiator > 0) { ?>
+                        <?php echo shortdate_indo($truck->air_radiator_selanjutnya); ?><br>
+                        <small style="font-style:italic;"> Sisa
+                          <?php
+                          $days = $truck->sisa_hari_air_radiator;
+                          $start_date = new DateTime();
+                          $end_date = (new $start_date)->add(new DateInterval("P{$days}D"));
+                          $dd = date_diff($start_date, $end_date);
+                          if ($dd->y != 0 and $dd->m != 0 and $dd->d != 0) {
+                            echo $dd->y . " tahun " . $dd->m . " bulan " . $dd->d . " hari";
+                          } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d != 0) {
+                            echo $dd->m . " bulan " . $dd->d . " hari";
+                          } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d != 0) {
+                            echo $dd->d . " hari";
+                          } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d == 0) {
+                            echo $dd->m . " bulan ";
+                          } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d == 0) {
+                            echo $dd->y . " tahun ";
+                          } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d != 0) {
+                            echo $dd->y . " tahun "  . $dd->d . " hari";
+                          } elseif ($dd->y != 0 and $dd->m != 0 and $dd->d == 0) {
+                            echo $dd->y . " tahun " . $dd->m . " bulan ";
+                          } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d == 0) {
+                            echo "Sudah habis";
+                          }
+                          ?>
+                        </small>
+                      <?php } else {
+                        echo "-";
+                      } ?>
+                    </span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+              </div>
+              <div class="col-md-3">
                 <div class="info-box mb-3 <?php if ($truck->sisa_hari_pajak_tahunan > 0 AND $truck->sisa_hari_pajak_tahunan < '30') { echo 'bg-danger'; }elseif ($truck->sisa_hari_pajak_tahunan >= '30' AND $truck->sisa_hari_pajak_tahunan < '60') { echo 'bg-warning'; }else{echo 'bg-success';} ?>">
                   <span class="info-box-icon"><i class="fas fa-money-check"></i></span>
 
@@ -116,7 +158,7 @@
                   <!-- /.info-box-content -->
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="info-box mb-3 <?php if ($truck->sisa_hari_pajak_5_tahunan > 0 AND $truck->sisa_hari_pajak_5_tahunan < '30') { echo 'bg-danger'; }elseif ($truck->sisa_hari_pajak_5_tahunan >= '30' AND $truck->sisa_hari_pajak_5_tahunan < '60') { echo 'bg-warning'; }else{echo 'bg-success';} ?>">
                   <span class="info-box-icon"><i class="fas fa-money-check"></i></span>
 
@@ -158,7 +200,7 @@
                   <!-- /.info-box-content -->
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="info-box mb-3 <?php if ($truck->sisa_hari_kir > 0 AND $truck->sisa_hari_kir < '7') { echo 'bg-danger'; }elseif ($truck->sisa_hari_kir >= '7' AND $truck->sisa_hari_kir < '30') { echo 'bg-warning'; }else{echo 'bg-success';} ?>">
                   <span class="info-box-icon"><i class="fas fa-money-check"></i></span>
 
