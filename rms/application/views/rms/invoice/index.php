@@ -32,6 +32,7 @@
                     <th>No</th>
                     <th>No Invoice</th>
                     <th>Nama Perusahaan</th>
+                    <th>Komoditas</th>
                     <th>Total Nilai</th>
                     <th>PPh</th>
                     <th>PPn</th>
@@ -51,6 +52,7 @@
                       <td><?php echo $no; ?></td>
                       <td><?php echo $row->no_invoice; ?></td>
                       <td><?php echo $row->nama_perusahaan; ?></td>
+                      <td><?php echo $row->komoditas; ?></td>
                       <td>Rp <?php echo number_format($row->total, 0, "", "."); ?></td>
                       <td><?php if ($row->pph) { ?><span class="badge badge-danger"><?php echo $row->pph . '%'; ?></span> <?php echo 'Rp' . number_format($row->total_pph, 0, "", "."); ?> <?php } ?></td>
                       <td><?php if ($row->ppn) { ?><span class="badge badge-danger"><?php echo $row->ppn . '%'; ?></span> <?php echo 'Rp' . number_format($row->total_ppn, 0, "", "."); ?> <?php } ?></td>
@@ -82,6 +84,7 @@
                     <th>No</th>
                     <th>No Invoice</th>
                     <th>Nama Perusahaan</th>
+                    <th>Komoditas</th>
                     <th>Total Nilai</th>
                     <th>PPh</th>
                     <th>PPn</th>

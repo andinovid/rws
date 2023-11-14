@@ -24,9 +24,10 @@
         tr,
         td {
             border: 1px solid #111;
-            
+
         }
-        td{
+
+        td {
             padding-top: 0px;
             padding-bottom: 0px;
         }
@@ -39,7 +40,7 @@
 
     <div style="margin-top:30px;">
         <div style="display: inline-table; width:20%;vertical-align:top;">
-            <label style="vertical-align:top;">Invoice No</label>
+            <label style="vertical-align:top;">NO. INVOICE</label>
         </div>
         <div style="display: inline-table; width:2%;">
             <label style="vertical-align:top;">:</label>
@@ -48,39 +49,74 @@
             <label style="vertical-align:top;"><?php echo $invoice->no_invoice; ?></label>
         </div>
     </div>
-    <?php if($invoice->remark){ ?>
     <div style="margin-top:10px;">
         <div style="display: inline-table; width:20%; vertical-align:top;">
-            <label style=" vertical-align:top; vertical-align:top;">Re</label>
+            <label style="vertical-align:top;">KEPADA YTH.</label>
         </div>
         <div style="display: inline-table; width:2%; vertical-align:top;">
             <label style="vertical-align:top;">:</label>
         </div>
         <div style="display: inline-table; width:50%; vertical-align:top;">
-            <label style="vertical-align:top;"><?php echo $invoice->remark; ?></label>
+            <label style="vertical-align:top;"><?php echo $invoice->nama_perusahaan; ?><br><span style="font-weight: 400;"><?php echo $invoice->alamat; ?></span></label>
         </div>
     </div>
+    <?php if ($invoice->remark) { ?>
+        <div style="margin-top:10px;">
+            <div style="display: inline-table; width:20%; vertical-align:top;">
+                <label style=" vertical-align:top; vertical-align:top;">RE</label>
+            </div>
+            <div style="display: inline-table; width:2%; vertical-align:top;">
+                <label style="vertical-align:top;">:</label>
+            </div>
+            <div style="display: inline-table; width:50%; vertical-align:top;">
+                <label style="vertical-align:top;"><?php echo $invoice->remark; ?></label>
+            </div>
+        </div>
     <?php } ?>
-    <div style="margin-top:10px;">
-        <div style="display: inline-table; width:20%; vertical-align:top;">
-            <label style="vertical-align:top;">To</label>
+
+    <?php if ($invoice->no_kontrak) { ?>
+        <div style="margin-top:30px;">
+            <div style="display: inline-table; width:20%;vertical-align:top;">
+                <label style="vertical-align:top;">NO. KONTRAK</label>
+            </div>
+            <div style="display: inline-table; width:2%;">
+                <label style="vertical-align:top;">:</label>
+            </div>
+            <div style="display: inline-table;">
+                <label style="vertical-align:top;"><?php echo $invoice->no_kontrak; ?></label>
+            </div>
         </div>
-        <div style="display: inline-table; width:2%; vertical-align:top;">
-            <label style="vertical-align:top;">:</label>
+    <?php } ?>
+
+    <?php if ($invoice->id_komoditas == '2' || $invoice->id_komoditas == '4') { ?>
+        <div style="margin-top:30px;">
+            <div style="display: inline-table; width:20%;vertical-align:top;">
+                <label style="vertical-align:top;">NO. DO</label>
+            </div>
+            <div style="display: inline-table; width:2%;">
+                <label style="vertical-align:top;">:</label>
+            </div>
+            <div style="display: inline-table;">
+                <?php foreach ($project as $do) : ?>
+                    <label style="vertical-align:top;"><?php echo $do->no_do; ?></label>
+                <?php endforeach; ?>
+            </div>
         </div>
-        <div style="display: inline-table; width:50%; vertical-align:top;">
-            <label style="vertical-align:top;"><?php echo $invoice->nama_perusahaan; ?><br><?php echo $invoice->alamat; ?></label>
-        </div>
-    </div>
+    <?php } ?>
+
     <table class="table table-hover" style="width:100%; margin-top:50px;">
         <thead style="background-color: #EEE;">
             <tr style="border: 1px solid #111;">
                 <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:5%;">No</th>
-                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">No DO</th>
-                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:35%;">Description</th>
-                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:5%;">Qty</th>
-                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:20%;">Unit Price (IDR)</th>
-                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:25%;">Total Amount (IDR)</th>
+                <?php if ($invoice->id_komoditas == '1') { ?>
+                    <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">NO. STO</th>
+                    <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">NO. DO</th>
+                <?php } else { ?>
+                    <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">DESC</th>
+                <?php } ?>
+                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">QTY</th>
+                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">HARGA</th>
+                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:20%;">TOTAL</th>
             </tr>
         </thead>
         <tbody>
@@ -92,9 +128,13 @@
             ?>
                 <tr>
                     <td><?php echo $no; ?></td>
-                    <td><?php echo $row->no_do; ?></td>
-                    <td><?php echo $row->deskripsi; ?></td>
-                    <td><?php echo $row->qty; ?></td>
+                    <?php if ($invoice->id_komoditas == '1') { ?>
+                        <td><?php echo $row->no_sto; ?></td>
+                        <td><?php echo $row->no_do; ?></td>
+                    <?php } else { ?>
+                        <td><?php echo $row->deskripsi; ?></td>
+                    <?php } ?>
+                    <td><?php echo number_format($row->qty, 0, "", "."); ?> KG</td>
                     <td>Rp <?php echo number_format($row->harga_unit, 0, "", "."); ?></td>
                     <td>Rp <?php echo number_format($row->total, 0, "", "."); ?></td>
                 </tr>
