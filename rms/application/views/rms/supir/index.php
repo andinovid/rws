@@ -28,63 +28,134 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered table-striped data-table">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Telepon</th>
-                    <th>No KTP</th>
-                    <th>No SIM</th>
-                    <th>Kategori</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
+              <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="custom-content-above-home-tab" data-toggle="pill" href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home" aria-selected="true">Supir RWS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="custom-content-above-profile-tab" data-toggle="pill" href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile" aria-selected="false">Supir Vendor</a>
+                </li>
+              </ul>
+              <div class="tab-content pt-3" id="custom-content-above-tabContent">
+                <div class="tab-pane fade show active" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
+                  <table class="table table-bordered table-striped data-table">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Telepon</th>
+                        <th>No KTP</th>
+                        <th>No SIM</th>
+                        <th>Kategori</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
 
-                  <?php
-                  $no = 0;
-                  foreach ($supir as $row) :
-                    $no++;
-                  ?>
-                    <tr>
-                      <td><?php echo $no; ?></td>
-                      <td><?php echo $row->nama; ?></td>
-                      <td><?php echo $row->no_wa; ?></td>
-                      <td><?php echo $row->no_ktp; ?></td>
-                      <td><?php echo $row->no_sim; ?></td>
-                      <td><span class="badge <?php if ($row->kategori == '1') { ?>bg-success <?php } else { ?> bg-warning <?php } ?>"><?php if ($row->kategori == '1') { ?>Supir RWS <?php } else { ?> Supir Vendor <?php } ?></span></td>
+                      <?php
+                      $no = 0;
+                      foreach ($supir_rws as $row) :
+                        $no++;
+                      ?>
+                        <tr>
+                          <td><?php echo $no; ?></td>
+                          <td><?php echo $row->nama; ?></td>
+                          <td><?php echo $row->no_wa; ?></td>
+                          <td><?php echo $row->no_ktp; ?></td>
+                          <td><?php echo $row->no_sim; ?></td>
+                          <td><span class="badge <?php if ($row->kategori == '1') { ?>bg-success <?php } else { ?> bg-warning <?php } ?>"><?php if ($row->kategori == '1') { ?>Supir RWS <?php } else { ?> Supir Vendor <?php } ?></span></td>
 
 
-                      <td class="project-actions text-right">
-                        <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>supir/view/<?php echo $row->id; ?>" data-toggle="tooltip" data-placement="top" title="Detail supir">
-                          <i class="fas fa-folder">
-                          </i>
-                        </a>
-                        <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Edit supir">
-                          <i class="fas fa-pencil-alt">
-                          </i>
-                        </a>
-                        <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_truck(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus supir">
-                          <i class="fas fa-trash">
-                          </i>
-                        </a>
-                      </td>
-                    </tr>
-                  <?php endforeach; ?>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Telepon</th>
-                    <th>No KTP</th>
-                    <th>No SIM</th>
-                    <th>Kategori</th>
-                    <th></th>
-                  </tr>
-                </tfoot>
-              </table>
+                          <td class="project-actions text-right">
+                            <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>supir/view/<?php echo $row->id; ?>" data-toggle="tooltip" data-placement="top" title="Detail supir">
+                              <i class="fas fa-folder">
+                              </i>
+                            </a>
+                            <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Edit supir">
+                              <i class="fas fa-pencil-alt">
+                              </i>
+                            </a>
+                            <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_truck(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus supir">
+                              <i class="fas fa-trash">
+                              </i>
+                            </a>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Telepon</th>
+                        <th>No KTP</th>
+                        <th>No SIM</th>
+                        <th>Kategori</th>
+                        <th></th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <div class="tab-pane fade show" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
+                  <table class="table table-bordered table-striped data-table">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Telepon</th>
+                        <th>No KTP</th>
+                        <th>No SIM</th>
+                        <th>Kategori</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <?php
+                      $no = 0;
+                      foreach ($supir_vendor as $row) :
+                        $no++;
+                      ?>
+                        <tr>
+                          <td><?php echo $no; ?></td>
+                          <td><?php echo $row->nama; ?></td>
+                          <td><?php echo $row->no_wa; ?></td>
+                          <td><?php echo $row->no_ktp; ?></td>
+                          <td><?php echo $row->no_sim; ?></td>
+                          <td><span class="badge <?php if ($row->kategori == '1') { ?>bg-success <?php } else { ?> bg-warning <?php } ?>"><?php if ($row->kategori == '1') { ?>Supir RWS <?php } else { ?> Supir Vendor <?php } ?></span></td>
+
+
+                          <td class="project-actions text-right">
+                            <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>supir/view/<?php echo $row->id; ?>" data-toggle="tooltip" data-placement="top" title="Detail supir">
+                              <i class="fas fa-folder">
+                              </i>
+                            </a>
+                            <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Edit supir">
+                              <i class="fas fa-pencil-alt">
+                              </i>
+                            </a>
+                            <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_truck(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus supir">
+                              <i class="fas fa-trash">
+                              </i>
+                            </a>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Telepon</th>
+                        <th>No KTP</th>
+                        <th>No SIM</th>
+                        <th>Kategori</th>
+                        <th></th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
             </div>
             <!-- /.card-body -->
           </div>
@@ -121,6 +192,7 @@
                       <option value="2">Supir Vendor</option>
                     </select>
                   </div>
+                  
                   <div class="form-group">
                     <label for="no_wa">No Telepon</label>
                     <input type="text" class="form-control" id="no_wa" onkeyup="validate(this.id);" name="no_wa" placeholder="Input nomor telepon">

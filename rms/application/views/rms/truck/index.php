@@ -52,6 +52,7 @@
                         <th>Pajak Tahunan</th>
                         <th>Pajak 5 Tahunan</th>
                         <th>KIR</th>
+                        <th>Supir</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -69,7 +70,13 @@
                           <td><img src="<?php echo base_url(); ?>assets/rms/dist/img/dashboard2.png" width="25" class="mr-2" style="margin-top: -3px;"><?php echo number_format($row->oddo_terakhir, 0, "", "."); ?> KM</td>
                           <td class="project_progress">
                             <div class="progress progress-sm">
-                              <div class="progress-bar <?php if($row->persentase_penggunaan_oli_mesin > '90'){echo 'bg-danger';}elseif($row->persentase_penggunaan_oli_mesin > '80' AND $row->persentase_penggunaan_oli_mesin < '90'){echo 'bg-warning';}else{echo 'bg-green';} ?>" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_mesin; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_mesin; ?>%">
+                              <div class="progress-bar <?php if ($row->persentase_penggunaan_oli_mesin > '90') {
+                                                          echo 'bg-danger';
+                                                        } elseif ($row->persentase_penggunaan_oli_mesin > '80' and $row->persentase_penggunaan_oli_mesin < '90') {
+                                                          echo 'bg-warning';
+                                                        } else {
+                                                          echo 'bg-green';
+                                                        } ?>" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_mesin; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_mesin; ?>%">
                               </div>
                             </div>
                             <small>
@@ -78,7 +85,13 @@
                           </td>
                           <td class="project_progress">
                             <div class="progress progress-sm">
-                              <div class="progress-bar <?php if($row->persentase_penggunaan_oli_gardan > '90'){echo 'bg-danger';}elseif($row->persentase_penggunaan_oli_gardan > '80' AND $row->persentase_penggunaan_oli_gardan < '90'){echo 'bg-warning';}else{echo 'bg-green';} ?>" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_gardan; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_gardan; ?>%">
+                              <div class="progress-bar <?php if ($row->persentase_penggunaan_oli_gardan > '90') {
+                                                          echo 'bg-danger';
+                                                        } elseif ($row->persentase_penggunaan_oli_gardan > '80' and $row->persentase_penggunaan_oli_gardan < '90') {
+                                                          echo 'bg-warning';
+                                                        } else {
+                                                          echo 'bg-green';
+                                                        } ?>" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_gardan; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_gardan; ?>%">
                               </div>
                             </div>
                             <small>
@@ -87,7 +100,13 @@
                           </td>
                           <td class="project_progress">
                             <div class="progress progress-sm">
-                              <div class="progress-bar <?php if($row->persentase_penggunaan_oli_transmisi > '90'){echo 'bg-danger';}elseif($row->persentase_penggunaan_oli_transmisi > '80' AND $row->persentase_penggunaan_oli_transmisi < '90'){echo 'bg-warning';}else{echo 'bg-green';} ?>" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_transmisi; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_transmisi; ?>%">
+                              <div class="progress-bar <?php if ($row->persentase_penggunaan_oli_transmisi > '90') {
+                                                          echo 'bg-danger';
+                                                        } elseif ($row->persentase_penggunaan_oli_transmisi > '80' and $row->persentase_penggunaan_oli_transmisi < '90') {
+                                                          echo 'bg-warning';
+                                                        } else {
+                                                          echo 'bg-green';
+                                                        } ?>" role="progressbar" aria-valuenow="<?php echo $row->persentase_penggunaan_oli_transmisi; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $row->persentase_penggunaan_oli_transmisi; ?>%">
                               </div>
                             </div>
                             <small>
@@ -99,7 +118,13 @@
                           <td>
                             <?php if ($row->sisa_hari_pajak_tahunan > 0) { ?>
                               <?php echo shortdate_indo($row->pajak_tahunan); ?><br>
-                              <small class="badge <?php if ($row->sisa_hari_pajak_tahunan > 0 AND $row->sisa_hari_pajak_tahunan < '30') { echo 'badge-danger'; }elseif ($row->sisa_hari_pajak_tahunan >= '30' AND $row->sisa_hari_pajak_tahunan < '60') { echo 'badge-warning'; }else{echo 'badge-success';} ?>"> Sisa
+                              <small class="badge <?php if ($row->sisa_hari_pajak_tahunan > 0 and $row->sisa_hari_pajak_tahunan < '30') {
+                                                    echo 'badge-danger';
+                                                  } elseif ($row->sisa_hari_pajak_tahunan >= '30' and $row->sisa_hari_pajak_tahunan < '60') {
+                                                    echo 'badge-warning';
+                                                  } else {
+                                                    echo 'badge-success';
+                                                  } ?>"> Sisa
                                 <?php
                                 $days = $row->sisa_hari_pajak_tahunan;
                                 $start_date = new DateTime();
@@ -132,7 +157,13 @@
                           <td>
                             <?php if ($row->sisa_hari_pajak_5_tahunan > 0) { ?>
                               <?php echo shortdate_indo($row->pajak_5_tahunan); ?><br>
-                              <small class="badge <?php if ($row->sisa_hari_pajak_5_tahunan > 0 AND $row->sisa_hari_pajak_5_tahunan < '30') { echo 'badge-danger'; }elseif ($row->sisa_hari_pajak_5_tahunan >= '30' AND $row->sisa_hari_pajak_5_tahunan < '60') { echo 'badge-warning'; }else{echo 'badge-success';} ?>">Sisa
+                              <small class="badge <?php if ($row->sisa_hari_pajak_5_tahunan > 0 and $row->sisa_hari_pajak_5_tahunan < '30') {
+                                                    echo 'badge-danger';
+                                                  } elseif ($row->sisa_hari_pajak_5_tahunan >= '30' and $row->sisa_hari_pajak_5_tahunan < '60') {
+                                                    echo 'badge-warning';
+                                                  } else {
+                                                    echo 'badge-success';
+                                                  } ?>">Sisa
                                 <?php
                                 $days = $row->sisa_hari_pajak_5_tahunan;
                                 $start_date = new DateTime();
@@ -165,7 +196,13 @@
                           <td>
                             <?php if ($row->sisa_hari_kir > 0) { ?>
                               <?php echo shortdate_indo($row->kir_selanjutnya); ?><br>
-                              <small class="badge <?php if ($row->sisa_hari_kir > 0 AND $row->sisa_hari_kir < '7') { echo 'badge-danger'; }elseif ($row->sisa_hari_kir >= '7' AND $row->sisa_hari_kir < '30') { echo 'badge-warning'; }else{echo 'badge-success';} ?>">Sisa
+                              <small class="badge <?php if ($row->sisa_hari_kir > 0 and $row->sisa_hari_kir < '7') {
+                                                    echo 'badge-danger';
+                                                  } elseif ($row->sisa_hari_kir >= '7' and $row->sisa_hari_kir < '30') {
+                                                    echo 'badge-warning';
+                                                  } else {
+                                                    echo 'badge-success';
+                                                  } ?>">Sisa
                                 <?php
                                 $days = $row->sisa_hari_kir;
                                 $start_date = new DateTime();
@@ -194,6 +231,7 @@
                               echo "-";
                             } ?>
                           </td>
+                          <td><?php echo $row->nama_supir; ?></td>
 
                           <td class="project-actions text-right">
                             <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>truck/view/<?php echo $row->id_truck; ?>" data-toggle="tooltip" data-placement="top" title="Detail Truk">
@@ -224,6 +262,7 @@
                         <th>Pajak Tahunan</th>
                         <th>Pajak 5 Tahunan</th>
                         <th>KIR</th>
+                        <th>Supir</th>
                         <th></th>
                       </tr>
                     </tfoot>
@@ -245,7 +284,7 @@
                       $no = 0;
                       foreach ($truck_vendor as $row) :
                         $no++;
-                      ?> 
+                      ?>
                         <tr>
                           <td><?php echo $no; ?></td>
                           <td><?php echo $row->nopol; ?></td>
@@ -319,7 +358,16 @@
 
                 <div class="row">
                   <div class="col-md-6">
-
+                    <div class="form-group">
+                      <label>Supir</label>
+                      <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
+                        <option value="0">Pilih supir</option>
+                        <?php foreach ($supir as $row) : ?>
+                          <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
+                        <?php endforeach; ?>
+                      </select>
+                      <input type="hidden" class="form-control" id="nama_supir" name="nama_supir">
+                    </div>
                     <div class="form-group">
                       <label for="kategori">Jenis Truk</label>
                       <select id="jenis_truck" class="form-control" name="jenis_truck">
@@ -511,7 +559,8 @@
             $('#kategori-1').show();
             $('#kategori-2').hide();
             $('[name="cicilan"]').val($.number(data[i].cicilan).replace(/\,/g, '.'));
-          $('[name="jenis_truck"]').val(data[i].jenis_truck).change();
+            $('[name="jenis_truck"]').val(data[i].jenis_truck).change();
+            $('[name="supir"]').val(data[i].id_supir).change();
             $('[name="nomor_rangka"]').val(data[i].nomor_rangka);
             $('[name="nomor_mesin"]').val(data[i].nomor_mesin);
             $('[name="pajak_tahunan"]').val(data[i].pajak_tahunan);

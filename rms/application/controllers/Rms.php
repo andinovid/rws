@@ -67,14 +67,19 @@ class Rms extends CI_Controller
 
     function dashboard()
     {
-
+        if ($this->sess->role == '5') {
+            $id_supir = $this->sess->id_supir;
+            $data['truck'] = $this->rms_model->get("v_truck", "WHERE id_supir = '$id_supir'")->row();
+        } else {
+            $data['all_project'] = $this->rms_model->get("v_project")->num_rows();
+            $data['project_on_progress'] = $this->rms_model->get("v_project", "WHERE status = '0' OR status = '1'")->num_rows();
+            $data['project_complete'] = $this->rms_model->get("v_project", "WHERE status = '2'")->num_rows();
+            $data['saldo'] = $this->rms_model->get_by_query("SELECT SUM(jumlah) as total FROM tbl_keuangan")->row();
+            $data['project_on_progress_list'] = $this->rms_model->get("v_project", "WHERE (status = '0' OR status = '1') AND total_terkirim > 0 LIMIT 8")->result();
+            $data['truck'] = $this->rms_model->get("v_truck", "WHERE kategori = '1' LIMIT 8")->result();
+        }
+        
         $data['content'] = 'rms/dashboard/dashboard';
-        $data['all_project'] = $this->rms_model->get("v_project")->num_rows();
-        $data['project_on_progress'] = $this->rms_model->get("v_project", "WHERE status = '0' OR status = '1'")->num_rows();
-        $data['project_complete'] = $this->rms_model->get("v_project", "WHERE status = '2'")->num_rows();
-        $data['saldo'] = $this->rms_model->get_by_query("SELECT SUM(jumlah) as total FROM tbl_keuangan")->row();
-        $data['project_on_progress_list'] = $this->rms_model->get("v_project", "WHERE (status = '0' OR status = '1') AND total_terkirim > 0 LIMIT 8")->result();
-        $data['truck'] = $this->rms_model->get("v_truck", "WHERE kategori = '1' LIMIT 8")->result();
         $this->load->view('rms/includes/template', $data);
     }
 
@@ -417,6 +422,7 @@ class Rms extends CI_Controller
         $data['truck_rws'] = $this->rms_model->get("v_truck", "WHERE kategori = '1'")->result();
         $data['truck_vendor'] = $this->rms_model->get("v_truck", "WHERE kategori = '2'")->result();
         $data['vendor'] = $this->rms_model->get("tbl_vendor_truck")->result();
+        $data['supir'] = $this->rms_model->get("tbl_supir")->result();
         $data['content'] = 'rms/truck/index';
         $this->load->view('rms/includes/template', $data);
     }
@@ -490,6 +496,11 @@ class Rms extends CI_Controller
         } else {
             $jenis_truck = "";
         }
+        if (isset($_POST['supir'])) {
+            $supir = $this->input->POST('supir');
+        } else {
+            $supir = "";
+        }
         if (isset($_POST['nomor_rangka'])) {
             $nomor_rangka = $this->input->POST('nomor_rangka');
         } else {
@@ -553,6 +564,7 @@ class Rms extends CI_Controller
             'id_vendor' => $vendor,
             'cicilan' => str_replace('.', '', $cicilan),
             'jenis_truck' => $jenis_truck,
+            'id_supir' => $supir,
             'nomor_rangka' => $nomor_rangka,
             'nomor_mesin' => $nomor_mesin,
             'kir_terakhir' => $kir_terakhir,
@@ -892,7 +904,9 @@ class Rms extends CI_Controller
 
     function supir()
     {
-        $data['supir'] = $this->rms_model->get("tbl_supir")->result();
+        $data['supir_rws'] = $this->rms_model->get("tbl_supir", "kategori = '1'")->result();
+        $data['supir_vendor'] = $this->rms_model->get("tbl_supir", "WHERE kategori = '2'")->result();
+        $data['truck'] = $this->rms_model->get("tbl_truck", "WHERE kategori = '1'")->result();
         $data['content'] = 'rms/supir/index';
         $this->load->view('rms/includes/template', $data);
     }
@@ -1511,7 +1525,7 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0);
         // Proses file excel
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="kwitansi_'.$detail_kwitansi->vendor.'.xlsx"'); // Set nama file excel nya
+        header('Content-Disposition: attachment; filename="kwitansi_' . $detail_kwitansi->vendor . '.xlsx"'); // Set nama file excel nya
         header('Cache-Control: max-age=0');
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');
@@ -1808,7 +1822,7 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0);
         // Proses file excel
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="kwitansi_'.$detail_kwitansi->vendor.'.xlsx"'); // Set nama file excel nya
+        header('Content-Disposition: attachment; filename="kwitansi_' . $detail_kwitansi->vendor . '.xlsx"'); // Set nama file excel nya
         header('Cache-Control: max-age=0');
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');

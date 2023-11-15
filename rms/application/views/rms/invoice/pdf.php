@@ -144,6 +144,7 @@
                     <td>Rp <?php echo number_format($row->harga_unit, 0, "", "."); ?></td>
                     <td>Rp <?php echo number_format($row->total, 0, "", "."); ?></td>
                 </tr>
+                <?php if ($invoice->id_komoditas != '2') { ?>
                 <tr>
                     <td></td>
                     <?php if ($invoice->id_komoditas == '1') { ?>
@@ -155,6 +156,7 @@
                     <td></td>
                     <td>Rp <?php echo number_format($row->total_biaya_susut, 0, "", "."); ?></td>
                 </tr>
+                <?php } ?>
             <?php endforeach; ?>
             <tr style="border: none;">
                 <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>

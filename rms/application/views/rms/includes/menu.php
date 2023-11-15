@@ -19,6 +19,7 @@
     </div>
 
     <!-- SidebarSearch Form -->
+    <?php if ($this->sess->role != '5') { ?>
     <div class="form-inline">
       <div class="input-group" data-widget="sidebar-search">
         <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -29,11 +30,40 @@
         </div>
       </div>
     </div>
+    <?php } ?>
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
+      <?php if ($this->sess->role == '5') { ?>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>dashboard/" class="nav-link <?php if ($this->uri->segment(2) == "dashboard") { ?>active <?php } ?>">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>update_truck/" class="nav-link <?php if ($this->uri->segment(1) == "update_truck") { ?>active <?php } ?>">
+              <i class="nav-icon fas fa-truck"></i>
+              <p>
+                Update Truk
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>bbm/" class="nav-link <?php if ($this->uri->segment(1) == "bbm") { ?>active <?php } ?>">
+              <i class="nav-icon fas fa-gas-pump"></i>
+              <p>
+                Riwayat BBM
+              </p>
+            </a>
+          </li>
+        </ul>
+      <?php } else { ?>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>dashboard/" class="nav-link <?php if ($this->uri->segment(2) == "dashboard") { ?>active <?php } ?>">
@@ -220,7 +250,8 @@
               </p>
             </a>
           </li>
-      </ul>
+        </ul>
+      <?php } ?>
     </nav>
     <!-- /.sidebar-menu -->
   </div>
