@@ -305,6 +305,16 @@ class Rms extends CI_Controller
         }
     }
 
+    
+    public function delete_perbaikan()
+    {
+        $id = $this->input->POST('id');
+        $delete = $this->rms_model->delete_perbaikan($id);
+        if ($delete) {
+            echo json_encode(array("status" => TRUE));
+        }
+    }
+
     public function save_project()
     {
         $id = $this->input->POST('id');
@@ -1119,7 +1129,7 @@ class Rms extends CI_Controller
 
     function keuangan()
     {
-        $data['keuangan'] = $this->rms_model->get("tbl_keuangan", "ORDER BY tanggal DESC")->result();
+        $data['keuangan'] = $this->rms_model->get("tbl_keuangan", "ORDER BY tanggal_input DESC")->result();
         $data['saldo'] = $this->rms_model->get_by_query("SELECT SUM(CASE WHEN jenis = '1' THEN jumlah ELSE 0 END) -  SUM(CASE WHEN jenis = '2' THEN jumlah ELSE 0 END) as total FROM tbl_keuangan")->row();
         $data['content'] = 'rms/keuangan/index';
         $this->load->view('rms/includes/template', $data);
@@ -1134,11 +1144,6 @@ class Rms extends CI_Controller
         $keterangan = $this->input->POST('keterangan');
         $tanggal = $this->input->POST('tanggal');
 
-        if ($jenis == '2') {
-            $jumlah = '-' . $jumlah;
-        } else {
-            $jumlah = $jumlah;
-        }
 
         $data = array(
             'tanggal' => $tanggal,
@@ -1146,8 +1151,6 @@ class Rms extends CI_Controller
             'jenis' => $jenis,
             'keterangan' => $keterangan,
         );
-
-
 
         if ($id == "") {
             $save = $this->rms_model->insert("tbl_keuangan", $data);

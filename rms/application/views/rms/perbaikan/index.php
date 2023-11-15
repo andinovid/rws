@@ -304,8 +304,8 @@
         if (data.status = "true") {
           Swal.fire({
             icon: 'success',
-            title: "Success!",
-            text: "Schedule has been saved.",
+            title: "Berhasil!",
+            text: "Data berhasil disimpan.",
             type: "success"
           }).then((result) => {
             location.reload();
@@ -357,27 +357,26 @@
 
   function delete_perbaikan(id) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Hapus data?',
+      text: "Setelah data dihapus, data tidak dapat kembali!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Ya, hapus!'
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
-          url: "<?php echo base_url() ?>rms/delete",
+          url: "<?php echo base_url() ?>rms/delete_perbaikan",
           type: "POST",
           data: {
             id: id,
-            tbl: "tbl_perbaikan",
           },
           dataType: "JSON",
           success: function(data) {
             Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
+              'Berhasil!',
+              'Data perbaikan berhasil dihapus.',
               'success'
             ).then((result) => {
               location.reload();
@@ -450,8 +449,8 @@
             },
             success: function(data) {
               Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
+                'Berhasil!',
+                'Data berhasil dihapus.',
                 'success'
               ).then((result) => {
                 load_data_sparepart_perbaikan(id_perbaikan);

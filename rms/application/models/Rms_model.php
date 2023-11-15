@@ -104,12 +104,22 @@ class Rms_model extends CI_Model
         $this->db->delete($tbl);
         return TRUE;
     }
+    function delete_perbaikan($id)
+    {
+        $this->db->delete('tbl_perbaikan', array('id' => $id));
+        $this->db->delete('tbl_keuangan', array('id_perbaikan' => $id));
+        return TRUE;
+    }
+
+
+    
     function delete_project($id)
     {
-        $this->db->delete('tbl_project', array('id' => $id));
+        $this->db->delete('tbl_perbaikan', array('id' => $id));
         $this->db->delete('tbl_rekap', array('id_project' => $id));
         return TRUE;
     }
+
     function delete_truck($id)
     {
         $this->db->delete('tbl_truck', array('id' => $id));
