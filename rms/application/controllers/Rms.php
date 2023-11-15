@@ -1119,7 +1119,7 @@ class Rms extends CI_Controller
 
     function keuangan()
     {
-        $data['keuangan'] = $this->rms_model->get("tbl_keuangan")->result();
+        $data['keuangan'] = $this->rms_model->get("tbl_keuangan", "ORDER BY tanggal DESC")->result();
         $data['saldo'] = $this->rms_model->get_by_query("SELECT SUM(CASE WHEN jenis = '1' THEN jumlah ELSE 0 END) -  SUM(CASE WHEN jenis = '2' THEN jumlah ELSE 0 END) as total FROM tbl_keuangan")->row();
         $data['content'] = 'rms/keuangan/index';
         $this->load->view('rms/includes/template', $data);
