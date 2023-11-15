@@ -241,17 +241,31 @@
                     <th rowspan="2" class="text-center align-middle">Supir</th>
                     <th rowspan="2" class="text-center align-middle">Nopol</th>
                     <th rowspan="2" class="text-center align-middle">Tujuan</th>
-                    <th colspan="2" class="text-center align-middle">Qty Awal</th>
-                    <th colspan="2" class="text-center align-middle">Qty Akhir</th>
+                    <?php if ($project->id_klien == '6') { ?>
+                      <th colspan="3" class="text-center align-middle">Qty Awal</th>
+                      <th colspan="3" class="text-center align-middle">Qty Akhir</th>
+                    <?php } else { ?>
+                      <th colspan="2" class="text-center align-middle">Qty Awal</th>
+                      <th colspan="2" class="text-center align-middle">Qty Akhir</th>
+                    <?php } ?>
                     <th colspan="2" class="text-center align-middle">Susut</th>
                     <th rowspan="2" class="text-center align-middle">Status</th>
                     <th rowspan="2" class="text-center align-middle">Action</th>
                   </tr>
                   <tr>
-                    <th class="text-center align-middle">Bag</th>
-                    <th class="text-center align-middle">Kg</th>
-                    <th class="text-center align-middle">Bag</th>
-                    <th class="text-center align-middle">Kg</th>
+                    <?php if ($project->id_klien == '6') { ?>
+                      <th class="text-center align-middle">Bruto</th>
+                      <th class="text-center align-middle">Tarra</th>
+                      <th class="text-center align-middle">Netto</th>
+                      <th class="text-center align-middle">Bruto</th>
+                      <th class="text-center align-middle">Tarra</th>
+                      <th class="text-center align-middle">Netto</th>
+                    <?php } else { ?>
+                      <th class="text-center align-middle">Bag</th>
+                      <th class="text-center align-middle">Kg</th>
+                      <th class="text-center align-middle">Bag</th>
+                      <th class="text-center align-middle">Kg</th>
+                    <?php } ?>
                     <th class="text-center align-middle">M</th>
                     <th class="text-center align-middle">C</th>
                   </tr>
@@ -272,26 +286,60 @@
                       <td><?php echo $row->nama_supir; ?></td>
                       <td><?php echo $row->nopol; ?></td>
                       <td><?php echo $row->nama_tujuan; ?></td>
-                      <td><?php if ($row->timbang_kebun_bag != NULL) {
-                            echo number_format($row->timbang_kebun_bag, 0, "", ".");
-                          } else {
-                            echo "0";
-                          }  ?></td>
-                      <td><?php if ($row->timbang_kebun_kg != NULL) {
-                            echo number_format($row->timbang_kebun_kg, 0, "", ".");
-                          } else {
-                            echo "0";
-                          }  ?> Kg</td>
-                      <td><?php if ($row->qty_kirim_bag != NULL) {
-                            echo number_format($row->qty_kirim_bag, 0, "", ".");
-                          } else {
-                            echo "0";
-                          }  ?></td>
-                      <td><?php if ($row->qty_kirim_kg != NULL) {
-                            echo number_format($row->qty_kirim_kg, 0, "", ".");
-                          } else {
-                            echo "0";
-                          }  ?> Kg</td>
+                      <?php if ($project->id_klien == '6') { ?>
+                        <td><?php if ($row->bruto_awal != NULL) {
+                              echo number_format($row->bruto_awal, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?> Kg</td>
+                        <td><?php if ($row->tarra_awal != NULL) {
+                              echo number_format($row->tarra_awal, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?> Kg</td>
+                        <td><?php if ($row->timbang_kebun_kg != NULL) {
+                              echo number_format($row->timbang_kebun_kg, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?></td>
+
+                        <td><?php if ($row->bruto_akhir != NULL) {
+                              echo number_format($row->bruto_akhir, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?> Kg</td>
+                        <td><?php if ($row->tarra_akhir != NULL) {
+                              echo number_format($row->tarra_akhir, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?> Kg</td>
+                        <td><?php if ($row->qty_kirim_kg != NULL) {
+                              echo number_format($row->qty_kirim_kg, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?></td>
+                      <?php } else { ?>
+                        <td><?php if ($row->timbang_kebun_bag != NULL) {
+                              echo number_format($row->timbang_kebun_bag, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?></td>
+                        <td><?php if ($row->timbang_kebun_kg != NULL) {
+                              echo number_format($row->timbang_kebun_kg, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?> Kg</td>
+                        <td><?php if ($row->qty_kirim_bag != NULL) {
+                              echo number_format($row->qty_kirim_bag, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?></td>
+                        <td><?php if ($row->qty_kirim_kg != NULL) {
+                              echo number_format($row->qty_kirim_kg, 0, "", ".");
+                            } else {
+                              echo "0";
+                            }  ?> Kg</td>
+                      <?php } ?>
                       <td><?php if ($row->m_susut != NULL) {
                             echo number_format($row->m_susut, 0, "", ".");
                           } else {
@@ -537,23 +585,57 @@
                   <div class="form-group">
                     <label for="no_replas">Qty Awal</label>
                     <div class="row">
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" name="timbang_kebun_bag" id="timbang_kebun_bag" placeholder="Bag">
-                      </div>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control number" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Kg">
-                      </div>
+                      <?php if ($project->id_klien == '6') { ?>
+                        <div class="col-md-4">
+                        <label for="no_replas">Bruto Awal</label>
+                          <input type="text" class="form-control number" name="bruto_awal" id="bruto_awal" placeholder="Bruto awal (kg)">
+                        </div>
+                        <div class="col-md-4">
+                        <label for="no_replas">Tarra Awal</label>
+                          <input type="text" class="form-control number" name="tarra_awal" id="tarra_awal" placeholder="Tarra awal (kg)">
+                        </div>
+                        <div class="col-md-4">
+                        <label for="no_replas">Netto Awal</label>
+                          <input type="text" class="form-control number" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Netto (kg)">
+                        </div>
+                      <?php } else { ?>
+                        <div class="col-md-6">
+                        <label for="no_replas">Bag</label>
+                          <input type="text" class="form-control" name="timbang_kebun_bag" id="timbang_kebun_bag" placeholder="Bag">
+                        </div>
+                        <div class="col-md-6">
+                        <label for="no_replas">Kg</label>
+                          <input type="text" class="form-control number" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Kg">
+                        </div>
+                      <?php } ?>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="no_replas">Qty Akhir</label>
                     <div class="row">
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Bag" name="qty_kirim_bag" id="qty_kirim_bag">
-                      </div>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control number" placeholder="Kg" name="qty_kirim_kg" id="qty_kirim_kg">
-                      </div>
+                      <?php if ($project->id_klien == '6') { ?>
+                        <div class="col-md-4">
+                        <label for="no_replas">Bruto Akhir</label>
+                          <input type="text" class="form-control number" name="bruto_akhir" id="bruto_akhir" placeholder="Bruto akhir (kg)">
+                        </div>
+                        <div class="col-md-4">
+                        <label for="no_replas">Tarra Akhir</label>
+                          <input type="text" class="form-control number" name="tarra_akhir" id="tarra_akhir" placeholder="Tarra akhir (kg)">
+                        </div>
+                        <div class="col-md-4">
+                        <label for="no_replas">Netto Akhir</label>
+                          <input type="text" class="form-control number" placeholder="Netto (kg)" name="qty_kirim_kg" id="qty_kirim_kg">
+                        </div>
+                      <?php } else { ?>
+                        <div class="col-md-6">
+                        <label for="no_replas">Bag</label>
+                          <input type="text" class="form-control" placeholder="Bag" name="qty_kirim_bag" id="qty_kirim_bag">
+                        </div>
+                        <div class="col-md-6">
+                        <label for="no_replas">Kg</label>
+                          <input type="text" class="form-control number" placeholder="Kg" name="qty_kirim_kg" id="qty_kirim_kg">
+                        </div>
+                      <?php } ?>
                     </div>
                   </div>
                   <div class="form-group">
@@ -890,6 +972,10 @@
           $('[name="supir"]').val(data[i].id_supir).change();
           $('[name="truck"]').val(data[i].id_truck).change();
           $('[name="tujuan"]').val(data[i].id_tujuan).change();
+          $('[name="bruto_awal"]').val($.number(data[i].bruto_awal).replace(/\,/g, '.'));
+          $('[name="tarra_awal"]').val($.number(data[i].tarra_awal).replace(/\,/g, '.'));
+          $('[name="bruto_akhir"]').val($.number(data[i].bruto_akhir).replace(/\,/g, '.'));
+          $('[name="tarra_akhir"]').val($.number(data[i].tarra_akhir).replace(/\,/g, '.'));
           $('[name="qty_kirim_bag"]').val(data[i].qty_kirim_bag);
           $('[name="qty_kirim_kg"]').val($.number(data[i].qty_kirim_kg).replace(/\,/g, '.'));
           $('[name="timbang_kebun_bag"]').val(data[i].timbang_kebun_bag);

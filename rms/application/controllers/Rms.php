@@ -186,6 +186,27 @@ class Rms extends CI_Controller
             $id_project = NULL;
         }
 
+        if ($this->input->POST('bruto_awal')) {
+            $bruto_awal = $this->input->POST('bruto_awal');
+        } else {
+            $bruto_awal = NULL;
+        }
+        if ($this->input->POST('tarra_awal')) {
+            $tarra_awal = $this->input->POST('tarra_awal');
+        } else {
+            $tarra_awal = NULL;
+        }
+        if ($this->input->POST('bruto_akhir')) {
+            $bruto_akhir = $this->input->POST('bruto_akhir');
+        } else {
+            $bruto_akhir = NULL;
+        }
+        if ($this->input->POST('tarra_akhir')) {
+            $tarra_akhir = $this->input->POST('tarra_akhir');
+        } else {
+            $tarra_akhir = NULL;
+        }
+
         $tanggal_bongkar = $this->input->POST('tanggal_bongkar');
         $supir = $this->input->POST('supir');
         $truck = $this->input->POST('truck');
@@ -207,6 +228,10 @@ class Rms extends CI_Controller
             'id_truck' => $truck,
             'id_vendor_pajak' => $vendor_pajak,
             'id_tujuan' => $tujuan,
+            'bruto_awal' => str_replace('.', '', $bruto_awal),
+            'tarra_awal' => str_replace('.', '', $tarra_awal),
+            'bruto_akhir' => str_replace('.', '', $bruto_akhir),
+            'tarra_akhir' => str_replace('.', '', $tarra_akhir),
             'qty_kirim_bag' => $qty_kirim_bag,
             'qty_kirim_kg' => str_replace('.', '', $qty_kirim_kg),
             'timbang_kebun_bag' => $timbang_kebun_bag,
