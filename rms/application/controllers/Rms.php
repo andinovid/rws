@@ -696,20 +696,22 @@ class Rms extends CI_Controller
             );
         }
 
-        if ($status == '1') {
-            $data_keuangan = array(
-                'jenis' => '2',
-                'keterangan' => 'BAYAR NOTA ' . $nama_supir . ' - ' . $nopol,
-                'jumlah' => str_replace('.', '', $jumlah),
-                'tanggal' => date('Y-m-d'),
-            );
-            $this->rms_model->insert("tbl_keuangan", $data_keuangan);
-        }
+        
 
 
 
         if ($id == "") {
-            $save = $this->rms_model->insert("tbl_perbaikan", $data_array);
+            $save = $this->rms_model->insert_id("tbl_perbaikan", $data_array);
+            if ($status == '1') {
+                $data_keuangan = array(
+                    'jenis' => '2',
+                    'keterangan' => 'BAYAR NOTA ' . $nama_supir . ' - ' . $nopol,
+                    'jumlah' => str_replace('.', '', $jumlah),
+                    'tanggal' => date('Y-m-d'),
+                    'id_perbaikan' => $save,
+                );
+                $this->rms_model->insert("tbl_keuangan", $data_keuangan);
+            }
             if ($save) {
                 echo json_encode(array(
                     "status" => TRUE,
@@ -1118,7 +1120,7 @@ class Rms extends CI_Controller
     function keuangan()
     {
         $data['keuangan'] = $this->rms_model->get("tbl_keuangan")->result();
-        $data['saldo'] = $this->rms_model->get_by_query("SELECT SUM(jumlah) as total FROM tbl_keuangan")->row();
+        $data['saldo'] = $this->rms_model->get_by_query("SELECT SUM(CASE WHEN jenis = '1' THEN jumlah ELSE 0 END) -  SUM(CASE WHEN jenis = '2' THEN jumlah ELSE 0 END) as total FROM tbl_keuangan")->row();
         $data['content'] = 'rms/keuangan/index';
         $this->load->view('rms/includes/template', $data);
     }

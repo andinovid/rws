@@ -83,6 +83,12 @@ class Rms_model extends CI_Model
         return $this->db->insert($table, $data);
     }
 
+    public function insert_id($table, $data)
+    {
+        $this->db->insert($table, $data);
+        return $this->db->insert_id();
+    }
+
     public function update_data($table, $data, $param)
     {
         $return = FALSE;
