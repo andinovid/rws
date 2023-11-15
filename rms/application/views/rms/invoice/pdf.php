@@ -22,13 +22,14 @@
         }
 
         tr,
-        td,th {
+        td,
+        th {
             border: 1px solid #111;
             padding: 0px;
             border-spacing: 0px;
             padding-top: 2px !important;
             padding-bottom: 2px !important;
-            border-spacing:0;
+            border-spacing: 0;
         }
     </style>
 </head>
@@ -140,22 +141,28 @@
                     <?php } else { ?>
                         <td><?php echo $row->deskripsi; ?></td>
                     <?php } ?>
-                    <td><?php echo number_format($row->qty, 0, "", "."); ?> KG</td>
+                    <?php if ($invoice->id_komoditas == '2') { ?>
+                        <td><?php echo number_format($row->total_qty_akhir, 0, "", "."); ?> KG</td>
+                    <?php } elseif ($invoice->id_komoditas == '3' || $invoice->id_komoditas == '4') { ?>
+                        <td><?php echo number_format($row->total_qty_terendah, 0, "", "."); ?> KG</td>
+                    <?php } else { ?>
+                        <td><?php echo number_format($row->qty, 0, "", "."); ?> KG</td>
+                    <?php } ?>
                     <td>Rp <?php echo number_format($row->harga_unit, 0, "", "."); ?></td>
                     <td>Rp <?php echo number_format($row->total, 0, "", "."); ?></td>
                 </tr>
                 <?php if ($invoice->id_komoditas != '2') { ?>
-                <tr>
-                    <td></td>
-                    <?php if ($invoice->id_komoditas == '1') { ?>
-                        <td colspan="3">Potongan Claim Susut</td>
-                    <?php } else { ?>
-                        <td colspan="2">Potongan Claim Susut</td>
-                    <?php } ?>
+                    <tr>
+                        <td></td>
+                        <?php if ($invoice->id_komoditas == '1') { ?>
+                            <td colspan="3">Potongan Claim Susut</td>
+                        <?php } else { ?>
+                            <td colspan="2">Potongan Claim Susut</td>
+                        <?php } ?>
 
-                    <td></td>
-                    <td>Rp <?php echo number_format($row->total_biaya_susut, 0, "", "."); ?></td>
-                </tr>
+                        <td></td>
+                        <td>Rp <?php echo number_format($row->total_biaya_susut, 0, "", "."); ?></td>
+                    </tr>
                 <?php } ?>
             <?php endforeach; ?>
             <tr style="border: none;">
@@ -163,19 +170,19 @@
                 <td style="text-align:right;">Total</td>
                 <td>Rp <?php echo number_format($invoice->total, 0, "", "."); ?></td>
             </tr>
-            <?php if($invoice->$total_pph !='0'){ ?>
-            <tr style="border: none;">
-                <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
-                <td style="text-align:right;">PPh <?php echo $invoice->$pph; ?> %</td>
-                <td>Rp <?php echo number_format($invoice->total_pph, 0, "", "."); ?></td>
-            </tr>
+            <?php if ($invoice->$total_pph != '0') { ?>
+                <tr style="border: none;">
+                    <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
+                    <td style="text-align:right;">PPh <?php echo $invoice->$pph; ?> %</td>
+                    <td>Rp <?php echo number_format($invoice->total_pph, 0, "", "."); ?></td>
+                </tr>
             <?php } ?>
-            <?php if($invoice->$total_ppn !='0'){ ?>
-            <tr style="border: none;">
-                <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
-                <td style="text-align:right;">PPn <?php echo $invoice->$ppn; ?> %</td>
-                <td>Rp <?php echo number_format($invoice->total_ppn, 0, "", "."); ?></td>
-            </tr>
+            <?php if ($invoice->$total_ppn != '0') { ?>
+                <tr style="border: none;">
+                    <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
+                    <td style="text-align:right;">PPn <?php echo $invoice->$ppn; ?> %</td>
+                    <td>Rp <?php echo number_format($invoice->total_ppn, 0, "", "."); ?></td>
+                </tr>
             <?php } ?>
             <tr style="border: none;">
                 <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
