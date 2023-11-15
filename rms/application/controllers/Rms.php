@@ -904,7 +904,7 @@ class Rms extends CI_Controller
 
     function supir()
     {
-        $data['supir_rws'] = $this->rms_model->get("tbl_supir", "kategori = '1'")->result();
+        $data['supir_rws'] = $this->rms_model->get("tbl_supir", "WHERE kategori = '1'")->result();
         $data['supir_vendor'] = $this->rms_model->get("tbl_supir", "WHERE kategori = '2'")->result();
         $data['truck'] = $this->rms_model->get("tbl_truck", "WHERE kategori = '1'")->result();
         $data['content'] = 'rms/supir/index';
