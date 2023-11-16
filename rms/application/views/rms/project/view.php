@@ -216,7 +216,7 @@
                   <a href="<?php echo base_url(); ?>assets/rms/documents/do/<?php echo $project->file_do; ?>" class="link-black text-sm mr-3"><i class="fas fa-file mr-1"></i> File DO</a>
                   <!--a href="#" class="text-sm btn btn-danger btn-sm text-sm mr-1"><i class="fas fa-print mr-1"></i> Cetak Invoice</a-->
                   <a href="<?php echo base_url(); ?>project/kwitansi/<?php echo $project->id_project; ?>" class="text-sm btn btn-success btn-sm text-sm"><i class="fas fa-print mr-1"></i> Kwitansi</a>
-                  <a href="<?php echo base_url(); ?>download_replas/<?php echo $project->id_project; ?>" class="text-sm btn btn-success btn-sm text-sm"><i class="fas fa-download mr-1"></i> Download data replas</a>
+                  <a href="<?php echo base_url(); ?>rms/download_replas/<?php echo $project->id_project; ?>" class="text-sm btn btn-success btn-sm text-sm"><i class="fas fa-download mr-1"></i> Download data replas</a>
                 </div>
               </div>
             </div>
@@ -242,7 +242,7 @@
                     <th rowspan="2" class="text-center align-middle">Supir</th>
                     <th rowspan="2" class="text-center align-middle">Nopol</th>
                     <th rowspan="2" class="text-center align-middle">Tujuan</th>
-                    <?php if ($project->id_klien == '6') { ?>
+                    <?php if ($project->id_komoditas == '2') { ?>
                       <th colspan="3" class="text-center align-middle">Qty Awal</th>
                       <th colspan="3" class="text-center align-middle">Qty Akhir</th>
                     <?php } else { ?>
@@ -254,7 +254,7 @@
                     <th rowspan="2" class="text-center align-middle">Action</th>
                   </tr>
                   <tr>
-                    <?php if ($project->id_klien == '6') { ?>
+                    <?php if ($project->id_komoditas == '2') { ?>
                       <th class="text-center align-middle">Bruto</th>
                       <th class="text-center align-middle">Tarra</th>
                       <th class="text-center align-middle">Netto</th>
@@ -287,7 +287,7 @@
                       <td><?php echo $row->nama_supir; ?></td>
                       <td><?php echo $row->nopol; ?></td>
                       <td><?php echo $row->kode_tujuan; ?></td>
-                      <?php if ($project->id_klien == '6') { ?>
+                      <?php if ($project->id_komoditas == '2') { ?>
                         <td><?php if ($row->bruto_awal != NULL) {
                               echo number_format($row->bruto_awal, 0, "", ".");
                             } else {
@@ -372,7 +372,7 @@
                     </tr>
                   <?php endforeach; ?>
                   <tr>
-                    <?php if ($project->id_klien == '6') { ?>
+                    <?php if ($project->id_komoditas == '2') { ?>
 
                       <td></td>
                       <td></td>
@@ -608,7 +608,7 @@
                   <div class="form-group">
                     <label for="no_replas">Qty Awal</label>
                     <div class="row">
-                      <?php if ($project->id_klien == '6') { ?>
+                      <?php if ($project->id_komoditas == '2') { ?>
                         <div class="col-md-4">
                           <label for="no_replas">Bruto Awal</label>
                           <input type="text" class="form-control number" name="bruto_awal" id="bruto_awal" placeholder="Bruto awal (kg)">
@@ -636,7 +636,7 @@
                   <div class="form-group">
                     <label for="no_replas">Qty Akhir</label>
                     <div class="row">
-                      <?php if ($project->id_klien == '6') { ?>
+                      <?php if ($project->id_komoditas == '2') { ?>
                         <div class="col-md-4">
                           <label for="no_replas">Bruto Akhir</label>
                           <input type="text" class="form-control number" name="bruto_akhir" id="bruto_akhir" placeholder="Bruto akhir (kg)">
