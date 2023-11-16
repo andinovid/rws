@@ -1979,6 +1979,10 @@ class Rms extends CI_Controller
                 'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
                 'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
                 'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+            ),
+            'fill' => array(
+                'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('rgb' => 'DDDDDD')
             )
         );
         // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
@@ -1990,10 +1994,29 @@ class Rms extends CI_Controller
                 'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
                 'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
                 'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
-                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN)
             )
         );
-        $excel->setActiveSheetIndex(0)->setCellValue('A1', "Rekap");
+        $style_col_yellow = array(
+            'fill' => array(
+                'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('rgb' => 'ffe100')
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN)
+            )
+        );
+
+        $style_col_center = array(
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ),
+        );
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "REKAP $data_project->komoditas $data_project->nama_perusahaan");
         $excel->getActiveSheet()->mergeCells('A1:K1'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
@@ -2052,9 +2075,49 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('K3:K4');
         $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('K4')->applyFromArray($style_col);
-        // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
 
-        // Set width kolom
+        $no = 1; // Untuk penomoran tabel, di awal set dengan 1
+        $numrow = 5; // Set baris pertama untuk isi tabel adalah baris ke 4
+        foreach ($data_replas as $data) { // Lakukan looping pada variabel siswa
+            $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
+            $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, mediumdate_indo($data->tanggal_muat));
+            $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->no_do);
+            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->no_sto);
+            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->nama_supir);
+            $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->nopol);
+            $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->timbang_kebun_bag);
+            $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->timbang_kebun_kg);
+            $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->qty_kirim_bag);
+            $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->qty_kirim_kg);
+            $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data->m_susut);
+
+            // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
+            $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('F' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('G' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('H' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('I' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('J' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('K' . $numrow)->applyFromArray($style_row);
+
+            $no++; // Tambah 1 setiap kali looping
+            $numrow++; // Tambah 1 setiap kali looping
+        }
+        $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, 'Total');
+        $excel->getActiveSheet()->mergeCells('A' . $numrow . ':F' . $numrow);
+        $excel->getActiveSheet()->getStyle('A'. $numrow . ':K' . $numrow)->applyFromArray($style_col_yellow);
+        $excel->getActiveSheet()->getStyle('A' . $numrow, 'Total')->applyFromArray($style_col_center);
+
+        $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, number_format($data_project->total_qty_awal_bag, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, number_format($data_project->total_qty_awal, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, number_format($data_project->total_qty_akhir_bag, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, number_format($data_project->total_qty_akhir, 0, "", "."));
+
+
         $excel->getActiveSheet()->getColumnDimension('A')->setWidth(5); // Set width kolom A
         $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15); // Set width kolom B
         $excel->getActiveSheet()->getColumnDimension('C')->setWidth(25); // Set width kolom C
