@@ -216,6 +216,7 @@
                   <a href="<?php echo base_url(); ?>assets/rms/documents/do/<?php echo $project->file_do; ?>" class="link-black text-sm mr-3"><i class="fas fa-file mr-1"></i> File DO</a>
                   <!--a href="#" class="text-sm btn btn-danger btn-sm text-sm mr-1"><i class="fas fa-print mr-1"></i> Cetak Invoice</a-->
                   <a href="<?php echo base_url(); ?>project/kwitansi/<?php echo $project->id_project; ?>" class="text-sm btn btn-success btn-sm text-sm"><i class="fas fa-print mr-1"></i> Kwitansi</a>
+                  <a href="<?php echo base_url(); ?>download_replas/<?php echo $project->id_project; ?>" class="text-sm btn btn-success btn-sm text-sm"><i class="fas fa-download mr-1"></i> Download data replas</a>
                 </div>
               </div>
             </div>
@@ -285,7 +286,7 @@
                           } ?></td>
                       <td><?php echo $row->nama_supir; ?></td>
                       <td><?php echo $row->nopol; ?></td>
-                      <td><?php echo $row->nama_tujuan; ?></td>
+                      <td><?php echo $row->kode_tujuan; ?></td>
                       <?php if ($project->id_klien == '6') { ?>
                         <td><?php if ($row->bruto_awal != NULL) {
                               echo number_format($row->bruto_awal, 0, "", ".");
@@ -371,21 +372,43 @@
                     </tr>
                   <?php endforeach; ?>
                   <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Total : <?php echo number_format($total->total_qty_awal_bag, 0, "", "."); ?> Bag</td>
-                    <td>Total : <?php echo number_format($total->total_qty_awal_kg, 0, "", "."); ?> Kg</td>
-                    <td>Total : <?php echo number_format($total->total_qty_akhir_bag, 0, "", "."); ?> Bag</td>
-                    <td>Total : <?php echo number_format($total->total_qty_akhir_kg, 0, "", "."); ?> Kg</td>
-                    <td>Total : <?php echo number_format($total->total_susut, 0, "", "."); ?> Kg</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <?php if ($project->id_klien == '6') { ?>
+
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>Total : <?php echo number_format($total->total_bruto_awal, 0, "", "."); ?> Kg</td>
+                      <td>Total : <?php echo number_format($total->total_tarra_awal, 0, "", "."); ?> Kg</td>
+                      <td>Total : <?php echo number_format($total->total_qty_awal_kg, 0, "", "."); ?> Kg</td>
+                      <td>Total : <?php echo number_format($total->total_bruto_akhir, 0, "", "."); ?> Kg</td>
+                      <td>Total : <?php echo number_format($total->total_tarra_akhir, 0, "", "."); ?> Kg</td>
+                      <td>Total : <?php echo number_format($total->total_qty_akhir_kg, 0, "", "."); ?> Kg</td>
+                      <td>Total : <?php echo number_format($total->total_susut, 0, "", "."); ?> Kg</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      
+                    <?php } else { ?>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>Total : <?php echo number_format($total->total_qty_awal_bag, 0, "", "."); ?> Bag</td>
+                      <td>Total : <?php echo number_format($total->total_qty_awal_kg, 0, "", "."); ?> Kg</td>
+                      <td>Total : <?php echo number_format($total->total_qty_akhir_bag, 0, "", "."); ?> Bag</td>
+                      <td>Total : <?php echo number_format($total->total_qty_akhir_kg, 0, "", "."); ?> Kg</td>
+                      <td>Total : <?php echo number_format($total->total_susut, 0, "", "."); ?> Kg</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    <?php } ?>
                   </tr>
                 </tbody>
               </table>
@@ -587,24 +610,24 @@
                     <div class="row">
                       <?php if ($project->id_klien == '6') { ?>
                         <div class="col-md-4">
-                        <label for="no_replas">Bruto Awal</label>
+                          <label for="no_replas">Bruto Awal</label>
                           <input type="text" class="form-control number" name="bruto_awal" id="bruto_awal" placeholder="Bruto awal (kg)">
                         </div>
                         <div class="col-md-4">
-                        <label for="no_replas">Tarra Awal</label>
+                          <label for="no_replas">Tarra Awal</label>
                           <input type="text" class="form-control number" name="tarra_awal" id="tarra_awal" placeholder="Tarra awal (kg)">
                         </div>
                         <div class="col-md-4">
-                        <label for="no_replas">Netto Awal</label>
+                          <label for="no_replas">Netto Awal</label>
                           <input type="text" class="form-control number" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Netto (kg)">
                         </div>
                       <?php } else { ?>
                         <div class="col-md-6">
-                        <label for="no_replas">Bag</label>
+                          <label for="no_replas">Bag</label>
                           <input type="text" class="form-control" name="timbang_kebun_bag" id="timbang_kebun_bag" placeholder="Bag">
                         </div>
                         <div class="col-md-6">
-                        <label for="no_replas">Kg</label>
+                          <label for="no_replas">Kg</label>
                           <input type="text" class="form-control number" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Kg">
                         </div>
                       <?php } ?>
@@ -615,24 +638,24 @@
                     <div class="row">
                       <?php if ($project->id_klien == '6') { ?>
                         <div class="col-md-4">
-                        <label for="no_replas">Bruto Akhir</label>
+                          <label for="no_replas">Bruto Akhir</label>
                           <input type="text" class="form-control number" name="bruto_akhir" id="bruto_akhir" placeholder="Bruto akhir (kg)">
                         </div>
                         <div class="col-md-4">
-                        <label for="no_replas">Tarra Akhir</label>
+                          <label for="no_replas">Tarra Akhir</label>
                           <input type="text" class="form-control number" name="tarra_akhir" id="tarra_akhir" placeholder="Tarra akhir (kg)">
                         </div>
                         <div class="col-md-4">
-                        <label for="no_replas">Netto Akhir</label>
+                          <label for="no_replas">Netto Akhir</label>
                           <input type="text" class="form-control number" placeholder="Netto (kg)" name="qty_kirim_kg" id="qty_kirim_kg">
                         </div>
                       <?php } else { ?>
                         <div class="col-md-6">
-                        <label for="no_replas">Bag</label>
+                          <label for="no_replas">Bag</label>
                           <input type="text" class="form-control" placeholder="Bag" name="qty_kirim_bag" id="qty_kirim_bag">
                         </div>
                         <div class="col-md-6">
-                        <label for="no_replas">Kg</label>
+                          <label for="no_replas">Kg</label>
                           <input type="text" class="form-control number" placeholder="Kg" name="qty_kirim_kg" id="qty_kirim_kg">
                         </div>
                       <?php } ?>
@@ -972,6 +995,7 @@
           $('[name="supir"]').val(data[i].id_supir).change();
           $('[name="truck"]').val(data[i].id_truck).change();
           $('[name="tujuan"]').val(data[i].id_tujuan).change();
+          $('[name="vendor_pajak"]').val(data[i].id_vendor_pajak).change();
           $('[name="bruto_awal"]').val($.number(data[i].bruto_awal).replace(/\,/g, '.'));
           $('[name="tarra_awal"]').val($.number(data[i].tarra_awal).replace(/\,/g, '.'));
           $('[name="bruto_akhir"]').val($.number(data[i].bruto_akhir).replace(/\,/g, '.'));

@@ -191,7 +191,8 @@
         "lengthChange": false,
         "autoWidth": true,
         "ordering": false,
-        "pageLength": 50
+        "pageLength": 50,
+        "buttons": false,
       })
 
       $(".data-table").DataTable({
