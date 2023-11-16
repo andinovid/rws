@@ -1394,7 +1394,7 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('P8')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('Q8')->applyFromArray($style_col);
 
-        $kwitansi = $this->rms_model->get("v_rekap", "WHERE id_project = '$id_project' AND id_vendor = '$id_vendor'")->result();
+        $kwitansi = $this->rms_model->get("v_rekap", "WHERE id_project = '$id_project' AND id_vendor = '$id_vendor' AND status = '0'")->result();
 
 
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
