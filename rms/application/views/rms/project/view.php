@@ -216,7 +216,7 @@
                   <a href="<?php echo base_url(); ?>assets/rms/documents/do/<?php echo $project->file_do; ?>" class="link-black text-sm mr-3" target="_blank"><i class="fas fa-file mr-1"></i> File DO</a>
                   <!--a href="#" class="text-sm btn btn-danger btn-sm text-sm mr-1"><i class="fas fa-print mr-1"></i> Cetak Invoice</a-->
                   <a href="<?php echo base_url(); ?>project/kwitansi/<?php echo $project->id_project; ?>" class="text-sm btn btn-success btn-sm text-sm"><i class="fas fa-print mr-1"></i> Kwitansi</a>
-                  <a href="<?php echo base_url(); ?>rms/download_replas/<?php echo $project->id_project; ?>" class="text-sm btn btn-success btn-sm text-sm"><i class="fas fa-download mr-1"></i> Download data replas</a>
+                  <a href="<?php echo base_url(); ?>rms/download_replas/<?php echo $project->id_project; ?>" class="text-sm btn btn-success btn-sm text-sm"><i class="fas fa-download mr-1"></i> Download data rekap</a>
                 </div>
               </div>
             </div>
