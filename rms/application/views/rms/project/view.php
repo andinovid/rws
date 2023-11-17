@@ -107,16 +107,16 @@
                                                 } ?></b>
                         </p>
                         <p class="text-sm">Jasa Muat
-                          <b class="d-block">Rp <?php if ($project->estimasi_total_harga_jasa_muat != NULL) {
-                                                  echo number_format($project->estimasi_total_harga_jasa_muat, 0, "", ".");
+                          <b class="d-block">Rp <?php if ($project->total_pembayaran_muat != NULL) {
+                                                  echo number_format($project->total_pembayaran_muat, 0, "", ".");
                                                 } else {
                                                   echo "0";
                                                 }  ?></b>
                         </p>
 
                         <p class="text-sm">Jasa Bongkar
-                          <b class="d-block">Rp <?php if ($project->estimasi_total_harga_jasa_muat != NULL) {
-                                                  echo number_format($project->estimasi_total_harga_jasa_bongkar, 0, "", ".");
+                          <b class="d-block">Rp <?php if ($project->total_pembayaran_bongkar != NULL) {
+                                                  echo number_format($project->total_pembayaran_bongkar, 0, "", ".");
                                                 } else {
                                                   echo "0";
                                                 } ?></b>
@@ -128,8 +128,8 @@
 
 
                         <p class="text-sm">Jasa BAP
-                          <b class="d-block">Rp <?php if ($project->estimasi_total_harga_jasa_muat != NULL) {
-                                                  echo number_format($project->estimasi_total_harga_jasa_bongkar, 0, "", ".");
+                          <b class="d-block">Rp <?php if ($project->total_pembayaran_bap != NULL) {
+                                                  echo number_format($project->total_pembayaran_bap, 0, "", ".");
                                                 } else {
                                                   echo "0";
                                                 } ?></b>
@@ -161,18 +161,14 @@
                                                 } ?></b>
                         </p>
                         <p class="text-sm">Total Pengeluaran Lapangan
-                          <b class="d-block">Rp <?php if ($project->total_pengeluaran != NULL) {
-                                                  echo number_format($project->total_pengeluaran, 0, "", ".");
+                          <b class="d-block">Rp <?php if ($project->total_pengeluaran_lapangan != NULL) {
+                                                  echo number_format($project->total_pengeluaran_lapangan, 0, "", ".");
                                                 } else {
                                                   echo "0";
                                                 } ?></b>
                         </p>
                         <p class="text-sm">Total Keuntungan
-                          <b class="d-block">Rp <?php if ($project->total_pengeluaran != NULL) {
-                                                  echo number_format($project->total_pengeluaran, 0, "", ".");
-                                                } else {
-                                                  echo "0";
-                                                } ?></b>
+                          <b class="d-block">Rp -</b>
                         </p>
                       </div>
                     </div>
@@ -481,6 +477,8 @@
                                 echo "Muat";
                               } elseif ($row->jenis == '3') {
                                 echo "BAP";
+                              } elseif ($row->jenis == '4') {
+                                echo "Ambil BAP";
                               } ?></td>
                           <td>Rp <?php echo number_format($row->jumlah_pembayaran, 0, "", "."); ?></td>
                           <td><?php echo shortdate_indo($row->tanggal_pembayaran); ?></td>
@@ -752,6 +750,7 @@
                       <option value="1">Bongkar</option>
                       <option value="2">Muat</option>
                       <option value="3">BAP</option>
+                      <option value="4">Ambil BAP</option>
                     </select>
                   </div>
                   <div class="form-group">
