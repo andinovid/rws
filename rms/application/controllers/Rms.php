@@ -85,7 +85,7 @@ class Rms extends CI_Controller
 
     function project()
     {
-        $data['project'] = $this->rms_model->get("v_project")->result();
+        $data['project'] = $this->rms_model->get("v_project", "ORDER BY tanggal_input DESC")->result();
         $data['klien'] = $this->rms_model->get("tbl_klien")->result();
         $data['truck'] = $this->rms_model->get("tbl_truck")->result();
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
@@ -134,7 +134,7 @@ class Rms extends CI_Controller
     function view_project($id_project)
     {
         $data['project'] = $this->rms_model->get("v_project", "WHERE id_project = $id_project")->row();
-        $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE id_project = $id_project")->result();
+        $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE id_project = $id_project ORDER BY tanggal_input DESC")->result();
         $data['total'] = $this->rms_model->get_by_query("SELECT SUM(bruto_awal) as total_bruto_awal, SUM(bruto_akhir) as total_bruto_akhir, SUM(tarra_awal) as total_tarra_awal, SUM(tarra_akhir) as total_tarra_akhir, SUM(timbang_kebun_bag) as total_qty_awal_bag, SUM(timbang_kebun_kg) as total_qty_awal_kg, SUM(qty_kirim_bag) as total_qty_akhir_bag, SUM(qty_kirim_kg) as total_qty_akhir_kg, SUM(m_susut) as total_susut  FROM v_rekap WHERE id_project = $id_project")->row();
         $data['pembayaran_replas'] = $this->rms_model->get("v_rekap", "WHERE id_project = $id_project AND status ='1'")->result();
         $data['pembayaran_bongkar_muat'] = $this->rms_model->get("tbl_pembayaran_bongkar_muat", "WHERE id_project = $id_project")->result();
@@ -2104,6 +2104,13 @@ class Rms extends CI_Controller
             $excel->getActiveSheet()->getStyle('M3')->applyFromArray($style_col);
             $excel->getActiveSheet()->getStyle('M4')->applyFromArray($style_col);
         } else {
+            $excel->getActiveSheet()->mergeCells('G3:H3');
+            $excel->setActiveSheetIndex(0)->setCellValue('G4', "BAG");
+            $excel->setActiveSheetIndex(0)->setCellValue('H4', "KG");
+            $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
+            $excel->getActiveSheet()->getStyle('G4')->applyFromArray($style_col);
+            $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
+            $excel->getActiveSheet()->getStyle('H4')->applyFromArray($style_col);
             $excel->setActiveSheetIndex(0)->setCellValue('I3', "QTY AKHIR");
             $excel->getActiveSheet()->mergeCells('I3:J3');
             $excel->setActiveSheetIndex(0)->setCellValue('I4', "BAG");
@@ -2164,6 +2171,11 @@ class Rms extends CI_Controller
             $excel->getActiveSheet()->getStyle('J' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('K' . $numrow)->applyFromArray($style_row);
 
+            if ($data_project->id_komoditas == '2' || ($data_project->id_komoditas == '3' and $data_project->id_klien == '6')) {
+                $excel->getActiveSheet()->getStyle('L' . $numrow)->applyFromArray($style_row);
+                $excel->getActiveSheet()->getStyle('M' . $numrow)->applyFromArray($style_row);
+            }
+
             $no++; // Tambah 1 setiap kali looping
             $numrow++; // Tambah 1 setiap kali looping
         }
@@ -2190,11 +2202,6 @@ class Rms extends CI_Controller
             $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data_project->total_qty_akhir);
         }
 
-        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(5); // Set width kolom A
-        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15); // Set width kolom B
-        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(25); // Set width kolom C
-        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(20); // Set width kolom D
-        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(30); // Set width kolom E
 
         // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
         $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
