@@ -117,6 +117,7 @@ class Rms_model extends CI_Model
     {
         $this->db->delete('tbl_perbaikan', array('id' => $id));
         $this->db->delete('tbl_rekap', array('id_project' => $id));
+        $this->db->delete('tbl_project', array('id' => $id));
         return TRUE;
     }
 
