@@ -135,15 +135,15 @@
                                                 } ?></b>
                         </p>
                         <p class="text-sm">Total Claim
-                          <b class="d-block"><?php if ($project->total_claim != NULL) {
-                                                echo number_format($project->total_claim, 0, "", ".");
+                          <b class="d-block"><?php if ($project->total_claim_replas != NULL) {
+                                                echo number_format($project->total_claim_replas, 0, "", ".");
                                               } else {
                                                 echo "0";
                                               } ?> Kg</b>
                         </p>
                         <p class="text-sm">Total Biaya Claim
-                          <b class="d-block">Rp <?php if ($project->total_biaya_claim != NULL) {
-                                                  echo number_format($project->total_biaya_claim, 0, "", ".");
+                          <b class="d-block">Rp <?php if ($project->total_biaya_claim_replas != NULL) {
+                                                  echo number_format($project->total_biaya_claim_replas, 0, "", ".");
                                                 } else {
                                                   echo "0";
                                                 } ?></b>
