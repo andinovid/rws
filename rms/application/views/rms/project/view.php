@@ -924,8 +924,8 @@
         if (data.status = "true") {
           Swal.fire({
             icon: 'success',
-            title: "Success!",
-            text: "Schedule has been saved.",
+            title: "Berhasil!",
+            text: "Data berhasil disimpan.",
             type: "success"
           }).then((result) => {
             location.reload();
@@ -953,8 +953,8 @@
         if (data.status = "true") {
           Swal.fire({
             icon: 'success',
-            title: "Success!",
-            text: "Schedule has been saved.",
+            title: "Berhasil!",
+            text: "Data berhasil disimpan.",
             type: "success"
           }).then((result) => {
             location.reload();
@@ -982,8 +982,8 @@
         if (data.status = "true") {
           Swal.fire({
             icon: 'success',
-            title: "Success!",
-            text: "Schedule has been saved.",
+            title: "Berhasil!",
+            text: "Data berhasil disimpan.",
             type: "success"
           }).then((result) => {
             location.reload();
@@ -1111,8 +1111,8 @@
 
   function delete_data(id) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Hapus data?',
+      text: "Data yang telah dihapus tidak dapat dikembalikan.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -1130,8 +1130,8 @@
           dataType: "JSON",
           success: function(data) {
             Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
+              'Berhasil!',
+              'Data berhasil dihapus.',
               'success'
             ).then((result) => {
               location.reload();
@@ -1144,13 +1144,13 @@
 
   function delete_bongkar_muat(id) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Hapus data?',
+      text: "Data yang telah dihapus tidak dapat dikembalikan.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Ya, Hapus!'
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
@@ -1163,8 +1163,8 @@
           dataType: "JSON",
           success: function(data) {
             Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
+              'Berhasil!',
+              'Data berhasil dihapus.',
               'success'
             ).then((result) => {
               location.reload();

@@ -267,8 +267,8 @@
         if (data.status = "true") {
           Swal.fire({
             icon: 'success',
-            title: "Success!",
-            text: "Schedule has been saved.",
+            title: "Berhasil!",
+            text: "Data berhasil disimpan.",
             type: "success"
           }).then((result) => {
             location.reload();

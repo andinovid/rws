@@ -430,13 +430,13 @@
       var id_sparepart = $(this).attr('data-id-sparepart');
       var jumlah = $(this).attr('data-jumlah');
       Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Hapus data?',
+        text: "Data yang telah dihapus tidak dapat dikembalikan.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Ya, Hapus!'
       }).then((result) => {
         if (result.isConfirmed) {
           $.ajax({
