@@ -176,13 +176,6 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="deskripsi">Deskripsi</label>
-                    <textarea name="deskripsi" id="deskripsi" class="form-control" rows="2"></textarea>
-                  </div>
-
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
                     <label for="no_replas">Komoditas</label>
                     <select class="form-control select2" style="width: 100%;" name="komoditas" id="komoditas">
                       <option value="0">Pilih komoditas</option>
@@ -191,6 +184,14 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
+                  <div class="form-group">
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea name="deskripsi" id="deskripsi" class="form-control" rows="2"></textarea>
+                  </div>
+
+                </div>
+                <div class="col-md-6">
+                  
 
                   <div class="form-group">
                     <label for="no_replas">Qty</label>
@@ -205,8 +206,12 @@
                     <input type="text" class="form-control" placeholder="Toleransi susut" name="toleransi_susut" id="toleransi_susut">
                   </div>
                   <div class="form-group">
-                    <label for="no_replas">Harga Claim</label>
-                    <input type="text" class="form-control number" placeholder="Harga claim" name="claim" id="claim">
+                    <label for="no_replas">Harga Claim Invoice</label>
+                    <input type="text" class="form-control number" placeholder="Harga claim invoice" name="claim" id="claim">
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Harga Claim Replas</label>
+                    <input type="text" class="form-control number" placeholder="Harga claim replas" name="claim_replas" id="claim_replas">
                   </div>
                   <div class="form-group">
                     <label for="no_replas">File SPK</label>
@@ -447,6 +452,7 @@
           $('[name="harga_unit"]').val(data[i].harga_unit);
           $('[name="toleransi_susut"]').val(data[i].toleransi_susut);
           $('[name="claim"]').val(data[i].claim);
+          $('[name="claim_replas"]').val(data[i].claim_replas);
           $('[name="deskripsi"]').val(data[i].deskripsi);
           $('#file_spk_label').html(data[i].file_spk);
           $('#file_do_label').html(data[i].file_do);

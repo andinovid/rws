@@ -223,6 +223,7 @@ class Rms extends CI_Controller
         $timbang_kebun_kg = $this->input->POST('timbang_kebun_kg');
         $uang_sangu = $this->input->POST('uang_sangu');
         $toleransi_susut = $this->input->POST('toleransi_susut');
+        $tanggal_input = date('Y-m-d H:i:s');
 
         $data = array(
             'no_replas' => $no_replas,
@@ -252,6 +253,9 @@ class Rms extends CI_Controller
         );
 
         if ($id == "") {
+            $data += array(
+                'tanggal_input' => $tanggal_input
+            );
             $save = $this->rms_model->insert("tbl_rekap", $data);
             $this->rms_model->update("tbl_project", $data2, $id_project);
             if ($save) {
@@ -360,7 +364,9 @@ class Rms extends CI_Controller
         $toleransi_susut = $this->input->POST('toleransi_susut');
         $harga_unit = $this->input->POST('harga_unit');
         $claim = $this->input->POST('claim');
+        $claim_replas = $this->input->POST('claim_replas');
         $deskripsi = $this->input->POST('deskripsi');
+        $tanggal_input = date('Y-m-d H:i:s');
 
         $file_spk = $_FILES['file_spk']['name'];
         $file_do = $_FILES['file_do']['name'];
@@ -377,6 +383,7 @@ class Rms extends CI_Controller
             'toleransi_susut' => $toleransi_susut,
             'harga_unit' => str_replace('.', '', $harga_unit),
             'claim' => str_replace('.', '', $claim),
+            'claim_replas' => str_replace('.', '', $claim_replas),
             'deskripsi' => $deskripsi,
             'status' => '0',
         );
@@ -417,6 +424,9 @@ class Rms extends CI_Controller
         }
 
         if ($id == "") {
+            $data_array += array(
+                'tanggal_input' => $tanggal_input
+            );
             $save = $this->rms_model->insert("tbl_project", $data_array);
             if ($save) {
                 echo json_encode(array(
@@ -1083,11 +1093,15 @@ class Rms extends CI_Controller
         $id = $this->input->POST('id');
         $jenis = $this->input->POST('jenis');
         $jumlah = $this->input->POST('jumlah');
+        $nama_kebun = $this->input->POST('nama_kebun');
+        $tonase = $this->input->POST('tonase');
         $tanggal_pembayaran = $this->input->POST('tanggal_pembayaran');
 
         $data = array(
             'id_project' => $id_project,
             'jenis' => $jenis,
+            'nama_kebun' => $nama_kebun,
+            'tonase' => $tonase,
             'jumlah_pembayaran' => str_replace('.', '', $jumlah),
             'tanggal_pembayaran' => $tanggal_pembayaran
         );
@@ -1103,7 +1117,7 @@ class Rms extends CI_Controller
                 ));
             }
         } else {
-            $save = $this->rms_model->update("tbl_pembayaran_bongkar_muat", $data, $id_project);
+            $save = $this->rms_model->update("tbl_pembayaran_bongkar_muat", $data, $id);
             if ($save) {
                 echo json_encode(array(
                     "status" => TRUE,

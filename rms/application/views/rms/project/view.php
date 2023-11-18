@@ -31,35 +31,35 @@
                     <?php if ($project->no_kontrak) { ?>
                       <div class="col-md-3">
                         <p class="text-sm mb-0">No Kontrak :
-                          <b><?php echo $project->no_kontrak; ?></b>
+                          <b class="d-block"><?php echo $project->no_kontrak; ?></b>
                         </p>
                       </div>
                     <?php } ?>
                     <?php if ($project->no_sto) { ?>
                       <div class="col-md-3">
                         <p class="text-sm mb-0">No STO :
-                          <b><?php echo $project->no_sto; ?></b>
+                          <b class="d-block"><?php echo $project->no_sto; ?></b>
                         </p>
                       </div>
                     <?php } ?>
                     <?php if ($project->no_po) { ?>
                       <div class="col-md-3">
                         <p class="text-sm mb-0">No PO :
-                          <b><?php echo $project->no_po; ?></b>
+                          <b class="d-block"><?php echo $project->no_po; ?></b>
                         </p>
                       </div>
                     <?php } ?>
                     <?php if ($project->no_do) { ?>
                       <div class="col-md-3">
                         <p class="text-sm mb-0">No DO :
-                          <b><?php echo $project->no_do; ?></b>
+                          <b class="d-block"><?php echo $project->no_do; ?></b>
                         </p>
                       </div>
                     <?php } ?>
 
                     <div class="col-md-3">
                       <p class="text-sm mb-0">Status :
-                        <b class="text-green"><?php echo $project->nama_status; ?></b>
+                        <b class="text-green d-block"><?php echo $project->nama_status; ?></b>
                       </p>
                     </div>
                   </div>
@@ -278,7 +278,7 @@
                     <?php } ?>
                     <th colspan="2" class="text-center align-middle">Susut</th>
                     <th rowspan="2" class="text-center align-middle">Status</th>
-                    <th rowspan="2" class="text-center align-middle">Action</th>
+                    <th rowspan="2" class="text-center align-middle" style="width: 120px;">Action</th>
                   </tr>
                   <tr>
                     <?php if ($project->id_komoditas == '2' || ($project->id_komoditas == '3' and $project->id_klien == '6')) { ?>
@@ -458,8 +458,10 @@
                       <tr>
                         <th>No</th>
                         <th>Jenis</th>
+                        <th>Kebun</th>
+                        <th>Tonase</th>
                         <th>Jumlah</th>
-                        <th>Tanggal Pembayaran</th>
+                        <th>Tanggal</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -480,6 +482,9 @@
                               } elseif ($row->jenis == '4') {
                                 echo "Ambil BAP";
                               } ?></td>
+
+                              <td><?php echo $row->nama_kebun; ?></td>
+                          <td><?php echo number_format($row->tonase, 0, "", "."); ?></td>
                           <td>Rp <?php echo number_format($row->jumlah_pembayaran, 0, "", "."); ?></td>
                           <td><?php echo shortdate_indo($row->tanggal_pembayaran); ?></td>
                           <td class="project-actions text-right">
@@ -498,9 +503,11 @@
                     <tfoot>
                       <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Qty</th>
-                        <th>Harga</th>
+                        <th>Jenis</th>
+                        <th>Kebun</th>
+                        <th>Tonase</th>
+                        <th>Jumlah</th>
+                        <th>Tanggal</th>
                         <th></th>
                       </tr>
                     </tfoot>
@@ -754,14 +761,22 @@
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="no_replas">Jumlah</label>
+                    <label for="no_replas">Nama Kebun</label>
+                    <input type="text" class="form-control" id="nama_kebun" name="nama_kebun" placeholder="Input nama kebun">
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Tonase(MT)</label>
+                    <input type="text" class="form-control number" id="tonase" name="tonase" placeholder="Input tonase">
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Jumlah Pembayaran</label>
                     <input type="text" class="form-control number" id="jumlah" name="jumlah" placeholder="Input jumlah pembayaran">
                   </div>
                   <div class="form-group">
                     <label for="tanggal_pembayaran">Tanggal Pembayaran</label>
-                    <div class="input-group date reservationdate3" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate3" data-toggle="datetimepicker" name="tanggal_pembayaran" id="tanggal_pembayaran" />
-                      <div class="input-group-append" data-target=".reservationdate3" data-toggle="datetimepicker">
+                    <div class="input-group date reservationdate reservationdate10" data-target-input="nearest">
+                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate10" data-toggle="datetimepicker" name="tanggal_pembayaran" id="tanggal_pembayaran" />
+                      <div class="input-group-append" data-target=".reservationdate10" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                       </div>
                     </div>
@@ -1004,6 +1019,8 @@
         for (var i = 0; i < data.length; i++) {
           $('[name="jenis"]').val(data[i].jenis).change();
           $('[name="jumlah"]').val($.number(data[i].jumlah_pembayaran).replace(/\,/g, '.'));
+          $('[name="tonase"]').val($.number(data[i].tonase).replace(/\,/g, '.'));
+          $('[name="nama_kebun"]').val(data[i].nama_kebun);
           $('[name="tanggal_pembayaran"]').val(data[i].tanggal_pembayaran);
         }
       },
