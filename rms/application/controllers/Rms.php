@@ -91,6 +91,7 @@ class Rms extends CI_Controller
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
         $data['tujuan'] = $this->rms_model->get("tbl_tujuan")->result();
         $data['komoditas'] = $this->rms_model->get("tbl_komoditas")->result();
+        $data['penagih'] = $this->rms_model->get("tbl_penagih")->result();
         $data['content'] = 'rms/project/index';
         $this->load->view('rms/includes/template', $data);
     }
@@ -366,6 +367,7 @@ class Rms extends CI_Controller
         $claim = $this->input->POST('claim');
         $claim_replas = $this->input->POST('claim_replas');
         $deskripsi = $this->input->POST('deskripsi');
+        $penagih = $this->input->POST('penagih');
         $tanggal_input = date('Y-m-d H:i:s');
 
         $file_spk = $_FILES['file_spk']['name'];
@@ -385,6 +387,7 @@ class Rms extends CI_Controller
             'claim' => str_replace('.', '', $claim),
             'claim_replas' => str_replace('.', '', $claim_replas),
             'deskripsi' => $deskripsi,
+            'id_penagih' => $penagih,
             'status' => '0',
         );
 
@@ -1094,6 +1097,7 @@ class Rms extends CI_Controller
         $jenis = $this->input->POST('jenis');
         $jumlah = $this->input->POST('jumlah');
         $nama_kebun = $this->input->POST('nama_kebun');
+        $penagih = $this->input->POST('penagih');
         $tonase = $this->input->POST('tonase');
         $tanggal_pembayaran = $this->input->POST('tanggal_pembayaran');
 
@@ -1101,7 +1105,8 @@ class Rms extends CI_Controller
             'id_project' => $id_project,
             'jenis' => $jenis,
             'nama_kebun' => $nama_kebun,
-            'tonase' => $tonase,
+            'penagih' => $penagih,
+            'tonase' => str_replace('.', '', $tonase),
             'jumlah_pembayaran' => str_replace('.', '', $jumlah),
             'tanggal_pembayaran' => $tanggal_pembayaran
         );

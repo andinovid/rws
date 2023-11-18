@@ -184,6 +184,7 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
+                  
                   <div class="form-group">
                     <label for="deskripsi">Deskripsi</label>
                     <textarea name="deskripsi" id="deskripsi" class="form-control" rows="2"></textarea>
@@ -212,6 +213,15 @@
                   <div class="form-group">
                     <label for="no_replas">Harga Claim Replas</label>
                     <input type="text" class="form-control number" placeholder="Harga claim replas" name="claim_replas" id="claim_replas">
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Penagih</label>
+                    <select class="form-control select2" style="width: 100%;" name="penagih" id="penagih">
+                      <option value="0">Pilih penagih</option>
+                      <?php foreach ($penagih as $row) : ?>
+                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
+                      <?php endforeach; ?>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="no_replas">File SPK</label>
@@ -448,6 +458,7 @@
           $('[name="tanggal_angkut"]').val(data[i].tanggal_angkut);
           $('[name="tanggal_selesai"]').val(data[i].tanggal_selesai);
           $('[name="komoditas"]').val(data[i].id_komoditas).change();
+          $('[name="penagih"]').val(data[i].id_penagih).change();
           $('[name="qty"]').val(data[i].qty);
           $('[name="harga_unit"]').val(data[i].harga_unit);
           $('[name="toleransi_susut"]').val(data[i].toleransi_susut);

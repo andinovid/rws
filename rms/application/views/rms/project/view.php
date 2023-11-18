@@ -459,6 +459,7 @@
                         <th>No</th>
                         <th>Jenis</th>
                         <th>Kebun</th>
+                        <th>Penagih</th>
                         <th>Tonase</th>
                         <th>Jumlah</th>
                         <th>Tanggal</th>
@@ -484,6 +485,7 @@
                               } ?></td>
 
                               <td><?php echo $row->nama_kebun; ?></td>
+                              <td><?php echo $row->penagih; ?></td>
                           <td><?php echo number_format($row->tonase, 0, "", "."); ?></td>
                           <td>Rp <?php echo number_format($row->jumlah_pembayaran, 0, "", "."); ?></td>
                           <td><?php echo shortdate_indo($row->tanggal_pembayaran); ?></td>
@@ -505,6 +507,7 @@
                         <th>No</th>
                         <th>Jenis</th>
                         <th>Kebun</th>
+                        <th>Penagih</th>
                         <th>Tonase</th>
                         <th>Jumlah</th>
                         <th>Tanggal</th>
@@ -773,6 +776,10 @@
                     <input type="text" class="form-control number" id="jumlah" name="jumlah" placeholder="Input jumlah pembayaran">
                   </div>
                   <div class="form-group">
+                    <label for="no_replas">Penagih</label>
+                    <input type="text" class="form-control" id="penagih" name="penagih" placeholder="Input nama penagih">
+                  </div>
+                  <div class="form-group">
                     <label for="tanggal_pembayaran">Tanggal Pembayaran</label>
                     <div class="input-group date reservationdate reservationdate10" data-target-input="nearest">
                       <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate10" data-toggle="datetimepicker" name="tanggal_pembayaran" id="tanggal_pembayaran" />
@@ -1021,6 +1028,7 @@
           $('[name="jumlah"]').val($.number(data[i].jumlah_pembayaran).replace(/\,/g, '.'));
           $('[name="tonase"]').val($.number(data[i].tonase).replace(/\,/g, '.'));
           $('[name="nama_kebun"]').val(data[i].nama_kebun);
+          $('[name="penagih"]').val(data[i].penagih);
           $('[name="tanggal_pembayaran"]').val(data[i].tanggal_pembayaran);
         }
       },
