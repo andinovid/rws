@@ -68,7 +68,13 @@
                       </p>
                     </div>
 
-                    <span class="badge <?php if($project->status == '0'){echo "bg-secondary";}elseif($project->status == '1'){echo "bg-warning";}elseif($project->status == '2'){echo "bg-success";} ?> " style="position:absolute; right:20px; top:25px;"><?php echo $project->nama_status; ?></span>
+                    <span class="badge <?php if ($project->status == '0') {
+                                          echo "bg-secondary";
+                                        } elseif ($project->status == '1') {
+                                          echo "bg-warning";
+                                        } elseif ($project->status == '2') {
+                                          echo "bg-success";
+                                        } ?> " style="position:absolute; right:20px; top:25px;"><?php echo $project->nama_status; ?></span>
                   </div>
                   <hr>
                   <div class="row">
@@ -99,34 +105,6 @@
                                                   echo "0";
                                                 } ?></b>
                         </p>
-                        <p class="text-sm">Jasa Muat
-                          <b class="d-block">Rp <?php if ($project->total_pembayaran_muat != NULL) {
-                                                  echo number_format($project->total_pembayaran_muat, 0, "", ".");
-                                                } else {
-                                                  echo "0";
-                                                }  ?></b>
-                        </p>
-
-                        <p class="text-sm">Jasa Bongkar
-                          <b class="d-block">Rp <?php if ($project->total_pembayaran_bongkar != NULL) {
-                                                  echo number_format($project->total_pembayaran_bongkar, 0, "", ".");
-                                                } else {
-                                                  echo "0";
-                                                } ?></b>
-                        </p>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="text-muted">
-
-
-                        <p class="text-sm">Jasa BAP
-                          <b class="d-block">Rp <?php if ($project->total_pembayaran_bap != NULL) {
-                                                  echo number_format($project->total_pembayaran_bap, 0, "", ".");
-                                                } else {
-                                                  echo "0";
-                                                } ?></b>
-                        </p>
                         <p class="text-sm">Claim replas
                           <b class="d-block"><?php if ($project->total_claim_replas != NULL) {
                                                 echo number_format($project->total_claim_replas, 0, "", ".");
@@ -134,9 +112,25 @@
                                                 echo "0";
                                               } ?> Kg</b>
                         </p>
+
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="text-muted">
+
+
+
+
                         <p class="text-sm">Biaya claim replas
                           <b class="d-block">Rp <?php if ($project->total_biaya_claim_replas != NULL) {
                                                   echo number_format($project->total_biaya_claim_replas, 0, "", ".");
+                                                } else {
+                                                  echo "0";
+                                                } ?></b>
+                        </p>
+                        <p class="text-sm">Claim invoice
+                          <b class="d-block">Rp <?php if ($project->total_claim_invoice != NULL) {
+                                                  echo number_format($project->total_claim_invoice, 0, "", ".");
                                                 } else {
                                                   echo "0";
                                                 } ?></b>
@@ -146,13 +140,7 @@
                     </div>
 
                     <div class="col">
-                      <p class="text-sm">Claim invoice
-                        <b class="d-block">Rp <?php if ($project->total_claim_invoice != NULL) {
-                                                echo number_format($project->total_claim_invoice, 0, "", ".");
-                                              } else {
-                                                echo "0";
-                                              } ?></b>
-                      </p>
+
                       <p class="text-sm">Biaya claim inovice
                         <b class="d-block">Rp <?php if ($project->total_biaya_claim_invoice != NULL) {
                                                 echo number_format($project->total_biaya_claim_invoice, 0, "", ".");
@@ -167,6 +155,10 @@
                     </div>
                     <div class="col">
                       <div class="text-muted">
+                        
+                      <p class="text-sm">Jumlah Replas
+                        <b class="d-block"><?php echo $project->total_replas; ?></b>
+                      </p>
                         <p class="text-sm">Total Replas
                           <b class="d-block">Rp <?php if ($project->total_pengeluaran != NULL) {
                                                   echo number_format($project->total_pengeluaran, 0, "", ".");
@@ -174,16 +166,7 @@
                                                   echo "0";
                                                 } ?></b>
                         </p>
-                        <p class="text-sm">Pengeluaran Lapangan
-                          <b class="d-block">Rp <?php if ($project->total_pengeluaran_lapangan != NULL) {
-                                                  echo number_format($project->total_pengeluaran_lapangan, 0, "", ".");
-                                                } else {
-                                                  echo "0";
-                                                } ?></b>
-                        </p>
-                        <p class="text-sm">Total Keuntungan
-                          <b class="d-block">Rp -</b>
-                        </p>
+
                       </div>
                     </div>
                   </div>
