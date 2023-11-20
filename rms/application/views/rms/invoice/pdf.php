@@ -141,8 +141,10 @@
                     <?php } else { ?>
                         <td><?php echo $row->deskripsi; ?></td>
                     <?php } ?>
-                    <?php if ($invoice->id_komoditas == '2') { ?>
+                    <?php if ($invoice->id_komoditas == '2' and ($invoice->id_klien == '4' || $invoice->id_klien == '5' || $invoice->id_klien == '9' || $invoice->id_klien == '10' || $invoice->id_klien == '16')) { ?>
                         <td><?php echo number_format($row->total_qty_akhir, 0, "", "."); ?> KG</td>
+                    <?php } elseif ($invoice->id_komoditas == '2' and $invoice->id_klien == '7') { ?>
+                        <td><?php echo number_format($row->total_qty_awal, 0, "", "."); ?> KG</td>
                     <?php } elseif ($invoice->id_komoditas == '3' || $invoice->id_komoditas == '4') { ?>
                         <td><?php echo number_format($row->total_qty_terendah, 0, "", "."); ?> KG</td>
                     <?php } else { ?>
