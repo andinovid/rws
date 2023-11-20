@@ -203,8 +203,8 @@
                     <input type="text" class="form-control number" placeholder="Harga unit" name="harga_unit" id="harga_unit">
                   </div>
                   <div class="form-group">
-                    <label for="no_replas">Toleransi susut</label>
-                    <input type="text" class="form-control" placeholder="Toleransi susut" name="toleransi_susut" id="toleransi_susut">
+                    <label for="no_replas">Toleransi susut (%)</label>
+                    <input type="text" class="form-control" placeholder="Toleransi susut (%)" name="toleransi_susut" id="toleransi_susut">
                   </div>
                   <div class="form-group">
                     <label for="no_replas">Harga Claim Invoice</label>
