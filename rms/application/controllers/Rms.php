@@ -2068,7 +2068,7 @@ class Rms extends CI_Controller
             $excel->getActiveSheet()->mergeCells('D3:D4');
             $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_col);
             $excel->getActiveSheet()->getStyle('D4')->applyFromArray($style_col);
-        } else {
+        } elseif ($data_project->id_komoditas != '3' and $data_project->id_klien != '6') {
             $excel->setActiveSheetIndex(0)->setCellValue('C3', "NO DO");
             $excel->getActiveSheet()->mergeCells('C3:C4');
             $excel->getActiveSheet()->getStyle('C3')->applyFromArray($style_col);
@@ -2080,69 +2080,131 @@ class Rms extends CI_Controller
             $excel->getActiveSheet()->getStyle('D4')->applyFromArray($style_col);
         }
 
+        if ($data_project->id_komoditas == '3' and $data_project->id_klien == '6') {
 
-        $excel->setActiveSheetIndex(0)->setCellValue('E3', "SUPIR");
-        $excel->getActiveSheet()->mergeCells('E3:E4');
-        $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
-        $excel->getActiveSheet()->getStyle('E4')->applyFromArray($style_col);
+            $excel->setActiveSheetIndex(0)->setCellValue('C3', "SUPIR");
+            $excel->getActiveSheet()->mergeCells('C3:C4');
+            $excel->getActiveSheet()->getStyle('C3')->applyFromArray($style_col);
+            $excel->getActiveSheet()->getStyle('C4')->applyFromArray($style_col);
 
+            $excel->setActiveSheetIndex(0)->setCellValue('D3', "NOPOL");
+            $excel->getActiveSheet()->mergeCells('D3:D4');
+            $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_col);
+            $excel->getActiveSheet()->getStyle('D4')->applyFromArray($style_col);
 
+            $excel->setActiveSheetIndex(0)->setCellValue('E3', "QTY AWAL");
+            if ($data_project->id_komoditas == '2' || ($data_project->id_komoditas == '3' and $data_project->id_klien == '6')) {
+                $excel->setActiveSheetIndex(0)->setCellValue('H3', "QTY AKHIR");
+                $excel->getActiveSheet()->mergeCells('E3:G3');
+                $excel->getActiveSheet()->mergeCells('H3:J3');
+                $excel->setActiveSheetIndex(0)->setCellValue('E4', "BRUOT");
+                $excel->setActiveSheetIndex(0)->setCellValue('F4', "TARRA");
+                $excel->setActiveSheetIndex(0)->setCellValue('G4', "NETTO");
+                $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('E4')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('F3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('F4')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('G4')->applyFromArray($style_col);
 
-        $excel->setActiveSheetIndex(0)->setCellValue('F3', "NOPOL");
-        $excel->getActiveSheet()->mergeCells('F3:F4');
-        $excel->getActiveSheet()->getStyle('F3')->applyFromArray($style_col);
-        $excel->getActiveSheet()->getStyle('F4')->applyFromArray($style_col);
+                $excel->setActiveSheetIndex(0)->setCellValue('H4', "BRUOT");
+                $excel->setActiveSheetIndex(0)->setCellValue('I4', "TARRA");
+                $excel->setActiveSheetIndex(0)->setCellValue('J4', "NETTO");
+                $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('H4')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('I4')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('J4')->applyFromArray($style_col);
 
-        $excel->setActiveSheetIndex(0)->setCellValue('G3', "QTY AWAL");
-        if ($data_project->id_komoditas == '2' || ($data_project->id_komoditas == '3' and $data_project->id_klien == '6')) {
-            $excel->setActiveSheetIndex(0)->setCellValue('J3', "QTY AKHIR");
-            $excel->getActiveSheet()->mergeCells('G3:I3');
-            $excel->getActiveSheet()->mergeCells('J3:L3');
-            $excel->setActiveSheetIndex(0)->setCellValue('G4', "BRUOT");
-            $excel->setActiveSheetIndex(0)->setCellValue('H4', "TARRA");
-            $excel->setActiveSheetIndex(0)->setCellValue('I4', "NETTO");
-            $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('G4')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('H4')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('I4')->applyFromArray($style_col);
+                $excel->setActiveSheetIndex(0)->setCellValue('K3', "SUSUT");
+                $excel->getActiveSheet()->mergeCells('K3:K4');
+                $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('K4')->applyFromArray($style_col);
+            } else {
+                $excel->getActiveSheet()->mergeCells('G3:H3');
+                $excel->setActiveSheetIndex(0)->setCellValue('G4', "BAG");
+                $excel->setActiveSheetIndex(0)->setCellValue('H4', "KG");
+                $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('G4')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('H4')->applyFromArray($style_col);
+                $excel->setActiveSheetIndex(0)->setCellValue('I3', "QTY AKHIR");
+                $excel->getActiveSheet()->mergeCells('I3:J3');
+                $excel->setActiveSheetIndex(0)->setCellValue('I4', "BAG");
+                $excel->setActiveSheetIndex(0)->setCellValue('J4', "KG");
+                $excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('I4')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('J4')->applyFromArray($style_col);
 
-            $excel->setActiveSheetIndex(0)->setCellValue('J4', "BRUOT");
-            $excel->setActiveSheetIndex(0)->setCellValue('K4', "TARRA");
-            $excel->setActiveSheetIndex(0)->setCellValue('L4', "NETTO");
-            $excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('J4')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('K4')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('L3')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('L4')->applyFromArray($style_col);
-
-            $excel->setActiveSheetIndex(0)->setCellValue('M3', "SUSUT");
-            $excel->getActiveSheet()->mergeCells('M3:M4');
-            $excel->getActiveSheet()->getStyle('M3')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('M4')->applyFromArray($style_col);
+                $excel->setActiveSheetIndex(0)->setCellValue('K3', "SUSUT");
+                $excel->getActiveSheet()->mergeCells('K3:K4');
+                $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('K4')->applyFromArray($style_col);
+            }
         } else {
-            $excel->getActiveSheet()->mergeCells('G3:H3');
-            $excel->setActiveSheetIndex(0)->setCellValue('G4', "BAG");
-            $excel->setActiveSheetIndex(0)->setCellValue('H4', "KG");
-            $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('G4')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('H4')->applyFromArray($style_col);
-            $excel->setActiveSheetIndex(0)->setCellValue('I3', "QTY AKHIR");
-            $excel->getActiveSheet()->mergeCells('I3:J3');
-            $excel->setActiveSheetIndex(0)->setCellValue('I4', "BAG");
-            $excel->setActiveSheetIndex(0)->setCellValue('J4', "KG");
-            $excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('I4')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('J4')->applyFromArray($style_col);
+            $excel->setActiveSheetIndex(0)->setCellValue('E3', "SUPIR");
+            $excel->getActiveSheet()->mergeCells('E3:E4');
+            $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
+            $excel->getActiveSheet()->getStyle('E4')->applyFromArray($style_col);
 
-            $excel->setActiveSheetIndex(0)->setCellValue('K3', "SUSUT");
-            $excel->getActiveSheet()->mergeCells('K3:K4');
-            $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
-            $excel->getActiveSheet()->getStyle('K4')->applyFromArray($style_col);
+            $excel->setActiveSheetIndex(0)->setCellValue('F3', "NOPOL");
+            $excel->getActiveSheet()->mergeCells('F3:F4');
+            $excel->getActiveSheet()->getStyle('F3')->applyFromArray($style_col);
+            $excel->getActiveSheet()->getStyle('F4')->applyFromArray($style_col);
+
+            $excel->setActiveSheetIndex(0)->setCellValue('G3', "QTY AWAL");
+            if ($data_project->id_komoditas == '2' || ($data_project->id_komoditas == '3' and $data_project->id_klien == '6')) {
+                $excel->setActiveSheetIndex(0)->setCellValue('J3', "QTY AKHIR");
+                $excel->getActiveSheet()->mergeCells('G3:I3');
+                $excel->getActiveSheet()->mergeCells('J3:L3');
+                $excel->setActiveSheetIndex(0)->setCellValue('G4', "BRUOT");
+                $excel->setActiveSheetIndex(0)->setCellValue('H4', "TARRA");
+                $excel->setActiveSheetIndex(0)->setCellValue('I4', "NETTO");
+                $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('G4')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('H4')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('I4')->applyFromArray($style_col);
+
+                $excel->setActiveSheetIndex(0)->setCellValue('J4', "BRUOT");
+                $excel->setActiveSheetIndex(0)->setCellValue('K4', "TARRA");
+                $excel->setActiveSheetIndex(0)->setCellValue('L4', "NETTO");
+                $excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('J4')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('K4')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('L3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('L4')->applyFromArray($style_col);
+
+                $excel->setActiveSheetIndex(0)->setCellValue('M3', "SUSUT");
+                $excel->getActiveSheet()->mergeCells('M3:M4');
+                $excel->getActiveSheet()->getStyle('M3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('M4')->applyFromArray($style_col);
+            } else {
+                $excel->getActiveSheet()->mergeCells('G3:H3');
+                $excel->setActiveSheetIndex(0)->setCellValue('G4', "BAG");
+                $excel->setActiveSheetIndex(0)->setCellValue('H4', "KG");
+                $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('G4')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('H4')->applyFromArray($style_col);
+                $excel->setActiveSheetIndex(0)->setCellValue('I3', "QTY AKHIR");
+                $excel->getActiveSheet()->mergeCells('I3:J3');
+                $excel->setActiveSheetIndex(0)->setCellValue('I4', "BAG");
+                $excel->setActiveSheetIndex(0)->setCellValue('J4', "KG");
+                $excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('I4')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('J4')->applyFromArray($style_col);
+
+                $excel->setActiveSheetIndex(0)->setCellValue('K3', "SUSUT");
+                $excel->getActiveSheet()->mergeCells('K3:K4');
+                $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('K4')->applyFromArray($style_col);
+            }
         }
 
 
@@ -2154,27 +2216,47 @@ class Rms extends CI_Controller
             if ($data_project->id_klien == '8' || $data_project->id_klien == '9' || $data_project->id_klien == '16') {
                 $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->no_kontrak);
                 $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->no_tiket);
-            } else {
+            } elseif ($data_project->id_komoditas != '3' and $data_project->id_klien != '6') {
                 $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->no_do);
                 $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->no_sto);
             }
 
-            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->nama_supir);
-            $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->nopol);
-            if ($data_project->id_komoditas == '2' || ($data_project->id_komoditas == '3' and $data_project->id_klien == '6')) {
-                $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->bruto_awal);
-                $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->tarra_awal);
-                $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->timbang_kebun_kg);
-                $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->bruto_akhir);
-                $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data->tarra_akhir);
-                $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, $data->qty_kirim_kg);
-                $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, $data->m_susut);
+            if ($data_project->id_komoditas == '3' and $data_project->id_klien == '6') {
+                $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->nama_supir);
+                $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->nopol);
+                if ($data_project->id_komoditas == '2' || ($data_project->id_komoditas == '3' and $data_project->id_klien == '6')) {
+                    $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->bruto_awal);
+                    $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->tarra_awal);
+                    $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->timbang_kebun_kg);
+                    $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->bruto_akhir);
+                    $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->tarra_akhir);
+                    $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->qty_kirim_kg);
+                    $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data->m_susut);
+                } else {
+                    $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->timbang_kebun_bag);
+                    $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->timbang_kebun_kg);
+                    $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->qty_kirim_bag);
+                    $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->qty_kirim_kg);
+                    $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->m_susut);
+                }
             } else {
-                $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->timbang_kebun_bag);
-                $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->timbang_kebun_kg);
-                $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->qty_kirim_bag);
-                $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->qty_kirim_kg);
-                $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data->m_susut);
+                $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->nama_supir);
+                $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->nopol);
+                if ($data_project->id_komoditas == '2' || ($data_project->id_komoditas == '3' and $data_project->id_klien == '6')) {
+                    $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->bruto_awal);
+                    $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->tarra_awal);
+                    $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->timbang_kebun_kg);
+                    $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->bruto_akhir);
+                    $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data->tarra_akhir);
+                    $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, $data->qty_kirim_kg);
+                    $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, $data->m_susut);
+                } else {
+                    $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->timbang_kebun_bag);
+                    $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->timbang_kebun_kg);
+                    $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->qty_kirim_bag);
+                    $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->qty_kirim_kg);
+                    $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data->m_susut);
+                }
             }
 
             // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
@@ -2190,9 +2272,11 @@ class Rms extends CI_Controller
             $excel->getActiveSheet()->getStyle('J' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('K' . $numrow)->applyFromArray($style_row);
 
-            if ($data_project->id_komoditas == '2' || ($data_project->id_komoditas == '3' and $data_project->id_klien == '6')) {
-                $excel->getActiveSheet()->getStyle('L' . $numrow)->applyFromArray($style_row);
-                $excel->getActiveSheet()->getStyle('M' . $numrow)->applyFromArray($style_row);
+            if ($data_project->id_komoditas != '3' and $data_project->id_klien != '6') {
+                if ($data_project->id_komoditas == '2' || ($data_project->id_komoditas == '3' and $data_project->id_klien == '6')) {
+                    $excel->getActiveSheet()->getStyle('L' . $numrow)->applyFromArray($style_row);
+                    $excel->getActiveSheet()->getStyle('M' . $numrow)->applyFromArray($style_row);
+                }
             }
 
             $no++; // Tambah 1 setiap kali looping
@@ -2201,24 +2285,48 @@ class Rms extends CI_Controller
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, 'Total');
-        $excel->getActiveSheet()->mergeCells('A' . $numrow . ':F' . $numrow);
-        if ($data_project->id_komoditas == '2' || ($data_project->id_komoditas == '3' and $data_project->id_klien == '6')) {
+        if ($data_project->id_komoditas == '3' and $data_project->id_klien == '6') {
+            $excel->getActiveSheet()->mergeCells('A' . $numrow . ':D' . $numrow);
 
-            $excel->getActiveSheet()->getStyle('A' . $numrow . ':M' . $numrow)->applyFromArray($style_col_yellow);
-            $excel->getActiveSheet()->getStyle('A' . $numrow, 'Total')->applyFromArray($style_col_center);
-            $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data_project->total_bruto_awal);
-            $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data_project->total_tarra_awal);
-            $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data_project->total_qty_awal);
-            $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data_project->total_bruto_akhir);
-            $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data_project->total_tarra_akhir);
-            $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, $data_project->total_qty_akhir);
+            if ($data_project->id_komoditas == '2' || ($data_project->id_komoditas == '3' and $data_project->id_klien == '6')) {
+
+                $excel->getActiveSheet()->getStyle('A' . $numrow . ':K' . $numrow)->applyFromArray($style_col_yellow);
+                $excel->getActiveSheet()->getStyle('A' . $numrow, 'Total')->applyFromArray($style_col_center);
+                $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data_project->total_bruto_awal);
+                $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data_project->total_tarra_awal);
+                $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data_project->total_qty_awal);
+                $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data_project->total_bruto_akhir);
+                $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data_project->total_tarra_akhir);
+                $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data_project->total_qty_akhir);
+            } else {
+                $excel->getActiveSheet()->getStyle('A' . $numrow . ':K' . $numrow)->applyFromArray($style_col_yellow);
+                $excel->getActiveSheet()->getStyle('A' . $numrow, 'Total')->applyFromArray($style_col_center);
+                $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data_project->total_qty_awal_bag);
+                $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data_project->total_qty_awal);
+                $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data_project->total_qty_akhir_bag);
+                $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data_project->total_qty_akhir);
+            }
         } else {
-            $excel->getActiveSheet()->getStyle('A' . $numrow . ':K' . $numrow)->applyFromArray($style_col_yellow);
-            $excel->getActiveSheet()->getStyle('A' . $numrow, 'Total')->applyFromArray($style_col_center);
-            $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data_project->total_qty_awal_bag);
-            $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data_project->total_qty_awal);
-            $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data_project->total_qty_akhir_bag);
-            $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data_project->total_qty_akhir);
+            $excel->getActiveSheet()->mergeCells('A' . $numrow . ':F' . $numrow);
+
+            if ($data_project->id_komoditas == '2' || ($data_project->id_komoditas == '3' and $data_project->id_klien == '6')) {
+
+                $excel->getActiveSheet()->getStyle('A' . $numrow . ':M' . $numrow)->applyFromArray($style_col_yellow);
+                $excel->getActiveSheet()->getStyle('A' . $numrow, 'Total')->applyFromArray($style_col_center);
+                $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data_project->total_bruto_awal);
+                $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data_project->total_tarra_awal);
+                $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data_project->total_qty_awal);
+                $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data_project->total_bruto_akhir);
+                $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data_project->total_tarra_akhir);
+                $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, $data_project->total_qty_akhir);
+            } else {
+                $excel->getActiveSheet()->getStyle('A' . $numrow . ':K' . $numrow)->applyFromArray($style_col_yellow);
+                $excel->getActiveSheet()->getStyle('A' . $numrow, 'Total')->applyFromArray($style_col_center);
+                $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data_project->total_qty_awal_bag);
+                $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data_project->total_qty_awal);
+                $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data_project->total_qty_akhir_bag);
+                $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data_project->total_qty_akhir);
+            }
         }
 
 

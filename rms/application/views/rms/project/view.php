@@ -29,56 +29,49 @@
                   <br>
                   <div class="row">
                     <?php if ($project->no_kontrak) { ?>
-                      <div class="col-md-3">
+                      <div class="col-auto mr-2">
                         <p class="text-sm mb-0">No Kontrak :
                           <b class="d-block"><?php echo $project->no_kontrak; ?></b>
                         </p>
                       </div>
                     <?php } ?>
                     <?php if ($project->no_sto) { ?>
-                      <div class="col-md-3">
+                      <div class="col-auto mr-2">
                         <p class="text-sm mb-0">No STO :
                           <b class="d-block"><?php echo $project->no_sto; ?></b>
                         </p>
                       </div>
                     <?php } ?>
                     <?php if ($project->no_po) { ?>
-                      <div class="col-md-3">
+                      <div class="col-auto mr-2">
                         <p class="text-sm mb-0">No PO :
                           <b class="d-block"><?php echo $project->no_po; ?></b>
                         </p>
                       </div>
                     <?php } ?>
                     <?php if ($project->no_do) { ?>
-                      <div class="col-md-3">
+                      <div class="col-auto mr-2">
                         <p class="text-sm mb-0">No DO :
                           <b class="d-block"><?php echo $project->no_do; ?></b>
                         </p>
                       </div>
                     <?php } ?>
 
-                    <div class="col-md-3">
-                      <p class="text-sm mb-0">Status :
-                        <b class="text-green d-block"><?php echo $project->nama_status; ?></b>
+                    <div class="col-auto mr-2">
+                      <p class="text-sm mb-0">Komoditas
+                        <b class="d-block"><?php echo $project->komoditas; ?></b>
                       </p>
                     </div>
+                    <div class="col-auto mr-2">
+                      <p class="text-sm mb-0">Harga Satuan
+                        <b class="d-block">Rp <?php echo number_format($project->harga_unit, 0, "", "."); ?></b>
+                      </p>
+                    </div>
+
+                    <span class="badge <?php if($project->status == '0'){echo "bg-secondary";}elseif($project->status == '1'){echo "bg-warning";}elseif($project->status == '2'){echo "bg-success";} ?> " style="position:absolute; right:20px; top:25px;"><?php echo $project->nama_status; ?></span>
                   </div>
                   <hr>
                   <div class="row">
-                    <div class="col">
-                      <div class="text-muted">
-                        <p class="text-sm">Komoditas
-                          <b class="d-block"><?php echo $project->komoditas; ?></b>
-                        </p>
-                        <p class="text-sm">Tujuan
-                          <b class="d-block"><?php echo $project->nama_tujuan; ?></b>
-                        </p>
-                        <p class="text-sm">Harga Satuan
-                          <b class="d-block">Rp <?php echo number_format($project->harga_unit, 0, "", "."); ?></b>
-                        </p>
-                      </div>
-
-                    </div>
                     <div class="col">
                       <div class="text-muted">
                         <p class="text-sm">Tanggal Angkut
@@ -134,14 +127,14 @@
                                                   echo "0";
                                                 } ?></b>
                         </p>
-                        <p class="text-sm">Total Claim
+                        <p class="text-sm">Claim replas
                           <b class="d-block"><?php if ($project->total_claim_replas != NULL) {
                                                 echo number_format($project->total_claim_replas, 0, "", ".");
                                               } else {
                                                 echo "0";
                                               } ?> Kg</b>
                         </p>
-                        <p class="text-sm">Total Biaya Claim
+                        <p class="text-sm">Biaya claim replas
                           <b class="d-block">Rp <?php if ($project->total_biaya_claim_replas != NULL) {
                                                   echo number_format($project->total_biaya_claim_replas, 0, "", ".");
                                                 } else {
@@ -150,6 +143,27 @@
                         </p>
 
                       </div>
+                    </div>
+
+                    <div class="col">
+                      <p class="text-sm">Claim invoice
+                        <b class="d-block">Rp <?php if ($project->total_claim_invoice != NULL) {
+                                                echo number_format($project->total_claim_invoice, 0, "", ".");
+                                              } else {
+                                                echo "0";
+                                              } ?></b>
+                      </p>
+                      <p class="text-sm">Biaya claim inovice
+                        <b class="d-block">Rp <?php if ($project->total_biaya_claim_invoice != NULL) {
+                                                echo number_format($project->total_biaya_claim_invoice, 0, "", ".");
+                                              } else {
+                                                echo "0";
+                                              } ?></b>
+                      </p>
+
+                      <p class="text-sm">Penagih
+                        <b class="d-block"><?php echo $project->nama_penagih; ?></b>
+                      </p>
                     </div>
                     <div class="col">
                       <div class="text-muted">
@@ -160,7 +174,7 @@
                                                   echo "0";
                                                 } ?></b>
                         </p>
-                        <p class="text-sm">Total Pengeluaran Lapangan
+                        <p class="text-sm">Pengeluaran Lapangan
                           <b class="d-block">Rp <?php if ($project->total_pengeluaran_lapangan != NULL) {
                                                   echo number_format($project->total_pengeluaran_lapangan, 0, "", ".");
                                                 } else {
@@ -443,7 +457,7 @@
             <!-- /.card-body -->
           </div>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-7">
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title mt-2">Riwayat Pembayaran Jasa Bongkar Muat</h3>
@@ -484,8 +498,8 @@
                                 echo "Ambil BAP";
                               } ?></td>
 
-                              <td><?php echo $row->nama_kebun; ?></td>
-                              <td><?php echo $row->penagih; ?></td>
+                          <td><?php echo $row->nama_kebun; ?></td>
+                          <td><?php echo $row->penagih; ?></td>
                           <td><?php echo number_format($row->tonase, 0, "", "."); ?></td>
                           <td>Rp <?php echo number_format($row->jumlah_pembayaran, 0, "", "."); ?></td>
                           <td><?php echo shortdate_indo($row->tanggal_pembayaran); ?></td>
@@ -518,7 +532,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title mt-2">Riwayat Pembayaran Replas</h3>

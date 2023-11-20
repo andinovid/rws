@@ -57,7 +57,7 @@
                       <td><?php echo $row->nama_perusahaan; ?></td>
                       <td><?php echo $row->total_replas; ?></td>
                       <td>Rp <?php echo number_format($row->total_nilai, 0, "", "."); ?></td>
-                      <td>Rp <?php echo number_format($row->total_biaya_claim, 0, "", "."); ?></td>
+                      <td>Rp <?php echo number_format($row->total_biaya_claim_invoice, 0, "", "."); ?></td>
                       <td class="project-actions text-right">
                         <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/project/view/<?php echo $row->id_project; ?>" data-toggle="tooltip" data-placement="top" title="Detail Project">
                           <i class="fas fa-folder">
