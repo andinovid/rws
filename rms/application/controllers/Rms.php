@@ -2107,7 +2107,7 @@ class Rms extends CI_Controller
                 $excel->setActiveSheetIndex(0)->setCellValue('H3', "QTY AKHIR");
                 $excel->getActiveSheet()->mergeCells('E3:G3');
                 $excel->getActiveSheet()->mergeCells('H3:J3');
-                $excel->setActiveSheetIndex(0)->setCellValue('E4', "BRUOT");
+                $excel->setActiveSheetIndex(0)->setCellValue('E4', "BRUTO");
                 $excel->setActiveSheetIndex(0)->setCellValue('F4', "TARRA");
                 $excel->setActiveSheetIndex(0)->setCellValue('G4', "NETTO");
                 $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
@@ -2117,7 +2117,7 @@ class Rms extends CI_Controller
                 $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
                 $excel->getActiveSheet()->getStyle('G4')->applyFromArray($style_col);
 
-                $excel->setActiveSheetIndex(0)->setCellValue('H4', "BRUOT");
+                $excel->setActiveSheetIndex(0)->setCellValue('H4', "BRUTO");
                 $excel->setActiveSheetIndex(0)->setCellValue('I4', "TARRA");
                 $excel->setActiveSheetIndex(0)->setCellValue('J4', "NETTO");
                 $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
@@ -2201,7 +2201,7 @@ class Rms extends CI_Controller
                 $excel->setActiveSheetIndex(0)->setCellValue('J3', "QTY AKHIR");
                 $excel->getActiveSheet()->mergeCells('G3:I3');
                 $excel->getActiveSheet()->mergeCells('J3:L3');
-                $excel->setActiveSheetIndex(0)->setCellValue('G4', "BRUOT");
+                $excel->setActiveSheetIndex(0)->setCellValue('G4', "BRUTO");
                 $excel->setActiveSheetIndex(0)->setCellValue('H4', "TARRA");
                 $excel->setActiveSheetIndex(0)->setCellValue('I4', "NETTO");
                 $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
@@ -2211,7 +2211,7 @@ class Rms extends CI_Controller
                 $excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
                 $excel->getActiveSheet()->getStyle('I4')->applyFromArray($style_col);
 
-                $excel->setActiveSheetIndex(0)->setCellValue('J4', "BRUOT");
+                $excel->setActiveSheetIndex(0)->setCellValue('J4', "BRUTO");
                 $excel->setActiveSheetIndex(0)->setCellValue('K4', "TARRA");
                 $excel->setActiveSheetIndex(0)->setCellValue('L4', "NETTO");
                 $excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
