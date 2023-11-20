@@ -2130,6 +2130,39 @@ class Rms extends CI_Controller
                 $excel->getActiveSheet()->mergeCells('K3:K4');
                 $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
                 $excel->getActiveSheet()->getStyle('K4')->applyFromArray($style_col);
+
+                if ($data_project->id_komoditas == '3') {
+                    $excel->setActiveSheetIndex(0)->setCellValue('L3', "NILAI TERENDAH");
+                    $excel->getActiveSheet()->mergeCells('L3:L4');
+                    $excel->getActiveSheet()->getStyle('L3')->applyFromArray($style_col);
+                    $excel->getActiveSheet()->getStyle('L4')->applyFromArray($style_col);
+
+                    $excel->setActiveSheetIndex(0)->setCellValue('M3', "OA/KG");
+                    $excel->getActiveSheet()->mergeCells('M3:M4');
+                    $excel->getActiveSheet()->getStyle('M3')->applyFromArray($style_col);
+                    $excel->getActiveSheet()->getStyle('M4')->applyFromArray($style_col);
+
+                    $excel->setActiveSheetIndex(0)->setCellValue('N3', "BIAYA ANGKUT");
+                    $excel->getActiveSheet()->mergeCells('N3:N4');
+                    $excel->getActiveSheet()->getStyle('N3')->applyFromArray($style_col);
+                    $excel->getActiveSheet()->getStyle('N4')->applyFromArray($style_col);
+
+                    $excel->setActiveSheetIndex(0)->setCellValue('O3', "CLAIM");
+                    $excel->getActiveSheet()->mergeCells('O3:O4');
+                    $excel->getActiveSheet()->getStyle('O3')->applyFromArray($style_col);
+                    $excel->getActiveSheet()->getStyle('O4')->applyFromArray($style_col);
+
+                    $excel->setActiveSheetIndex(0)->setCellValue('P3', "TOTAL CLAIM");
+                    $excel->getActiveSheet()->mergeCells('P3:P4');
+                    $excel->getActiveSheet()->getStyle('P3')->applyFromArray($style_col);
+                    $excel->getActiveSheet()->getStyle('P4')->applyFromArray($style_col);
+
+                    $excel->setActiveSheetIndex(0)->setCellValue('Q3', "TOTAL");
+                    $excel->getActiveSheet()->mergeCells('Q3:Q4');
+                    $excel->getActiveSheet()->getStyle('Q3')->applyFromArray($style_col);
+                    $excel->getActiveSheet()->getStyle('Q4')->applyFromArray($style_col);
+                }
+
             } else {
                 $excel->getActiveSheet()->mergeCells('G3:H3');
                 $excel->setActiveSheetIndex(0)->setCellValue('G4', "BAG");
@@ -2151,6 +2184,8 @@ class Rms extends CI_Controller
                 $excel->getActiveSheet()->mergeCells('K3:K4');
                 $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
                 $excel->getActiveSheet()->getStyle('K4')->applyFromArray($style_col);
+
+                
             }
         } else {
             $excel->setActiveSheetIndex(0)->setCellValue('E3', "SUPIR");
@@ -2241,6 +2276,14 @@ class Rms extends CI_Controller
                     $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->tarra_akhir);
                     $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->qty_kirim_kg);
                     $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data->m_susut);
+                    if ($data_project->id_komoditas == '3') {
+                        $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, $data->qty_terendah);
+                        $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, $data->harga_unit);
+                        $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, $data->harga_qty_terendah);
+                        $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, $data->claim_invoice);
+                        $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, $data->total_claim_invoice);
+                        $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, $data->total_invoice);
+                    }
                 } else {
                     $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->timbang_kebun_bag);
                     $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->timbang_kebun_kg);
@@ -2280,6 +2323,15 @@ class Rms extends CI_Controller
             $excel->getActiveSheet()->getStyle('I' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('J' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('K' . $numrow)->applyFromArray($style_row);
+
+            if($data_project->id_komoditas == '3' and $data_project->id_klien == '6'){
+                $excel->getActiveSheet()->getStyle('L' . $numrow)->applyFromArray($style_row);
+                $excel->getActiveSheet()->getStyle('M' . $numrow)->applyFromArray($style_row);
+                $excel->getActiveSheet()->getStyle('N' . $numrow)->applyFromArray($style_row);
+                $excel->getActiveSheet()->getStyle('O' . $numrow)->applyFromArray($style_row);
+                $excel->getActiveSheet()->getStyle('P' . $numrow)->applyFromArray($style_row);
+                $excel->getActiveSheet()->getStyle('Q' . $numrow)->applyFromArray($style_row);
+            }
 
             if ($data_project->id_komoditas != '3' and $data_project->id_klien != '6') {
                 if ($data_project->id_komoditas == '2' || ($data_project->id_komoditas == '3' and $data_project->id_klien == '6')) {
