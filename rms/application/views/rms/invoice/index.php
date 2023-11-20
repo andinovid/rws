@@ -70,11 +70,15 @@
                             </i>
                           </a>
                         <?php } elseif (($row->status != "0")) { ?>
-                          <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>invoice/view/<?php echo $row->id_invoice; ?>"  data-toggle="tooltip" data-placement="top" title="Riwayat Pembayaran Invoice">
+                          <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>invoice/view/<?php echo $row->id_invoice; ?>" data-toggle="tooltip" data-placement="top" title="Riwayat Pembayaran Invoice">
                             <i class="fas fa-clock">
                             </i>
                           </a>
                         <?php } ?>
+                        <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_invoice(<?php echo $row->id_invoice; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
+                          <i class="fas fa-trash">
+                          </i>
+                        </a>
                       </td>
                     </tr>
                   <?php endforeach; ?>
@@ -374,29 +378,28 @@
     });
   }
 
-  function delete_tujuan(id) {
+  function delete_invoice(id) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Hapus data?',
+      text: "Data yang telah dihapus tidak dapat dikembalikan.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Ya, Hapus!'
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
-          url: "<?php echo base_url() ?>rms/delete",
+          url: "<?php echo base_url() ?>rms/delete_invoice",
           type: "POST",
           data: {
             id: id,
-            tbl: "tbl_tujuan",
           },
           dataType: "JSON",
           success: function(data) {
             Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
+              'Berhasil!',
+              'Data berhasil dihapus.',
               'success'
             ).then((result) => {
               location.reload();

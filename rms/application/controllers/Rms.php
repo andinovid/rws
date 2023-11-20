@@ -341,6 +341,15 @@ class Rms extends CI_Controller
         }
     }
 
+    public function delete_invoice()
+    {
+        $id = $this->input->POST('id');
+        $delete = $this->rms_model->delete_invoice($id);
+        if ($delete) {
+            echo json_encode(array("status" => TRUE));
+        }
+    }
+
 
     public function delete_perbaikan()
     {
@@ -1915,12 +1924,7 @@ class Rms extends CI_Controller
             'status' => '2',
         );
 
-        for ($i = 0; $i < count($projectArray); $i++) {
 
-            $item = array('no_invoice' => $no_invoice, 'id_project' => $projectArray[$i]);
-            $this->rms_model->insert("tbl_generate_invoice", $item);
-            $this->rms_model->update("tbl_project", $data_project, $projectArray[$i]);
-        }
 
         $data = array(
             'no_invoice' => $no_invoice,
@@ -1931,8 +1935,13 @@ class Rms extends CI_Controller
         );
 
 
-        $save_invoice = $this->rms_model->insert("tbl_invoice", $data);
+        $save_invoice = $this->rms_model->insert_id("tbl_invoice", $data);
+        for ($i = 0; $i < count($projectArray); $i++) {
 
+            $item = array('no_invoice' => $no_invoice, 'id_project' => $projectArray[$i], 'id_invoice' => $save_invoice);
+            $this->rms_model->insert("tbl_generate_invoice", $item);
+            $this->rms_model->update("tbl_project", $data_project, $projectArray[$i]);
+        }
         if ($save_invoice) {
 
             echo json_encode(array(
