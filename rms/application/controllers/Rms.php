@@ -1972,7 +1972,7 @@ class Rms extends CI_Controller
         $html = $this->load->view('rms/invoice/pdf', $data, true);
         $filename = "INVOICE(" . $cetak_no . ").pdf";
         $this->pdf->createPDF($html, $filename, true);
-    }
+    } 
 
 
     function view_invoice($id)
