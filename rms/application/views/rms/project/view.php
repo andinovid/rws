@@ -378,7 +378,7 @@
                       <td><span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span></td>
 
                       <td class="project-actions text-right">
-                        <?php if ($row->no_replas != "" and $row->no_replas != "0" and $row->no_replas != NULL and $row->status != "1") { ?>
+                        <?php if ($row->status != "1") { ?>
                           <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="bayar_replas(<?php echo $row->id_rekap; ?>)" data-toggle="tooltip" data-placement="top" title="Bayar Replas">
                             <i class="fas fa-credit-card">
                             </i>
