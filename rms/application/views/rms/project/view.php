@@ -155,10 +155,10 @@
                     </div>
                     <div class="col">
                       <div class="text-muted">
-                        
-                      <p class="text-sm">Jumlah Replas
-                        <b class="d-block"><?php echo $project->total_replas; ?></b>
-                      </p>
+
+                        <p class="text-sm">Jumlah Replas
+                          <b class="d-block"><?php echo $project->total_replas; ?></b>
+                        </p>
                         <p class="text-sm">Total Replas
                           <b class="d-block">Rp <?php if ($project->total_pengeluaran != NULL) {
                                                   echo number_format($project->total_pengeluaran, 0, "", ".");
@@ -657,15 +657,15 @@
                       <?php if ($project->id_komoditas == '2' || ($project->id_komoditas == '3' and $project->id_klien == '6')) { ?>
                         <div class="col-md-4">
                           <label for="no_replas">Bruto Awal</label>
-                          <input type="text" class="form-control number" name="bruto_awal" id="bruto_awal" placeholder="Bruto awal (kg)">
+                          <input type="text" class="form-control" name="bruto_awal" id="bruto_awal" placeholder="Bruto awal (kg)">
                         </div>
                         <div class="col-md-4">
                           <label for="no_replas">Tarra Awal</label>
-                          <input type="text" class="form-control number" name="tarra_awal" id="tarra_awal" placeholder="Tarra awal (kg)">
+                          <input type="text" class="form-control" name="tarra_awal" id="tarra_awal" placeholder="Tarra awal (kg)">
                         </div>
                         <div class="col-md-4">
                           <label for="no_replas">Netto Awal</label>
-                          <input type="text" class="form-control number" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Netto (kg)">
+                          <input type="text" class="form-control" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Netto (kg)">
                         </div>
                       <?php } else { ?>
                         <div class="col-md-6">
@@ -685,15 +685,15 @@
                       <?php if ($project->id_komoditas == '2' || ($project->id_komoditas == '3' and $project->id_klien == '6')) { ?>
                         <div class="col-md-4">
                           <label for="no_replas">Bruto Akhir</label>
-                          <input type="text" class="form-control number" name="bruto_akhir" id="bruto_akhir" placeholder="Bruto akhir (kg)">
+                          <input type="text" class="form-control" name="bruto_akhir" id="bruto_akhir" placeholder="Bruto akhir (kg)">
                         </div>
                         <div class="col-md-4">
                           <label for="no_replas">Tarra Akhir</label>
-                          <input type="text" class="form-control number" name="tarra_akhir" id="tarra_akhir" placeholder="Tarra akhir (kg)">
+                          <input type="text" class="form-control" name="tarra_akhir" id="tarra_akhir" placeholder="Tarra akhir (kg)">
                         </div>
                         <div class="col-md-4">
                           <label for="no_replas">Netto Akhir</label>
-                          <input type="text" class="form-control number" placeholder="Netto (kg)" name="qty_kirim_kg" id="qty_kirim_kg">
+                          <input type="text" class="form-control" placeholder="Netto (kg)" name="qty_kirim_kg" id="qty_kirim_kg">
                         </div>
                       <?php } else { ?>
                         <div class="col-md-6">
@@ -702,7 +702,7 @@
                         </div>
                         <div class="col-md-6">
                           <label for="no_replas">Kg</label>
-                          <input type="text" class="form-control number" placeholder="Kg" name="qty_kirim_kg" id="qty_kirim_kg">
+                          <input type="text" class="form-control" placeholder="Kg" name="qty_kirim_kg" id="qty_kirim_kg">
                         </div>
                       <?php } ?>
                     </div>
@@ -912,6 +912,17 @@
     $("#input-replas").modal('show');
   }
 
+  $('#bruto_awal, #tarra_awal').on('change keyup', function() {
+    var res = $('#bruto_awal').val() - $('#tarra_awal').val();
+    $('#timbang_kebun_kg').val(res)
+  })
+
+  
+  $('#bruto_akhir, #tarra_akhir').on('change keyup', function() {
+    var res = $('#bruto_akhir').val() - $('#tarra_akhir').val();
+    $('#qty_kirim_kg').val(res)
+  })
+
   $('#form_replas').on('submit', function(event) {
     event.preventDefault();
     var formData = new FormData($('#form_replas')[0]);
@@ -1060,14 +1071,14 @@
           $('[name="truck"]').val(data[i].id_truck).change();
           $('[name="tujuan"]').val(data[i].id_tujuan).change();
           $('[name="vendor_pajak"]').val(data[i].id_vendor_pajak).change();
-          $('[name="bruto_awal"]').val($.number(data[i].bruto_awal).replace(/\,/g, '.'));
-          $('[name="tarra_awal"]').val($.number(data[i].tarra_awal).replace(/\,/g, '.'));
-          $('[name="bruto_akhir"]').val($.number(data[i].bruto_akhir).replace(/\,/g, '.'));
-          $('[name="tarra_akhir"]').val($.number(data[i].tarra_akhir).replace(/\,/g, '.'));
+          $('[name="bruto_awal"]').val(data[i].bruto_awal);
+          $('[name="tarra_awal"]').val(data[i].tarra_awal);
+          $('[name="bruto_akhir"]').val(data[i].bruto_akhir);
+          $('[name="tarra_akhir"]').val(data[i].tarra_akhir);
           $('[name="qty_kirim_bag"]').val(data[i].qty_kirim_bag);
-          $('[name="qty_kirim_kg"]').val($.number(data[i].qty_kirim_kg).replace(/\,/g, '.'));
+          $('[name="qty_kirim_kg"]').val(data[i].qty_kirim_kg);
           $('[name="timbang_kebun_bag"]').val(data[i].timbang_kebun_bag);
-          $('[name="timbang_kebun_kg"]').val($.number(data[i].timbang_kebun_kg).replace(/\,/g, '.'));
+          $('[name="timbang_kebun_kg"]').val(data[i].timbang_kebun_kg);
           $('[name="toleransi_susut"]').val(data[i].toleransi_susut);
           $('[name="uang_sangu"]').val($.number(data[i].uang_sangu).replace(/\,/g, '.'));
         }
