@@ -127,6 +127,13 @@ class Rms_model extends CI_Model
         $this->db->delete('tbl_generate_invoice', array('id_invoice' => $id));
         return TRUE;
     }
+    
+    function delete_kwitansi($id)
+    {
+        $this->db->delete('tbl_kwitansi', array('id' => $id));
+        $this->db->delete('tbl_generate_kwitansi', array('id_kwitansi' => $id));
+        return TRUE;
+    }
 
     function delete_truck($id)
     {

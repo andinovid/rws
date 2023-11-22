@@ -20,16 +20,16 @@
 
     <!-- SidebarSearch Form -->
     <?php if ($this->sess->role != '5') { ?>
-    <div class="form-inline">
-      <div class="input-group" data-widget="sidebar-search">
-        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-sidebar">
-            <i class="fas fa-search fa-fw"></i>
-          </button>
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     <?php } ?>
 
     <!-- Sidebar Menu -->
@@ -194,6 +194,30 @@
             </a>
           </li>
 
+          <li class="nav-item <?php if ($this->uri->segment(1) == "kwitansi") { ?>menu-open <?php } ?>">
+            <a href="<?php echo base_url(); ?>invoice/" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi") { ?>active <?php } ?>">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Kwitansi
+                <i class="fas fa-angle-right right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item ">
+                <a href="<?php echo base_url(); ?>kwitansi/generate" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi" AND $this->uri->segment(2) == "generate") { ?>active <?php } ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Generate Kwitansi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>kwitansi/data" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi" AND $this->uri->segment(2) == "data") { ?>active <?php } ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Kwitansi</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-item <?php if ($this->uri->segment(1) == "invoice") { ?>menu-open <?php } ?>">
             <a href="<?php echo base_url(); ?>invoice/" class="nav-link <?php if ($this->uri->segment(1) == "invoice") { ?>active <?php } ?>">
               <i class="nav-icon fas fa-copy"></i>
@@ -224,15 +248,36 @@
               Kwitansi
             </p>
           </a>
-        </li>
-        <li class="nav-item">
-          <a href="<?php echo base_url(); ?>laporan/" class="nav-link">
-            <i class="nav-icon fas fa-book"></i>
-            <p>
-              Laporan
-            </p>
-          </a>
         </li-->
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>laporan/" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Laporan
+                <i class="fas fa-angle-right right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item ">
+                <a href="<?php echo base_url(); ?>laporan/all" class="nav-link <?php if ($this->uri->segment(2) == "all") { ?>active <?php } ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Semua Laporan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>laporan/komoditas" class="nav-link <?php if ($this->uri->segment(2) == "komoditas") { ?>active <?php } ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Komoditas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>invoice/data" class="nav-link <?php if ($this->uri->segment(2) == "transporter") { ?>active <?php } ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Transporter</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-header">PENGATURAN</li>
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>setting/" class="nav-link">

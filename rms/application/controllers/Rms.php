@@ -164,6 +164,16 @@ class Rms extends CI_Controller
         echo json_encode($detail);
     }
 
+    public function get_kwitansi()
+    {
+        $id = $this->input->POST('id');
+        $data = $this->rms_model->get("v_kwitansi", "WHERE id_kwitansi = $id");
+        $detail = $data->result();
+        echo json_encode($detail);
+    }
+
+    
+
     public function save_replas()
     {
         $id = $this->input->POST('id');
@@ -345,6 +355,14 @@ class Rms extends CI_Controller
     {
         $id = $this->input->POST('id');
         $delete = $this->rms_model->delete_invoice($id);
+        if ($delete) {
+            echo json_encode(array("status" => TRUE));
+        }
+    }
+    public function delete_kwitansi()
+    {
+        $id = $this->input->POST('id');
+        $delete = $this->rms_model->delete_kwitansi($id);
         if ($delete) {
             echo json_encode(array("status" => TRUE));
         }
@@ -1185,12 +1203,45 @@ class Rms extends CI_Controller
         }
     }
 
+    
+    public function save_pembayaran_kwitansi()
+    {
+        $id = $this->input->POST('id');
+        $tanggal_bayar = $this->input->POST('tanggal_pembayaran');
+
+        $data = array(
+            'tanggal_pembayaran' => $tanggal_bayar,
+            'status' => '1',
+        );
+
+        $data_rekap = array(
+            'tanggal_pembayaran_replas' => $tanggal_bayar,
+            'status' => '1',
+        );
+
+        $save = $this->rms_model->update("tbl_kwitansi", $data, $id);
+        if ($save) {
+            $this->rms_model->update("tbl_rekap", $data_rekap, $id);
+            echo json_encode(array(
+                "status" => TRUE,
+                "target" => TRUE
+            ));
+        }
+    }
+
 
     function keuangan()
     {
         $data['keuangan'] = $this->rms_model->get("tbl_keuangan", "ORDER BY tanggal_input DESC")->result();
         $data['saldo'] = $this->rms_model->get_by_query("SELECT SUM(CASE WHEN jenis = '1' THEN jumlah ELSE 0 END) -  SUM(CASE WHEN jenis = '2' THEN jumlah ELSE 0 END) as total FROM tbl_keuangan")->row();
         $data['content'] = 'rms/keuangan/index';
+        $this->load->view('rms/includes/template', $data);
+    }
+
+    function laporan_komoditas()
+    {
+        $data['laporan'] = $this->rms_model->get("v_laporan_komoditas", "WHERE (year(tanggal_angkut),month(tanggal_angkut)) = (year(now()),month(now())) ORDER BY tanggal_angkut ASC")->result();
+        $data['content'] = 'rms/laporan/kokmoditas';
         $this->load->view('rms/includes/template', $data);
     }
 
@@ -1286,10 +1337,10 @@ class Rms extends CI_Controller
     }
 
 
-    function kwitansi($id_project)
+    function kwitansi()
     {
-        $data['kwitansi'] = $this->rms_model->get("v_kwitansi", "WHERE id_project = '$id_project'")->result();
-        $data['content'] = 'rms/project/kwitansi';
+        $data['kwitansi'] = $this->rms_model->get("v_kwitansi")->result();
+        $data['content'] = 'rms/kwitansi/kwitansi';
         $this->load->view('rms/includes/template', $data);
     }
 
@@ -1303,10 +1354,10 @@ class Rms extends CI_Controller
 
 
 
-    public function print_kwitansi($id_project, $id_vendor)
+    public function print_kwitansi($id_kwitansi)
     {
 
-        $detail_kwitansi = $this->rms_model->get_by_query("SELECT * FROM v_kwitansi WHERE id_project = '$id_project' AND id_vendor = '$id_vendor'")->row();
+        $detail_kwitansi = $this->rms_model->get_by_query("SELECT * FROM v_kwitansi WHERE id_kwitansi = '$id_kwitansi'")->row();
         include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
         $excel = new PHPExcel();
         $excel->getProperties()->setCreator('Rajawali System')
@@ -1428,7 +1479,7 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('P8')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('Q8')->applyFromArray($style_col);
 
-        $kwitansi = $this->rms_model->get("v_rekap", "WHERE id_project = '$id_project' AND id_vendor = '$id_vendor' AND status = '0'")->result();
+        $kwitansi = $this->rms_model->get("v_generate_kwitansi", "WHERE id_kwitansi = '$id_kwitansi'")->result();
 
 
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
@@ -1902,6 +1953,40 @@ class Rms extends CI_Controller
         echo json_encode($detail);
     }
 
+    function generate_kwitansi()
+    {
+        $data['kwitansi'] = $this->rms_model->get("v_rekap", "WHERE status = '0'")->result();
+        $data['content'] = 'rms/kwitansi/generate';
+        $this->load->view('rms/includes/template', $data);
+    }
+
+    function save_generate_kwitansi()
+    {
+        $id_rekap = $this->input->POST('id_rekap_invoice');
+        $no_kwitansi = $this->input->POST('no_invoice');
+
+
+        $projectArray = explode(',', $id_rekap);
+
+        $data = array(
+            'no_kwitansi' => $no_kwitansi,
+            'status' => '0',
+        );
+
+        $save_invoice = $this->rms_model->insert_id("tbl_kwitansi", $data);
+        for ($i = 0; $i < count($projectArray); $i++) {
+
+            $item = array('no_kwitansi' => $no_kwitansi, 'id_rekap' => $projectArray[$i], 'id_kwitansi' => $save_invoice);
+            $this->rms_model->insert("tbl_generate_kwitansi", $item);
+        }
+        if ($save_invoice) {
+
+            echo json_encode(array(
+                "status" => TRUE,
+                "target" => TRUE
+            ));
+        }
+    }
 
 
     function generate_invoice()
@@ -1972,7 +2057,7 @@ class Rms extends CI_Controller
         $html = $this->load->view('rms/invoice/pdf', $data, true);
         $filename = "INVOICE(" . $cetak_no . ").pdf";
         $this->pdf->createPDF($html, $filename, true);
-    } 
+    }
 
 
     function view_invoice($id)
@@ -2278,9 +2363,9 @@ class Rms extends CI_Controller
                         $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, $data->qty_terendah);
                         $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, $data->harga_unit);
                         $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, $data->harga_qty_terendah);
-                        if($data->total_claim_invoice == NULL || $data->total_claim_invoice == "" ||  $data->total_claim_invoice == '0'){
+                        if ($data->total_claim_invoice == NULL || $data->total_claim_invoice == "" ||  $data->total_claim_invoice == '0') {
                             $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, '0');
-                        }else{
+                        } else {
                             $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, $data->claim_invoice);
                         }
                         $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, $data->total_claim_invoice);
