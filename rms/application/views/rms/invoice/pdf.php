@@ -153,7 +153,7 @@
                     <td>Rp <?php echo number_format($row->harga_unit, 0, "", "."); ?></td>
                     <td>Rp <?php echo number_format($row->total, 0, "", "."); ?></td>
                 </tr>
-                <?php if ($invoice->id_komoditas != '2') { ?>
+                <?php if ($invoice->id_komoditas != '2' AND $row->total_biaya_susut != '0') { ?>
                     <tr>
                         <td></td>
                         <?php if ($invoice->id_komoditas == '1') { ?>
@@ -172,14 +172,14 @@
                 <td style="text-align:right;">Total</td>
                 <td>Rp <?php echo number_format($invoice->total, 0, "", "."); ?></td>
             </tr>
-            <?php if ($invoice->$total_pph != '0') { ?>
+            <?php if ($invoice->total_pph != '0') { ?>
                 <tr style="border: none;">
                     <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
                     <td style="text-align:right;">PPh <?php echo $invoice->$pph; ?> %</td>
                     <td>Rp <?php echo number_format($invoice->total_pph, 0, "", "."); ?></td>
                 </tr>
             <?php } ?>
-            <?php if ($invoice->$total_ppn != '0') { ?>
+            <?php if ($invoice->total_ppn != '0') { ?>
                 <tr style="border: none;">
                     <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
                     <td style="text-align:right;">PPn <?php echo $invoice->$ppn; ?> %</td>
