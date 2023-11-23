@@ -212,12 +212,12 @@
             <label style="vertical-align:top;">:</label>
         </div>
         <div style="display: inline-table; width:50%; vertical-align:top;">
-            <label style="vertical-align:top;"><?php echo ucwords(terbilang($invoice->grand_total)); ?></label>
+            <label style="vertical-align:top;"><?php echo ucwords(terbilang($invoice->grand_total)); ?> Rupiah</label>
         </div>
     </div>
     <div style="margin-top:10px;">
         <div style="display: inline-table; width:50%;">
-            Seluruh pembayaran dapat dilakukan melalue transfer ke :
+            Seluruh pembayaran dapat dilakukan melalui transfer ke :
         </div>
     </div>
     <div style="margin-top:10px;">
@@ -234,10 +234,10 @@
             <label style="vertical-align:top;">:</label>
         </div>
         <div style="display: inline-table; width:50%; vertical-align:top;">
-            <label style="vertical-align:top;">1590-0015-77849</label>
+            <label style="vertical-align:top;">159-00-0157784-9</label>
         </div>
     </div>
-    <div style="margin-top:10px;">
+    <div>
         <div style="display: inline-table; width:20%; vertical-align:top;">
             <label style=" vertical-align:top; vertical-align:top;">Atas Nama</label>
         </div>
@@ -254,7 +254,7 @@
             Sampit, <?php echo shortdate_indo(date("Y-m-d")); ?><br>
             Diajukan Oleh<br>
             <b>CV. RAJA WALI SAMPIT</b><br><br><br><br><br><br>
-            <b><u>Abdullah</u></b><br>
+            <b><u>ABDULLAH</u></b><br>
             <i>Direktur</i>
         </div>
     </div>
