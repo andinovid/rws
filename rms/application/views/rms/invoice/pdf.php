@@ -123,7 +123,7 @@
                 <?php } ?>
                 <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">QTY</th>
                 <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">HARGA</th>
-                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:20%;">TOTAL</th>
+                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">TOTAL</th>
             </tr>
         </thead>
         <tbody>
