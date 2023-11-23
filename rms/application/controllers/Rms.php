@@ -2001,6 +2001,7 @@ class Rms extends CI_Controller
         $id_project = $this->input->POST('id_project_invoice');
         $no_invoice = $this->input->POST('no_invoice');
         $remark = $this->input->POST('remark');
+        $tanggal_invoice = $this->input->POST('tanggal_invoice');
         $pph = $this->input->POST('pph');
         $ppn = $this->input->POST('ppn');
 
@@ -2014,6 +2015,7 @@ class Rms extends CI_Controller
         $data = array(
             'no_invoice' => $no_invoice,
             'remark' => $remark,
+            'tanggal_invoice' => $tanggal_invoice,
             'ppn' => $ppn,
             'pph' => $pph,
             'status' => '0',

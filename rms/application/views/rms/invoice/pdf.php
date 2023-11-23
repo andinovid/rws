@@ -251,7 +251,7 @@
 
     <div style="display: flex;">
         <div style="margin-left: auto; width:300px; text-align:center;">
-            Sampit, <?php echo shortdate_indo(date("Y-m-d")); ?><br>
+            Sampit, <?php echo shortdate_indo($invoice->tanggal_invoice); ?><br>
             Diajukan Oleh<br>
             <b>CV. RAJA WALI SAMPIT</b><br><br><br><br><br><br>
             <b><u>ABDULLAH</u></b><br>

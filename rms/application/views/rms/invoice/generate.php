@@ -114,6 +114,15 @@
                     <label for="nama">Remark</label>
                     <textarea class="form-control" name="remark" rows="3"></textarea>
                   </div>
+                  <div class="form-group">
+                    <label for="no_replas">Tanggal Invoice</label>
+                    <div class="input-group date reservationdate reservationdate1" data-target-input="nearest">
+                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate1" data-toggle="datetimepicker" name="tanggal_invoice" id="tanggal_invoice" />
+                      <div class="input-group-append" data-target=".reservationdate1" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
@@ -198,5 +207,4 @@
       }
     });
   });
-  
 </script>
