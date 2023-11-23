@@ -1426,7 +1426,7 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('G5', $detail_kwitansi->no_hp);
         $excel->setActiveSheetIndex(0)->setCellValue('F6', "NO REK");
         $excel->setActiveSheetIndex(0)->setCellValue('G6', $detail_kwitansi->bank . ' ' . $detail_kwitansi->no_rekening . ' a/n ' . $detail_kwitansi->nama_rekening);
-        $excel->setActiveSheetIndex(0)->setCellValue('O3', "NOMOR KWITANSI : ");
+        $excel->setActiveSheetIndex(0)->setCellValue('O3', "NOMOR KWITANSI : $detail_kwitansi->no_kwitansi");
 
         $excel->getActiveSheet()->mergeCells('A1:Q1'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('A4:E4'); // Set Merge Cell pada kolom A1 sampai E1
