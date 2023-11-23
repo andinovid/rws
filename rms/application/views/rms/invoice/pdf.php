@@ -206,7 +206,7 @@
     </div>
     <div style="margin-top:10px;">
         <div style="display: inline-table; width:20%; vertical-align:top;">
-            <label style=" vertical-align:top; vertical-align:top;">Total Tagihan</label>
+            <label style=" vertical-align:top; vertical-align:top;">Terbilang</label>
         </div>
         <div style="display: inline-table; width:2%; vertical-align:top;">
             <label style="vertical-align:top;">:</label>
