@@ -114,16 +114,16 @@
     <table class="table table-hover" cellpadding="0" style="width:100%; margin-top:20px; cell-margin:0px; border-spacing:0;">
         <thead style="background-color: #EEE;">
             <tr style="border: 1px solid #111;">
-                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:5%;">No</th>
+                <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:5%;">No</th>
                 <?php if ($invoice->id_komoditas == '1') { ?>
-                    <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">NO. STO</th>
-                    <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">NO. DO</th>
+                    <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:10%;">NO. STO</th>
+                    <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:10%;">NO. DO</th>
                 <?php } else { ?>
-                    <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">DESC</th>
+                    <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:10%;">DESC</th>
                 <?php } ?>
-                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">QTY</th>
-                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">HARGA</th>
-                <th style="border: 1px solid #111;text-align:left; padding-bottom:10px; width:10%;">TOTAL</th>
+                <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:10%;">QTY</th>
+                <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:10%;">HARGA</th>
+                <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:10%;">TOTAL</th>
             </tr>
         </thead>
         <tbody>
@@ -134,24 +134,24 @@
                 $no++;
             ?>
                 <tr>
-                    <td><?php echo $no; ?></td>
+                    <td style="text-align: center;"><?php echo $no; ?></td>
                     <?php if ($invoice->id_komoditas == '1') { ?>
-                        <td><?php echo $row->no_sto; ?></td>
-                        <td><?php echo $row->no_do; ?></td>
+                        <td style="text-align: center;"><?php echo $row->no_sto; ?></td>
+                        <td style="text-align: center;"><?php echo $row->no_do; ?></td>
                     <?php } else { ?>
-                        <td><?php echo $row->deskripsi; ?></td>
+                        <td style="text-align: center;"><?php echo $row->deskripsi; ?></td>
                     <?php } ?>
                     <?php if ($invoice->id_komoditas == '2' and ($invoice->id_klien == '4' || $invoice->id_klien == '5' || $invoice->id_klien == '9' || $invoice->id_klien == '10' || $invoice->id_klien == '16')) { ?>
-                        <td><?php echo number_format($row->total_qty_akhir, 0, "", "."); ?> KG</td>
+                        <td style="text-align: center;"><?php echo number_format($row->total_qty_akhir, 0, "", "."); ?> KG</td>
                     <?php } elseif ($invoice->id_komoditas == '2' and $invoice->id_klien == '7') { ?>
-                        <td><?php echo number_format($row->total_qty_awal, 0, "", "."); ?> KG</td>
+                        <td style="text-align: center;"><?php echo number_format($row->total_qty_awal, 0, "", "."); ?> KG</td>
                     <?php } elseif ($invoice->id_komoditas == '3' || $invoice->id_komoditas == '4') { ?>
-                        <td><?php echo number_format($row->total_qty_terendah, 0, "", "."); ?> KG</td>
+                        <td style="text-align: center;"><?php echo number_format($row->total_qty_terendah, 0, "", "."); ?> KG</td>
                     <?php } else { ?>
-                        <td><?php echo number_format($row->qty, 0, "", "."); ?> KG</td>
+                        <td style="text-align: center;"><?php echo number_format($row->qty, 0, "", "."); ?> KG</td>
                     <?php } ?>
-                    <td>Rp <?php echo number_format($row->harga_unit, 0, "", "."); ?></td>
-                    <td>Rp <?php echo number_format($row->total, 0, "", "."); ?></td>
+                    <td style="text-align: center;">Rp <?php echo number_format($row->harga_unit, 0, "", "."); ?></td>
+                    <td style="text-align: center;">Rp <?php echo number_format($row->total, 0, "", "."); ?></td>
                 </tr>
                 <?php if ($invoice->id_komoditas != '2' AND $row->total_biaya_susut != '0') { ?>
                     <tr>
@@ -163,33 +163,33 @@
                         <?php } ?>
 
                         <td></td>
-                        <td>Rp <?php echo number_format($row->total_biaya_susut, 0, "", "."); ?></td>
+                        <td style="text-align: center;">Rp <?php echo number_format($row->total_biaya_susut, 0, "", "."); ?></td>
                     </tr>
                 <?php } ?>
             <?php endforeach; ?>
             <tr style="border: none;">
                 <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
                 <td style="text-align:right;">Total</td>
-                <td>Rp <?php echo number_format($invoice->total, 0, "", "."); ?></td>
+                <td style="text-align: center;">Rp <?php echo number_format($invoice->total, 0, "", "."); ?></td>
             </tr>
             <?php if ($invoice->total_pph != '0') { ?>
                 <tr style="border: none;">
                     <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
-                    <td style="text-align:right;">PPh <?php echo $invoice->$pph; ?> %</td>
-                    <td>Rp <?php echo number_format($invoice->total_pph, 0, "", "."); ?></td>
+                    <td style="text-align:right;">PPh <?php echo $invoice->pph; ?> %</td>
+                    <td style="text-align: center;">Rp <?php echo number_format($invoice->total_pph, 0, "", "."); ?></td>
                 </tr>
             <?php } ?>
             <?php if ($invoice->total_ppn != '0') { ?>
                 <tr style="border: none;">
                     <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
-                    <td style="text-align:right;">PPn <?php echo $invoice->$ppn; ?> %</td>
-                    <td>Rp <?php echo number_format($invoice->total_ppn, 0, "", "."); ?></td>
+                    <td style="text-align:right;">PPn <?php echo $invoice->ppn; ?> %</td>
+                    <td style="text-align: center;">Rp <?php echo number_format($invoice->total_ppn, 0, "", "."); ?></td>
                 </tr>
             <?php } ?>
             <tr style="border: none;">
                 <td style="border: none; text-align:right;" <?php if ($invoice->id_komoditas == '1') { ?> colspan="4" <?php } else { ?> colspan="3" <?php } ?>></td>
                 <td style="text-align:right;">Grand Total</td>
-                <td>Rp <?php echo number_format($invoice->grand_total, 0, "", "."); ?></td>
+                <td style="text-align: center;">Rp <?php echo number_format($invoice->grand_total, 0, "", "."); ?></td>
             </tr>
         </tbody>
     </table>
