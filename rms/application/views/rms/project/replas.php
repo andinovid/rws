@@ -86,7 +86,7 @@
                             } ?></td>
                         <td><?php echo $row->nama_supir; ?></td>
                         <td><?php echo $row->nopol; ?></td>
-                        <td><?php echo $row->nama_tujuan; ?></td>
+                        <td><?php echo $row->kode_tujuan; ?></td>
                         <td><?php if ($row->timbang_kebun_bag != NULL) {
                               echo number_format($row->timbang_kebun_bag, 0, "", ".");
                             } else {

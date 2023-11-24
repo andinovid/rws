@@ -63,7 +63,7 @@
                       <td>Rp <?php echo number_format($row->total_claim, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($row->uang_sangu, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($row->grand_total, 0, "", "."); ?></td>
-                      
+
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
@@ -133,9 +133,12 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-  function generate_invoice() {
+  
 
+  function generate_invoice() {
+    var table = $('#tbl-invoice').DataTable();
     event.preventDefault();
+    table.page.len( -1 ).draw();
     var searchIDs = $("#tbl-invoice input:checkbox:checked").map(function() {
       return $(this).val();
     }).get();
@@ -182,5 +185,4 @@
       }
     });
   });
-  
 </script>

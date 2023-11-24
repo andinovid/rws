@@ -122,7 +122,7 @@ class Rms extends CI_Controller
 
     function non_do()
     {
-        $data['rekap'] = $this->rms_model->get("v_rekap_non_do")->result();
+        $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE non_do = '1'")->result();
         $data['klien'] = $this->rms_model->get("tbl_klien")->result();
         $data['truck'] = $this->rms_model->get("tbl_truck")->result();
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
@@ -293,28 +293,29 @@ class Rms extends CI_Controller
         $truck = $this->input->POST('truck');
         $komoditas = $this->input->POST('komoditas');
         $tujuan = $this->input->POST('tujuan');
-        $qty = $this->input->POST('qty');
+        $timbang_kebun = $this->input->POST('timbang_kebun_kg');
+        $qty_kirim_kg = $this->input->POST('qty_kirim_kg');
         $harga = $this->input->POST('harga');
         $harga_supir = $this->input->POST('harga_supir');
         $potongan = $this->input->POST('potongan');
         $uang_sangu = $this->input->POST('uang_sangu');
-        $status = $this->input->POST('status');
 
         $data = array(
             'id_supir' => $supir,
             'id_truck' => $truck,
             'id_komoditas' => $komoditas,
             'id_tujuan' => $tujuan,
-            'qty' => $qty,
+            'timbang_kebun' => $timbang_kebun,
+            'qty_kirim_kg' => $qty_kirim_kg,
             'harga' => $harga,
             'harga_supir' => $harga_supir,
-            'potongan' => str_replace('.', '', $potongan),
             'uang_sangu' => str_replace('.', '', $uang_sangu),
-            'status' => $status,
+            'non_do' => '1',
+            'status' => '0',
         );
 
         if ($id == "") {
-            $save = $this->rms_model->insert("tbl_rekap_non_do", $data);
+            $save = $this->rms_model->insert("tbl_rekap", $data);
             if ($save) {
                 echo json_encode(array(
                     "status" => TRUE,
@@ -322,7 +323,7 @@ class Rms extends CI_Controller
                 ));
             }
         } else {
-            $save = $this->rms_model->update("tbl_rekap_non_do", $data, $id);
+            $save = $this->rms_model->update("tbl_rekap", $data, $id);
             if ($save) {
                 echo json_encode(array(
                     "status" => TRUE,
@@ -1431,11 +1432,12 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('A1:Q1'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('A4:E4'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('O3:Q3'); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->mergeCells('G6:H6'); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->mergeCells('G5:H5'); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->mergeCells('G4:H4'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('G6:K6'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('G5:K5'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('G4:K4'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('A2:Q2'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('O3')->getFont()->setBold(TRUE); // Set bold kolom A1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); // Set font size 15 untuk kolom A1
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
@@ -1723,9 +1725,9 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('A1:Q1'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('A4:E4'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('O3:Q3'); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->mergeCells('G6:H6'); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->mergeCells('G5:H5'); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->mergeCells('G4:H4'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('G6:K6'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('G5:K5'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('G4:K4'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('A2:Q2'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
@@ -1968,6 +1970,7 @@ class Rms extends CI_Controller
 
         $projectArray = explode(',', $id_rekap);
 
+        //var_dump($projectArray); exit;
         $data = array(
             'no_kwitansi' => $no_kwitansi,
             'status' => '0',
@@ -2009,6 +2012,7 @@ class Rms extends CI_Controller
         $data_project = array(
             'status' => '2',
         );
+
 
 
 

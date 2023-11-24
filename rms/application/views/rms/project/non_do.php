@@ -112,7 +112,6 @@
       <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
-
     <div class="modal fade" id="input-replas">
       <div class="modal-dialog modal-lg">
         <form id="form_replas" class="form-horizontal" method="post" enctype="multipart/form-data">
@@ -124,7 +123,6 @@
               </button>
             </div>
             <div class="modal-body">
-
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
@@ -157,8 +155,17 @@
                   </div>
                   <div class="form-group">
                     <label for="no_replas">Qty</label>
-                    <input type="text" class="form-control" placeholder="Bag" name="qty" id="qty">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <input type="text" class="form-control number" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Qty awal (Kg)">
+                      </div>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control number" name="qty_kirim_kg" id="qty_kirim_kg" placeholder="Qty akhir (Kg)">
+                      </div>
+                    </div>
                   </div>
+                </div>
+                <div class="col-md-6">
                   <div class="form-group">
                     <label>Tujuan</label>
                     <select class="form-control select2" style="width: 100%;" name="tujuan" id="tujuan">
@@ -168,9 +175,6 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
-                </div>
-                <div class="col-md-6">
-
                   <div class="form-group">
                     <label for="no_replas">Harga</label>
                     <input type="text" class="form-control" name="harga" id="harga" placeholder="Harga Satuan">
@@ -180,23 +184,11 @@
                     <input type="text" class="form-control" name="harga_supir" id="harga_supir" placeholder="Harga untuk vendor">
                   </div>
                   <div class="form-group">
-                    <label for="no_replas">Biaya admin</label>
-                    <input type="text" class="form-control number" name="potongan" id="potongan" placeholder="Biaya admin">
-                  </div>
-                  <div class="form-group">
                     <label for="no_replas">Uang Sangu</label>
                     <input type="text" class="form-control number" name="uang_sangu" id="uang_sangu" placeholder="Uang Sangu">
                   </div>
-                  <div class="form-group">
-                    <label for="no_replas">Status</label>
-                    <select class="form-control select2" style="width: 100%;" name="status" id="status">
-                      <option value="0">Belum dibayar</option>
-                      <option value="1">Sudah dibayar</option>
-                    </select>
-                  </div>
                 </div>
               </div>
-
             </div>
             <div class="modal-footer" style="justify-content: flex-start;">
               <button type="submit" class="btn btn-primary">Save changes</button>
