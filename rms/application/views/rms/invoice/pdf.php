@@ -153,7 +153,7 @@
                     <td style="text-align: center;">Rp <?php echo number_format($row->harga_unit, 0, "", "."); ?></td>
                     <td style="text-align: center;">Rp <?php echo number_format($row->total, 0, "", "."); ?></td>
                 </tr>
-                <?php if ($invoice->id_komoditas != '2' AND $row->total_biaya_susut != '0') { ?>
+                <?php if ($invoice->id_komoditas != '2' and $row->total_biaya_susut != '0') { ?>
                     <tr>
                         <td></td>
                         <?php if ($invoice->id_komoditas == '1') { ?>
@@ -220,34 +220,63 @@
             Seluruh pembayaran dapat dilakukan melalui transfer ke :
         </div>
     </div>
-    <div style="margin-top:10px;">
-        <div style="display: inline-table; width:50%;">
-            Bank Mandiri Kantor Cabang Sampit
+    <?php if ($invoice->id_klien == "2" || $invoice->id_klien == "3" || $invoice->id_klien == "6" || $invoice->id_klien == "4" || $invoice->id_klien == "1") { ?>
+        <div style="margin-top:10px;">
+            <div style="display: inline-table; width:50%;">
+                Bank Mandiri Kantor Cabang Sampit
+            </div>
         </div>
-    </div>
-
-    <div style="margin-top:10px;">
-        <div style="display: inline-table; width:20%; vertical-align:top;">
-            <label style=" vertical-align:top;">No Rekening</label>
+        <div style="margin-top:10px;">
+            <div style="display: inline-table; width:20%; vertical-align:top;">
+                <label style=" vertical-align:top;">No Rekening</label>
+            </div>
+            <div style="display: inline-table; width:2%; vertical-align:top;">
+                <label style="vertical-align:top;">:</label>
+            </div>
+            <div style="display: inline-table; width:50%; vertical-align:top;">
+                <label style="vertical-align:top;">159-00-0157784-9</label>
+            </div>
         </div>
-        <div style="display: inline-table; width:2%; vertical-align:top;">
-            <label style="vertical-align:top;">:</label>
+        <div>
+            <div style="display: inline-table; width:20%; vertical-align:top;">
+                <label style=" vertical-align:top; vertical-align:top;">Atas Nama</label>
+            </div>
+            <div style="display: inline-table; width:2%; vertical-align:top;">
+                <label style="vertical-align:top;">:</label>
+            </div>
+            <div style="display: inline-table; width:50%; vertical-align:top;">
+                <label style="vertical-align:top;">CV. RAJA WALI SAMPIT</label>
+            </div>
         </div>
-        <div style="display: inline-table; width:50%; vertical-align:top;">
-            <label style="vertical-align:top;">159-00-0157784-9</label>
+    <?php } else { ?>
+        <div style="margin-top:10px;">
+            <div style="display: inline-table; width:50%;">
+                Bank BRI Kantor Cabang Sampit
+            </div>
         </div>
-    </div>
-    <div>
-        <div style="display: inline-table; width:20%; vertical-align:top;">
-            <label style=" vertical-align:top; vertical-align:top;">Atas Nama</label>
+        <div style="margin-top:10px;">
+            <div style="display: inline-table; width:20%; vertical-align:top;">
+                <label style=" vertical-align:top;">No Rekening</label>
+            </div>
+            <div style="display: inline-table; width:2%; vertical-align:top;">
+                <label style="vertical-align:top;">:</label>
+            </div>
+            <div style="display: inline-table; width:50%; vertical-align:top;">
+                <label style="vertical-align:top;">0163-01-001828-30-8</label>
+            </div>
         </div>
-        <div style="display: inline-table; width:2%; vertical-align:top;">
-            <label style="vertical-align:top;">:</label>
+        <div>
+            <div style="display: inline-table; width:20%; vertical-align:top;">
+                <label style=" vertical-align:top; vertical-align:top;">Atas Nama</label>
+            </div>
+            <div style="display: inline-table; width:2%; vertical-align:top;">
+                <label style="vertical-align:top;">:</label>
+            </div>
+            <div style="display: inline-table; width:50%; vertical-align:top;">
+                <label style="vertical-align:top;">CV. RAJA WALI SAMPIT</label>
+            </div>
         </div>
-        <div style="display: inline-table; width:50%; vertical-align:top;">
-            <label style="vertical-align:top;">CV. RAJA WALI SAMPIT</label>
-        </div>
-    </div>
+    <?php } ?>
 
     <div style="display: flex;">
         <div style="margin-left: auto; width:300px; text-align:center;">
