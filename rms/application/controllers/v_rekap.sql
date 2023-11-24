@@ -20,6 +20,7 @@ SELECT
     `e`.`nopol` AS `nopol`,
     `e`.`id_vendor` AS `id_vendor`,
     `b`.`id_vendor_pajak` AS `id_vendor_pajak`,
+    `b`.`id_vendor_pencairan` AS `id_vendor_pencairan`,
     `a`.`id_komoditas` AS `id_komoditas`,
     `f`.`komoditas` AS `komoditas`,
     `g`.`nama_tujuan` AS `nama_tujuan`,
@@ -288,7 +289,8 @@ SELECT
     `b`.`tanggal_input` AS `tanggal_input`,
     `b`.`non_do` AS `non_do`,
     `b`.`non_do_id_komoditas` AS `non_do_id_komoditas`,
-    `b`.`non_do_harga` AS `non_do_harga`
+    `b`.`non_do_harga` AS `non_do_harga`,
+    `b`.`non_do_harga_vendor` AS `non_do_harga_vendor`
     FROM
         (
             (

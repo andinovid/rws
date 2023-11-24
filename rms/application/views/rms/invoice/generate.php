@@ -161,6 +161,7 @@
   function generate_invoice() {
 
     event.preventDefault();
+    table.page.len( -1 ).draw();
     var searchIDs = $("#tbl-invoice input:checkbox:checked").map(function() {
       return $(this).val();
     }).get();
