@@ -227,6 +227,7 @@ class Rms extends CI_Controller
         $supir = $this->input->POST('supir');
         $truck = $this->input->POST('truck');
         $vendor_pajak = $this->input->POST('vendor_pajak');
+        $vendor_pencairan = $this->input->POST('vendor_pencairan');
         $tujuan = $this->input->POST('tujuan');
         $qty_kirim_bag = $this->input->POST('qty_kirim_bag');
         $qty_kirim_kg = $this->input->POST('qty_kirim_kg');
@@ -244,6 +245,7 @@ class Rms extends CI_Controller
             'tanggal_bongkar' => $tanggal_bongkar,
             'id_supir' => $supir,
             'id_truck' => $truck,
+            'id_vendor_pencairan' => $vendor_pencairan,
             'id_vendor_pajak' => $vendor_pajak,
             'id_tujuan' => $tujuan,
             'bruto_awal' => str_replace('.', '', $bruto_awal),

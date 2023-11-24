@@ -1079,6 +1079,7 @@
           $('[name="supir"]').val(data[i].id_supir).change();
           $('[name="truck"]').val(data[i].id_truck).change();
           $('[name="tujuan"]').val(data[i].id_tujuan).change();
+          $('[name="vendor_pencairan"]').val(data[i].id_vendor_pencairan).change();
           $('[name="vendor_pajak"]').val(data[i].id_vendor_pajak).change();
           $('[name="bruto_awal"]').val(data[i].bruto_awal);
           $('[name="tarra_awal"]').val(data[i].tarra_awal);
