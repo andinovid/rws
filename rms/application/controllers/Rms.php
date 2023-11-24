@@ -1551,6 +1551,7 @@ class Rms extends CI_Controller
             $numrow2 = $numrow2 + 2;
         }
 
+        $total = $numrow + 1;
         $sebesar = $numrow + 3;
         $terbilang = $numrow + 4;
         $ttd = $numrow + 4;
@@ -1561,16 +1562,20 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, 'Total Qty');
         $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $detail_kwitansi->qty_awal);
         $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $detail_kwitansi->qty_akhir);
+        $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, 'Rp ' . number_format($detail_kwitansi->total_kotor_replas, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, 'Rp ' . number_format($detail_kwitansi->total_claim, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, 'Rp ' . number_format($detail_kwitansi->total_pph, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, 'Rp ' . number_format($detail_kwitansi->total_biaya_admin, 0, "", "."));
         $excel->getActiveSheet()->getStyle('A' . $numrow . ':' . 'Q' . $numrow)->applyFromArray($style_row);
 
+        
 
 
 
-
-        $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, 'Total');
-        $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
-        $excel->getActiveSheet()->getStyle('P' . $numrow)->applyFromArray($style_row);
-        $excel->getActiveSheet()->getStyle('Q' . $numrow)->applyFromArray($style_row);
+        $excel->setActiveSheetIndex(0)->setCellValue('P' . $total, 'Total');
+        $excel->setActiveSheetIndex(0)->setCellValue('Q' . $total, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
+        $excel->getActiveSheet()->getStyle('P' . $total)->applyFromArray($style_row);
+        $excel->getActiveSheet()->getStyle('Q' . $total)->applyFromArray($style_row);
 
         $excel->setActiveSheetIndex(0)->setCellValue('A' . $sebesar, 'Sebesar');
         $excel->setActiveSheetIndex(0)->setCellValue('C' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
