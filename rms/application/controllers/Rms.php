@@ -110,7 +110,7 @@ class Rms extends CI_Controller
 
     function replas()
     {
-        $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE no_replas != ''")->result();
+        $data['rekap'] = $this->rms_model->get("v_rekap")->result();
         $data['klien'] = $this->rms_model->get("tbl_klien")->result();
         $data['truck'] = $this->rms_model->get("tbl_truck")->result();
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
@@ -127,6 +127,7 @@ class Rms extends CI_Controller
         $data['truck'] = $this->rms_model->get("tbl_truck")->result();
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
         $data['tujuan'] = $this->rms_model->get("tbl_tujuan")->result();
+        $data['vendor'] = $this->rms_model->get("tbl_vendor_truck")->result();
         $data['komoditas'] = $this->rms_model->get("tbl_komoditas")->result();
         $data['content'] = 'rms/project/non_do';
         $this->load->view('rms/includes/template', $data);
@@ -299,21 +300,23 @@ class Rms extends CI_Controller
         $qty_kirim_kg = $this->input->POST('qty_kirim_kg');
         $harga = $this->input->POST('harga');
         $harga_supir = $this->input->POST('harga_supir');
-        $potongan = $this->input->POST('potongan');
         $uang_sangu = $this->input->POST('uang_sangu');
-
+        $tanggal_input = date('Y-m-d H:i:s');
+        $vendor_pencairan = $this->input->POST('vendor_pencairan');
         $data = array(
             'id_supir' => $supir,
             'id_truck' => $truck,
-            'id_komoditas' => $komoditas,
+            'non_do_id_komoditas' => $komoditas,
             'id_tujuan' => $tujuan,
-            'timbang_kebun' => $timbang_kebun,
+            'id_vendor_pencairan' => $vendor_pencairan,
+            'timbang_kebun_kg' => $timbang_kebun,
             'qty_kirim_kg' => $qty_kirim_kg,
-            'harga' => $harga,
-            'harga_supir' => $harga_supir,
+            'non_do_harga' => $harga,
+            'non_do_harga_vendor' => $harga_supir,
             'uang_sangu' => str_replace('.', '', $uang_sangu),
             'non_do' => '1',
             'status' => '0',
+            'tanggal_input' => $tanggal_input,
         );
 
         if ($id == "") {
@@ -1549,6 +1552,7 @@ class Rms extends CI_Controller
         }
 
         $sebesar = $numrow + 3;
+        $terbilang = $numrow + 4;
         $ttd = $numrow + 4;
         $ttd_bottom = $ttd + 3;
         $ttd_periksa = $ttd_bottom + 1;
@@ -1569,7 +1573,10 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('Q' . $numrow)->applyFromArray($style_row);
 
         $excel->setActiveSheetIndex(0)->setCellValue('A' . $sebesar, 'Sebesar');
-        $excel->setActiveSheetIndex(0)->setCellValue('D' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('C' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('C' . $terbilang, '('.ucwords(terbilang($detail_kwitansi->grand_total)) . ' Rupiah)');
+        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setItalic(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setSize(10); // Set font size 15 untuk kolom A1
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('G' . $sebesar, 'Sampit, ' . shortdate_indo(date('Y-m-d')));
@@ -1577,10 +1584,11 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('G' . $sebesar . ':' . 'H' . $sebesar)->applyFromArray($style_center);
 
         $excel->getActiveSheet()->mergeCells('A' . $sebesar . ':' . 'B' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->mergeCells('D' . $sebesar . ':' . 'E' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->getStyle('D' . $sebesar)->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('D' . $sebesar)->getFont()->setSize(16); // Set font size 15 untuk kolom A1
-        $excel->getActiveSheet()->getStyle('D' . $sebesar)->getFont()->setItalic(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->mergeCells('C' . $sebesar . ':' . 'E' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('C' . $terbilang . ':' . 'E' . $terbilang); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setBold(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setSize(16); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setItalic(TRUE); // Set bold kolom A1
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('G' . $ttd, 'Direkap oleh');

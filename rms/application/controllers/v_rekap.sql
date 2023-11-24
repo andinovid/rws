@@ -22,7 +22,12 @@ SELECT
     `b`.`id_vendor_pajak` AS `id_vendor_pajak`,
     `b`.`id_vendor_pencairan` AS `id_vendor_pencairan`,
     `a`.`id_komoditas` AS `id_komoditas`,
-    `f`.`komoditas` AS `komoditas`,
+    CASE WHEN `b`.`non_do_id_komoditas` = '0' THEN
+    `f`.`komoditas` 
+    ELSE
+    `k`.`komoditas` 
+    END
+    AS `komoditas`,
     `g`.`nama_tujuan` AS `nama_tujuan`,
     `g`.`kode_tujuan` AS `kode_tujuan`,
     `g`.`harga` AS `harga`,
@@ -304,6 +309,7 @@ SELECT
                                 (
                                     (
                                         (
+                                        (
                                             `u856234669_rws`.`tbl_rekap` `b`
                                         LEFT JOIN `u856234669_rws`.`tbl_project` `a`
                                         ON
@@ -339,3 +345,7 @@ SELECT
             )
         JOIN `u856234669_rws`.`tbl_adm_setting` `i`
         )
+        LEFT JOIN `u856234669_rws`.`tbl_komoditas` `k`
+                        ON
+                            (`b`.`non_do_id_komoditas` = `k`.`id`)
+                        )

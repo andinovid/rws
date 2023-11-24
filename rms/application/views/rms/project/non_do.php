@@ -54,11 +54,8 @@
                       <th class="text-center align-middle">Qty</th>
                       <th class="text-center align-middle">Harga</th>
                       <th class="text-center align-middle">Harga Supir</th>
-                      <th class="text-center align-middle">Potongan</th>
                       <th class="text-center align-middle">Uang Sangu</th>
                       <th class="text-center align-middle">Grand Total</th>
-                      <th class="text-center align-middle">Total Bayar Supir</th>
-                      <th class="text-center align-middle">Keuntungan</th>
                       <th class="text-center align-middle">Status</th>
                       <th class="text-center align-middle" style="width: 10%;"></th>
                     </tr>
@@ -77,22 +74,19 @@
                         <td><?php echo $row->nopol; ?></td>
                         <td><?php echo $row->komoditas; ?></td>
                         <td><?php echo $row->kode_tujuan; ?></td>
-                        <td><?php echo $row->qty; ?> Kg</td>
-                        <td><?php echo 'Rp ' . number_format($row->harga, 0, "", "."); ?></td>
-                        <td><?php echo 'Rp ' . number_format($row->harga_supir, 0, "", "."); ?></td>
-                        <td><?php echo 'Rp ' . number_format($row->potongan, 0, "", "."); ?></td>
+                        <td><?php echo $row->qty_kirim_kg; ?> Kg</td>
+                        <td><?php echo 'Rp ' . number_format($row->non_do_harga, 0, "", "."); ?></td>
+                        <td><?php echo 'Rp ' . number_format($row->non_do_harga_vendor, 0, "", "."); ?></td>
                         <td><?php echo 'Rp ' . number_format($row->uang_sangu, 0, "", "."); ?></td>
-                        <td><?php echo 'Rp ' . number_format($row->total, 0, "", "."); ?></td>
-                        <td><?php echo 'Rp ' . number_format($row->total_supir, 0, "", "."); ?></td>
-                        <td><?php echo 'Rp ' . number_format($row->total_keuntungan, 0, "", "."); ?></td>
+                        <td><?php echo 'Rp ' . number_format($row->grand_total, 0, "", "."); ?></td>
                         <td><span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php if ($row->status == '0') { ?>Belum dibayar <?php } else { ?> Sudah dibayar <?php } ?></span></td>
                         <td class="project-actions text-right">
 
-                          <a class="btn btn-warning btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
+                          <a class="btn btn-warning btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_rekap; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fas fa-pencil-alt">
                             </i>
                           </a>
-                          <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_data(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
+                          <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_data(<?php echo $row->id_rekap; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
                             <i class="fas fa-trash">
                             </i>
                           </a>
@@ -131,6 +125,15 @@
                     <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
                       <option value="0">Pilih supir</option>
                       <?php foreach ($supir as $row) : ?>
+                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Vendor Pencairan</label>
+                    <select class="form-control select2" style="width: 100%;" name="vendor_pencairan" id="vendor_pencairan">
+                      <option value="0">Pilih vendor pajak</option>
+                      <?php foreach ($vendor as $row) : ?>
                         <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
                       <?php endforeach; ?>
                     </select>
