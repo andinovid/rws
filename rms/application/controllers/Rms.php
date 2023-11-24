@@ -172,7 +172,7 @@ class Rms extends CI_Controller
         echo json_encode($detail);
     }
 
-    
+
 
     public function save_replas()
     {
@@ -1206,7 +1206,7 @@ class Rms extends CI_Controller
         }
     }
 
-    
+
     public function save_pembayaran_kwitansi()
     {
         $id = $this->input->POST('id');
@@ -2439,13 +2439,27 @@ class Rms extends CI_Controller
 
 
         if ($data_project->id_komoditas != '3' and $data_project->id_klien != '6') {
-            $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, 'Total');
-            $excel->getActiveSheet()->getStyle('A' . $numrow . ':K' . $numrow)->applyFromArray($style_col_yellow);
-            $excel->getActiveSheet()->getStyle('A' . $numrow, 'Total')->applyFromArray($style_col_center);
-            $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data_project->total_qty_awal_bag);
-            $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data_project->total_qty_awal);
-            $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data_project->total_qty_akhir_bag);
-            $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data_project->total_qty_akhir);
+            if ($data_project->id_komoditas == '2') {
+
+                $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, 'Total');
+                $excel->getActiveSheet()->getStyle('A' . $numrow . ':M' . $numrow)->applyFromArray($style_col_yellow);
+                $excel->getActiveSheet()->getStyle('A' . $numrow, 'Total')->applyFromArray($style_col_center);
+                $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data_project->total_bruto_awal);
+                $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data_project->total_tarra_awal);
+                $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data_project->total_qty_awal);
+                $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data_project->total_bruto_akhir);
+                $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data_project->total_tarra_akhir);
+                $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, $data_project->total_qty_akhir);
+                $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, $data_project->total_susut);
+            } else {
+                $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, 'Total');
+                $excel->getActiveSheet()->getStyle('A' . $numrow . ':K' . $numrow)->applyFromArray($style_col_yellow);
+                $excel->getActiveSheet()->getStyle('A' . $numrow, 'Total')->applyFromArray($style_col_center);
+                $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data_project->total_qty_awal_bag);
+                $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data_project->total_qty_awal);
+                $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data_project->total_qty_akhir_bag);
+                $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data_project->total_qty_akhir);
+            }
         }
 
         // if ($data_project->id_komoditas == '3' and $data_project->id_klien == '6') {
