@@ -2013,9 +2013,6 @@ class Rms extends CI_Controller
             'status' => '2',
         );
 
-
-
-
         $data = array(
             'no_invoice' => $no_invoice,
             'remark' => $remark,
@@ -2024,7 +2021,6 @@ class Rms extends CI_Controller
             'pph' => $pph,
             'status' => '0',
         );
-
 
         $save_invoice = $this->rms_model->insert_id("tbl_invoice", $data);
         for ($i = 0; $i < count($projectArray); $i++) {
