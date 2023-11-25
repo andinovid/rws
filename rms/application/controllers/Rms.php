@@ -1514,9 +1514,9 @@ class Rms extends CI_Controller
 
             $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
             if ($data->non_do == '1') {
-                $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, mediumdate_indo($data->tanggal_bongkar));
-            } else {
                 $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, mediumdate_indo(date('Y-m-d')));
+            } else {
+                $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, mediumdate_indo($data->tanggal_bongkar));
             }
             $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->timbang_kebun_kg);
             $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->qty_kirim_kg);
