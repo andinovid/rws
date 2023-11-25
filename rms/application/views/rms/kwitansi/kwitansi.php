@@ -23,14 +23,24 @@
             <div class="card-header">
               <h3 class="card-title">Data Kwitansi</h3>
               <div class="card-tools mr-1">
+                <div id="reportrange" class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="far fa-calendar-alt"></i>
+                    </span>
+                  </div>
+                  <input type="text" id="date-filter" class="form-control float-right" value=""> <b class="caret"></b>
+                  <button class="btn btn-dark btn-flat float-right" onclick="filterData()">Filter</button>
+                </div>
               </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered table-striped data-table">
+              <table class="table table-bordered table-striped" id="tbl_replas">
                 <thead>
                   <tr>
                     <th>No</th>
+                    <th>Tgl Input</th>
                     <th>No Kwitansi</th>
                     <th>Vendor</th>
                     <th>Komoditas</th>
@@ -48,6 +58,7 @@
                   ?>
                     <tr>
                       <td><?php echo $no; ?></td>
+                      <td><?php echo $row->tanggal_input; ?></td>
                       <td><?php echo $row->no_kwitansi; ?></td>
                       <td><?php echo $row->vendor; ?></td>
                       <td><?php echo $row->komoditas; ?></td>
@@ -79,6 +90,7 @@
                 <tfoot>
                   <tr>
                     <th>No</th>
+                    <th>Tgl Input</th>
                     <th>No DO</th>
                     <th>Vendor</th>
                     <th>Komoditas</th>
@@ -153,6 +165,80 @@
 </div>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
+  $(function() {
+
+    const date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    // This arrangement can be altered based on how we want the date's format to appear.
+    let currentDate = `${day}-${month}-${year}`;
+    $('#reservation').daterangepicker();
+    var table = $("#tbl_replas").DataTable({
+      "columnDefs": [{
+        "visible": false,
+        "searchable": true,
+        "targets": 1
+      }],
+      "ordering": false,
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "pageLength": 20,
+      "buttons": [{
+          extend: 'pdfHtml5',
+          title: "Laporan Replas " + currentDate,
+          exportOptions: {
+            columns: [3, 4, 5, 6, 7]
+          },
+          customize: function(doc) {
+            doc.content[1].table.widths = ['20%', '20%', '20%', '20%', '20%'];
+            doc.styles.tableBodyEven.alignment = 'center';
+            doc.styles.tableBodyOdd.alignment = 'center';
+          }
+        },
+        {
+          extend: 'excelHtml5',
+          exportOptions: {
+            columns: ':visible'
+          }
+        },
+        "colvis"
+      ]
+    }).buttons().container().appendTo('#tbl_replas_wrapper .col-md-6:eq(0)');
+  });
+
+  function filterData() {
+    date = $("#date-filter").val();
+    filter = date.substr(0, 10);
+    startdate = date.substring(0, 10);
+    enddate = date.substring(13, 23);
+
+    $.fn.dataTable.ext.search.push(
+      function(settings, data, dataIndex) {
+        var min = startdate;
+        var max = enddate;
+        var createdAt = data[1];
+
+        if (
+          (min == "" || max == "") ||
+          (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
+        ) {
+          return true;
+        }
+        return false;
+      }
+    );
+    var table = $("#tbl_replas").DataTable();
+    table.draw();
+  }
+
+
+
+
+
   function bayar_kwitansi(id) {
     $("#bayar-replas").modal('show');
     $('input[name=id]').val(id);
