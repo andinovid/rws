@@ -265,6 +265,15 @@
 <script type="text/javascript">
   $(function() {
 
+    const date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    // This arrangement can be altered based on how we want the date's format to appear.
+    let currentDate = `${day}-${month}-${year}`;
+
     $('#reservation').daterangepicker();
     var table = $("#tbl_replas").DataTable({
       "columnDefs": [{
@@ -279,7 +288,7 @@
       "pageLength": 20,
       "buttons": [{
           extend: 'pdfHtml5',
-          title: "Laporan Replas",
+          title: "Laporan Replas " + currentDate,
           exportOptions: {
             columns: [4, 6, 7, 8, 17]
           },
