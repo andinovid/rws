@@ -1434,6 +1434,7 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('F6', "NO REK");
         $excel->setActiveSheetIndex(0)->setCellValue('G6', $detail_kwitansi->bank . ' ' . $detail_kwitansi->no_rekening . ' a/n ' . $detail_kwitansi->nama_rekening);
         $excel->setActiveSheetIndex(0)->setCellValue('O3', "NOMOR KWITANSI : $detail_kwitansi->no_kwitansi");
+        $excel->setActiveSheetIndex(0)->setCellValue('Q4', "Lembar 1");
 
         $excel->getActiveSheet()->mergeCells('A1:Q1'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('A4:E4'); // Set Merge Cell pada kolom A1 sampai E1
@@ -1443,11 +1444,16 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('G4:K4'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('A2:Q2'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('Q4')->applyFromArray($style_row);
+        $excel->getActiveSheet()->getStyle('O3:Q3')->applyFromArray($style_row);
+        $excel->getActiveSheet()->getStyle('Q4')->getFont()->setBold(TRUE); // Set bold kolom A1
         $excel->getActiveSheet()->getStyle('O3')->getFont()->setBold(TRUE); // Set bold kolom A1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); // Set font size 15 untuk kolom A1
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('Q4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('O3:Q3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12); // Set font size 15 untuk kolom A1
         $excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(TRUE); // Set bold kolom A1
         // Buat header tabel nya pada baris ke 3
