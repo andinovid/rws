@@ -47,6 +47,7 @@
                     <th>Tujuan</th>
                     <th>Jumlah Replas</th>
                     <th>Total</th>
+                    <th>Grand Total</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -64,6 +65,7 @@
                       <td><?php echo $row->komoditas; ?></td>
                       <td><?php echo $row->kode_tujuan; ?></td>
                       <td><?php echo $row->total_replas; ?></td>
+                      <td>Rp <?php echo number_format($row->total_kotor_replas, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($row->grand_total, 0, "", "."); ?></td>
 
                       </td>
@@ -97,6 +99,7 @@
                     <th>Tujuan</th>
                     <th>Jumlah Replas</th>
                     <th>Total</th>
+                    <th>Grand Total</th>
                     <th></th>
                   </tr>
                 </tfoot>
@@ -191,10 +194,10 @@
           extend: 'pdfHtml5',
           title: "Laporan Replas " + currentDate,
           exportOptions: {
-            columns: [3, 4, 5, 6, 7]
+            columns: [3,  6, 7]
           },
           customize: function(doc) {
-            doc.content[1].table.widths = ['20%', '20%', '20%', '20%', '20%'];
+            doc.content[1].table.widths = ['33%', '33%', '33%'];
             doc.styles.tableBodyEven.alignment = 'center';
             doc.styles.tableBodyOdd.alignment = 'center';
           }
