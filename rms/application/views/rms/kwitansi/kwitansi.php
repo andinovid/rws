@@ -33,6 +33,7 @@
                     <th>No</th>
                     <th>No Kwitansi</th>
                     <th>Vendor</th>
+                    <th>Komoditas</th>
                     <th>Jumlah Replas</th>
                     <th>Total</th>
                     <th></th>
@@ -48,6 +49,7 @@
                       <td><?php echo $no; ?></td>
                       <td><?php echo $row->no_kwitansi; ?></td>
                       <td><?php echo $row->vendor; ?></td>
+                      <td><?php echo $row->komoditas; ?></td>
                       <td><?php echo $row->total_replas; ?></td>
                       <td>Rp <?php echo number_format($row->grand_total, 0, "", "."); ?></td>
 
@@ -77,6 +79,7 @@
                     <th>No</th>
                     <th>No DO</th>
                     <th>Vendor</th>
+                    <th>Komoditas</th>
                     <th>Jumlah Replas</th>
                     <th>Total</th>
                     <th></th>

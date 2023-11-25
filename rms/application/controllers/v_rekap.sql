@@ -67,7 +67,12 @@ SELECT
     `b`.`uang_sangu` AS `uang_sangu`,
     `b`.`pinjaman` AS `pinjaman`,
     `h`.`nama` AS `vendor`,
-    `i`.`biaya_admin` AS `biaya_admin`,
+    CASE WHEN `b`.`non_do` != '1' THEN 
+    `i`.`biaya_admin` 
+    ELSE
+    `i`.`biaya_admin_non_do` 
+    END
+    AS `biaya_admin`,
     CASE WHEN `b`.`id_vendor_pajak` IS NULL OR `b`.`id_vendor_pajak` = '0' THEN `h`.`jenis_pajak` ELSE `j`.`jenis_pajak`
     END AS `jenis_pajak`,
     CASE WHEN `b`.`id_vendor_pajak` IS NULL OR `b`.`id_vendor_pajak` = '0' THEN `h`.`no_pajak` ELSE `j`.`no_pajak`
