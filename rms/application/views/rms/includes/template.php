@@ -201,7 +201,20 @@
         "autoWidth": false,
         "ordering": false,
         "pageLength": 20,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        "buttons": [{
+            extend: 'pdfHtml5',
+            exportOptions: {
+              columns: ':visible'
+            }
+          },
+          {
+            extend: 'excelHtml5',
+            exportOptions: {
+              columns: ':visible'
+            }
+          },
+          "colvis"
+        ]
       }).buttons().container().appendTo('#DataTables_Table_0_wrapper .col-md-6:eq(0)');
       $('[data-toggle="tooltip"]').tooltip()
       var areaChartData = {

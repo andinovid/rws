@@ -21,8 +21,10 @@ SELECT
     `e`.`id_vendor` AS `id_vendor`,
     `b`.`id_vendor_pajak` AS `id_vendor_pajak`,
     `b`.`id_vendor_pencairan` AS `id_vendor_pencairan`,
-    `a`.`id_komoditas` AS `id_komoditas`,
-    CASE WHEN `b`.`non_do_id_komoditas` = '0' THEN
+    CASE WHEN `b`.`non_do_id_komoditas` = '0' || `b`.`non_do_id_komoditas` is NULL THEN
+    `a`.`id_komoditas` ELSE `k`.`id`
+    END AS `id_komoditas`,
+    CASE WHEN `b`.`non_do_id_komoditas` = '0' || `b`.`non_do_id_komoditas` is NULL THEN
     `f`.`komoditas` 
     ELSE
     `k`.`komoditas` 
@@ -172,7 +174,7 @@ SELECT
     AS `total_invoice`,
 
     CASE WHEN `b`.`non_do` = '1' THEN 
-    `b`.`non_do_harga_vendor` * `b`.`qty_kirim_kg`
+    CONCAT(`b`.`non_do_harga_vendor` * `b`.`qty_kirim_kg`) - `i`.`biaya_admin_non_do` - `b`.`uang_sangu`
     ELSE
         CASE WHEN `b`.`id_vendor_pajak` IS NULL OR `b`.`id_vendor_pajak` = '0' THEN 
             CASE WHEN `h`.`jenis_pajak` = 'skb' THEN 

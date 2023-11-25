@@ -110,7 +110,7 @@ class Rms extends CI_Controller
 
     function replas()
     {
-        $data['rekap'] = $this->rms_model->get("v_rekap")->result();
+        $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE id_vendor !='1'")->result();
         $data['klien'] = $this->rms_model->get("tbl_klien")->result();
         $data['truck'] = $this->rms_model->get("tbl_truck")->result();
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
@@ -259,6 +259,7 @@ class Rms extends CI_Controller
             'timbang_kebun_kg' => str_replace('.', '', $timbang_kebun_kg),
             'toleransi_susut' => $toleransi_susut,
             'uang_sangu' => str_replace('.', '', $uang_sangu),
+            'non_do' => '0',
             'status' => '0',
         );
 
@@ -1506,27 +1507,43 @@ class Rms extends CI_Controller
             }
 
             $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
-            $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, mediumdate_indo($data->tanggal_bongkar));
+            if ($data->non_do == '1') {
+                $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, mediumdate_indo($data->tanggal_bongkar));
+            } else {
+                $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, mediumdate_indo(date('Y-m-d')));
+            }
             $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->timbang_kebun_kg);
             $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->qty_kirim_kg);
             $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->nama_supir);
             $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->nopol);
             $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->komoditas);
             $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->kode_tujuan);
-            $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->m_susut);
-            $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->c_claim);
+            if ($data->non_do == '1') {
+                $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, '0');
+                $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, '0');
+            } else {
+                $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->m_susut);
+                $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->c_claim);
+            }
             $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, 'Rp ' . number_format($data->harga, 0, "", "."));
             $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, 'Rp ' . number_format($data->total, 0, "", "."));
-            $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, 'Rp ' . number_format($data->claim, 0, "", "."));
-            $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, 'Rp ' . number_format($data->total_claim, 0, "", "."));
-            $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, 'Rp ' . number_format($data->pph, 0, "", "."));
+            if ($data->non_do == '1') {
+                $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, '0');
+                $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, '0');
+                $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, '0');
+            } else {
+                $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, 'Rp ' . number_format($data->claim, 0, "", "."));
+                $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, 'Rp ' . number_format($data->total_claim, 0, "", "."));
+                $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, 'Rp ' . number_format($data->pph, 0, "", "."));
+            }
             $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, 'Rp ' . number_format($data->biaya_admin, 0, "", "."));
             $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, 'Rp ' . number_format($data->grand_total, 0, "", "."));
             //$excel->setActiveSheetIndex(0)->insertNewRowBefore(2,1); 
+            if ($data->non_do != '1') {
             $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow2, $jenis_pajak . ' ' . $data->no_pajak . ' - ' . $data->nama_pajak);
             $excel->getActiveSheet()->mergeCells('M' . $numrow2 . ':' . 'Q' . $numrow2); // Set Merge Cell pada kolom A1 sampai E1
             $excel->getActiveSheet()->getStyle('A' . $numrow2 . ':' . 'Q' . $numrow2)->applyFromArray($style_row);
-
+            }
             // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
             $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);
@@ -1568,7 +1585,7 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, 'Rp ' . number_format($detail_kwitansi->total_biaya_admin, 0, "", "."));
         $excel->getActiveSheet()->getStyle('A' . $numrow . ':' . 'Q' . $numrow)->applyFromArray($style_row);
 
-        
+
 
 
 
@@ -1579,7 +1596,7 @@ class Rms extends CI_Controller
 
         $excel->setActiveSheetIndex(0)->setCellValue('A' . $sebesar, 'Sebesar');
         $excel->setActiveSheetIndex(0)->setCellValue('C' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
-        $excel->setActiveSheetIndex(0)->setCellValue('C' . $terbilang, '('.ucwords(terbilang($detail_kwitansi->grand_total)) . ' Rupiah)');
+        $excel->setActiveSheetIndex(0)->setCellValue('C' . $terbilang, '(' . ucwords(terbilang($detail_kwitansi->grand_total)) . ' Rupiah)');
         $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setItalic(TRUE); // Set bold kolom A1
         $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setSize(10); // Set font size 15 untuk kolom A1
 

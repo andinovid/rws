@@ -350,7 +350,7 @@
           type: "POST",
           data: {
             id: id,
-            tbl: "tbl_rekap_non_do"
+            tbl: "tbl_rekap"
           },
           dataType: "JSON",
           success: function(data) {

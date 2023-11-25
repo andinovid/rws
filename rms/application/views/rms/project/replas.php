@@ -46,9 +46,11 @@
                       <th rowspan="2" class="text-center align-middle">No DO</th>
                       <th rowspan="2" class="text-center align-middle">Tanggal Input</th>
                       <th rowspan="2" class="text-center align-middle">Tanggal Muat</th>
+                      <th rowspan="2" class="text-center align-middle">Vendor</th>
+                      <th rowspan="2" class="text-center align-middle">Komoditas</th>
+                      <th rowspan="2" class="text-center align-middle">Tujuan</th>
                       <th rowspan="2" class="text-center align-middle">Supir</th>
                       <th rowspan="2" class="text-center align-middle">Nopol</th>
-                      <th rowspan="2" class="text-center align-middle">Tujuan</th>
                       <th colspan="2" class="text-center align-middle">Qty Awal</th>
                       <th colspan="2" class="text-center align-middle">Qty Akhir</th>
                       <th colspan="2" class="text-center align-middle">Susut</th>
@@ -84,9 +86,11 @@
                         <td><?php if ($row->tanggal_muat) {
                               echo shortdate_indo($row->tanggal_muat);
                             } ?></td>
+                        <td><?php echo $row->vendor; ?></td>
+                        <td><?php echo $row->komoditas; ?></td>
+                        <td><?php echo $row->kode_tujuan; ?></td>
                         <td><?php echo $row->nama_supir; ?></td>
                         <td><?php echo $row->nopol; ?></td>
-                        <td><?php echo $row->kode_tujuan; ?></td>
                         <td><?php if ($row->timbang_kebun_bag != NULL) {
                               echo number_format($row->timbang_kebun_bag, 0, "", ".");
                             } else {
@@ -117,7 +121,7 @@
                             } else {
                               echo "0";
                             }  ?> Kg</td>
-                            
+
                         <td><?php echo 'Rp ' . number_format($row->total, 0, "", "."); ?></td>
                         <td><?php echo 'Rp ' . number_format($row->grand_total, 0, "", "."); ?></td>
                         <td><span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span></td>
@@ -260,21 +264,39 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
   $(function() {
+
     $('#reservation').daterangepicker();
-
-
     var table = $("#tbl_replas").DataTable({
       "columnDefs": [{
         "visible": false,
         "searchable": true,
         "targets": 2
       }],
-      "ordering":false,
+      "ordering": false,
       "responsive": true,
       "lengthChange": false,
       "autoWidth": false,
       "pageLength": 20,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+      "buttons": [{
+          extend: 'pdfHtml5',
+          title: "Laporan Replas",
+          exportOptions: {
+            columns: [4, 6, 7, 8, 17]
+          },
+          customize: function(doc) {
+            doc.content[1].table.widths = ['20%', '20%', '20%', '20%', '20%'];
+            doc.styles.tableBodyEven.alignment = 'center';
+            doc.styles.tableBodyOdd.alignment = 'center';
+          }
+        },
+        {
+          extend: 'excelHtml5',
+          exportOptions: {
+            columns: ':visible'
+          }
+        },
+        "colvis"
+      ]
 
     }).buttons().container().appendTo('#tbl_replas_wrapper .col-md-6:eq(0)');
 
@@ -282,6 +304,7 @@
 
   function filterData() {
     date = $("#date-filter").val();
+    filter = date.substr(0, 10);
     startdate = date.substring(0, 10);
     enddate = date.substring(13, 23);
 
