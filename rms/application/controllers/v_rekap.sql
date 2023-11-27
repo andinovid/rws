@@ -80,6 +80,7 @@ SELECT
     CASE WHEN `b`.`id_vendor_pajak` IS NULL OR `b`.`id_vendor_pajak` = '0' THEN `h`.`nama_pajak` ELSE `j`.`nama_pajak`
     END AS `nama_pajak`,
     
+    CASE WHEN `b`.`non_do` != '1' THEN
     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '2' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
         CASE WHEN `b`.`id_vendor_pajak` IS NULL OR `b`.`id_vendor_pajak` = '0' THEN 
             CASE WHEN `h`.`jenis_pajak` = 'skb' THEN CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_skb` / 100)
@@ -94,6 +95,7 @@ SELECT
             ELSE 0
             END
         END
+
     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
         CASE WHEN `b`.`id_vendor_pajak` IS NULL OR `b`.`id_vendor_pajak` = '0' THEN 
             CASE WHEN `h`.`jenis_pajak` = 'skb' THEN CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_skb` / 100)
@@ -122,7 +124,9 @@ SELECT
             ELSE 0
             END
         END
-    END  AS `pph`,
+    END
+    ELSE 0
+    END AS `pph`,  
 
     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '2' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
         `g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)

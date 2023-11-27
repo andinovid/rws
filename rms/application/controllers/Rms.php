@@ -518,10 +518,14 @@ class Rms extends CI_Controller
     function view_truck($id_truck)
     {
         $data['truck'] = $this->rms_model->get("v_truck", "WHERE id_truck = $id_truck")->row();
+        $id_supir = $data['truck']->id_supir;
+        $data['profil_supir'] = $this->rms_model->get("tbl_supir", "WHERE id = $id_supir")->row();
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
         $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE id_truck = $id_truck")->result();
-        $data['perbaikan'] = $this->rms_model->get("v_perbaikan", "WHERE id_truck = $id_truck")->result();
+        $data['perbaikan_reguler'] = $this->rms_model->get("v_perbaikan", "WHERE id_truck = $id_truck AND id_kategori = '1'")->result();
+        $data['pergantian_oli'] = $this->rms_model->get("v_perbaikan", "WHERE id_truck = $id_truck AND id_kategori = '2'")->result();
         $data['bbm'] = $this->rms_model->get("v_bbm", "WHERE id_truck = $id_truck ORDER BY tanggal DESC")->result();
+        $data['sparepart'] = $this->rms_model->get("tbl_sparepart")->result();
         $data['content'] = 'rms/truck/view';
         $this->load->view('rms/includes/template', $data);
     }
@@ -752,10 +756,12 @@ class Rms extends CI_Controller
         $status = $this->input->POST('status');
         $nopol = $this->input->POST('nopol');
         $nama_supir = $this->input->POST('nama_supir');
+        $kategori = $this->input->POST('kategori');
 
         $nota = $_FILES['nota']['name'];
 
         $data_array = array(
+            'kategori' => $kategori,
             'id_truck' => $truck,
             'nopol' => $nopol,
             'id_supir' => $supir,

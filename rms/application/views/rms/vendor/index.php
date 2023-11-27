@@ -52,7 +52,7 @@
                   ?>
                     <tr>
                       <td><?php echo $no; ?></td>
-                      <td><?php echo $row->nama; ?></td>
+                      <td><a class="text-dark" href="<?php echo base_url(); ?>rms/vendor/view/<?php echo $row->id; ?>"><u><?php echo $row->nama; ?></u></a></td>
                       <td><?php echo $row->no_rekening; ?></td>
                       <td><?php echo $row->nama_rekening; ?></td>
                       <td><?php echo $row->bank; ?></td>

@@ -6,13 +6,7 @@
           <h1 class="m-0">Rekapitulasi Data</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
-          <a class="btn btn-success btn-sm float-sm-right ml-1" href="<?php echo base_url(); ?>project/non_do/kwitansi/" data-toggle="tooltip" data-placement="top" title="Cetak Kwitansi">
-            <i class="fas fa-print">
-            </i>
-            Cetak Kwitansi
-          </a>
           <button type="button" class="btn btn-primary btn-sm float-sm-right" onclick="input_replas()"><i class="fas fa-plus mr-1"></i> Tambah Angkutan</button>
-
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -26,7 +20,7 @@
             <div class="card-header">
               <h3 class="card-title">Rekapitulasi Data</h3>
               <div class="card-tools mr-1">
-                <div id="reportrange" class="input-group">
+                <!-- <div id="reportrange" class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="far fa-calendar-alt"></i>
@@ -34,8 +28,7 @@
                   </div>
                   <input type="text" id="date-filter" class="form-control float-right" value=""> <b class="caret"></b>
                   <button class="btn btn-dark btn-flat float-right" onclick="filterData()">Filter</button>
-
-                </div>
+                </div> -->
               </div>
             </div>
             <!-- /.card-header -->
@@ -160,10 +153,10 @@
                     <label for="no_replas">Qty</label>
                     <div class="row">
                       <div class="col-md-6">
-                        <input type="text" class="form-control number" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Qty awal (Kg)">
+                        <input type="text" class="form-control" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Qty awal (Kg)">
                       </div>
                       <div class="col-md-6">
-                        <input type="text" class="form-control number" name="qty_kirim_kg" id="qty_kirim_kg" placeholder="Qty akhir (Kg)">
+                        <input type="text" class="form-control" name="qty_kirim_kg" id="qty_kirim_kg" placeholder="Qty akhir (Kg)">
                       </div>
                     </div>
                   </div>
@@ -307,7 +300,7 @@
       type: "POST",
       data: {
         'id': id,
-        tbl: "tbl_rekap_non_do"
+        tbl: "tbl_rekap"
       },
       dataType: "JSON",
       beforeSend: function() {
@@ -319,12 +312,12 @@
           $('[name="supir"]').val(data[i].id_supir).change();
           $('[name="truck"]').val(data[i].id_truck).change();
           $('[name="tujuan"]').val(data[i].id_tujuan).change();
-          $('[name="komoditas"]').val(data[i].id_komoditas).change();
+          $('[name="komoditas"]').val(data[i].non_do_id_komoditas).change();
 
-          $('[name="qty"]').val(data[i].qty);
-          $('[name="harga"]').val(data[i].harga);
-          $('[name="harga_supir"]').val(data[i].harga_supir);
-          $('[name="potongan"]').val(data[i].potongan);
+          $('[name="timbang_kebun_kg"]').val(data[i].timbang_kebun_kg);
+          $('[name="qty_kirim_kg"]').val(data[i].qty_kirim_kg);
+          $('[name="harga"]').val(data[i].non_do_harga);
+          $('[name="harga_supir"]').val(data[i].non_do_harga_vendor);
           $('[name="uang_sangu"]').val(data[i].uang_sangu);
         }
       },

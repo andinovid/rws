@@ -114,6 +114,14 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
+                    <label for="kategori">Kategori</label>
+                    <select class="form-control" name="kategori">
+                      <option>Pilih status</option>
+                      <option value="1">Perbaikan Reguler</option>
+                      <option value="2">Pergantian Oli Mesin</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
                     <label>Truck</label>
                     <input type="hidden" class="form-control" name="id" id="id" placeholder="id">
                     <select class="form-control select2" style="width: 100%;" name="truck" id="truck">
@@ -217,10 +225,6 @@
       <!-- /.modal-dialog -->
     </div>
 
-
-
-
-
     <div class="modal fade" id="modal-nota">
       <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -318,7 +322,6 @@
   });
 
   function edit(id) {
-
     $('#sparepart-content').show();
     load_data_sparepart_perbaikan(id);
     $("#input-perbaikan").modal('show');
@@ -338,6 +341,7 @@
       success: function(data) {
         for (var i = 0; i < data.length; i++) {
 
+          $('[name="kategori"]').val(data[i].kategori).change();
           $('[name="truck"]').val(data[i].id_truck).change();
           $('[name="nopol"]').val(data[i].nopol);
           $('[name="supir"]').val(data[i].id_supir).change();

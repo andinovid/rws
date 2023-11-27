@@ -52,7 +52,7 @@
                     <tr>
                       <td><?php echo $no; ?></td>
                       <td><?php echo $row->no_kontrak; ?></td>
-                      <td><?php echo $row->no_do; ?></td>
+                      <td><a class="text-dark" href="<?php echo base_url(); ?>project/view/<?php echo $row->id_project; ?>"><u><?php echo $row->no_do; ?></u></a></td>
                       <td><?php echo $row->nama_perusahaan; ?></td>
                       <td><?php echo $row->komoditas; ?></td>
                       <td><?php echo number_format($row->qty, 0, "", "."); ?></td>
