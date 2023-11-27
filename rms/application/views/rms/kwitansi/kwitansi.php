@@ -186,12 +186,7 @@
       "columnDefs": [{
         "visible": false,
         "searchable": true,
-        "targets": 1
-      }],
-      "columnDefs": [{
-        "visible": false,
-        "searchable": true,
-        "targets": 8
+        "targets": [1, 8]
       }],
       "ordering": false,
       "responsive": true,
