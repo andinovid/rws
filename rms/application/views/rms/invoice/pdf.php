@@ -92,7 +92,7 @@
         </div>
     <?php } ?>
 
-    <?php if ($invoice->id_komoditas == '2' || $invoice->id_komoditas == '4') { ?>
+    <?php if ($invoice->id_komoditas == '2' || $invoice->id_komoditas == '4' || ($invoice->id_komoditas == '3' and $invoice->id_klien == '1')) { ?>
         <div style="margin-top:5px;">
             <div style="display: inline-table; width:20%;vertical-align:top;">
                 <label style="vertical-align:top;">NO. DO</label>
@@ -145,8 +145,10 @@
                         <td style="text-align: center;"><?php echo number_format($row->total_qty_akhir, 0, "", "."); ?> KG</td>
                     <?php } elseif ($invoice->id_komoditas == '2' and $invoice->id_klien == '7') { ?>
                         <td style="text-align: center;"><?php echo number_format($row->total_qty_awal, 0, "", "."); ?> KG</td>
-                    <?php } elseif ($invoice->id_komoditas == '3' || $invoice->id_komoditas == '4') { ?>
+                    <?php } elseif (($invoice->id_komoditas == '3' and ($invoice->id_klien == '6' || $invoice->id_klien == '14')) || $invoice->id_komoditas == '4') { ?>
                         <td style="text-align: center;"><?php echo number_format($row->total_qty_terendah, 0, "", "."); ?> KG</td>
+                    <?php } elseif (($invoice->id_komoditas == '3' and $invoice->id_klien == '1')) { ?>
+                        <td style="text-align: center;"><?php echo number_format($row->qty, 0, "", "."); ?> KG</td>
                     <?php } else { ?>
                         <td style="text-align: center;"><?php echo number_format($row->qty, 0, "", "."); ?> KG</td>
                     <?php } ?>

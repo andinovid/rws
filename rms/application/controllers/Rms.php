@@ -1256,7 +1256,7 @@ class Rms extends CI_Controller
     function laporan_komoditas()
     {
         $data['laporan'] = $this->rms_model->get("v_laporan_komoditas", "WHERE (year(tanggal_angkut),month(tanggal_angkut)) = (year(now()),month(now())) ORDER BY tanggal_angkut ASC")->result();
-        $data['content'] = 'rms/laporan/kokmoditas';
+        $data['content'] = 'rms/laporan/komoditas';
         $this->load->view('rms/includes/template', $data);
     }
 
