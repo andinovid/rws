@@ -757,6 +757,7 @@ class Rms extends CI_Controller
         $nopol = $this->input->POST('nopol');
         $nama_supir = $this->input->POST('nama_supir');
         $kategori = $this->input->POST('kategori');
+        $payer = $this->input->POST('payer');
 
         $nota = $_FILES['nota']['name'];
 
@@ -770,6 +771,7 @@ class Rms extends CI_Controller
             'jumlah' => str_replace('.', '', $jumlah),
             'jenis' => $jenis,
             'status' => $status,
+            'payer' => $payer,
         );
 
         if (!empty($nota)) {
@@ -796,7 +798,7 @@ class Rms extends CI_Controller
 
         if ($id == "") {
             $save = $this->rms_model->insert_id("tbl_perbaikan", $data_array);
-            if ($status == '1') {
+            if ($status == '1' and $payer == '1') {
                 $data_keuangan = array(
                     'jenis' => '2',
                     'keterangan' => 'BAYAR NOTA ' . $nama_supir . ' - ' . $nopol,
@@ -1245,7 +1247,7 @@ class Rms extends CI_Controller
 
     function keuangan()
     {
-        $data['keuangan'] = $this->rms_model->get("tbl_keuangan", "ORDER BY tanggal_input DESC")->result();
+        $data['keuangan'] = $this->rms_model->get("tbl_keuangan", "ORDER BY tanggal DESC")->result();
         $data['saldo'] = $this->rms_model->get_by_query("SELECT SUM(CASE WHEN jenis = '1' THEN jumlah ELSE 0 END) -  SUM(CASE WHEN jenis = '2' THEN jumlah ELSE 0 END) as total FROM tbl_keuangan")->row();
         $data['content'] = 'rms/keuangan/index';
         $this->load->view('rms/includes/template', $data);
@@ -1552,9 +1554,9 @@ class Rms extends CI_Controller
             $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, 'Rp ' . number_format($data->grand_total, 0, "", "."));
             //$excel->setActiveSheetIndex(0)->insertNewRowBefore(2,1); 
             if ($data->non_do != '1') {
-            $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow2, $jenis_pajak . ' ' . $data->no_pajak . ' - ' . $data->nama_pajak);
-            $excel->getActiveSheet()->mergeCells('M' . $numrow2 . ':' . 'Q' . $numrow2); // Set Merge Cell pada kolom A1 sampai E1
-            $excel->getActiveSheet()->getStyle('A' . $numrow2 . ':' . 'Q' . $numrow2)->applyFromArray($style_row);
+                $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow2, $jenis_pajak . ' ' . $data->no_pajak . ' - ' . $data->nama_pajak);
+                $excel->getActiveSheet()->mergeCells('M' . $numrow2 . ':' . 'Q' . $numrow2); // Set Merge Cell pada kolom A1 sampai E1
+                $excel->getActiveSheet()->getStyle('A' . $numrow2 . ':' . 'Q' . $numrow2)->applyFromArray($style_row);
             }
             // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
             $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);

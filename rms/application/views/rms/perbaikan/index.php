@@ -179,7 +179,24 @@
                       <option value="1">Sudah dibayar</option>
                     </select>
                   </div>
+                  <div class="form-group clearfix" id="payer">
+                    <label for="kategori" class="d-block">Dibayar oleh</label>
+                    <div class="icheck-success d-inline">
+                      <input type="radio" name="payer" value="1" id="radioSuccess1">
+                      <label for="radioSuccess1">
+                        Kantor
+                      </label>
+                    </div>
+                    <div class="icheck-success d-inline">
+                      <input type="radio" name="payer" value="2" id="radioSuccess2">
+                      <label for="radioSuccess2">
+                        Bos
+                      </label>
+                    </div>
+                  </div>
                 </div>
+
+
 
                 <div class="col-md-12" id="sparepart-content">
                   <hr>
@@ -255,10 +272,13 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
   $(function() {
-    $('.kategori').hide();
+    $('#payer').hide();
     $('#colorselector').change(function() {
-      $('.kategori').hide();
-      $('#kategori-' + $(this).val()).show();
+      if ($(this).val() == '1') {
+        $('#payer').show();
+      }else{
+        $('#payer').hide();
+      }
     });
 
     $('#truck').change(function() {
