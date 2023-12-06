@@ -8,7 +8,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">data keuangan</li>
+            <li class="breadcrumb-item active">Laporan Pajak Replas</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -21,9 +21,8 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Data Keuangan</h3>
+              <h3 class="card-title">Laporan Pajak Replas</h3>
               <div class="card-tools mr-1">
-                <button type="button" class="btn btn-block btn-primary btn-sm" onclick="input_keuangan()"><i class="fas fa-plus mr-1"></i> Input</button>
               </div>
             </div>
             <!-- /.card-header -->
