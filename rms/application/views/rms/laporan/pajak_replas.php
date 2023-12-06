@@ -29,9 +29,9 @@
             <!-- /.card-header -->
             <div class="card-body">
 
-              <form id="a" class="form-horizontal" action="<?php echo base_url(); ?>rms/generate_laporan_replas" method="post" enctype="multipart/form-data">
+              <form id="form_pajak_replas" class="form-horizontal" method="post" enctype="multipart/form-data">
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label>Periode bulan</label>
                       <select class="form-control" name="bulan" id="bulan">
@@ -52,13 +52,24 @@
                     </div>
                   </div>
 
-                  <div class="col-md-3">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label>Periode tahun</label>
                       <select class="form-control" style="width: 100%;" name="tahun" id="tahun">
                         <option value="">Pilih tahun</option>
                         <option value="2023">2023</option>
                         <option value="2024">2024</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Jenis Pajak</label>
+                      <select class="form-control" style="width: 100%;" name="jenis" id="jenis">
+                        <option value="">Pilih jenis pajak</option>
+                        <option value="skb">SKB</option>
+                        <option value="npwp">NPWP</option>
+                        <option value="ktp">KTP</option>
                       </select>
                     </div>
                   </div>
@@ -95,29 +106,30 @@
   }
 
   $('#form_pajak_replas').on('submit', function(event) {
+    var bulan = $('#bulan').val();
+    var tahun = $('#tahun').val();
+    var jenis = $('#jenis').val();
     event.preventDefault();
     var formData = new FormData($('#form_pajak_replas')[0]);
     $('.loading').show();
     $.ajax({
       type: 'POST',
-      url: '<?php echo base_url(); ?>rms/generate_laporan_replas/',
+      url: '<?php echo base_url(); ?>rms/cek_laporan_replas/',
       data: formData,
       processData: false,
       contentType: false,
       success: function(data) {
-        $('#form_pajak_replas')[0].reset();
         $('.loading').hide();
-        if (data.status = "true") {
-          Swal.fire({
-            icon: 'success',
-            title: "Success!",
-            text: "Schedule has been saved.",
-            type: "success"
-          }).then((result) => {
-            location.reload();
-          });
+        obj = JSON.parse(data);
+        if (obj.status == "TRUE") {
+          $('#form_pajak_replas')[0].reset();
+          window.open('<?php echo base_url(); ?>rms/generate_laporan_replas/' + bulan + '/' + tahun + '/' + jenis, '_blank');
         } else {
-          alert("failed!");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Data tidak ditemukan!"
+          });
         }
       }
     });

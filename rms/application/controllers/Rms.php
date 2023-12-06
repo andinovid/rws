@@ -2573,8 +2573,29 @@ class Rms extends CI_Controller
         $this->load->view('rms/includes/template', $data);
     }
 
-    public function generate_laporan_replas()
+    public function cek_laporan_replas()
     {
+
+        $bulan = $this->input->POST('bulan');
+        $tahun = $this->input->POST('tahun');
+        $jenis = $this->input->POST('jenis');
+        $no_pajak = $this->rms_model->get_by_query("SELECT *, SUM(total) as total_biaya_replas, SUM(pph) as total_pot_pph FROM v_laporan_pajak_replas WHERE Year(tanggal_input) = '$tahun' and Month(tanggal_input) = '$bulan' and jenis_pajak = '$jenis' GROUP BY no_pajak ORDER BY jenis_pajak ASC")->result();
+
+        if (!$no_pajak) {
+            echo json_encode(array(
+                "status" => 'FALSE'
+            ));
+        } else {
+            echo json_encode(array(
+                "status" => 'TRUE'
+            ));
+        }
+    }
+    public function generate_laporan_replas($bulan, $tahun, $jenis)
+    {
+
+        $no_pajak = $this->rms_model->get_by_query("SELECT *, SUM(total) as total_biaya_replas, SUM(pph) as total_pot_pph FROM v_laporan_pajak_replas WHERE Year(tanggal_input) = '$tahun' and Month(tanggal_input) = '$bulan' and jenis_pajak = '$jenis' GROUP BY no_pajak ORDER BY jenis_pajak ASC")->result();
+
         // Load plugin PHPExcel nya
         include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
 
@@ -2633,9 +2654,6 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
 
         // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
-        $bulan = $this->input->POST('bulan');
-        $tahun = $this->input->POST('tahun');
-        $no_pajak = $this->rms_model->get_by_query("SELECT *, SUM(total) as total_biaya_replas, SUM(pph) as total_pot_pph FROM v_laporan_pajak_replas WHERE Year(tanggal_input) = '$tahun' and Month(tanggal_input) = '$bulan' GROUP BY no_pajak")->result();
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
         $numrow = 4; // Set baris pertama untuk isi tabel adalah baris ke 4
         foreach ($no_pajak as $data) { // Lakukan looping pada variabel siswa
@@ -2677,7 +2695,7 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0);
         // Proses file excel
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="Laporan Rekap Pajak ' . bulan($bulan) . ' '. $tahun . '.xlsx"'); // Set nama file excel nya
+        header('Content-Disposition: attachment; filename="Laporan Rekap Pajak ' . $jenis . ' ' . bulan($bulan) . ' ' . $tahun . '.xlsx"'); // Set nama file excel nya
         header('Cache-Control: max-age=0');
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');
