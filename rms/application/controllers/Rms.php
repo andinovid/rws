@@ -801,7 +801,7 @@ class Rms extends CI_Controller
             if ($status == '1' and $payer == '1') {
                 $data_keuangan = array(
                     'jenis' => '2',
-                    'keterangan' => 'BAYAR NOTA ' . $nama_supir . ' - ' . $nopol,
+                    'keterangan' => $jenis,
                     'jumlah' => str_replace('.', '', $jumlah),
                     'tanggal' => date('Y-m-d'),
                     'id_perbaikan' => $save,
