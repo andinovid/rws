@@ -78,5 +78,6 @@ $route['project/kwitansi/(:any)'] = 'rms/kwitansi/$1';
 $route['dashboard'] = 'rms/dashboard';
 $route['invoice/view/(:any)'] = 'rms/view_invoice/$1';
 $route['laporan/komoditas'] = 'rms/laporan_komoditas';
+$route['laporan/pajak_replas'] = 'rms/pajak_replas';
 $route['kwitansi/generate'] = 'rms/generate_kwitansi';
 $route['kwitansi/data'] = 'rms/kwitansi';

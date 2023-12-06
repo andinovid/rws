@@ -276,6 +276,12 @@
                   <p>Laporan Transporter</p>
                 </a>
               </li>
+              <li class="nav-item ">
+                <a href="<?php echo base_url(); ?>laporan/pajak_replas" class="nav-link <?php if ($this->uri->segment(2) == "all") { ?>active <?php } ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Pajak Replas</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-header">PENGATURAN</li>
