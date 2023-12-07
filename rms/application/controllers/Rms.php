@@ -522,8 +522,8 @@ class Rms extends CI_Controller
         $data['profil_supir'] = $this->rms_model->get("tbl_supir", "WHERE id = $id_supir")->row();
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
         $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE id_truck = $id_truck")->result();
-        $data['perbaikan_reguler'] = $this->rms_model->get("v_perbaikan", "WHERE id_truck = $id_truck AND id_kategori = '1'")->result();
-        $data['pergantian_oli'] = $this->rms_model->get("v_perbaikan", "WHERE id_truck = $id_truck AND id_kategori = '2'")->result();
+        $data['perbaikan_reguler'] = $this->rms_model->get("v_perbaikan", "WHERE id_truck = $id_truck")->result();
+        $data['total_perbaikan'] = $this->rms_model->get_by_query("SELECT SUM(jumlah) as total_perbaikan from v_perbaikan WHERE id_truck = $id_truck")->row();
         $data['bbm'] = $this->rms_model->get("v_bbm", "WHERE id_truck = $id_truck ORDER BY tanggal DESC")->result();
         $data['sparepart'] = $this->rms_model->get("tbl_sparepart")->result();
         $data['content'] = 'rms/truck/view';

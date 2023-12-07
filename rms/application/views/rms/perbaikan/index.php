@@ -116,7 +116,7 @@
                   <div class="form-group">
                     <label for="kategori">Kategori</label>
                     <select class="form-control" name="kategori">
-                      <option>Pilih status</option>
+                      <option>Pilih kategori</option>
                       <option value="1">Perbaikan Reguler</option>
                       <option value="2">Pergantian Oli Mesin</option>
                     </select>

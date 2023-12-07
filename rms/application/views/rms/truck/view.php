@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">TRUK <?php echo $truck->nopol; ?> | <i class="fas fa-user" style="font-size:76%;"></i> <?php echo $profil_supir->nama; ?></h1>
+          <h1 class="m-0">TRUK <?php echo $truck->nopol; ?> | <i class="fas fa-user" style="font-size:76%;"></i> <?php if($profil_supir){ echo $profil_supir->nama;} ?></h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -303,7 +303,7 @@
                         <th class="align-middle">Tanggal bongkar</th>
                         <th class="align-middle">Supir</th>
                         <th class="align-middle">Tujuan</th>
-                        <th class="align-middle">Status</th>
+                        <!-- <th class="align-middle">Status</th> -->
                       </tr>
                     </thead>
                     <tbody>
@@ -327,13 +327,13 @@
                           </td>
                           <td><?php echo $row->nama_supir; ?></td>
                           <td><?php echo $row->nama_tujuan; ?></td>
-                          <td>
+                          <!-- <td>
                             <?php if ($row->status == '0') { ?>
                               <span class="badge badge-warning">Sedang Mengirim</span>
                             <?php } else { ?>
                               <span class="badge badge-secondary">Selesai</span>
                             <?php } ?>
-                          </td>
+                          </td> -->
                         </tr>
                       <?php endforeach; ?>
                     </tbody>
@@ -344,12 +344,12 @@
             </div>
 
             <?php if ($truck->kategori == '1') { ?>
-              <div class="col-md-6">
+              <div class="col-md-7">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title mt-2">Riwayat Pergantian Oli</h3>
+                    <h3 class="card-title mt-2">Riwayat Perbaikan Truk</h3>
                     <div class="card-tools mr-1">
-                      <button type="button" class="btn btn-block btn-primary btn-sm" onclick="input_pergantian_oli()"><i class="fas fa-plus mr-1"></i> Input</button>
+                      <button type="button" class="btn btn-block btn-primary btn-sm" onclick="input_perbaikan()"><i class="fas fa-plus mr-1"></i> Input</button>
                     </div>
                   </div>
                   <!-- /.card-header -->
@@ -357,8 +357,9 @@
                     <table class="table table-striped table-valign-middle data-table-default">
                       <thead>
                         <tr>
-                          <th class="align-middle">Tanggal Pergantian</th>
+                          <th class="align-middle">Tanggal Perbaikan</th>
                           <th class="align-middle">Supir</th>
+                          <th class="align-middle">Jenis</th>
                           <th class="align-middle">Deskripsi</th>
                           <th class="align-middle">Harga</th>
                           <th class="align-middle">status</th>
@@ -367,12 +368,21 @@
                       </thead>
                       <tbody>
                         <?php
-                        foreach ($pergantian_oli as $row) : ?>
+                        foreach ($perbaikan_reguler as $row) : ?>
                           <tr>
                             <td><?php if ($row->tanggal_perbaikan) {
                                   echo shortdate_indo($row->tanggal_perbaikan);
                                 } ?></td>
                             <td><?php echo $row->nama_supir; ?></td>
+
+
+                            <td>
+                              <?php if ($row->id_kategori == '1') { ?>
+                                <span class="badge badge-primary">Perbaikan Reguler</span>
+                              <?php } elseif ($row->id_kategori == '2') { ?>
+                                <span class="badge badge-primary">Pergantian Oli</span>
+                              <?php } ?>
+                            </td>
                             <td><?php echo $row->jenis_perbaikan; ?></td>
                             <td>Rp <?php echo number_format($row->jumlah, 0, "", "."); ?></td>
                             <td>
@@ -385,24 +395,33 @@
                               <?php } ?>
                             </td>
                             <td class="project-actions text-right">
-                              <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit_pergantian_oli(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
+                              <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit_perbaikan(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
                                 <i class="fas fa-pencil-alt">
                                 </i>
                               </a>
-                              <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_pergantian_oli(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
+                              <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_perbaikan(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
                                 <i class="fas fa-trash">
                                 </i>
                               </a>
                             </td>
                           </tr>
                         <?php endforeach; ?>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>Total Perbaikan</td>
+                          <td>Rp <?php echo number_format($total_perbaikan->total_perbaikan, 0, "", "."); ?></td>
+                          <td></td>
+                          <td></td>
+                              </tr>
                       </tbody>
                     </table>
                   </div>
                   <!-- /.card-body -->
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-5">
                 <div class="card">
                   <div class="card-header">
                     <h3 class="card-title mt-2">Riwayat Pengisian BBM</h3>
@@ -438,64 +457,6 @@
                                 </i>
                               </a>
                               <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_data(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
-                                <i class="fas fa-trash">
-                                </i>
-                              </a>
-                            </td>
-                          </tr>
-                        <?php endforeach; ?>
-                      </tbody>
-                    </table>
-                  </div>
-                  <!-- /.card-body -->
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title mt-2">Riwayat Perbaikan Truk</h3>
-                    <div class="card-tools mr-1">
-                      <button type="button" class="btn btn-block btn-primary btn-sm" onclick="input_perbaikan()"><i class="fas fa-plus mr-1"></i> Input</button>
-                    </div>
-                  </div>
-                  <!-- /.card-header -->
-                  <div class="card-body">
-                    <table class="table table-striped table-valign-middle data-table-default">
-                      <thead>
-                        <tr>
-                          <th class="align-middle">Tanggal Perbaikan</th>
-                          <th class="align-middle">Supir</th>
-                          <th class="align-middle">Deskripsi</th>
-                          <th class="align-middle">Harga</th>
-                          <th class="align-middle">status</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        foreach ($perbaikan_reguler as $row) : ?>
-                          <tr>
-                            <td><?php if ($row->tanggal_perbaikan) {
-                                  echo shortdate_indo($row->tanggal_perbaikan);
-                                } ?></td>
-                            <td><?php echo $row->nama_supir; ?></td>
-                            <td><?php echo $row->jenis_perbaikan; ?></td>
-                            <td><?php echo $row->jumlah; ?></td>
-                            <td>
-                              <?php if ($row->status == '0') { ?>
-                                <span class="badge badge-secondary"><?php echo $row->nama_status; ?></span>
-                              <?php } elseif ($row->status == '1') { ?>
-                                <span class="badge badge-warning"><?php echo $row->nama_status; ?></span>
-                              <?php } elseif ($row->status == '2') { ?>
-                                <span class="badge badge-success"><?php echo $row->nama_status; ?></span>
-                              <?php } ?>
-                            </td>
-                            <td class="project-actions text-right">
-                              <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit_perbaikan(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                              </a>
-                              <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_perbaikan(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
                                 <i class="fas fa-trash">
                                 </i>
                               </a>
@@ -611,7 +572,7 @@
               <div class="row">
                 <div class="col-md-6">
 
-                <input type="hidden" class="form-control" name="id" id="id">
+                  <input type="hidden" class="form-control" name="id" id="id">
                   <input type="hidden" class="form-control" name="truck" id="truck" value="<?php echo $truck->id_truck; ?>">
                   <input type="hidden" class="form-control" name="kategori" id="kategori" value="1">
                   <div class="form-group">
