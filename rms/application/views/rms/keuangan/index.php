@@ -87,6 +87,47 @@
         </div>
         <!-- /.col -->
       </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Laporan Keuangan</h3>
+              <div class="card-tools mr-1">
+                <button type="button" class="btn btn-block btn-primary btn-sm" onclick="input_keuangan()"><i class="fas fa-plus mr-1"></i> Input</button>
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Periode</th>
+                    <th>Total Dana Masuk</th>
+                    <th>Total Dana Keluar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $no = 0;
+                  foreach ($laporan as $row) :
+                    $no++;
+                  ?>
+                    <tr>
+                      <td><?php echo bulan($row->bulan); ?> <?php echo $row->tahun; ?></td>
+                      <td>Rp <?php echo str_replace('-', '', number_format($row->total_dana_masuk, 0, "", ".")); ?></td>
+                      <td>Rp <?php echo str_replace('-', '', number_format($row->total_dana_keluar, 0, "", ".")); ?></td>
+                    </tr>
+                  <?php endforeach; ?>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
       <!-- /.row -->
     </div>
     <!-- /.container-fluid -->

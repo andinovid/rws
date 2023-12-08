@@ -1249,6 +1249,20 @@ class Rms extends CI_Controller
     {
         $data['keuangan'] = $this->rms_model->get("tbl_keuangan", "ORDER BY tanggal_input DESC")->result();
         $data['saldo'] = $this->rms_model->get_by_query("SELECT SUM(CASE WHEN jenis = '1' THEN jumlah ELSE 0 END) -  SUM(CASE WHEN jenis = '2' THEN jumlah ELSE 0 END) as total FROM tbl_keuangan")->row();
+        $data['laporan'] = $this->rms_model->get_by_query("SELECT tahun, bulan, total_dana_masuk, total_dana_keluar from v_laporan_keuangan")->result();
+        // $list = array();
+        // foreach($data_lap as $row):
+        //     $tahun[]= $row->tahun;
+        //     $bulan[]= bulan($row->bulan);
+        //     $total_dana_masuk[]= $row->total_dana_masuk;
+        //     $total_dana_keluar[]= $row->total_dana_keluar;
+        // endforeach;
+        // $data['json_tahun'] = json_encode($tahun);
+        // $data['json_bulan'] = json_encode($bulan);
+        // $data['json_total_dana_masuk'] = json_encode($total_dana_masuk);
+        // $data['json_total_dana_keluar'] = json_encode($total_dana_keluar);
+
+
         $data['content'] = 'rms/keuangan/index';
         $this->load->view('rms/includes/template', $data);
     }
