@@ -214,7 +214,7 @@
             <label style="vertical-align:top;">:</label>
         </div>
         <div style="display: inline-table; width:50%; vertical-align:top;">
-            <label style="vertical-align:top;"><?php echo ucwords(terbilang($invoice->grand_total)); ?> Rupiah</label>
+            <label style="vertical-align:top;"><?php echo ucwords(terbilang(number_format($invoice->grand_total, 0, "", ""))); ?> Rupiah</label>
         </div>
     </div>
     <div style="margin-top:10px;">
