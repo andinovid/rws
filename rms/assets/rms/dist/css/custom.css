@@ -49,3 +49,37 @@
     display: none;
   }
 }
+
+.grid-laporan{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+.grid-laporan ul{
+  padding-left: 25px;
+}
+
+.grid-laporan h3{
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+
+.grid-laporan li{
+  margin-bottom: 5px;
+}
+
+.layout-navbar-fixed .wrapper .sidebar-dark-primary .brand-link:not([class*=navbar]),
+[class*=sidebar-dark] .user-panel{
+  border-color: #2c2e74;
+}
+
+.main-sidebar, .layout-navbar-fixed .wrapper .sidebar-dark-primary .brand-link:not([class*=navbar]){
+  background-color: #11123e;
+}
+[class*=sidebar-dark] .btn-sidebar, [class*=sidebar-dark] .form-control-sidebar {
+  background-color: #1a1c56;
+  border-color: #2c2e74;
+}

@@ -98,7 +98,7 @@ class Rms extends CI_Controller
 
     function rekapitulasi()
     {
-        $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE id_vendor = '1'")->result();
+        $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE kategori_truck = '1'")->result();
         $data['klien'] = $this->rms_model->get("tbl_klien")->result();
         $data['truck'] = $this->rms_model->get("tbl_truck")->result();
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
@@ -1261,16 +1261,52 @@ class Rms extends CI_Controller
         // $data['json_bulan'] = json_encode($bulan);
         // $data['json_total_dana_masuk'] = json_encode($total_dana_masuk);
         // $data['json_total_dana_keluar'] = json_encode($total_dana_keluar);
-
-
         $data['content'] = 'rms/keuangan/index';
+        $this->load->view('rms/includes/template', $data);
+    }
+
+    function pinjaman()
+    {
+        $data['pinjaman'] = $this->rms_model->get_by_query("SELECT *, b.nama_supir, a.id as id_pinjaman, a.status AS status_pinjaman from tbl_pinjaman a LEFT JOIN v_truck b ON a.id_truck = b.id_truck ORDER BY a.tanggal DESC")->result();
+        $data['supir'] = $this->rms_model->get_by_query("SELECT id_truck, nama_supir FROM v_truck WHERE nama_supir !=''")->result();
+        $data['content'] = 'rms/pinjaman/index';
+        $this->load->view('rms/includes/template', $data);
+    }
+
+
+    function laporan()
+    {
+        if (!empty($_GET)) {
+            $bulan = $_GET["bulan"];
+            $tahun = $_GET["tahun"];
+            $data['laporan'] = $this->rms_model->get("v_laporan_komoditas", "WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->result();
+            $data['total'] = $this->rms_model->get_by_query("SELECT SUM(total_pemasukan_invoice) AS total_pemasukan,SUM(total_pph) AS total_potongan_pph, SUM(total_biaya_claim_invoice) AS total_biaya_claim, SUM(total_pph_replas) AS total_potongan_pph_replas, SUM(pengeluaran_lapangan) AS total_pengeluaran_lapangan, SUM(pengeluaran_replas) AS total_pengeluaran_replas, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_komoditas WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
+        }
+        $data['content'] = 'rms/laporan/index';
         $this->load->view('rms/includes/template', $data);
     }
 
     function laporan_komoditas()
     {
-        $data['laporan'] = $this->rms_model->get("v_laporan_komoditas", "WHERE (year(tanggal_angkut),month(tanggal_angkut)) = (year(now()),month(now())) ORDER BY tanggal_angkut ASC")->result();
+        if (!empty($_GET)) {
+            $bulan = $_GET["bulan"];
+            $tahun = $_GET["tahun"];
+            $data['laporan'] = $this->rms_model->get("v_laporan_komoditas", "WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->result();
+            $data['total'] = $this->rms_model->get_by_query("SELECT SUM(total_pemasukan_invoice) AS total_pemasukan,SUM(total_pph) AS total_potongan_pph, SUM(total_biaya_claim_invoice) AS total_biaya_claim, SUM(total_pph_replas) AS total_potongan_pph_replas, SUM(pengeluaran_lapangan) AS total_pengeluaran_lapangan, SUM(pengeluaran_replas) AS total_pengeluaran_replas, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_komoditas WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
+        }
         $data['content'] = 'rms/laporan/komoditas';
+        $this->load->view('rms/includes/template', $data);
+    }
+
+    function laporan_transporter()
+    {
+        if (!empty($_GET)) {
+            $bulan = $_GET["bulan"];
+            $tahun = $_GET["tahun"];
+            $data['laporan'] = $this->rms_model->get("v_laporan_transporter", "WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->result();
+            $data['total'] = $this->rms_model->get_by_query("SELECT SUM(grand_total) AS total_pemasukan, SUM(operasional) AS total_operasional,SUM(total_perbaikan) AS total_biaya_perbaikan, SUM(premi_supir) AS total_premi_supir, SUM(cicilan) AS total_cicilan, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_transporter WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
+        }
+        $data['content'] = 'rms/laporan/transporter';
         $this->load->view('rms/includes/template', $data);
     }
 
@@ -1301,6 +1337,41 @@ class Rms extends CI_Controller
             }
         } else {
             $save = $this->rms_model->update("tbl_keuangan", $data, $id);
+            if ($save) {
+                echo json_encode(array(
+                    "status" => TRUE,
+                    "target" => TRUE
+                ));
+            }
+        }
+    }
+
+    public function save_pinjaman()
+    {
+        $id = $this->input->POST('id');
+        $jumlah = $this->input->POST('jumlah');
+        $id_supir = $this->input->POST('supir');
+        $tanggal = $this->input->POST('tanggal');
+        $status = $this->input->POST('status');
+
+
+        $data = array(
+            'id_truck' => $id_supir,
+            'jumlah_pinjaman' => str_replace('.', '', $jumlah),
+            'tanggal' => $tanggal,
+            'status' => $status,
+        );
+
+        if ($id == "") {
+            $save = $this->rms_model->insert("tbl_pinjaman", $data);
+            if ($save) {
+                echo json_encode(array(
+                    "status" => TRUE,
+                    "target" => TRUE
+                ));
+            }
+        } else {
+            $save = $this->rms_model->update("tbl_pinjaman", $data, $id);
             if ($save) {
                 echo json_encode(array(
                     "status" => TRUE,
@@ -2026,11 +2097,7 @@ class Rms extends CI_Controller
     {
         $id_rekap = $this->input->POST('id_rekap_invoice');
         $no_kwitansi = $this->input->POST('no_invoice');
-
-
         $projectArray = explode(',', $id_rekap);
-
-        //var_dump($projectArray); exit;
         $data = array(
             'no_kwitansi' => $no_kwitansi,
             'status' => '0',
@@ -2071,6 +2138,8 @@ class Rms extends CI_Controller
         $projectArray = explode(',', $id_project);
         $data_project = array(
             'status' => '2',
+            'pph' => $pph,
+            'ppn' => $ppn,
         );
 
         $data = array(

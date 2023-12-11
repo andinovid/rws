@@ -19,6 +19,7 @@ SELECT
     `b`.`id_truck` AS `id_truck`,
     `e`.`nopol` AS `nopol`,
     `e`.`id_vendor` AS `id_vendor`,
+    `e`.`kategori` AS `kategori_truck`,
     `b`.`id_vendor_pajak` AS `id_vendor_pajak`,
     `b`.`id_vendor_pencairan` AS `id_vendor_pencairan`,
     CASE WHEN `b`.`non_do_id_komoditas` = '0' || `b`.`non_do_id_komoditas` is NULL THEN
@@ -184,6 +185,24 @@ SELECT
 
     CASE WHEN `b`.`non_do` = '1' THEN 
     CONCAT(`b`.`non_do_harga_vendor` * `b`.`qty_kirim_kg`) - `i`.`biaya_admin_non_do` - `b`.`uang_sangu`
+    WHEN `e`.`kategori` = '1' THEN
+        CASE WHEN CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) > `b`.`toleransi_susut` THEN
+                    CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`))  - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                    WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`)  - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                    ELSE
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                    END
+                ELSE
+                    CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`))  - `b`.`uang_sangu`
+                    WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - `b`.`uang_sangu`
+                    ELSE
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - `b`.`uang_sangu`
+                    END
+                END
     ELSE
         CASE WHEN `b`.`id_vendor_pajak` IS NULL OR `b`.`id_vendor_pajak` = '0' THEN 
             CASE WHEN `h`.`jenis_pajak` = 'skb' THEN 

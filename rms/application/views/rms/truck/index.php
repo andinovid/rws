@@ -452,7 +452,7 @@
 
               <div id="kategori-2" class="kategori">
                 <select class="form-control select2" style="width: 100%;" name="vendor" id="vendor">
-                  <option value="1">Pilih vendor</option>
+                  <option value="0">Pilih vendor</option>
                   <?php foreach ($vendor as $row) : ?>
                     <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
                   <?php endforeach; ?>

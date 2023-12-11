@@ -3,29 +3,30 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Laporan Komoditas</h1>
+          <h1 class="m-0">Laporan Transporter</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">laporan komoditas</li>
+            <li class="breadcrumb-item active">Laporan Transporter</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
   </div>
+
   <section class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">laporan komoditas</h3>
+              <h3 class="card-title">Laporan Transporter</h3>
               <div class="card-tools mr-1">
               </div>
             </div>
             <div class="card-body">
-              <form class="form-horizontal" action="<?php echo base_url(); ?>laporan/komoditas/" method="get" enctype="multipart/form-data">
+              <form class="form-horizontal" action="<?php echo base_url(); ?>laporan/transporter/" method="get" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-md-2">
                     <div class="form-group">
@@ -67,7 +68,7 @@
               </form>
               <?php if (!empty($_GET)) { ?>
                 <hr class=" mt-4">
-                <h2 class="text-center mt-4" style="font-weight: bold;">Laporan Komoditas Periode <?php echo bulan($_GET['bulan']); ?> <?php echo $_GET['tahun']; ?></h2>
+                <h2 class="text-center mt-4" style="font-weight: bold;">Laporan Transporter Periode <?php echo bulan($_GET['bulan']); ?> <?php echo $_GET['tahun']; ?></h2>
                 <div class="row mt-4">
                   <div class="col-lg-4 col-6">
                     <!-- small box -->
@@ -86,57 +87,20 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                       <div class="inner">
-                        <h3>Rp <?php echo number_format($total->total_pengeluaran_lapangan, 0, "", "."); ?></h3>
-                        <p>Beban Pengeluaran Lapangan</p>
+                        <h3>Rp <?php echo number_format($total->total_premi_supir, 0, "", "."); ?></h3>
+                        <p>Beban Premi Supir</p>
                       </div>
                       <div class="icon">
                         <i class="ion ion-ios-checkmark-outline"></i>
                       </div>
                     </div>
                   </div>
-                  <!-- ./col -->
                   <div class="col-lg-4 col-6">
                     <!-- small box -->
                     <div class="small-box bg-warning">
                       <div class="inner">
-                        <h3>Rp <?php echo number_format($total->total_pengeluaran_replas, 0, "", "."); ?></h3>
-                        <p>Beban Pengeluaran Replas</p>
-                      </div>
-                      <div class="icon">
-                        <i class="ion ion-ios-checkmark-outline"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                      <div class="inner">
-                        <h3>Rp <?php echo number_format($total->total_biaya_claim, 0, "", "."); ?></h3>
-                        <p>Beban Biaya Claim</p>
-                      </div>
-                      <div class="icon">
-                        <i class="ion ion-ios-checkmark-outline"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                      <div class="inner">
-                        <h3>Rp <?php echo number_format($total->total_potongan_pph, 0, "", "."); ?></h3>
-                        <p>Beban PPh Invoice</p>
-                      </div>
-                      <div class="icon">
-                        <i class="ion ion-ios-checkmark-outline"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                      <div class="inner">
-                        <h3>Rp <?php echo number_format($total->total_potongan_pph_replas, 0, "", "."); ?></h3>
-                        <p>Beban PPh Replas</p>
+                        <h3>Rp <?php echo number_format($total->total_biaya_perbaikan, 0, "", "."); ?></h3>
+                        <p>Beban Perbaikan</p>
                       </div>
                       <div class="icon">
                         <i class="ion ion-ios-checkmark-outline"></i>
@@ -144,7 +108,20 @@
                     </div>
                   </div>
                   <!-- ./col -->
-                  <div class="col-lg-3 col-6">
+                  <div class="col-lg-6 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                      <div class="inner">
+                        <h3>Rp <?php echo number_format($total->total_cicilan, 0, "", "."); ?></h3>
+                        <p>Beban Cicilan</p>
+                      </div>
+                      <div class="icon">
+                        <i class="ion ion-ios-checkmark-outline"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-6 col-6">
                     <!-- small box -->
                     <div class="small-box bg-success">
                       <div class="inner">
@@ -163,30 +140,28 @@
                 <table class="table table-bordered table-striped data-table">
                   <thead>
                     <tr>
-                      <th>No DO</th>
-                      <th>No Kontrak</th>
+                      <th>Nopol</th>
+                      <th>Supir</th>
                       <th>Periode</th>
                       <th>Gross profit</th>
-                      <th>Beban Lapangan</th>
-                      <th>Beban Replas</th>
-                      <th>Beban PPh Replas</th>
-                      <th>Beban Claim Invoice</th>
-                      <th>Beban PPh</th>
+                      <th>Beban Operasional</th>
+                      <th>Beban Premi Supir</th>
+                      <th>Beban Perbaikan</th>
+                      <th>Beban Cicilan</th>
                       <th>Net Profit</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php foreach ($laporan as $row) : ?>
                       <tr>
-                        <td><?php echo $row->no_do; ?></td>
-                        <td><?php echo $row->no_kontrak; ?></td>
+                        <td><?php echo $row->nopol; ?></td>
+                        <td><?php echo $row->nama_supir; ?></td>
                         <td><?php echo bulan($row->periode_bulan); ?> <?php echo $row->periode_tahun; ?></td>
-                        <td>Rp <?php echo number_format($row->total_pemasukan_invoice, 0, "", "."); ?></td>
-                        <td>Rp <?php echo number_format($row->pengeluaran_lapangan, 0, "", "."); ?></td>
-                        <td>Rp <?php echo number_format($row->pengeluaran_replas, 0, "", "."); ?></td>
-                        <td>Rp <?php echo number_format($row->total_pph_replas, 0, "", "."); ?></td>
-                        <td>Rp <?php echo number_format($row->total_biaya_claim_invoice, 0, "", "."); ?></td>
-                        <td>Rp <?php echo number_format($row->total_pph, 0, "", "."); ?></td>
+                        <td>Rp <?php echo number_format($row->grand_total, 0, "", "."); ?></td>
+                        <td>Rp <?php echo number_format($row->operasional, 0, "", "."); ?></td>
+                        <td>Rp <?php echo number_format($row->premi_supir, 0, "", "."); ?></td>
+                        <td>Rp <?php echo number_format($row->total_perbaikan, 0, "", "."); ?></td>
+                        <td>Rp <?php echo number_format($row->cicilan, 0, "", "."); ?></td>
                         <td>Rp <?php echo number_format($row->total_keuntungan, 0, "", "."); ?></td>
                       </tr>
                     <?php endforeach; ?>
@@ -195,11 +170,9 @@
                     <tr>
                       <td colspan="3" class="text-right">Total : </td>
                       <td>Rp <?php echo number_format($total->total_pemasukan, 0, "", "."); ?></td>
-                      <td>Rp <?php echo number_format($total->total_pengeluaran_lapangan, 0, "", "."); ?></td>
-                      <td>Rp <?php echo number_format($total->total_pengeluaran_replas, 0, "", "."); ?></td>
-                      <td>Rp <?php echo number_format($total->total_potongan_pph_replas, 0, "", "."); ?></td>
-                      <td>Rp <?php echo number_format($total->total_biaya_claim, 0, "", "."); ?></td>
-                      <td>Rp <?php echo number_format($total->total_potongan_pph, 0, "", "."); ?></td>
+                      <td>Rp <?php echo number_format($total->total_operasional, 0, "", "."); ?></td>
+                      <td>Rp <?php echo number_format($total->total_premi_supir, 0, "", "."); ?></td>
+                      <td>Rp <?php echo number_format($total->total_cicilan, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($total->total_bersih, 0, "", "."); ?></td>
                     </tr>
                   </tfoot>
