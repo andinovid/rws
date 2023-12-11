@@ -801,6 +801,7 @@ class Rms extends CI_Controller
             if ($status == '1' and $payer == '1') {
                 $data_keuangan = array(
                     'jenis' => '2',
+                    'kategori' => '4',
                     'keterangan' => $jenis . '-' . $nama_supir . ' - ' . $nopol,
                     'jumlah' => str_replace('.', '', $jumlah),
                     'tanggal' => $tanggal,
@@ -1317,6 +1318,7 @@ class Rms extends CI_Controller
         $jenis = $this->input->POST('jenis');
         $jumlah = $this->input->POST('jumlah');
         $keterangan = $this->input->POST('keterangan');
+        $kategori = $this->input->POST('kategori');
         $tanggal = $this->input->POST('tanggal');
 
 
@@ -1324,6 +1326,7 @@ class Rms extends CI_Controller
             'tanggal' => $tanggal,
             'jumlah' => str_replace('.', '', $jumlah),
             'jenis' => $jenis,
+            'kategori' => $kategori,
             'keterangan' => $keterangan,
         );
 
@@ -2782,6 +2785,15 @@ class Rms extends CI_Controller
         header('Cache-Control: max-age=0');
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');
+    }
+
+    
+
+    function kwitansi_supir()
+    {
+        $data['truck'] = $this->rms_model->get("tbl_truck")->result();
+        $data['content'] = 'rms/kwitansi_supir/index';
+        $this->load->view('rms/includes/template', $data);
     }
 
 

@@ -162,6 +162,16 @@
                   <option value="2">Pengeluaran</option>
                 </select>
               </div>
+              <div class="form-group" id="kategori">
+                <label>Kategori</label>
+                <select class="form-control" style="width: 100%;" name="kategori">
+                  <option value="0">Pilih kategori</option>
+                  <option value="1">Operasional Kantor</option>
+                  <option value="2">Gaji Karyawan</option>
+                  <option value="3">Asuransi Karyawan</option>
+                  <option value="4">Perbaikan</option>
+                </select>
+              </div>
               <div class="form-group">
                 <label for="nama_rekening">Jumlah</label>
                 <input type="text" class="form-control number" id="jumlah" name="jumlah" placeholder="Input jumlah transaksi">
@@ -195,6 +205,17 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
+  $(function() {
+    $('#kategori').hide();
+    $('#jenis').change(function() {
+      if ($('#jenis').val() == '2') {
+        $('#kategori').show();
+      } else {
+        $('#kategori').hide();
+      }
+    });
+  });
+
   function input_keuangan() {
     $('#form_keuangan')[0].reset();
     $("#input-keuangan").modal('show');
@@ -247,6 +268,10 @@
       success: function(data) {
         for (var i = 0; i < data.length; i++) {
           $('[name="jenis"]').val(data[i].jenis).change();
+          if (data[i].jenis == '2') {
+            $('#kategori').show();
+            $('[name="kategori"]').val(data[i].kategori).change();
+          }
           $('[name="tanggal"]').val(data[i].tanggal);
           $('[name="jumlah"]').val($.number(data[i].jumlah).replace(/\,/g, '.').replace(/\-/g, ''));
           $('[name="keterangan"]').val(data[i].keterangan);

@@ -83,3 +83,13 @@
   background-color: #08214b;
   border-color: #2c2e74;
 }
+
+.btn-warning{
+  background-color: #ffb100;
+  border-color: #ffb100;
+  color: #FFF;
+  font-weight: 500;
+}
+.btn-warning:hover{
+  color: #FFF;
+}

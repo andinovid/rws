@@ -229,28 +229,13 @@
               </p>
             </a>
           </li>
-          <li class="nav-item <?php if ($this->uri->segment(1) == "kwitansi") { ?>menu-open <?php } ?>">
-            <a href="#" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi") { ?>active <?php } ?>">
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>kwitansi-supir/" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi-supir") { ?>active <?php } ?>">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Kwitansi
-                <i class="fas fa-angle-right right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item ">
-                <a href="#" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi" AND $this->uri->segment(2) == "generate") { ?>active <?php } ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Generate Kwitansi</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi" AND $this->uri->segment(2) == "data") { ?>active <?php } ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Data Kwitansi</p>
-                </a>
-              </li>
-            </ul>
           </li>
 
           <li class="nav-header">KEUANGAN</li>
