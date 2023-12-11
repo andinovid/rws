@@ -77,9 +77,9 @@
 }
 
 .main-sidebar, .layout-navbar-fixed .wrapper .sidebar-dark-primary .brand-link:not([class*=navbar]){
-  background-color: #11123e;
+  background-color: #061E45;
 }
 [class*=sidebar-dark] .btn-sidebar, [class*=sidebar-dark] .form-control-sidebar {
-  background-color: #1a1c56;
+  background-color: #08214b;
   border-color: #2c2e74;
 }
