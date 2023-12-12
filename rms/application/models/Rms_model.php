@@ -98,6 +98,15 @@ class Rms_model extends CI_Model
         return $return;
     }
 
+    public function update_keuangan_perbaikan($data, $param)
+    {
+        $return = FALSE;
+        if ($this->db->update("tbl_keuangan", $data, "id_perbaikan = $param")) {
+            $return = TRUE;
+        }
+        return $return;
+    }
+
     function delete_data($tbl, $id)
     {
         $this->db->where('id', $id);

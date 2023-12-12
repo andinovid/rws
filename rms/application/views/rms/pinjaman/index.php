@@ -36,6 +36,7 @@
                     <th>Supir</th>
                     <th>Jumlah Pinjaman</th>
                     <th>Tanggal</th>
+                    <th>Keterangan</th>
                     <th>Status</th>
                     <th></th>
                   </tr>
@@ -51,6 +52,7 @@
                       <td><?php echo $row->nama_supir; ?></td>
                       <td>Rp <?php echo number_format($row->jumlah_pinjaman, 0, "", "."); ?></td>
                       <td><?php echo shortdate_indo($row->tanggal); ?></td>
+                      <td><?php echo $row->keterangan; ?></td>
                       <td>
                         <?php if ($row->status_pinjaman == '0') { ?>
                           <span class="badge bg-warning">Belum dibayar</span>
@@ -121,6 +123,10 @@
               <div class="form-group">
                 <label for="nama_rekening">Jumlah</label>
                 <input type="text" class="form-control number" id="jumlah" name="jumlah" placeholder="Input jumlah transaksi">
+              </div>
+              <div class="form-group">
+                <label for="nama_rekening">Keterangan</label>
+                <textarea class="form-control" name="keterangan" id="keterangan"></textarea>
               </div>
               <div class="form-group">
                 <label for="kategori">Status</label>
@@ -208,6 +214,7 @@
         for (var i = 0; i < data.length; i++) {
           $('[name="supir"]').val(data[i].id_truck).change();
           $('[name="tanggal"]').val(data[i].tanggal);
+          $('[name="keterangan"]').val(data[i].keterangan);
           $('[name="jumlah"]').val($.number(data[i].jumlah_pinjaman).replace(/\,/g, '.').replace(/\-/g, ''));
           $('[name="status"]').val(data[i].status).change();
         }

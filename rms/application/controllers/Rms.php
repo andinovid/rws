@@ -792,10 +792,6 @@ class Rms extends CI_Controller
             );
         }
 
-
-
-
-
         if ($id == "") {
             $save = $this->rms_model->insert_id("tbl_perbaikan", $data_array);
             if ($status == '1' and $payer == '1') {
@@ -817,6 +813,12 @@ class Rms extends CI_Controller
             }
         } else {
             $save = $this->rms_model->update("tbl_perbaikan", $data_array, $id);
+            $data_keuangan = array(
+                'keterangan' => $jenis . '-' . $nama_supir . ' - ' . $nopol,
+                'jumlah' => str_replace('.', '', $jumlah),
+                'tanggal' => $tanggal,
+            );
+            $this->rms_model->update_keuangan_perbaikan($data_keuangan, $id);
             if ($save) {
                 echo json_encode(array(
                     "status" => TRUE,
@@ -1355,6 +1357,7 @@ class Rms extends CI_Controller
         $jumlah = $this->input->POST('jumlah');
         $id_supir = $this->input->POST('supir');
         $tanggal = $this->input->POST('tanggal');
+        $keterangan = $this->input->POST('keterangan');
         $status = $this->input->POST('status');
 
 
@@ -1362,6 +1365,7 @@ class Rms extends CI_Controller
             'id_truck' => $id_supir,
             'jumlah_pinjaman' => str_replace('.', '', $jumlah),
             'tanggal' => $tanggal,
+            'keterangan' => $keterangan,
             'status' => $status,
         );
 
