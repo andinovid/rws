@@ -36,6 +36,7 @@
                     <th>Supir</th>
                     <th>Jumlah Pinjaman</th>
                     <th>Tanggal</th>
+                    <th>Untuk Periode</th>
                     <th>Keterangan</th>
                     <th>Status</th>
                     <th></th>
@@ -52,6 +53,7 @@
                       <td><?php echo $row->nama_supir; ?></td>
                       <td>Rp <?php echo number_format($row->jumlah_pinjaman, 0, "", "."); ?></td>
                       <td><?php echo shortdate_indo($row->tanggal); ?></td>
+                      <td><?php echo bulan($row->periode_bulan) . ' ' . $row->periode_tahun; ?></td>
                       <td><?php echo $row->keterangan; ?></td>
                       <td>
                         <?php if ($row->status_pinjaman == '0') { ?>
@@ -107,6 +109,35 @@
                   <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate1" data-toggle="datetimepicker" name="tanggal" id="tanggal" />
                   <div class="input-group-append" data-target=".reservationdate1" data-toggle="datetimepicker">
                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Untuk Periode</label>
+                <div class="row">
+                  <div class="col-md-6">
+                    <select class="form-control" name="bulan" id="bulan">
+                      <option value="">Pilih bulan</option>
+                      <option value="01">Januari</option>
+                      <option value="02">Februari</option>
+                      <option value="03">Maret</option>
+                      <option value="04">April</option>
+                      <option value="05">Mei</option>
+                      <option value="06">Juni</option>
+                      <option value="07">Juli</option>
+                      <option value="08">Agustus</option>
+                      <option value="09">September</option>
+                      <option value="10">Oktober</option>
+                      <option value="11">November</option>
+                      <option value="12">Desember</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <select class="form-control" style="width: 100%;" name="tahun" id="tahun">
+                      <option value="">Pilih tahun</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -214,6 +245,8 @@
         for (var i = 0; i < data.length; i++) {
           $('[name="supir"]').val(data[i].id_truck).change();
           $('[name="tanggal"]').val(data[i].tanggal);
+          $('[name="bulan"]').val(data[i].periode_bulan).change();
+          $('[name="tahun"]').val(data[i].periode_tahun).change();
           $('[name="keterangan"]').val(data[i].keterangan);
           $('[name="jumlah"]').val($.number(data[i].jumlah_pinjaman).replace(/\,/g, '.').replace(/\-/g, ''));
           $('[name="status"]').val(data[i].status).change();

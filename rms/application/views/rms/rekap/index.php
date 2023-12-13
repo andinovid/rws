@@ -23,12 +23,12 @@
             <div class="card-header">
               <h3 class="card-title">Rekapitulasi Data</h3>
               <div class="card-tools mr-1">
-                <button type="button" class="btn btn-block btn-primary btn-sm" onclick="input_replas()"><i class="fas fa-plus mr-1"></i> Input Data</button>
+                <button type="button" class="btn btn-block btn-primary btn-sm" onclick="generate_invoice()"><i class="fas fa-print mr-1"></i> Generate Kwitansi</button>
               </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered data-table">
+              <table class="table table-bordered data-table" id="tbl-rekap">
                 <thead class="thead-dark">
                   <tr>
                     <th rowspan="2" class="text-center align-middle">#</th>
@@ -57,7 +57,7 @@
                   $no++;
                   foreach ($rekap as $row) : ?>
                     <tr>
-                      <td><?php echo $no; ?></td>
+                      <td><input type="checkbox" name="id[]" value="<?php echo $row->id_rekap; ?>" /></td>
                       <td><?php echo $row->no_replas; ?></td>
                       <td><?php if ($row->tanggal_muat) {
                             echo shortdate_indo($row->tanggal_muat);
@@ -100,113 +100,64 @@
     </div>
     <!-- /.container-fluid -->
 
-    <div class="modal fade" id="input-replas">
-      <div class="modal-dialog modal-lg">
-        <form id="form_replas" class="form-horizontal" method="post" enctype="multipart/form-data">
+    <div class="modal fade" id="generate-invoice">
+      <div class="modal-dialog modal-md">
+        <form id="form_generate_invoice" class="form-horizontal" method="post" enctype="multipart/form-data">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Input Replas</h4>
+              <h4 class="modal-title">Generate Kwitansi Transporter</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
-                    <input type="hidden" class="form-control" name="id" id="id" placeholder="id">
-
-                    <label for="no_replas">Nomor Replas</label>
-                    <input type="text" class="form-control" id="no_replas" name="no_replas" placeholder="Input nomor replas">
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Tanggal Muat</label>
-                    <div class="input-group date reservationdate1" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate1" data-toggle="datetimepicker" name="tanggal_muat" id="tanggal_muat" />
-                      <div class="input-group-append" data-target=".reservationdate1" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Tanggal Bongkar</label>
-                    <div class="input-group date reservationdate2" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate2" data-toggle="datetimepicker" name="tanggal_bongkar" id="tanggal_bongkar" />
-                      <div class="input-group-append" data-target=".reservationdate2" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label>Supir</label>
-                    <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
-                      <option value="0">Pilih supir</option>
-                      <?php foreach ($supir as $row) : ?>
-                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
-                      <?php endforeach; ?>
+                    <label>Periode bulan</label>
+                    <select class="form-control" name="bulan" id="bulan">
+                      <option value="">Pilih bulan</option>
+                      <option value="01">Januari</option>
+                      <option value="02">Februari</option>
+                      <option value="03">Maret</option>
+                      <option value="04">April</option>
+                      <option value="05">Mei</option>
+                      <option value="06">Juni</option>
+                      <option value="07">Juli</option>
+                      <option value="08">Agustus</option>
+                      <option value="09">September</option>
+                      <option value="10">Oktober</option>
+                      <option value="11">November</option>
+                      <option value="12">Desember</option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <label>Truck</label>
-                    <select class="form-control select2" style="width: 100%;" name="truck" id="truck">
-                      <option value="0">Pilih truk</option>
-                      <?php foreach ($truck as $row) : ?>
-                        <option value="<?php echo $row->id; ?>"><?php echo $row->nopol; ?></option>
-                      <?php endforeach; ?>
-                    </select>
-                  </div>
-
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Tujuan</label>
-                    <select class="form-control select2" style="width: 100%;" name="tujuan" id="tujuan">
-                      <option value="0">Pilih tujuan</option>
-                      <?php foreach ($tujuan as $row) : ?>
-                        <option value="<?php echo $row->id; ?>"><?php echo $row->kode_tujuan; ?></option>
-                      <?php endforeach; ?>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Qty Kirim</label>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Bag" name="qty_kirim_bag" id="qty_kirim_bag">
-                      </div>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Kg" name="qty_kirim_kg" id="qty_kirim_kg">
-                      </div>
+                      <label>Periode tahun</label>
+                      <select class="form-control" style="width: 100%;" name="tahun" id="tahun">
+                        <option value="">Pilih tahun</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                      </select>
                     </div>
-                  </div>
                   <div class="form-group">
-                    <label for="no_replas">Timbang Kebun</label>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" name="timbang_kebun_bag" id="timbang_kebun_bag" placeholder="Bag">
-                      </div>
-                      <div class="col-md-6">
-                        <input type="text" class="form-control" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Kg">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Uang Sangu</label>
-                    <input type="text" class="form-control" name="uang_sangu" id="uang_sangu" placeholder="Uang Sangu">
+                    <label for="nama">Uang Sangu</label>
+                    <input type="hidden" class="form-control" id="id_rekap_invoice" name="id_rekap_invoice">
+                    <input type="text" class="form-control number" id="uang_sangu" name="uang_sangu" placeholder="Input uang sangu">
                   </div>
                 </div>
               </div>
-
             </div>
             <div class="modal-footer" style="justify-content: flex-start;">
-              <button type="submit" class="btn btn-primary">Save changes</button>
+              <button type="submit" class="btn btn-primary">Generate</button>
               <div class="loading" style="display: none;">
                 <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
               </div>
             </div>
           </div>
         </form>
+        <!-- /.modal-content -->
       </div>
+      <!-- /.modal-dialog -->
     </div>
 
 
@@ -220,6 +171,56 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
+  function generate_invoice() {
+    var table = $('#tbl-rekap').DataTable();
+    event.preventDefault();
+    table.page.len(-1).draw();
+    var searchIDs = $("#tbl-rekap input:checkbox:checked").map(function() {
+      return $(this).val();
+    }).get();
+
+    if (searchIDs != "") {
+      $('[name="id_rekap_invoice"]').val(searchIDs);
+      $('#form_generate_invoice')[0].reset();
+      $("#generate-invoice").modal('show');
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Silahkan pilih invoice yang akan dicetak!"
+      });
+    }
+  }
+
+  $('#form_generate_invoice').on('submit', function(event) {
+    event.preventDefault();
+    var formData = new FormData($('#form_generate_invoice')[0]);
+    $('.loading').show();
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo base_url(); ?>rms/save_generate_kwitansi_transporter',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(data) {
+        $('#form_generate_invoice')[0].reset();
+        $('.loading').hide();
+        if (data.status = "true") {
+          Swal.fire({
+            icon: 'success',
+            title: "Berhasil!",
+            text: "Kwitansi berhasil digenerate.",
+            type: "success"
+          }).then((result) => {
+            window.open('<?php echo base_url(); ?>kwitansi-transporter/data', '_self');
+          });
+        } else {
+          alert("failed!");
+        }
+      }
+    });
+  });
+
   function input_replas(id) {
     $('#form_replas')[0].reset();
     $("#supir").val(0).change();

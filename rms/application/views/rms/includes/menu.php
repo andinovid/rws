@@ -74,7 +74,7 @@
             </a>
 
           </li>
-          
+
           <li class="nav-header">Komoditas</li>
           <li class="nav-item <?php if ($this->uri->segment(1) == "project") { ?>menu-open <?php } ?>">
             <a href="#" class="nav-link <?php if ($this->uri->segment(1) == "project") { ?>active <?php } ?>">
@@ -121,7 +121,7 @@
               </p>
             </a>
           </li>
-          
+
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>vendor/" class="nav-link <?php if ($this->uri->segment(1) == "vendor") { ?>active <?php } ?>">
               <i class="nav-icon fas fa-building"></i>
@@ -140,13 +140,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item ">
-                <a href="<?php echo base_url(); ?>kwitansi/generate" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi" AND $this->uri->segment(2) == "generate") { ?>active <?php } ?>">
+                <a href="<?php echo base_url(); ?>kwitansi/generate" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi" and $this->uri->segment(2) == "generate") { ?>active <?php } ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Generate Kwitansi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>kwitansi/data" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi" AND $this->uri->segment(2) == "data") { ?>active <?php } ?>">
+                <a href="<?php echo base_url(); ?>kwitansi/data" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi" and $this->uri->segment(2) == "data") { ?>active <?php } ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Kwitansi</p>
                 </a>
@@ -179,14 +179,14 @@
           </li>
           <li class="nav-header">Transporter</li>
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>rekapitulasi" class="nav-link <?php if ($this->uri->segment(1) == "project") { ?>active <?php } ?>">
+            <a href="<?php echo base_url(); ?>rekapitulasi" class="nav-link <?php if ($this->uri->segment(1) == "rekapitulasi") { ?>active <?php } ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Rekapitulasi
               </p>
             </a>
           </li>
-          
+
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>truck/" class="nav-link <?php if ($this->uri->segment(1) == "truck") { ?>active <?php } ?>">
               <i class="nav-icon fas fa-truck"></i>
@@ -229,13 +229,28 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url(); ?>kwitansi-supir/" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi-supir") { ?>active <?php } ?>">
+          <li class="nav-item <?php if ($this->uri->segment(1) == "kwitansi-transporter") { ?>menu-open <?php } ?>">
+            <a href="#" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi-transporter") { ?>active <?php } ?>">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Kwitansi
+                Kwitansi Transporter
+                <i class="fas fa-angle-right right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item ">
+                <a href="<?php echo base_url(); ?>kwitansi-transporter/data" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi-transporter" AND $this->uri->segment(2) == "data") { ?>active <?php } ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Kwitansi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>kwitansi-transporter/periode" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi-transporter" AND $this->uri->segment(2) == "periode") { ?>active <?php } ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kwitansi periode</p>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-header">KEUANGAN</li>
@@ -270,8 +285,8 @@
             </a>
           </li>
 
-          
-          
+
+
           <!--li class="nav-item">
           <a href="<?php echo base_url(); ?>kwitansi/" class="nav-link">
             <i class="nav-icon fas fa-table"></i>
@@ -281,7 +296,7 @@
           </a>
         </li-->
           <li class="nav-item <?php if ($this->uri->segment(1) == "laporan") { ?>menu-open <?php } ?>">
-            <a href="<?php echo base_url(); ?>laporan/" class="nav-link " >
+            <a href="<?php echo base_url(); ?>laporan/" class="nav-link ">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Laporan

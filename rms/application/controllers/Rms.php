@@ -1357,6 +1357,8 @@ class Rms extends CI_Controller
         $jumlah = $this->input->POST('jumlah');
         $id_supir = $this->input->POST('supir');
         $tanggal = $this->input->POST('tanggal');
+        $bulan = $this->input->POST('bulan');
+        $tahun = $this->input->POST('tahun');
         $keterangan = $this->input->POST('keterangan');
         $status = $this->input->POST('status');
 
@@ -1365,6 +1367,8 @@ class Rms extends CI_Controller
             'id_truck' => $id_supir,
             'jumlah_pinjaman' => str_replace('.', '', $jumlah),
             'tanggal' => $tanggal,
+            'periode_bulan' => $bulan,
+            'periode_tahun' => $tahun,
             'keterangan' => $keterangan,
             'status' => $status,
         );
@@ -1786,6 +1790,301 @@ class Rms extends CI_Controller
         $write->save('php://output');
     }
 
+    public function print_kwitansi_transporter($id_kwitansi)
+    {
+
+        $detail_kwitansi = $this->rms_model->get_by_query("SELECT * FROM v_kwitansi_transporter WHERE id_kwitansi = '$id_kwitansi'")->row();
+        include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
+        $excel = new PHPExcel();
+        $excel->getProperties()->setCreator('Rajawali System')
+            ->setLastModifiedBy('My Notes Code')
+            ->setTitle("Kwitansi")
+            ->setSubject("Kwitansi")
+            ->setDescription("Kwitansi")
+            ->setKeywords("Kwitansi");
+        $style_col = array(
+            'font' => array('bold' => true), // Set font nya jadi bold
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+            ),
+            'fill' => array(
+                'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('rgb' => 'DDDDDD')
+            )
+        );
+
+        $excel->getActiveSheet()->getStyle('Q4')->applyFromArray(
+            array(
+                'fill' => array(
+                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb' => 'ff6372')
+                )
+            )
+        );
+        $excel->getActiveSheet()->getStyle('Q5')->applyFromArray(
+            array(
+                'fill' => array(
+                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb' => 'ff6372')
+                )
+            )
+        );
+        // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+        $style_row = array(
+            'alignment' => array(
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+            )
+        );
+        $style_center = array(
+            'alignment' => array(
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            )
+        );
+        $style_border = array(
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+            )
+        );
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "KWITANSI");
+        $excel->setActiveSheetIndex(0)->setCellValue('A2', "CV RAJA WALI SAMPIT");
+        $excel->setActiveSheetIndex(0)->setCellValue('A4', "Untuk Pembayaran");
+        $excel->setActiveSheetIndex(0)->setCellValue('F4', "GROUP");
+        $excel->setActiveSheetIndex(0)->setCellValue('G4', $detail_kwitansi->nama_supir);
+        $excel->setActiveSheetIndex(0)->setCellValue('F5', "NO HP");
+        $excel->setActiveSheetIndex(0)->setCellValue('G5', "");
+        $excel->setActiveSheetIndex(0)->setCellValue('Q4', "Lembar 1");
+        $excel->setActiveSheetIndex(0)->setCellValue('Q5', "Supir");
+
+        $excel->getActiveSheet()->mergeCells('A1:Q1'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('A4:E4'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('G6:K6'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('G5:K5'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('G4:K4'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('A2:Q2'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('Q4')->applyFromArray($style_row);
+        $excel->getActiveSheet()->getStyle('Q5')->applyFromArray($style_row);
+        $excel->getActiveSheet()->getStyle('Q4')->getFont()->setBold(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('Q5')->getFont()->setBold(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('Q5')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('Q4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(TRUE); // Set bold kolom A1
+        // Buat header tabel nya pada baris ke 3
+        $excel->setActiveSheetIndex(0)->setCellValue('A8', "NO");
+        $excel->setActiveSheetIndex(0)->setCellValue('B8', "TGL");
+        $excel->setActiveSheetIndex(0)->setCellValue('C8', "QTY AWAL");
+        $excel->setActiveSheetIndex(0)->setCellValue('D8', "QTY AKHIR");
+        $excel->setActiveSheetIndex(0)->setCellValue('E8', "SUPIR");
+        $excel->setActiveSheetIndex(0)->setCellValue('F8', "NOPOL");
+        $excel->setActiveSheetIndex(0)->setCellValue('G8', "ANGKUT");
+        $excel->setActiveSheetIndex(0)->setCellValue('H8', "TUJUAN");
+        $excel->setActiveSheetIndex(0)->setCellValue('I8', "M");
+        $excel->setActiveSheetIndex(0)->setCellValue('J8', "C");
+        $excel->setActiveSheetIndex(0)->setCellValue('K8', "HARGA");
+        $excel->setActiveSheetIndex(0)->setCellValue('L8', "TOTAL");
+        $excel->setActiveSheetIndex(0)->setCellValue('M8', "CLAIM");
+        $excel->setActiveSheetIndex(0)->setCellValue('N8', "TTL CLAIM");
+        $excel->setActiveSheetIndex(0)->setCellValue('O8', "Pph %");
+        $excel->setActiveSheetIndex(0)->setCellValue('P8', "ADM");
+        $excel->setActiveSheetIndex(0)->setCellValue('Q8', "GRAND TOTAL");
+        // Apply style header yang telah kita buat tadi ke masing-masing kolom header
+        $excel->getActiveSheet()->getStyle('A8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('B8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('C8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('D8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('E8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('F8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('G8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('H8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('I8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('J8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('K8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('L8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('M8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('N8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('O8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('P8')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('Q8')->applyFromArray($style_col);
+
+        $kwitansi = $this->rms_model->get("v_generate_kwitansi_transporter", "WHERE id_kwitansi = '$id_kwitansi'")->result();
+        $no = 1; // Untuk penomoran tabel, di awal set dengan 1
+        $numrow = 9;
+        $numrow2 = 10; // Set baris pertama untuk isi tabel adalah baris ke 4
+        foreach ($kwitansi as $data) { // Lakukan looping pada variabel siswa
+            $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
+            $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, mediumdate_indo($data->tanggal_bongkar));
+            $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->timbang_kebun_kg);
+            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->qty_kirim_kg);
+            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->nama_supir);
+            $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->nopol);
+            $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->komoditas);
+            $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->kode_tujuan);
+            $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->m_susut);
+            $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->c_claim);
+            $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, 'Rp ' . number_format($data->harga, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, 'Rp ' . number_format($data->total, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, 'Rp ' . number_format($data->claim, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, 'Rp ' . number_format($data->total_claim, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, 'Rp ' . number_format($data->pph, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('P' . $numrow, '');
+            $excel->setActiveSheetIndex(0)->setCellValue('Q' . $numrow, 'Rp ' . number_format($data->grand_total, 0, "", "."));
+            $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('F' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('G' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('H' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('I' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('J' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('K' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('L' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('M' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('N' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('O' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('P' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('Q' . $numrow)->applyFromArray($style_row);
+
+            $no++; // Tambah 1 setiap kali looping
+            $numrow = $numrow +1; // Tambah 1 setiap kali looping
+            $numrow2 = $numrow2 + 2;
+        }
+
+        $total = $numrow + 1;
+        $total2 = $numrow + 2;
+        $sebesar = $numrow + 3;
+        $terbilang = $numrow + 4;
+        $ttd = $numrow + 4;
+        $ttd_bottom = $ttd + 3;
+        $ttd_periksa = $ttd_bottom + 1;
+
+
+        $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, 'Total Qty');
+        $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $detail_kwitansi->qty_awal);
+        $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $detail_kwitansi->qty_akhir);
+        $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, 'Rp ' . number_format($detail_kwitansi->total_kotor_replas, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, 'Rp ' . number_format($detail_kwitansi->total_claim, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('O' . $numrow, 'Rp ' . number_format($detail_kwitansi->total_pph, 0, "", "."));
+        $excel->getActiveSheet()->getStyle('A' . $numrow . ':' . 'Q' . $numrow)->applyFromArray($style_row);
+
+
+
+
+        $excel->setActiveSheetIndex(0)->setCellValue('P' . $total, 'Sangu Jalan');
+        $excel->setActiveSheetIndex(0)->setCellValue('Q' . $total, 'Rp ' . number_format($detail_kwitansi->uang_sangu, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('P' . $total2, 'Total');
+        $excel->setActiveSheetIndex(0)->setCellValue('Q' . $total2, 'Rp ' . number_format($detail_kwitansi->grand_total_transporter, 0, "", "."));
+        $excel->getActiveSheet()->getStyle('P' . $total)->applyFromArray($style_row);
+        $excel->getActiveSheet()->getStyle('Q' . $total)->applyFromArray($style_row);
+
+        $excel->setActiveSheetIndex(0)->setCellValue('A' . $sebesar, 'Sebesar');
+        $excel->setActiveSheetIndex(0)->setCellValue('C' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total_transporter, 0, "", "."));
+        $excel->setActiveSheetIndex(0)->setCellValue('C' . $terbilang, '(' . ucwords(terbilang($detail_kwitansi->grand_total_transporter)) . ' Rupiah)');
+        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setItalic(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setSize(10); // Set font size 15 untuk kolom A1
+
+
+        $excel->setActiveSheetIndex(0)->setCellValue('G' . $sebesar, 'Sampit, ' . shortdate_indo(date('Y-m-d')));
+        $excel->getActiveSheet()->mergeCells('G' . $sebesar . ':' . 'O' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->getStyle('G' . $sebesar . ':' . 'H' . $sebesar)->applyFromArray($style_center);
+
+        $excel->getActiveSheet()->mergeCells('A' . $sebesar . ':' . 'B' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('C' . $sebesar . ':' . 'E' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->mergeCells('C' . $terbilang . ':' . 'E' . $terbilang); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setBold(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setSize(16); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setItalic(TRUE); // Set bold kolom A1
+
+
+        $excel->setActiveSheetIndex(0)->setCellValue('G' . $ttd, 'Direkap oleh');
+        $excel->setActiveSheetIndex(0)->setCellValue('G' . $ttd_periksa, 'HANAFI');
+        $excel->getActiveSheet()->mergeCells('G' . $ttd . ':' . 'i' . $ttd_bottom); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->getStyle('G' . $ttd)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('G' . $ttd)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('G' . $ttd . ':' . 'i' . $ttd_periksa)->applyFromArray($style_border);
+        $excel->getActiveSheet()->getStyle('G' . $ttd_periksa)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('G' . $ttd_periksa)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_BOTTOM); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->mergeCells('G' . $ttd_periksa . ':' . 'i' . $ttd_periksa); // Set Merge Cell pada kolom A1 sampai E1
+
+
+        $excel->setActiveSheetIndex(0)->setCellValue('J' . $ttd, 'Diperiksa oleh');
+        $excel->setActiveSheetIndex(0)->setCellValue('J' . $ttd_periksa, 'ANISA');
+        $excel->getActiveSheet()->mergeCells('J' . $ttd . ':' . 'L' . $ttd_bottom); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->getStyle('J' . $ttd)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('J' . $ttd)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('J' . $ttd . ':' . 'L' . $ttd_periksa)->applyFromArray($style_border);
+        $excel->getActiveSheet()->getStyle('J' . $ttd_periksa)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('J' . $ttd_periksa)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_BOTTOM); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->mergeCells('J' . $ttd_periksa . ':' . 'L' . $ttd_periksa); // Set Merge Cell pada kolom A1 sampai E1
+
+
+        $excel->setActiveSheetIndex(0)->setCellValue('M' . $ttd, 'Disetujui oleh');
+        $excel->setActiveSheetIndex(0)->setCellValue('M' . $ttd_periksa, 'ABDULLAH');
+        $excel->getActiveSheet()->mergeCells('M' . $ttd . ':' . 'O' . $ttd_bottom); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->getStyle('M' . $ttd)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('M' . $ttd)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('M' . $ttd . ':' . 'O' . $ttd_periksa)->applyFromArray($style_border);
+        $excel->getActiveSheet()->getStyle('M' . $ttd_periksa)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->getStyle('M' . $ttd_periksa)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_BOTTOM); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->mergeCells('M' . $ttd_periksa . ':' . 'O' . $ttd_periksa); // Set Merge Cell pada kolom A1 sampai E1
+
+
+        // Set width kolom
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(3); // Set width kolom A
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15); // Set width kolom B
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(15); // Set width kolom C
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(15); // Set width kolom D
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(20); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(5); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('J')->setWidth(5); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('K')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('L')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('M')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('N')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('O')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('P')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('Q')->setWidth(15); // Set width kolom E
+
+        // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
+        $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
+        // Set orientasi kertas jadi LANDSCAPE
+        $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+        // Set judul file excel nya
+        $excel->getActiveSheet(0)->setTitle("Laporan Data Siswa");
+        $excel->setActiveSheetIndex(0);
+        // Proses file excel
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="kwitansi_' . $detail_kwitansi->nama_supir . '.xlsx"'); // Set nama file excel nya
+        header('Cache-Control: max-age=0');
+        $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        $write->save('php://output');
+    }
+
     public function print_kwitansi_non_do($id_vendor)
     {
 
@@ -2115,6 +2414,35 @@ class Rms extends CI_Controller
 
             $item = array('no_kwitansi' => $no_kwitansi, 'id_rekap' => $projectArray[$i], 'id_kwitansi' => $save_invoice);
             $this->rms_model->insert("tbl_generate_kwitansi", $item);
+        }
+        if ($save_invoice) {
+
+            echo json_encode(array(
+                "status" => TRUE,
+                "target" => TRUE
+            ));
+        }
+    }
+
+    function save_generate_kwitansi_transporter()
+    {
+        $id_rekap = $this->input->POST('id_rekap_invoice');
+        $uang_sangu = $this->input->POST('uang_sangu');
+        $bulan = $this->input->POST('bulan');
+        $tahun = $this->input->POST('tahun');
+        $projectArray = explode(',', $id_rekap);
+        $data = array(
+            'periode_bulan' => $bulan,
+            'periode_tahun' => $tahun,
+            'uang_sangu' => str_replace('.', '', $uang_sangu),
+            'status' => '0',
+        );
+
+        $save_invoice = $this->rms_model->insert_id("tbl_kwitansi_transporter", $data);
+        for ($i = 0; $i < count($projectArray); $i++) {
+
+            $item = array('id_rekap' => $projectArray[$i], 'id_kwitansi' => $save_invoice);
+            $this->rms_model->insert("tbl_generate_kwitansi_transporter", $item);
         }
         if ($save_invoice) {
 
@@ -2793,10 +3121,17 @@ class Rms extends CI_Controller
 
     
 
-    function kwitansi_supir()
+    function kwitansi_transporter_periode()
     {
-        $data['truck'] = $this->rms_model->get("tbl_truck")->result();
+        $data['truck'] = $this->rms_model->get("tbl_truck", "WHERE kategori = '1'")->result();
         $data['content'] = 'rms/kwitansi_supir/index';
+        $this->load->view('rms/includes/template', $data);
+    }
+
+    function kwitansi_transporter_data()
+    {
+        $data['kwitansi'] = $this->rms_model->get("v_kwitansi_transporter")->result();
+        $data['content'] = 'rms/kwitansi_supir/kwitansi';
         $this->load->view('rms/includes/template', $data);
     }
 

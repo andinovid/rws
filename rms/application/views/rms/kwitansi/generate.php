@@ -99,7 +99,7 @@
         <form id="form_generate_invoice" class="form-horizontal" method="post" enctype="multipart/form-data">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Generate Invoice</h4>
+              <h4 class="modal-title">Generate Kwitansi</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

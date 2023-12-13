@@ -82,46 +82,46 @@ SELECT
     END AS `nama_pajak`,
     
     CASE WHEN `b`.`non_do` != '1' THEN
-    CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
+        CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
         CASE WHEN `b`.`id_vendor_pajak` IS NULL OR `b`.`id_vendor_pajak` = '0' THEN 
-            CASE WHEN `h`.`jenis_pajak` = 'skb' THEN CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_skb` / 100)
-            WHEN `h`.`jenis_pajak` = 'ktp' THEN CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_ktp` / 100)
-            WHEN `h`.`jenis_pajak` = 'npwp' THEN CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_npwp` / 100)
+            CASE WHEN `h`.`jenis_pajak` = 'skb' THEN ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_skb` / 100), 1)
+            WHEN `h`.`jenis_pajak` = 'ktp' THEN ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_ktp` / 100), 1)
+            WHEN `h`.`jenis_pajak` = 'npwp' THEN ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_npwp` / 100), 1)
             ELSE 0
             END 
         ELSE 
-            CASE WHEN `j`.`jenis_pajak` = 'skb' THEN CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_skb` / 100) 
-            WHEN `j`.`jenis_pajak` = 'ktp' THEN CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_ktp` / 100)
-            WHEN `j`.`jenis_pajak` = 'npwp' THEN CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_npwp` / 100)
+            CASE WHEN `j`.`jenis_pajak` = 'skb' THEN ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_skb` / 100), 1)
+            WHEN `j`.`jenis_pajak` = 'ktp' THEN ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_ktp` / 100), 1)
+            WHEN `j`.`jenis_pajak` = 'npwp' THEN ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_npwp` / 100), 1)
             ELSE 0
             END
         END
 
-    WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
+        WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
         CASE WHEN `b`.`id_vendor_pajak` IS NULL OR `b`.`id_vendor_pajak` = '0' THEN 
-            CASE WHEN `h`.`jenis_pajak` = 'skb' THEN CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_skb` / 100)
-            WHEN `h`.`jenis_pajak` = 'ktp' THEN CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100)
-            WHEN `h`.`jenis_pajak` = 'npwp' THEN CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100)
+            CASE WHEN `h`.`jenis_pajak` = 'skb' THEN ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_skb` / 100), 1)
+            WHEN `h`.`jenis_pajak` = 'ktp' THEN ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_ktp` / 100), 1)
+            WHEN `h`.`jenis_pajak` = 'npwp' THEN ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_npwp` / 100), 1)
             ELSE 0
             END 
         ELSE 
-            CASE WHEN `j`.`jenis_pajak` = 'skb' THEN CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100)
-            WHEN `j`.`jenis_pajak` = 'ktp' THEN CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100)
-            WHEN `j`.`jenis_pajak` = 'npwp' THEN CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100)
+            CASE WHEN `j`.`jenis_pajak` = 'skb' THEN ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_skb` / 100), 1)
+            WHEN `j`.`jenis_pajak` = 'ktp' THEN ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_ktp` / 100), 1)
+            WHEN `j`.`jenis_pajak` = 'npwp' THEN ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_npwp` / 100), 1)
             ELSE 0
             END
         END
-    ELSE 
+        ELSE 
         CASE WHEN `b`.`id_vendor_pajak` IS NULL OR `b`.`id_vendor_pajak` = '0' THEN 
-            CASE WHEN `h`.`jenis_pajak` = 'skb' THEN CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_skb` / 100)
-            WHEN `h`.`jenis_pajak` = 'ktp' THEN CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100)
-            WHEN `h`.`jenis_pajak` = 'npwp' THEN CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100)
+            CASE WHEN `h`.`jenis_pajak` = 'skb' THEN ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_skb` / 100), 1)
+            WHEN `h`.`jenis_pajak` = 'ktp' THEN ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_ktp` / 100), 1)
+            WHEN `h`.`jenis_pajak` = 'npwp' THEN ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_npwp` / 100), 1)
             ELSE 0
             END 
         ELSE 
-            CASE WHEN `j`.`jenis_pajak` = 'skb' THEN CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100)
-            WHEN `j`.`jenis_pajak` = 'ktp' THEN CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100) 
-            WHEN `j`.`jenis_pajak` = 'npwp' THEN CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100)
+            CASE WHEN `j`.`jenis_pajak` = 'skb' THEN ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_skb` / 100), 1)
+            WHEN `j`.`jenis_pajak` = 'ktp' THEN ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_ktp` / 100), 1)
+            WHEN `j`.`jenis_pajak` = 'npwp' THEN ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_npwp` / 100), 1)
             ELSE 0
             END
         END
@@ -184,23 +184,23 @@ SELECT
     AS `total_invoice`,
 
     CASE WHEN `b`.`non_do` = '1' THEN 
-    CONCAT(`b`.`non_do_harga_vendor` * `b`.`qty_kirim_kg`) - `i`.`biaya_admin_non_do` - `b`.`uang_sangu`
+    CONCAT(`b`.`non_do_harga_vendor` * `b`.`qty_kirim_kg`) - `i`.`biaya_admin_non_do`
     WHEN `e`.`kategori` = '1' THEN
         CASE WHEN CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) > `b`.`toleransi_susut` THEN
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`))  - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`))  - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_npwp` / 100), 1) - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`)  - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`)  - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_npwp` / 100), 1) - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_npwp` / 100), 1) - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     END
                 ELSE
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`))  - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`))  - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_npwp` / 100), 1)
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_npwp` / 100), 1)
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_npwp` / 100), 1)
                     END
                 END
     ELSE
@@ -208,55 +208,55 @@ SELECT
             CASE WHEN `h`.`jenis_pajak` = 'skb' THEN 
                 CASE WHEN CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) > `b`.`toleransi_susut` THEN
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     END
                 ELSE
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin`
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin`
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin`
                     END
                 END
             WHEN `h`.`jenis_pajak` = 'npwp' THEN 
                 CASE WHEN CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) > `b`.`toleransi_susut` THEN
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) * (`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) * (`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     END
                 ELSE
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin`
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin`
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin`
                     END
                 END
             WHEN `h`.`jenis_pajak` = 'ktp' THEN 
                 CASE WHEN CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) > `b`.`toleransi_susut` THEN
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     END
                 ELSE
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin`
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin`
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin`
                     END
                 END
             ELSE 1
@@ -265,55 +265,55 @@ SELECT
             CASE WHEN `j`.`jenis_pajak` = 'skb' THEN 
                 CASE WHEN CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) > `b`.`toleransi_susut` THEN
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     END
                 ELSE
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin`
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin`
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_skb` / 100), 1) - `i`.`biaya_admin`
                     END
                 END
             WHEN `j`.`jenis_pajak` = 'npwp' THEN
                 CASE WHEN CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) > `b`.`toleransi_susut` THEN
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     END
                 ELSE
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin`
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin`
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_npwp` / 100), 1) - `i`.`biaya_admin`
                     END
                 END
             WHEN `j`.`jenis_pajak` = 'ktp' THEN 
                 CASE WHEN CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) > `b`.`toleransi_susut` THEN
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu` - CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` -  CONCAT(CONCAT((`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - `b`.`toleransi_susut`) * `a`.`claim_replas`) 
                     END
                 ELSE
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
-                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) - ROUND(CONCAT(`g`.`harga` * LEAST(`b`.`qty_kirim_kg`, `b`.`timbang_kebun_kg`)) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin`
                     WHEN (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '4') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '16') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '5') THEN
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin`
                     ELSE
-                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin` - `b`.`uang_sangu`
+                        CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) - ROUND(CONCAT(`g`.`harga` * `b`.`qty_kirim_kg`) *(`i`.`pph_ktp` / 100), 1) - `i`.`biaya_admin`
                     END
                 END
             ELSE 2

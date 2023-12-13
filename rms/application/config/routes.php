@@ -84,4 +84,6 @@ $route['laporan/pajak_replas'] = 'rms/pajak_replas';
 $route['kwitansi/generate'] = 'rms/generate_kwitansi';
 $route['kwitansi/data'] = 'rms/kwitansi';
 $route['pinjaman'] = 'rms/pinjaman';
-$route['kwitansi-supir'] = 'rms/kwitansi_supir';
+$route['rekapitulasi'] = 'rms/rekapitulasi';
+$route['kwitansi-transporter/data'] = 'rms/kwitansi_transporter_data';
+$route['kwitansi-transporter/periode'] = 'rms/kwitansi_transporter_periode';
