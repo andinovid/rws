@@ -64,12 +64,7 @@
                       <td>Rp <?php echo number_format($row->total_pph, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($row->grand_total_transporter, 0, "", "."); ?></td>
                       <td class="project-actions text-right">
-                        <?php if ($row->status != "1") { ?>
-                          <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="bayar_kwitansi(<?php echo $row->id_kwitansi; ?>)" data-toggle="tooltip" data-placement="top" title="Bayar Kwitansi">
-                            <i class="fas fa-credit-card">
-                            </i>
-                          </a>
-                        <?php } ?>
+                        
                         <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/print_kwitansi_transporter/<?php echo $row->id_kwitansi; ?>" data-toggle="tooltip" data-placement="top" title="Cetak Kwitansi">
                           <i class="fas fa-print">
                           </i>
@@ -321,7 +316,7 @@
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
-          url: "<?php echo base_url() ?>rms/delete_kwitansi",
+          url: "<?php echo base_url() ?>rms/delete_kwitansi_transporter",
           type: "POST",
           data: {
             id: id,

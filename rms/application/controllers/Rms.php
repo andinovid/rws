@@ -375,6 +375,15 @@ class Rms extends CI_Controller
         }
     }
 
+    public function delete_kwitansi_transporter()
+    {
+        $id = $this->input->POST('id');
+        $delete = $this->rms_model->delete_kwitansi_transporter($id);
+        if ($delete) {
+            echo json_encode(array("status" => TRUE));
+        }
+    }
+
 
     public function delete_perbaikan()
     {
@@ -2080,6 +2089,157 @@ class Rms extends CI_Controller
         // Proses file excel
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment; filename="kwitansi_' . $detail_kwitansi->nama_supir . '.xlsx"'); // Set nama file excel nya
+        header('Cache-Control: max-age=0');
+        $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        $write->save('php://output');
+    }
+
+    public function cek_kwitansi_supir()
+    {
+
+        $bulan = $this->input->POST('bulan');
+        $tahun = $this->input->POST('tahun');
+        $truck = $this->input->POST('truck');
+        $kwitansi = $this->rms_model->get_by_query("SELECT * FROM v_kwitansi_transporter_periode WHERE periode_bulan = '$bulan' and periode_tahun = '$tahun' and id_truck = '$truck'")->row();
+
+        if (!$kwitansi) {
+            echo json_encode(array(
+                "status" => 'FALSE'
+            ));
+        } else {
+            echo json_encode(array(
+                "status" => 'TRUE'
+            ));
+        }
+    }
+
+    public function print_kwitansi_transporter_periode($bulan, $tahun, $id_truck)
+    {
+
+        $data = $this->rms_model->get_by_query("SELECT * FROM v_kwitansi_transporter_periode WHERE periode_bulan = '$bulan' and periode_tahun = '$tahun' and id_truck = '$id_truck'")->row();
+
+        // Load plugin PHPExcel nya
+        include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
+
+        // Panggil class PHPExcel nya
+        $excel = new PHPExcel();
+        // Settingan awal fil excel
+        $excel->getProperties()->setCreator('My Notes Code')
+            ->setLastModifiedBy('My Notes Code')
+            ->setTitle("Data Siswa")
+            ->setSubject("Siswa")
+            ->setDescription("Laporan Semua Data Siswa")
+            ->setKeywords("Data Siswa");
+        // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
+        $style_col = array(
+            'font' => array('bold' => true), // Set font nya jadi bold
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+            )
+        );
+        // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+        $style_row = array(
+            'alignment' => array(
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+            )
+        );
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(3); // Set width kolom A
+        $excel->setActiveSheetIndex(0)->setCellValue('K2', "Lembar 1"); // Set kolom A1 dengan tulisan "DATA SISWA"
+        $excel->getActiveSheet()->getStyle('K2')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('K2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+
+        $excel->setActiveSheetIndex(0)->setCellValue('K3', "RWS"); // Set kolom A1 dengan tulisan "DATA SISWA"
+        $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('K3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+
+        $excel->setActiveSheetIndex(0)->setCellValue('B4', "KWITANSI"); // Set kolom A1 dengan tulisan "DATA SISWA"
+        $excel->getActiveSheet()->getStyle('B4')->getFont()->setBold(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('B4')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('B4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+        $excel->getActiveSheet()->mergeCells('B4:K4'); // Set Merge Cell pada kolom A1 sampai E1
+
+        // Buat header tabel nya pada baris ke 3
+        $excel->setActiveSheetIndex(0)->setCellValue('B6', "Sudah terima dari"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('C6', ":"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('B7', "Untuk Pembayaran"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('D6', "CV. RAJA WALI  SAMPIT"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('D7', "RETASI SOPIR"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('D8', $data->nopol); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('E8', $data->nama_supir); // Set kolom A3 dengan tulisan "NO"
+        
+        $excel->setActiveSheetIndex(0)->setCellValue('D9', "TOTAL PENDAPATAN"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('K9', 'Rp ' . number_format($data->total_pendapatan, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        
+        $excel->setActiveSheetIndex(0)->setCellValue('D10', "TOTAL OPERASIONAL"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('K10', 'Rp ' . number_format($data->total_operasional, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        
+        $excel->setActiveSheetIndex(0)->setCellValue('D11', "TOTAL PENDAPATAN BERSIH"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('K11', 'Rp ' . number_format($data->total_pendapatan_bersih, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        
+        $excel->setActiveSheetIndex(0)->setCellValue('D12', "TOTAL PREMI 25%"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('K12', 'Rp ' . number_format($data->total_premi_supir, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        
+        $excel->setActiveSheetIndex(0)->setCellValue('D13', "TOTAL PINJAMAN"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('K13', 'Rp ' . number_format($data->total_pinjaman_supir, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        
+        $excel->setActiveSheetIndex(0)->setCellValue('D14', "TOTAL PREMI BERSIH"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('K14', 'Rp ' . number_format($data->total_premi_bersih, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        
+        $excel->setActiveSheetIndex(0)->setCellValue('J16', "JUMLAH"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('K16', 'Rp ' . number_format($data->total_premi_bersih, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+
+        
+        $excel->setActiveSheetIndex(0)->setCellValue('B17', "SEBESAR"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('C17', ":"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('D17', 'Rp ' . number_format($data->total_premi_bersih, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        $excel->getActiveSheet()->getStyle('D17')->getFont()->setBold(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('D17')->getFont()->setSize(16); // Set font size 15 untuk kolom A1
+        
+        $excel->setActiveSheetIndex(0)->setCellValue('B18', "TERBILANG"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('C18', ":"); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('D18', '(' . ucwords(terbilang(number_format($data->total_premi_bersih, 0, "", ""))) . ' Rupiah)'); // Set kolom A3 dengan tulisan "NO"
+        $excel->getActiveSheet()->getStyle('D18')->getFont()->setItalic(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('D18')->getFont()->setSize(10); // Set font size 15 untuk kolom A1
+
+
+        // $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
+        // $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_col);
+        // $excel->getActiveSheet()->getStyle('C3')->applyFromArray($style_col);
+        // $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_col);
+        // $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
+
+        // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
+        
+        // Set width kolom
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(25); // Set width kolom A
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(2); // Set width kolom A
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(25); // Set width kolom A
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(15); // Set width kolom A
+        $excel->getActiveSheet()->getColumnDimension('K')->setWidth(20); // Set width kolom A
+
+        // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
+        $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
+        // Set orientasi kertas jadi LANDSCAPE
+        $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+        // Set judul file excel nya
+        $excel->getActiveSheet(0)->setTitle("Kwitansi Periode " . bulan($bulan) . " " . $tahun);
+        $excel->setActiveSheetIndex(0);
+        // Proses file excel
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="Kwitansi Periode ' . $data->nama_supir . ' ' . bulan($bulan) . ' ' . $tahun . '.xlsx"'); // Set nama file excel nya
         header('Cache-Control: max-age=0');
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');

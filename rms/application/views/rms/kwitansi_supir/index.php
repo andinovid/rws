@@ -89,7 +89,7 @@
   $('#form_kwitansi_supir').on('submit', function(event) {
     var bulan = $('#bulan').val();
     var tahun = $('#tahun').val();
-    var jenis = $('#jenis').val();
+    var truck = $('#truck').val();
     event.preventDefault();
     var formData = new FormData($('#form_kwitansi_supir')[0]);
     $('.loading').show();
@@ -104,7 +104,7 @@
         obj = JSON.parse(data);
         if (obj.status == "TRUE") {
           $('#form_kwitansi_supir')[0].reset();
-          window.open('<?php echo base_url(); ?>rms/generate_laporan_replas/' + bulan + '/' + tahun + '/' + jenis, '_blank');
+          window.open('<?php echo base_url(); ?>rms/print_kwitansi_transporter_periode/' + bulan + '/' + tahun + '/' + truck, '_blank');
         } else {
           Swal.fire({
             icon: "error",
