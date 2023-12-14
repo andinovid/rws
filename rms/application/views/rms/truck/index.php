@@ -368,6 +368,7 @@
                       </select>
                       <input type="hidden" class="form-control" id="nama_supir" name="nama_supir">
                     </div>
+                    
                     <div class="form-group">
                       <label for="kategori">Jenis Truk</label>
                       <select id="jenis_truck" class="form-control" name="jenis_truck">
@@ -416,6 +417,11 @@
 
                   </div>
                   <div class="col-md-6">
+                    
+                  <div class="form-group">
+                      <label for="no_replas">Premi Supir (%)</label>
+                      <input type="text" class="form-control" id="premi_supir" name="premi_supir" placeholder="Input premi supir (%)">
+                    </div>
                     <div class="form-group">
                       <label for="cicilan">Cicilan</label>
                       <input type="text" class="form-control number" id="cicilan" name="cicilan" placeholder="Input cicilan truk">
@@ -570,6 +576,7 @@
             $('[name="oddo_terakhir_oli_mesin"]').val($.number(data[i].oddo_terakhir_oli_mesin).replace(/\,/g, '.'));
             $('[name="oddo_terakhir_oli_gardan"]').val($.number(data[i].oddo_terakhir_oli_gardan).replace(/\,/g, '.'));
             $('[name="oddo_terakhir_oli_transmisi"]').val($.number(data[i].oddo_terakhir_oli_transmisi).replace(/\,/g, '.'));
+            $('[name="premi_supir"]').val(data[i].premi_supir);
           } else {
             $('#kategori-2').show();
             $('#kategori-1').hide();

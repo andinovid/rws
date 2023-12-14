@@ -652,6 +652,11 @@ class Rms extends CI_Controller
         } else {
             $cicilan = "";
         }
+        if (isset($_POST['premi_supir'])) {
+            $premi_supir = $this->input->POST('premi_supir');
+        } else {
+            $premi_supir = "";
+        }
 
         if (isset($_POST['air_radiator'])) {
             $air_radiator = $this->input->POST('air_radiator');
@@ -675,7 +680,8 @@ class Rms extends CI_Controller
             'oddo_terakhir_oli_mesin' => str_replace('.', '', $oddo_terakhir_oli_mesin),
             'oddo_terakhir_oli_gardan' => str_replace('.', '', $oddo_terakhir_oli_gardan),
             'oddo_terakhir_oli_transmisi' => str_replace('.', '', $oddo_terakhir_oli_transmisi),
-            'air_radiator_terakhir' => $air_radiator
+            'air_radiator_terakhir' => $air_radiator,
+            'premi_supir' => $premi_supir
         );
 
         if ($id == "") {
@@ -2099,7 +2105,6 @@ class Rms extends CI_Controller
 
     public function cek_kwitansi_supir()
     {
-
         $bulan = $this->input->POST('bulan');
         $tahun = $this->input->POST('tahun');
         $truck = $this->input->POST('truck');
@@ -2116,11 +2121,9 @@ class Rms extends CI_Controller
         }
     }
 
-    public function print_kwitansi_transporter_periode($bulan, $tahun, $id_truck)
+    public function print_kwitansi_transporter_periode($bulan, $tahun, $id_truck, $id_supir)
     {
-
-        $data = $this->rms_model->get_by_query("SELECT * FROM v_kwitansi_transporter_periode WHERE periode_bulan = '$bulan' and periode_tahun = '$tahun' and id_truck = '$id_truck'")->row();
-
+        $data = $this->rms_model->get_by_query("SELECT * FROM v_kwitansi_transporter_periode WHERE periode_bulan = '$bulan' and periode_tahun = '$tahun' and id_truck = '$id_truck' and id_supir = '$id_supir'")->row();
         // Load plugin PHPExcel nya
         include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
 
@@ -3287,6 +3290,7 @@ class Rms extends CI_Controller
     function kwitansi_transporter_periode()
     {
         $data['truck'] = $this->rms_model->get("tbl_truck", "WHERE kategori = '1'")->result();
+        $data['supir'] = $this->rms_model->get("tbl_supir", "WHERE kategori = '1'")->result();
         $data['content'] = 'rms/kwitansi_supir/index';
         $this->load->view('rms/includes/template', $data);
     }

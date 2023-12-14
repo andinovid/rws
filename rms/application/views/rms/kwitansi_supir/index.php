@@ -68,6 +68,27 @@
                       </select>
                     </div>
                   </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Pilih Supir</label>
+                      <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
+                        <option value="0">Pilih supir</option>
+                        <?php foreach ($supir as $row) : ?>
+                          <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Jenis</label>
+                      <select class="form-control" style="width: 100%;" name="tahun" id="tahun">
+                        <option value="">Pilih jenis</option>
+                        <option value="rekap">Data rekap</option>
+                        <option value="kwitansi">Kwitansi</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
                 <div class="form-group">
                   <button type="submit" class="btn btn-warning">Generate Kwitansi</button>
@@ -90,6 +111,8 @@
     var bulan = $('#bulan').val();
     var tahun = $('#tahun').val();
     var truck = $('#truck').val();
+    var supir = $('#supir').val();
+    var jenis = $('#jenis').val();
     event.preventDefault();
     var formData = new FormData($('#form_kwitansi_supir')[0]);
     $('.loading').show();
@@ -104,7 +127,7 @@
         obj = JSON.parse(data);
         if (obj.status == "TRUE") {
           $('#form_kwitansi_supir')[0].reset();
-          window.open('<?php echo base_url(); ?>rms/print_kwitansi_transporter_periode/' + bulan + '/' + tahun + '/' + truck, '_blank');
+          window.open('<?php echo base_url(); ?>rms/print_' . $jenis . '_transporter_periode/' + bulan + '/' + tahun + '/' + truck '/' + supir, '_blank');
         } else {
           Swal.fire({
             icon: "error",

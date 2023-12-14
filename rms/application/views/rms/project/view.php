@@ -619,7 +619,7 @@
                     <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
                       <option value="0">Pilih supir</option>
                       <?php foreach ($supir as $row) : ?>
-                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
+                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?> (<?php if($row->kategori == '1'){echo 'Kantor';}else{ echo 'Vendor';} ?>)</option>
                       <?php endforeach; ?>
                     </select>
                   </div>
