@@ -1279,8 +1279,9 @@ class Rms extends CI_Controller
 
     function pinjaman()
     {
-        $data['pinjaman'] = $this->rms_model->get_by_query("SELECT *, b.nama_supir, a.id as id_pinjaman, a.status AS status_pinjaman from tbl_pinjaman a LEFT JOIN v_truck b ON a.id_truck = b.id_truck ORDER BY a.tanggal DESC")->result();
-        $data['supir'] = $this->rms_model->get_by_query("SELECT id_truck, nama_supir FROM v_truck WHERE nama_supir !=''")->result();
+        $data['pinjaman'] = $this->rms_model->get("v_pinjaman", "ORDER BY tanggal DESC")->result();
+        $data['truck'] = $this->rms_model->get("tbl_truck")->result();
+        $data['supir'] = $this->rms_model->get("tbl_supir")->result();
         $data['content'] = 'rms/pinjaman/index';
         $this->load->view('rms/includes/template', $data);
     }
@@ -1364,6 +1365,7 @@ class Rms extends CI_Controller
     {
         $id = $this->input->POST('id');
         $jumlah = $this->input->POST('jumlah');
+        $id_truck = $this->input->POST('truck');
         $id_supir = $this->input->POST('supir');
         $tanggal = $this->input->POST('tanggal');
         $bulan = $this->input->POST('bulan');
@@ -1373,7 +1375,8 @@ class Rms extends CI_Controller
 
 
         $data = array(
-            'id_truck' => $id_supir,
+            'id_truck' => $id_truck,
+            'id_supir' => $id_supir,
             'jumlah_pinjaman' => str_replace('.', '', $jumlah),
             'tanggal' => $tanggal,
             'periode_bulan' => $bulan,

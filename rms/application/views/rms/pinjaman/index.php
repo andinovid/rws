@@ -33,6 +33,7 @@
                 <thead>
                   <tr>
                     <th>No</th>
+                    <th>Nopol</th>
                     <th>Supir</th>
                     <th>Jumlah Pinjaman</th>
                     <th>Tanggal</th>
@@ -50,6 +51,7 @@
                   ?>
                     <tr>
                       <td><?php echo $no; ?></td>
+                      <td><?php echo $row->nopol; ?></td>
                       <td><?php echo $row->nama_supir; ?></td>
                       <td>Rp <?php echo number_format($row->jumlah_pinjaman, 0, "", "."); ?></td>
                       <td><?php echo shortdate_indo($row->tanggal); ?></td>
@@ -142,11 +144,21 @@
                 </div>
               </div>
               <div class="form-group">
+                <label>Truck</label>
+                <select class="form-control select2" style="width: 100%;" name="truck" id="truck">
+                  <option value="0">Pilih truck</option>
+                  <?php foreach ($truck as $row) : ?>
+                    <option value="<?php echo $row->id; ?>"><?php echo $row->nopol; ?></option>
+                  <?php endforeach; ?>
+                </select>
+                <input type="hidden" class="form-control" id="nama_supir" name="nama_supir">
+              </div>
+              <div class="form-group">
                 <label>Supir</label>
                 <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
                   <option value="0">Pilih supir</option>
                   <?php foreach ($supir as $row) : ?>
-                    <option value="<?php echo $row->id_truck; ?>"><?php echo $row->nama_supir; ?></option>
+                    <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
                   <?php endforeach; ?>
                 </select>
                 <input type="hidden" class="form-control" id="nama_supir" name="nama_supir">
@@ -243,7 +255,8 @@
       },
       success: function(data) {
         for (var i = 0; i < data.length; i++) {
-          $('[name="supir"]').val(data[i].id_truck).change();
+          $('[name="truck"]').val(data[i].id_truck).change();
+          $('[name="supir"]').val(data[i].id_supir).change();
           $('[name="tanggal"]').val(data[i].tanggal);
           $('[name="bulan"]').val(data[i].periode_bulan).change();
           $('[name="tahun"]').val(data[i].periode_tahun).change();
