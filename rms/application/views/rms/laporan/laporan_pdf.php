@@ -40,20 +40,20 @@
 
         .grid-laporan ul {
             padding-left: 25px;
-            width: 100%;
         }
 
         .grid-laporan h3 {
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 0px;
+            margin-top: 5px;
         }
 
 
         .grid-laporan li {
             margin-bottom: 5px;
             clear: both;
-            width: 100%;
+            font-size: 14px;
         }
 
         .d-flex {
@@ -72,121 +72,125 @@
             float: right;
             text-align: right;
         }
+
+        .clearfix{
+            clear: both;
+        }
     </style>
 </head>
 
 <body>
     <img src="<?php echo base_url(); ?>assets/rms/dist/img/kop.png" style="width: 100%;">
-    <hr class=" mt-4">
-    <h2 class="text-center mt-4" style="font-weight: bold;">Laporan Laba Rugi <br>CV Raja Wali Sampit Periode <?php echo $bulan; ?> <?php echo $tahun; ?></h2>
-    <div style="width: 70%; margin:0 auto">
-        <ul class="grid-laporan">
+    <hr>
+    <h2 class="text-center mt-4" style="font-weight: 800; font-size:20px; text-transform:uppercase; line-height:1.5em">Laporan Laba Rugi CV Raja Wali Sampit <br>Periode <?php echo $bulan; ?> <?php echo $tahun; ?></h2>
+    <hr>
+    <ul class="grid-laporan">
+        <li>
+            <h3>Pendapatan Usaha Komoditas</h3>
+        </li>
+        <ul>
             <li>
-                <h3>Pendapatan Usaha Komoditas</h3>
-            </li>
-            <ul>
-                <li>
-                    <div class="mr-auto">Gross Profit</div>
-                    <div style="font-size: 18px;"><b>Rp <?php echo number_format($komoditas->total_pemasukan, 0, "", "."); ?></b></div>
-                </li>
-            </ul>
-            <li>
-                <h3>Pengeluaran Usaha Komoditas</h3>
-            </li>
-            <ul>
-                <li>
-                    <div class="float-left">Beban Replas</div>
-                    <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_pengeluaran_replas, 0, "", "."); ?></div>
-                </li>
-                <li class="d-flex">
-                    <div class="mr-auto">Beban Lapangan</div>
-                    <div style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_pengeluaran_lapangan, 0, "", "."); ?></div>
-                </li>
-                <li class="d-flex">
-                    <div class="mr-auto">Beban Claim</div>
-                    <div style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_biaya_claim, 0, "", "."); ?></div>
-                </li>
-                <li class="d-flex">
-                    <div class="mr-auto">Beban PPh Invoice</div>
-                    <div style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_potongan_pph, 0, "", "."); ?></div>
-                </li>
-                <li class="d-flex">
-                    <div class="mr-auto">Beban PPh Replas</div>
-                    <div style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_potongan_pph_replas, 0, "", "."); ?></div>
-                </li>
-            </ul>
-            <li class="d-flex">
-                <h3 class="mr-auto">Net Profit Usaha Komoditas</h3>
-                <div style="font-size: 18px;color:#0ccc48;"><b>Rp <?php echo number_format($komoditas->total_bersih, 0, "", "."); ?></b></div>
+                <div class="float-left">Gross Profit</div>
+                <div class="float-right" style="font-size: 18px;"><b>Rp <?php echo number_format($komoditas->total_pemasukan, 0, "", "."); ?></b></div>
             </li>
         </ul>
-        <hr>
-        <ul class="grid-laporan">
+        <li>
+            <h3>Pengeluaran Usaha Komoditas</h3>
+        </li>
+        <ul>
             <li>
-                <h3>Penghasilan Usaha Transporter</h3>
+                <div class="float-left">Beban Replas</div>
+                <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_pengeluaran_replas, 0, "", "."); ?></div>
             </li>
-            <ul>
-                <li class="d-flex">
-                    <div class="mr-auto">Gross Profit</div>
-                    <div style="font-size: 18px;"><b>Rp <?php echo number_format($transporter->total_pemasukan, 0, "", "."); ?></b></div>
-                </li>
-            </ul>
             <li>
-                <h3>Pengeluaran Usaha Transporter</h3>
+                <div class="float-left">Beban Lapangan</div>
+                <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_pengeluaran_lapangan, 0, "", "."); ?></div>
             </li>
-            <ul>
-                <li class="d-flex">
-                    <div class="mr-auto">Beban Premi Supir</div>
-                    <div style="color:#ff0000;">Rp <?php echo number_format($transporter->total_premi_supir, 0, "", "."); ?></div>
-                </li>
-                <li class="d-flex">
-                    <div class="mr-auto">Beban Operasional</div>
-                    <div style="color:#ff0000;">Rp <?php echo number_format($transporter->total_operasional, 0, "", "."); ?></div>
-                </li>
-                <li class="d-flex">
-                    <div class="mr-auto">Beban Perbaikan</div>
-                    <div style="color:#ff0000;">Rp <?php echo number_format($transporter->total_biaya_perbaikan, 0, "", "."); ?></div>
-                </li>
-            </ul>
-            <li class="d-flex">
-                <h3 class="mr-auto">Net Profit Usaha Transporter</h3>
-                <div style="font-size: 18px;color:#0ccc48;"><b>Rp <?php echo number_format($transporter->total_bersih, 0, "", "."); ?></b></div>
+            <li>
+                <div class="float-left">Beban Claim</div>
+                <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_biaya_claim, 0, "", "."); ?></div>
+            </li>
+            <li>
+                <div class="float-left">Beban PPh Invoice</div>
+                <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_potongan_pph, 0, "", "."); ?></div>
+            </li>
+            <li>
+                <div class="float-left">Beban PPh Replas</div>
+                <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_potongan_pph_replas, 0, "", "."); ?></div>
             </li>
         </ul>
-        <hr>
-
-        <ul class="grid-laporan">
+        <li>
+            <h3 class="float-left">Net Profit Usaha Komoditas</h3>
+            <div class="float-right" style="font-size: 18px;color:#0ccc48;"><b>Rp <?php echo number_format($komoditas->total_bersih, 0, "", "."); ?></b></div>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+    <hr style="margin-top: 20px;">
+    <ul class="grid-laporan" style="margin-top: 20px;">
+        <li>
+            <h3>Penghasilan Usaha Transporter</h3>
+        </li>
+        <ul>
             <li>
-                <h3>Pengeluaran Operasional Kantor</h3>
-            </li>
-            <ul>
-                <li class="d-flex">
-                    <div class="mr-auto">Beban Operasional General</div>
-                    <div>Rp <?php echo number_format($keuangan->operasional_kantor, 0, "", "."); ?></div>
-                </li>
-                <li class="d-flex">
-                    <div class="mr-auto">Beban Gaji Karyawan</div>
-                    <div>Rp <?php echo number_format($keuangan->gaji_karyawan, 0, "", "."); ?></div>
-                </li>
-                <li class="d-flex">
-                    <div class="mr-auto">Beban Asuransi Karyawan</div>
-                    <div>Rp <?php echo number_format($keuangan->asuransi_karyawan, 0, "", "."); ?></div>
-                </li>
-                <li class="d-flex">
-                    <div class="mr-auto">Beban Atensi</div>
-                    <div>Rp <?php echo number_format($keuangan->atensi, 0, "", "."); ?></div>
-                </li>
-            </ul>
-        </ul>
-
-        <hr>
-        <ul class="grid-laporan">
-            <li class="d-flex">
-                <h3 class="mr-auto">Total Net Profit Perusahaan</h3>
-                <div style="font-size: 24px; background-color:#0ccc48; color:#FFF;padding:0px 10px;border-radius:3px;"><b>Rp <?php echo number_format($total_net_profit, 0, "", "."); ?></b></div>
+                <div class="float-left">Gross Profit</div>
+                <div class="float-right" style="font-size: 18px;"><b>Rp <?php echo number_format($transporter->total_pemasukan, 0, "", "."); ?></b></div>
             </li>
         </ul>
-    </div>
+        <li>
+            <h3>Pengeluaran Usaha Transporter</h3>
+        </li>
+        <ul>
+            <li>
+                <div class="float-left">Beban Premi Supir</div>
+                <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($transporter->total_premi_supir, 0, "", "."); ?></div>
+            </li>
+            <li>
+                <div class="float-left">Beban Operasional</div>
+                <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($transporter->total_operasional, 0, "", "."); ?></div>
+            </li>
+            <li>
+                <div class="float-left">Beban Perbaikan</div>
+                <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($transporter->total_biaya_perbaikan, 0, "", "."); ?></div>
+            </li>
+        </ul>
+        <li>
+            <h3 class="float-left">Net Profit Usaha Transporter</h3>
+            <div class="float-right" style="font-size: 18px;color:#0ccc48;"><b>Rp <?php echo number_format($transporter->total_bersih, 0, "", "."); ?></b></div>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+    <hr style="margin-top: 20px;">
+    <ul class="grid-laporan" style="margin-top: 20px;">
+        <li>
+            <h3>Pengeluaran Operasional Kantor</h3>
+        </li>
+        <ul>
+            <li>
+                <div class="float-left">Beban Operasional General</div>
+                <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($keuangan->operasional_kantor, 0, "", "."); ?></div>
+            </li>
+            <li>
+                <div class="float-left">Beban Gaji Karyawan</div>
+                <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($keuangan->gaji_karyawan, 0, "", "."); ?></div>
+            </li>
+            <li>
+                <div class="float-left">Beban Asuransi Karyawan</div>
+                <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($keuangan->asuransi_karyawan, 0, "", "."); ?></div>
+            </li>
+            <li>
+                <div class="float-left">Beban Atensi</div>
+                <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($keuangan->atensi, 0, "", "."); ?></div>
+            </li>
+        </ul>
+    </ul>
+    <div class="clearfix"></div>
+    <hr style="margin-top: 20px;">
+    <ul class="grid-laporan" style="margin-top: 20px;">
+        <li>
+            <h3 class="float-left">Total Net Profit Perusahaan</h3>
+            <div class="float-right" style="font-size: 24px; background-color:#0ccc48; color:#FFF;padding:0px 10px;border-radius:3px;"><b>Rp <?php echo number_format($total_net_profit, 0, "", "."); ?></b></div>
+        </li>
+    </ul>
 </body>
 
 </html>

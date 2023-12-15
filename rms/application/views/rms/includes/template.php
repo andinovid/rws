@@ -58,6 +58,11 @@
       <ul class="navbar-nav ml-auto">
 
         <li class="nav-item">
+          <a class="nav-link" href="javascript:window.location.reload(true);" role="button">
+            <img src="<?php echo base_url() ?>assets/rms/dist/img/reload.png" width="20"/>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" data-widget="fullscreen" href="#" role="button">
             <i class="fas fa-expand-arrows-alt"></i>
           </a>
@@ -217,7 +222,7 @@
         ]
       }).buttons().container().appendTo('#DataTables_Table_0_wrapper .col-md-6:eq(0)');
       $('[data-toggle="tooltip"]').tooltip()
-      
+
 
     })
 

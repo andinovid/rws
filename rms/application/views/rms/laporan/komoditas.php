@@ -69,12 +69,12 @@
                 <hr class=" mt-4">
                 <h2 class="text-center mt-4" style="font-weight: bold;">Laporan Komoditas Periode <?php echo bulan($_GET['bulan']); ?> <?php echo $_GET['tahun']; ?></h2>
                 <div class="row mt-4">
-                  <div class="col-lg-4 col-6">
+                  <div class="col-lg-4 col-12">
                     <!-- small box -->
                     <div class="small-box bg-primary">
                       <div class="inner">
                         <h3>Rp <?php echo number_format($total->total_pemasukan, 0, "", "."); ?></h3>
-                        <p>Gross profit</p>
+                        <p class="mb-0">Gross profit</p>
                       </div>
                       <div class="icon">
                         <i class="ion ion-ios-checkmark-outline"></i>
@@ -82,12 +82,12 @@
                     </div>
                   </div>
                   <!-- ./col -->
-                  <div class="col-lg-4 col-6">
+                  <div class="col-lg-4 col-12">
                     <!-- small box -->
                     <div class="small-box bg-warning">
                       <div class="inner">
                         <h3>Rp <?php echo number_format($total->total_pengeluaran_lapangan, 0, "", "."); ?></h3>
-                        <p>Beban Pengeluaran Lapangan</p>
+                        <p class="mb-0">Beban Pengeluaran Lapangan</p>
                       </div>
                       <div class="icon">
                         <i class="ion ion-ios-checkmark-outline"></i>
@@ -95,48 +95,48 @@
                     </div>
                   </div>
                   <!-- ./col -->
-                  <div class="col-lg-4 col-6">
+                  <div class="col-lg-4 col-12">
                     <!-- small box -->
                     <div class="small-box bg-warning">
                       <div class="inner">
                         <h3>Rp <?php echo number_format($total->total_pengeluaran_replas, 0, "", "."); ?></h3>
-                        <p>Beban Pengeluaran Replas</p>
+                        <p class="mb-0">Beban Pengeluaran Replas</p>
                       </div>
                       <div class="icon">
                         <i class="ion ion-ios-checkmark-outline"></i>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-6">
+                  <div class="col-lg-3 col-12">
                     <!-- small box -->
                     <div class="small-box bg-warning">
                       <div class="inner">
                         <h3>Rp <?php echo number_format($total->total_biaya_claim, 0, "", "."); ?></h3>
-                        <p>Beban Biaya Claim</p>
+                        <p class="mb-0">Beban Biaya Claim</p>
                       </div>
                       <div class="icon">
                         <i class="ion ion-ios-checkmark-outline"></i>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-6">
+                  <div class="col-lg-3 col-12">
                     <!-- small box -->
                     <div class="small-box bg-warning">
                       <div class="inner">
                         <h3>Rp <?php echo number_format($total->total_potongan_pph, 0, "", "."); ?></h3>
-                        <p>Beban PPh Invoice</p>
+                        <p class="mb-0">Beban PPh Invoice</p>
                       </div>
                       <div class="icon">
                         <i class="ion ion-ios-checkmark-outline"></i>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-6">
+                  <div class="col-lg-3 col-12">
                     <!-- small box -->
                     <div class="small-box bg-warning">
                       <div class="inner">
                         <h3>Rp <?php echo number_format($total->total_potongan_pph_replas, 0, "", "."); ?></h3>
-                        <p>Beban PPh Replas</p>
+                        <p class="mb-0">Beban PPh Replas</p>
                       </div>
                       <div class="icon">
                         <i class="ion ion-ios-checkmark-outline"></i>
@@ -144,12 +144,12 @@
                     </div>
                   </div>
                   <!-- ./col -->
-                  <div class="col-lg-3 col-6">
+                  <div class="col-lg-3 col-12">
                     <!-- small box -->
                     <div class="small-box bg-success">
                       <div class="inner">
                         <h3>Rp <?php echo number_format($total->total_bersih, 0, "", "."); ?></h3>
-                        <p>Net Profit</p>
+                        <p class="mb-0">Net Profit</p>
                       </div>
                       <div class="icon">
                         <i class="ion ion-ios-checkmark-outline"></i>

@@ -24,7 +24,7 @@
               <div class="card-tools mr-1">
               </div>
             </div>
-            <div class="card-body">
+            <div class="card-body laporan">
               <form class="form-horizontal" action="<?php echo base_url(); ?>laporan/all" method="get" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-md-2">
@@ -67,7 +67,7 @@
               </form>
               <?php if (!empty($_GET)) { ?>
                 <hr class=" mt-4">
-                <h2 class="text-center mt-4" style="font-weight: bold;">Laporan Laba Rugi <br>CV Raja Wali Sampit Periode <?php echo bulan($_GET['bulan']); ?> <?php echo $_GET['tahun']; ?></h2>
+                <h2 class="text-center mt-4 text-uppercase" style="font-weight: bold;">Laporan Laba Rugi CV Raja Wali Sampit<br>Periode <?php echo bulan($_GET['bulan']); ?> <?php echo $_GET['tahun']; ?></h2>
                 <div class="row justify-content-md-center mt-5 mb-5">
                   <div class="col-md-6">
                     <ul class="grid-laporan">
@@ -173,7 +173,7 @@
                     <ul class="grid-laporan">
                       <li class="d-flex">
                         <h3 class="mr-auto">Total Net Profit Perusahaan</h3>
-                        <div style="font-size: 24px; background-color:#0ccc48; color:#FFF;padding:0px 10px;border-radius:3px;"><b>Rp <?php echo number_format($total_net_profit, 0, "", "."); ?></b></div>
+                        <div style="font-size: 20px; background-color:#0ccc48; color:#FFF;padding:0px 10px;border-radius:3px;"><b>Rp <?php echo number_format($total_net_profit, 0, "", "."); ?></b></div>
                       </li>
                     </ul>
 

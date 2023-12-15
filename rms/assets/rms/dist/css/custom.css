@@ -48,6 +48,13 @@
   footer{
     display: none;
   }
+
+  .laporan h2{
+    font-size: 22px;
+  }
+  .laporan h3{
+    font-size: 16px;
+  }
 }
 
 .grid-laporan{
@@ -70,6 +77,8 @@
 .grid-laporan li{
   margin-bottom: 5px;
 }
+
+
 
 .layout-navbar-fixed .wrapper .sidebar-dark-primary .brand-link:not([class*=navbar]),
 [class*=sidebar-dark] .user-panel{
