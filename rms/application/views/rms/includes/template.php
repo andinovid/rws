@@ -59,7 +59,7 @@
 
         <li class="nav-item">
           <a class="nav-link" href="javascript:window.location.reload(true);" role="button">
-            <img src="<?php echo base_url() ?>assets/rms/dist/img/reload.png" width="20"/>
+            <img src="<?php echo base_url() ?>assets/rms/dist/img/reload.png" width="20" style="margin-top: -3px;"/>
           </a>
         </li>
         <li class="nav-item">

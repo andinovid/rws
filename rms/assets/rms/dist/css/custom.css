@@ -58,6 +58,10 @@
   .page-link{
     padding: 0.5rem 0.4rem;
   }
+
+  .breadcrumb {
+    display: none;
+  }
 }
 
 .grid-laporan{
