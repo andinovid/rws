@@ -195,7 +195,7 @@ SELECT
     AS `total_invoice`,
 
     CASE WHEN `b`.`non_do` = '1' THEN 
-    CONCAT(`b`.`non_do_harga_vendor` * `b`.`qty_kirim_kg`) - `i`.`biaya_admin_non_do`
+    CONCAT(`b`.`non_do_harga_vendor` * `b`.`qty_kirim_kg`) - `b`.`uang_sangu` - `i`.`biaya_admin_non_do`
     WHEN `e`.`kategori` = '1' THEN
         CASE WHEN CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) > `b`.`toleransi_susut` THEN
                     CASE WHEN (`a`.`id_komoditas` = '1' || `a`.`id_komoditas` = '3' || `a`.`id_komoditas` = '4') || ((`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '7') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '10') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '9') || (`a`.`id_komoditas` = '2' AND `a`.`id_klien` = '8')) THEN
