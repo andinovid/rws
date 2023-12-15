@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/rms/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/rms/dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/rms/dist/css/custom.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/rms/dist/css/custom.css?key=<?php echo time(); ?>">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/rms/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
