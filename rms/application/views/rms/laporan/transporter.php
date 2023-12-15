@@ -172,6 +172,7 @@
                       <td>Rp <?php echo number_format($total->total_pemasukan, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($total->total_operasional, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($total->total_premi_supir, 0, "", "."); ?></td>
+                      <td>Rp <?php echo number_format($total->total_biaya_perbaikan, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($total->total_cicilan, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($total->total_bersih, 0, "", "."); ?></td>
                     </tr>
