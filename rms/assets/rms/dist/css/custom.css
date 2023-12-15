@@ -55,6 +55,9 @@
   .laporan h3{
     font-size: 16px;
   }
+  .page-link{
+    padding: 0.5rem 0.4rem;
+  }
 }
 
 .grid-laporan{
