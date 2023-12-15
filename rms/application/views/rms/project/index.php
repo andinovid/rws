@@ -23,7 +23,7 @@
             <div class="card-header">
               <h3 class="card-title">Data Project</h3>
               <div class="card-tools mr-1">
-                <button type="button" class="btn btn-block btn-primary btn-sm" onclick="input_project()"><i class="fas fa-plus mr-1"></i> Input Project</button>
+                <button type="button" class="btn btn-block btn-primary btn-sm" onclick="input_project()"><i class="fas fa-plus mr-1"></i> Input</button>
               </div>
             </div>
             <!-- /.card-header -->

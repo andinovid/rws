@@ -5,9 +5,6 @@
         <div class="col-sm-6">
           <h1 class="m-0">Rekapitulasi Data</h1>
         </div><!-- /.col -->
-        <div class="col-sm-6">
-          <button type="button" class="btn btn-primary btn-sm float-sm-right" onclick="input_replas()"><i class="fas fa-plus mr-1"></i> Tambah Angkutan</button>
-        </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
   </div>
@@ -20,15 +17,7 @@
             <div class="card-header">
               <h3 class="card-title">Rekapitulasi Data</h3>
               <div class="card-tools mr-1">
-                <!-- <div id="reportrange" class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="far fa-calendar-alt"></i>
-                    </span>
-                  </div>
-                  <input type="text" id="date-filter" class="form-control float-right" value=""> <b class="caret"></b>
-                  <button class="btn btn-dark btn-flat float-right" onclick="filterData()">Filter</button>
-                </div> -->
+                <button type="button" class="btn btn-primary btn-sm float-sm-right" onclick="input_replas()"><i class="fas fa-plus mr-1"></i> Input</button>
               </div>
             </div>
             <!-- /.card-header -->
