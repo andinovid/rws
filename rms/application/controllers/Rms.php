@@ -3736,7 +3736,7 @@ class Rms extends CI_Controller
         } else {
             $data['periode'] = shortdate_indo($start_date) . ' - ' . shortdate_indo($end_date);
         }
-        $data['replas'] = $this->rms_model->get("v_kwitansi", "WHERE tanggal_input between '$start_date' and '$end_date' ORDER BY tanggal_input ASC")->result();
+        $data['replas'] = $this->rms_model->get("v_kwitansi", "WHERE tanggal_input between '$start_date' and '$end_date' ORDER BY no_kwitansi ASC")->result();
         $data['total'] = $this->rms_model->get_by_query("SELECT SUM(grand_total) as total_biaya_replas FROM v_kwitansi WHERE tanggal_input between '$start_date' and '$end_date'")->row();
         $this->load->library('pdf');
         error_reporting(0); // AGAR ERROR MASALAH VERSI PHP TIDAK MUNCUL
