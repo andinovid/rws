@@ -178,13 +178,28 @@
             </ul>
           </li>
           <li class="nav-header">Transporter</li>
-          <li class="nav-item">
+          <li class="nav-item <?php if ($this->uri->segment(1) == "rekapitulasi") { ?>menu-open <?php } ?>">
             <a href="<?php echo base_url(); ?>rekapitulasi" class="nav-link <?php if ($this->uri->segment(1) == "rekapitulasi") { ?>active <?php } ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Rekapitulasi
+                <i class="fas fa-angle-right right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item ">
+                <a href="<?php echo base_url(); ?>rekapitulasi/data" class="nav-link <?php if ($this->uri->segment(1) == "rekapitulasi" AND $this->uri->segment(2) == "data") { ?>active <?php } ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Rekapitulasi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>rekapitulasi/periode" class="nav-link <?php if ($this->uri->segment(1) == "rekapitulasi" AND $this->uri->segment(2) == "periode") { ?>active <?php } ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Rekapitulasi periode</p>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item">

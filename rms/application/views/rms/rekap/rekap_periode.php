@@ -3,12 +3,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Kwitansi Supir</h1>
+          <h1 class="m-0">Rekapitulasi Periode</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Kwitansi Supir</li>
+            <li class="breadcrumb-item active">Rekapitulasi Periode</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -20,7 +20,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Kwitansi Supir</h3>
+              <h3 class="card-title">Rekapitulasi Periode</h3>
               <div class="card-tools mr-1">
               </div>
             </div>
@@ -81,7 +81,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <button type="submit" class="btn btn-warning">Download Kwitansi</button>
+                  <button type="submit" class="btn btn-warning">Download Rekapitulasi</button>
                   <div class="loading" style="display: none;">
                     <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
                   </div>
@@ -116,7 +116,7 @@
         obj = JSON.parse(data);
         if (obj.status == "TRUE") {
           $('#form_kwitansi_supir')[0].reset();
-          window.open('<?php echo base_url(); ?>rms/print_kwitansi_transporter_periode/' + bulan + '/' + tahun + '/' + truck + '/' + supir, '_blank');
+          window.open('<?php echo base_url(); ?>rms/print_rekap_transporter_periode/' + bulan + '/' + tahun + '/' + truck + '/' + supir, '_blank');
         } else {
           Swal.fire({
             icon: "error",
