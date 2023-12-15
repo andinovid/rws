@@ -176,6 +176,11 @@
                         <div style="font-size: 24px; background-color:#0ccc48; color:#FFF;padding:0px 10px;border-radius:3px;"><b>Rp <?php echo number_format($total_net_profit, 0, "", "."); ?></b></div>
                       </li>
                     </ul>
+
+                    <hr>
+                    <div class="text-center mt-5">
+                      <a href="<?php echo base_url(); ?>rms/download_laporan/<?php echo $bulan; ?>/<?php echo $tahun; ?>" class="btn btn-lg btn-primary"><i class="nav-icon fas fa-download"></i> Download Laporan</a>
+                    </div>
                   </div>
                 </div>
               <?php } ?>

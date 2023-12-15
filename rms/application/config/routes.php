@@ -82,6 +82,7 @@ $route['laporan/transporter'] = 'rms/laporan_transporter';
 $route['laporan/all'] = 'rms/laporan';
 $route['laporan/replas'] = 'rms/laporan_replas';
 $route['laporan/pajak_replas'] = 'rms/pajak_replas';
+$route['laporan/download/(:any)/(:any)'] = 'rms/download_laporan/$1/$1';
 $route['kwitansi/generate'] = 'rms/generate_kwitansi';
 $route['kwitansi/data'] = 'rms/kwitansi';
 $route['pinjaman'] = 'rms/pinjaman';
@@ -89,3 +90,4 @@ $route['kwitansi-transporter/data'] = 'rms/kwitansi_transporter_data';
 $route['kwitansi-transporter/periode'] = 'rms/kwitansi_transporter_periode';
 $route['rekapitulasi/data'] = 'rms/rekapitulasi';
 $route['rekapitulasi/periode'] = 'rms/rekap_transporter_periode';
+

@@ -1292,16 +1292,33 @@ class Rms extends CI_Controller
         $this->load->view('rms/includes/template', $data);
     }
 
+    function download_laporan($bulan, $tahun)
+    {
+        $data['bulan'] = bulan($bulan);
+        $data['tahun'] = $tahun;
+        $data['komoditas'] = $this->rms_model->get_by_query("SELECT SUM(total_pemasukan_invoice) AS total_pemasukan,SUM(total_pph) AS total_potongan_pph, SUM(total_biaya_claim_invoice) AS total_biaya_claim, SUM(total_pph_replas) AS total_potongan_pph_replas, SUM(pengeluaran_lapangan) AS total_pengeluaran_lapangan, SUM(pengeluaran_replas) AS total_pengeluaran_replas, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_komoditas WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
+        $data['transporter'] = $this->rms_model->get_by_query("SELECT SUM(grand_total) AS total_pemasukan, SUM(operasional) AS total_operasional,SUM(total_perbaikan) AS total_biaya_perbaikan, SUM(premi_supir) AS total_premi_supir, SUM(cicilan) AS total_cicilan, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_transporter WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
+        $data['keuangan'] = $this->rms_model->get_by_query("SELECT * from v_laporan_keuangan WHERE bulan = '$bulan' AND tahun = '$tahun'")->row();
+        $data['total_net_profit'] = $data['komoditas']->total_bersih + $data['transporter']->total_bersih - $data['keuangan']->operasional_kantor - $data['keuangan']->gaji_karyawan - $data['keuangan']->asuransi_karyawan;
+        
+        $this->load->library('pdf');
+        error_reporting(0); // AGAR ERROR MASALAH VERSI PHP TIDAK MUNCUL
+        $html = $this->load->view('rms/laporan/laporan_pdf', $data, true);
+        $filename = "LAPORAN LABA RUGI (" . $data['bulan'] . " " . $data['tahun'] .").pdf";
+        $this->pdf->createPDF($html, $filename, true);
+    }
+
 
     function laporan()
     {
         if (!empty($_GET)) {
             $bulan = $_GET["bulan"];
             $tahun = $_GET["tahun"];
+            $data['bulan'] = $_GET["bulan"];
+            $data['tahun'] = $_GET["tahun"];
             $data['komoditas'] = $this->rms_model->get_by_query("SELECT SUM(total_pemasukan_invoice) AS total_pemasukan,SUM(total_pph) AS total_potongan_pph, SUM(total_biaya_claim_invoice) AS total_biaya_claim, SUM(total_pph_replas) AS total_potongan_pph_replas, SUM(pengeluaran_lapangan) AS total_pengeluaran_lapangan, SUM(pengeluaran_replas) AS total_pengeluaran_replas, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_komoditas WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
             $data['transporter'] = $this->rms_model->get_by_query("SELECT SUM(grand_total) AS total_pemasukan, SUM(operasional) AS total_operasional,SUM(total_perbaikan) AS total_biaya_perbaikan, SUM(premi_supir) AS total_premi_supir, SUM(cicilan) AS total_cicilan, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_transporter WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
             $data['keuangan'] = $this->rms_model->get_by_query("SELECT * from v_laporan_keuangan WHERE bulan = '$bulan' AND tahun = '$tahun'")->row();
-
             $data['total_net_profit'] = $data['komoditas']->total_bersih + $data['transporter']->total_bersih - $data['keuangan']->operasional_kantor - $data['keuangan']->gaji_karyawan - $data['keuangan']->asuransi_karyawan;
         }
         $data['content'] = 'rms/laporan/index';
