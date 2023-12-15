@@ -170,6 +170,7 @@
                   <option value="2">Gaji Karyawan</option>
                   <option value="3">Asuransi Karyawan</option>
                   <option value="4">Perbaikan</option>
+                  <option value="5">Atensi</option>
                 </select>
               </div>
               <div class="form-group">

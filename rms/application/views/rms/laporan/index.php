@@ -162,6 +162,10 @@
                           <div class="mr-auto">Beban Asuransi Karyawan</div>
                           <div>Rp <?php echo number_format($keuangan->asuransi_karyawan, 0, "", "."); ?></div>
                         </li>
+                        <li class="d-flex">
+                          <div class="mr-auto">Beban Atensi</div>
+                          <div>Rp <?php echo number_format($keuangan->atensi, 0, "", "."); ?></div>
+                        </li>
                       </ul>
                     </ul>
 
@@ -169,12 +173,11 @@
                     <ul class="grid-laporan">
                       <li class="d-flex">
                         <h3 class="mr-auto">Total Net Profit Perusahaan</h3>
-                        <div style="font-size: 24px; background-color:#0ccc48; color:#FFF;padding:5px 10px;border-radius:3px;"><b>Rp <?php echo number_format($total_net_profit, 0, "", "."); ?></b></div>
+                        <div style="font-size: 24px; background-color:#0ccc48; color:#FFF;padding:0px 10px;border-radius:3px;"><b>Rp <?php echo number_format($total_net_profit, 0, "", "."); ?></b></div>
                       </li>
                     </ul>
                   </div>
                 </div>
-
               <?php } ?>
             </div>
           </div>
