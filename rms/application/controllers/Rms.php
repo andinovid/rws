@@ -1330,6 +1330,8 @@ class Rms extends CI_Controller
     }
 
 
+
+
     public function save_keuangan()
     {
         $id = $this->input->POST('id');
@@ -2399,7 +2401,7 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('L45')->getFont()->setSize(10);
         $excel->getActiveSheet()->getStyle('L45')->getFont()->setBold(TRUE);
         $excel->getActiveSheet()->getStyle('K6:L45')->applyFromArray($style_col);
-        
+
         $excel->setActiveSheetIndex(0)->setCellValue('N45', "TOTAL");
         $excel->getActiveSheet()->mergeCells('N45:R45');
         $excel->getActiveSheet()->getStyle('N45')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
@@ -2437,7 +2439,7 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('D50')->getFont()->setSize(10);
         $excel->getActiveSheet()->getStyle('D50')->getFont()->setBold(TRUE);
 
-        $excel->setActiveSheetIndex(0)->setCellValue('B51', "TOTAL PREMI" . $data->premi_supir. "%");
+        $excel->setActiveSheetIndex(0)->setCellValue('B51', "TOTAL PREMI" . $data->premi_supir . "%");
         $excel->setActiveSheetIndex(0)->setCellValue('D51', 'Rp ' . number_format($data->total_premi_supir, 0, "", "."));
         $excel->getActiveSheet()->getStyle('B51')->getFont()->setSize(10);
         $excel->getActiveSheet()->getStyle('B51')->getFont()->setBold(TRUE);
@@ -2533,14 +2535,14 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('Q52')->getFont()->setSize(10);
         $excel->getActiveSheet()->getStyle('Q52')->getFont()->setBold(TRUE);
 
-        
+
         $excel->getActiveSheet()->getColumnDimension('O')->setWidth(15);
         $excel->getActiveSheet()->getColumnDimension('P')->setWidth(15);
         $excel->getActiveSheet()->getColumnDimension('Q')->setWidth(15);
         $excel->getActiveSheet()->getColumnDimension('R')->setWidth(15);
 
 
-        
+
 
         // $total = $numrow + 1;
         // $total2 = $numrow + 2;
@@ -3706,9 +3708,48 @@ class Rms extends CI_Controller
         $this->load->view('rms/includes/template', $data);
     }
 
-    public function cek_laporan_replas()
+    public function laporan_replas()
     {
+        $data['content'] = 'rms/laporan/replas';
+        $this->load->view('rms/includes/template', $data);
+    }
 
+
+    public function cek_laporan_replas($start_date, $end_date)
+    {
+        $replas = $this->rms_model->get("v_kwitansi", "WHERE tanggal_input BETWEEN '$start_date' AND '$end_date' ORDER BY tanggal_input ASC")->result();
+        if (!$replas) {
+            echo json_encode(array(
+                "status" => 'FALSE'
+            ));
+        } else {
+            echo json_encode(array(
+                "status" => 'TRUE'
+            ));
+        }
+    }
+
+    function generate_laporan_replas($start_date, $end_date)
+    {
+        if ($start_date == $end_date) {
+            $data['periode'] = shortdate_indo($start_date);
+        } else {
+            $data['periode'] = shortdate_indo($start_date) . ' - ' . shortdate_indo($end_date);
+        }
+        $data['replas'] = $this->rms_model->get("v_kwitansi", "WHERE tanggal_input between '$start_date' and '$end_date' ORDER BY tanggal_input ASC")->result();
+        $data['total'] = $this->rms_model->get_by_query("SELECT SUM(grand_total) as total_biaya_replas FROM v_kwitansi WHERE tanggal_input between '$start_date' and '$end_date'")->row();
+        $this->load->library('pdf');
+        error_reporting(0); // AGAR ERROR MASALAH VERSI PHP TIDAK MUNCUL
+        $cetak_no = str_replace('/', '-', $no_invoice);
+        $html = $this->load->view('rms/laporan/replas_pdf', $data, true);
+        $filename = "LAPORAN REPLAS (" . $data['periode'] . ").pdf";
+        $this->pdf->createPDF($html, $filename, true);
+    }
+
+
+
+    public function cek_laporan_pajak_replas()
+    {
         $bulan = $this->input->POST('bulan');
         $tahun = $this->input->POST('tahun');
         $jenis = $this->input->POST('jenis');
@@ -3724,7 +3765,8 @@ class Rms extends CI_Controller
             ));
         }
     }
-    public function generate_laporan_replas($bulan, $tahun, $jenis)
+
+    public function generate_laporan_pajak_replas($bulan, $tahun, $jenis)
     {
 
         $no_pajak = $this->rms_model->get_by_query("SELECT *, SUM(total) as total_biaya_replas, SUM(pph) as total_pot_pph FROM v_laporan_pajak_replas WHERE Year(tanggal_input) = '$tahun' and Month(tanggal_input) = '$bulan' and jenis_pajak = '$jenis' GROUP BY no_pajak ORDER BY jenis_pajak ASC")->result();

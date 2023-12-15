@@ -338,6 +338,12 @@
                 </a>
               </li>
               <li class="nav-item ">
+                <a href="<?php echo base_url(); ?>laporan/replas" class="nav-link <?php if ($this->uri->segment(2) == "replas") { ?>active <?php } ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Replas</p>
+                </a>
+              </li>
+              <li class="nav-item ">
                 <a href="<?php echo base_url(); ?>laporan/pajak_replas" class="nav-link <?php if ($this->uri->segment(2) == "all") { ?>active <?php } ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Laporan Pajak Replas</p>

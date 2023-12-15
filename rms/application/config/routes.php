@@ -80,6 +80,7 @@ $route['invoice/view/(:any)'] = 'rms/view_invoice/$1';
 $route['laporan/komoditas'] = 'rms/laporan_komoditas';
 $route['laporan/transporter'] = 'rms/laporan_transporter';
 $route['laporan/all'] = 'rms/laporan';
+$route['laporan/replas'] = 'rms/laporan_replas';
 $route['laporan/pajak_replas'] = 'rms/pajak_replas';
 $route['kwitansi/generate'] = 'rms/generate_kwitansi';
 $route['kwitansi/data'] = 'rms/kwitansi';
