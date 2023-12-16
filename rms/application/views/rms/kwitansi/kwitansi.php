@@ -36,7 +36,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered table-striped" id="tbl_replas">
+              <table class="table table-bordered table-striped data-table">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -46,9 +46,7 @@
                     <th>Tujuan</th>
                     <th>Jumlah Replas</th>
                     <th>Total</th>
-                    <th>Total</th>
                     <th>Grand Total</th>
-                    <th>Tgl Input</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -66,9 +64,7 @@
                       <td><?php echo $row->kode_tujuan; ?></td>
                       <td><?php echo $row->total_replas; ?></td>
                       <td>Rp <?php echo number_format($row->total_kotor_replas, 0, "", "."); ?></td>
-                      <td><?php echo $row->total_kotor_replas; ?></td>
                       <td>Rp <?php echo number_format($row->grand_total, 0, "", "."); ?></td>
-                      <td><?php echo $row->tanggal_input; ?></td>
                       </td>
                       <td class="project-actions text-right">
                         <?php if ($row->status != "1") { ?>
@@ -92,8 +88,6 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th></th>
-                    <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -181,78 +175,6 @@
     // This arrangement can be altered based on how we want the date's format to appear.
     let currentDate = `${day}-${month}-${year}`;
     $('#reservation').daterangepicker();
-    var table = $("#tbl_replas").DataTable({
-      "columnDefs": [{
-        "visible": false,
-        "searchable": true,
-        "targets": [1, 8]
-      }],
-      "ordering": false,
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "pageLength": 20,
-      "buttons": [{
-          extend: 'pdfHtml5',
-          footer: true,
-          title: "Laporan Replas " + currentDate,
-          exportOptions: {
-            columns: [3, 6, 7]
-          },
-          customize: function(doc) {
-            doc.content[1].table.widths = ['33%', '33%', '33%'];
-            doc.styles.tableBodyEven.alignment = 'left';
-            doc.styles.tableBodyOdd.alignment = 'left';
-            doc.styles.tableFooter.alignment = 'left';
-            doc.styles.tableHeader.alignment = 'left';
-          }
-        },
-        {
-          extend: 'excelHtml5',
-          exportOptions: {
-            columns: ':visible'
-          }
-        },
-        "colvis"
-      ],
-      "footerCallback": function(row, data, start, end, display) {
-        var api = this.api(),
-          data;
-
-        // Remove the formatting to get integer data for summation
-        var intVal = function(i) {
-          return typeof i === 'string' ?
-            i.replace(/[\$,]/g, '') * 1 :
-            typeof i === 'number' ?
-            i : 0;
-        };
-
-        // Total over all pages
-        total = api
-          .column(7)
-          .data()
-          .reduce(function(a, b) {
-            return intVal(a) + intVal(b);
-          }, 0);
-
-        // Total over this page
-        pageTotal = api
-          .column(8, {
-            page: 'current'
-          })
-          .data()
-          .reduce(function(a, b) {
-            return intVal(a) + intVal(b);
-          }, 0);
-
-
-        // Total filtered rows on the selected column (code part added)
-        var sumCol4Filtered = display.map(el => data[el][4]).reduce((a, b) => intVal(a) + intVal(b), 0);
-
-        // Update footer
-        $(api.column(7).footer()).html('Rp ' + $.number(pageTotal).replace(/\,/g, '.'));
-      }
-    }).buttons().container().appendTo('#tbl_replas_wrapper .col-md-6:eq(0)');
   });
 
   function filterData() {
