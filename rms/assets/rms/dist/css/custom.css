@@ -40,6 +40,14 @@
 .bootstrap-datetimepicker-widget{
   z-index: 9999;
 }
+.profit{
+  font-size: 18px;
+  color: #0ccc48;
+}
+
+.gross{
+  font-size: 18px;
+}
 
 @media (max-width: 576px) {
   .dt-buttons{
@@ -53,6 +61,15 @@
     font-size: 22px;
   }
   .laporan h3{
+    font-size: 16px !important;
+    width: 50%;
+  }
+
+  .profit{
+    font-size: 16px;
+  }
+
+  .gross{
     font-size: 16px;
   }
   .page-link{
@@ -61,6 +78,9 @@
 
   .breadcrumb {
     display: none;
+  }
+  .grid-laporan ul{
+    padding-left: 15px !important; 
   }
 }
 

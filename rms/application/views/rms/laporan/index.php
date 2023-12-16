@@ -77,7 +77,7 @@
                       <ul>
                         <li class="d-flex">
                           <div class="mr-auto">Gross Profit</div>
-                          <div style="font-size: 18px;"><b>Rp <?php echo number_format($komoditas->total_pemasukan, 0, "", "."); ?></b></div>
+                          <div class="gross"><b>Rp <?php echo number_format($komoditas->total_pemasukan, 0, "", "."); ?></b></div>
                         </li>
                       </ul>
                       <li>
@@ -107,7 +107,7 @@
                       </ul>
                       <li class="d-flex">
                         <h3 class="mr-auto">Net Profit Usaha Komoditas</h3>
-                        <div style="font-size: 18px;color:#0ccc48;"><b>Rp <?php echo number_format($komoditas->total_bersih, 0, "", "."); ?></b></div>
+                        <div class="profit"><b>Rp <?php echo number_format($komoditas->total_bersih, 0, "", "."); ?></b></div>
                       </li>
                     </ul>
                     <hr>
@@ -118,7 +118,7 @@
                       <ul>
                         <li class="d-flex">
                           <div class="mr-auto">Gross Profit</div>
-                          <div style="font-size: 18px;"><b>Rp <?php echo number_format($transporter->total_pemasukan, 0, "", "."); ?></b></div>
+                          <div class="gross"><b>Rp <?php echo number_format($transporter->total_pemasukan, 0, "", "."); ?></b></div>
                         </li>
                       </ul>
                       <li>
@@ -140,7 +140,7 @@
                       </ul>
                       <li class="d-flex">
                         <h3 class="mr-auto">Net Profit Usaha Transporter</h3>
-                        <div style="font-size: 18px;color:#0ccc48;"><b>Rp <?php echo number_format($transporter->total_bersih, 0, "", "."); ?></b></div>
+                        <div class="profit"><b>Rp <?php echo number_format($transporter->total_bersih, 0, "", "."); ?></b></div>
                       </li>
                     </ul>
                     <hr>
@@ -152,19 +152,19 @@
                       <ul>
                         <li class="d-flex">
                           <div class="mr-auto">Beban Operasional General</div>
-                          <div>Rp <?php echo number_format($keuangan->operasional_kantor, 0, "", "."); ?></div>
+                          <div style="color:#ff0000;">Rp <?php echo number_format($keuangan->operasional_kantor, 0, "", "."); ?></div>
                         </li>
                         <li class="d-flex">
                           <div class="mr-auto">Beban Gaji Karyawan</div>
-                          <div>Rp <?php echo number_format($keuangan->gaji_karyawan, 0, "", "."); ?></div>
+                          <div style="color:#ff0000;">Rp <?php echo number_format($keuangan->gaji_karyawan, 0, "", "."); ?></div>
                         </li>
                         <li class="d-flex">
                           <div class="mr-auto">Beban Asuransi Karyawan</div>
-                          <div>Rp <?php echo number_format($keuangan->asuransi_karyawan, 0, "", "."); ?></div>
+                          <div style="color:#ff0000;">Rp <?php echo number_format($keuangan->asuransi_karyawan, 0, "", "."); ?></div>
                         </li>
                         <li class="d-flex">
                           <div class="mr-auto">Beban Atensi</div>
-                          <div>Rp <?php echo number_format($keuangan->atensi, 0, "", "."); ?></div>
+                          <div style="color:#ff0000;">Rp <?php echo number_format($keuangan->atensi, 0, "", "."); ?></div>
                         </li>
                       </ul>
                     </ul>
