@@ -74,7 +74,7 @@
         </div>
     <?php } ?>
 
-    <?php if ($invoice->no_kontrak) { ?>
+    <?php if ($invoice->no_kontrak AND $invoice->id_klien != '6') { ?>
         <div style="margin-top:5px;">
             <div style="display: inline-table; width:20%;vertical-align:top;">
                 <label style="vertical-align:top;">NO. KONTRAK</label>
@@ -92,7 +92,7 @@
         </div>
     <?php } ?>
 
-    <?php if ($invoice->id_komoditas == '2' || $invoice->id_komoditas == '4' || ($invoice->id_komoditas == '3' and $invoice->id_klien == '1')) { ?>
+    <?php if ($invoice->id_komoditas == '2' || $invoice->id_komoditas == '4' || ($invoice->id_komoditas == '3' and $invoice->id_klien == '1') || $invoice->id_klien == '6') { ?>
         <div style="margin-top:5px;">
             <div style="display: inline-table; width:20%;vertical-align:top;">
                 <label style="vertical-align:top;">NO. DO</label>
@@ -106,7 +106,6 @@
                         <?php echo $do->no_do; ?><br>
                     <?php endforeach; ?>
                 </label>
-
             </div>
         </div>
     <?php } ?>
