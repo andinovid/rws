@@ -85,6 +85,9 @@
   .nav-link{
     font-size: 18px;
   }
+  .login-box, .register-box{
+    margin-top: 0px;
+  }
 }
 
 .grid-laporan{

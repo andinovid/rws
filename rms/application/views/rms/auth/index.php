@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rajawali Sampit | Log in</title>
+  <title>RMS APP | Log in</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -17,7 +17,9 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?php echo base_url() ?>rms/login"><b>RAJAWALI</b>SAMPIT</a>
+    <a href="<?php echo base_url() ?>rms/login">
+  <img src="<?php echo base_url() ?>assets/rms/dist/img/rms_logo.png" width="300"/>
+  </a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
