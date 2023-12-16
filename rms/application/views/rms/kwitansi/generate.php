@@ -52,7 +52,7 @@
                     $no++;
                   ?>
                     <tr>
-                      <td><input type="checkbox" name="id[]" value="<?php echo $row->id_rekap; ?>" /></td>
+                      <td><input type="checkbox" class="select-row"  name="id[]" value="<?php echo $row->id_rekap; ?>" /></td>
                       <td><?php echo $row->no_do; ?></td>
                       <td><?php echo $row->no_replas; ?></td>
                       <td><?php echo $row->vendor; ?></td>
@@ -133,7 +133,12 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-  
+  $(function() {
+    $('.select-row').click(function() {
+      var backgroundColor = $(this).is(":checked") ? "#fff000;" : "";
+      $(this).closest('tr').attr('style', 'background-color: ' + backgroundColor + '');
+    });
+  });
 
   function generate_invoice() {
     var table = $('#tbl-invoice').DataTable();

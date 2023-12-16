@@ -311,7 +311,7 @@
           </a>
         </li-->
           <li class="nav-item <?php if ($this->uri->segment(1) == "laporan") { ?>menu-open <?php } ?>">
-            <a href="<?php echo base_url(); ?>laporan/" class="nav-link ">
+            <a href="<?php echo base_url(); ?>laporan/" class="nav-link <?php if ($this->uri->segment(1) == "laporan") { ?>active <?php } ?>">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Laporan
@@ -344,7 +344,7 @@
                 </a>
               </li>
               <li class="nav-item ">
-                <a href="<?php echo base_url(); ?>laporan/pajak_replas" class="nav-link <?php if ($this->uri->segment(2) == "all") { ?>active <?php } ?>">
+                <a href="<?php echo base_url(); ?>laporan/pajak_replas" class="nav-link <?php if ($this->uri->segment(2) == "pajak_replas") { ?>active <?php } ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Laporan Pajak Replas</p>
                 </a>

@@ -64,7 +64,6 @@
                       <td>Rp <?php echo number_format($row->total_pph, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($row->grand_total_transporter, 0, "", "."); ?></td>
                       <td class="project-actions text-right">
-                        
                         <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/print_kwitansi_transporter/<?php echo $row->id_kwitansi; ?>" data-toggle="tooltip" data-placement="top" title="Cetak Kwitansi">
                           <i class="fas fa-print">
                           </i>
@@ -102,7 +101,6 @@
           </button>
         </div>
         <div class="modal-body">
-
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">

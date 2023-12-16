@@ -57,7 +57,9 @@
                   $no++;
                   foreach ($rekap as $row) : ?>
                     <tr>
-                      <td><input type="checkbox" name="id[]" value="<?php echo $row->id_rekap; ?>" /></td>
+                      <td>
+                        <input type="checkbox" class="select-row" name="id[]" value="<?php echo $row->id_rekap; ?>" />
+                      </td>
                       <td><?php echo $row->no_replas; ?></td>
                       <td><?php if ($row->tanggal_muat) {
                             echo shortdate_indo($row->tanggal_muat);
@@ -132,13 +134,13 @@
                     </select>
                   </div>
                   <div class="form-group">
-                      <label>Periode tahun</label>
-                      <select class="form-control" style="width: 100%;" name="tahun" id="tahun">
-                        <option value="">Pilih tahun</option>
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
-                      </select>
-                    </div>
+                    <label>Periode tahun</label>
+                    <select class="form-control" style="width: 100%;" name="tahun" id="tahun">
+                      <option value="">Pilih tahun</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                    </select>
+                  </div>
                   <div class="form-group">
                     <label for="nama">Uang Sangu</label>
                     <input type="hidden" class="form-control" id="id_rekap_invoice" name="id_rekap_invoice">
@@ -171,6 +173,13 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
+  $(function() {
+    $('.select-row').click(function() {
+      var backgroundColor = $(this).is(":checked") ? "#fff99c;" : "";
+      $(this).closest('tr').attr('style', 'background-color: ' + backgroundColor + '');
+    });
+  });
+
   function generate_invoice() {
     var table = $('#tbl-rekap').DataTable();
     event.preventDefault();
