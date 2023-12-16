@@ -23,7 +23,7 @@
             <div class="card-header">
               <h3 class="card-title">Data Kwitansi</h3>
               <div class="card-tools mr-1">
-                <div id="reportrange" class="input-group">
+                <!-- <div id="reportrange" class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="far fa-calendar-alt"></i>
@@ -31,7 +31,7 @@
                   </div>
                   <input type="text" id="date-filter" class="form-control float-right" value=""> <b class="caret"></b>
                   <button class="btn btn-dark btn-flat float-right" onclick="filterData()">Filter</button>
-                </div>
+                </div> -->
               </div>
             </div>
             <!-- /.card-header -->
@@ -40,7 +40,6 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Tgl Input</th>
                     <th>No Kwitansi</th>
                     <th>Vendor</th>
                     <th>Komoditas</th>
@@ -49,6 +48,7 @@
                     <th>Total</th>
                     <th>Total</th>
                     <th>Grand Total</th>
+                    <th>Tgl Input</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -60,7 +60,6 @@
                   ?>
                     <tr>
                       <td><?php echo $no; ?></td>
-                      <td><?php echo $row->tanggal_input; ?></td>
                       <td><?php echo $row->no_kwitansi; ?></td>
                       <td><?php echo $row->vendor; ?></td>
                       <td><?php echo $row->komoditas; ?></td>
@@ -69,7 +68,7 @@
                       <td>Rp <?php echo number_format($row->total_kotor_replas, 0, "", "."); ?></td>
                       <td><?php echo $row->total_kotor_replas; ?></td>
                       <td>Rp <?php echo number_format($row->grand_total, 0, "", "."); ?></td>
-
+                      <td><?php echo $row->tanggal_input; ?></td>
                       </td>
                       <td class="project-actions text-right">
                         <?php if ($row->status != "1") { ?>

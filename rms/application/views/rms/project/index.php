@@ -99,8 +99,8 @@
                 <tfoot>
                   <tr>
                     <th>No</th>
-                    <th>No Kontrak</th>
                     <th>No DO</th>
+                    <th>No Kontrak</th>
                     <th>Klien</th>
                     <th>Komoditas</th>
                     <th>Qty</th>

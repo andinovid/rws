@@ -34,8 +34,8 @@
                   <tr>
                     <th></th>
                     <th>No</th>
-                    <th>No Kontrak</th>
                     <th>No DO</th>
+                    <th>No Kontrak</th>
                     <th>Nama Perusahaan</th>
                     <th>Jumlah Replas</th>
                     <th>Total Nilai</th>
@@ -52,8 +52,8 @@
                     <tr>
                       <td><input type="checkbox" name="id[]" value="<?php echo $row->id_project; ?>" /></td>
                       <td><?php echo $no; ?></td>
-                      <td><?php echo $row->no_kontrak; ?></td>
                       <td><?php echo $row->no_do; ?></td>
+                      <td><?php echo $row->no_kontrak; ?></td>
                       <td><?php echo $row->nama_perusahaan; ?></td>
                       <td><?php echo $row->total_replas; ?></td>
                       <td>Rp <?php echo number_format($row->total_nilai, 0, "", "."); ?></td>
@@ -71,8 +71,8 @@
                   <tr>
                     <th></th>
                     <th>No</th>
-                    <th>No Kontrak</th>
                     <th>No DO</th>
+                    <th>No Kontrak</th>
                     <th>Nama Perusahaan</th>
                     <th>Jumlah Replas</th>
                     <th>Total Nilai</th>
