@@ -82,6 +82,9 @@
   .grid-laporan ul{
     padding-left: 15px !important; 
   }
+  .nav-link{
+    font-size: 18px;
+  }
 }
 
 .grid-laporan{
