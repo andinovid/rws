@@ -304,6 +304,7 @@ class Rms extends CI_Controller
         $uang_sangu = $this->input->POST('uang_sangu');
         $tanggal_input = date('Y-m-d H:i:s');
         $vendor_pencairan = $this->input->POST('vendor_pencairan');
+        $biaya_admin = $this->input->POST('biaya_admin');
         $data = array(
             'id_supir' => $supir,
             'id_truck' => $truck,
@@ -315,6 +316,7 @@ class Rms extends CI_Controller
             'non_do_harga' => $harga,
             'non_do_harga_vendor' => $harga_supir,
             'uang_sangu' => str_replace('.', '', $uang_sangu),
+            'non_do_biaya_admin' => str_replace('.', '', $biaya_admin),
             'non_do' => '1',
             'status' => '0',
             'tanggal_input' => $tanggal_input,

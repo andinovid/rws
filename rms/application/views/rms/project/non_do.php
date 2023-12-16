@@ -311,7 +311,8 @@
           $('[name="qty_kirim_kg"]').val(data[i].qty_kirim_kg);
           $('[name="harga"]').val(data[i].non_do_harga);
           $('[name="harga_supir"]').val(data[i].non_do_harga_vendor);
-          $('[name="uang_sangu"]').val(data[i].uang_sangu);
+          $('[name="uang_sangu"]').val($.number(data[i].uang_sangu).replace(/\,/g, '.'));
+          $('[name="biaya_admin"]').val($.number(data[i].non_do_biaya_admin).replace(/\,/g, '.'));
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {

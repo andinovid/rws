@@ -641,7 +641,11 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
-                  <div class="form-group">
+                  
+
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
                     <label>Vendor Pajak</label>
                     <select class="form-control select2" style="width: 100%;" name="vendor_pajak" id="vendor_pajak">
                       <option value="0">Pilih vendor pajak</option>
@@ -650,9 +654,6 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
-
-                </div>
-                <div class="col-md-6">
                   <div class="form-group">
                     <label>Tujuan</label>
                     <select class="form-control select2" style="width: 100%;" name="tujuan" id="tujuan">
@@ -721,10 +722,6 @@
                   <div class="form-group">
                     <label for="no_replas">Toleransi Susut (kg)</label>
                     <input type="text" class="form-control" name="toleransi_susut" id="toleransi_susut" placeholder="Toleransi Susut">
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Uang Sangu</label>
-                    <input type="text" class="form-control number" name="uang_sangu" id="uang_sangu" placeholder="Uang Sangu">
                   </div>
                 </div>
               </div>
