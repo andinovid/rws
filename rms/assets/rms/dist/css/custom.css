@@ -88,6 +88,10 @@
   .login-box, .register-box{
     margin-top: 0px;
   }
+
+  .hidden-xs{
+    display: none;
+  }
 }
 
 .grid-laporan{

@@ -269,13 +269,13 @@
                     <th rowspan="2" class="text-center align-middle">Nopol</th>
                     <th rowspan="2" class="text-center align-middle">Tujuan</th>
                     <?php if ($project->id_komoditas == '2' || ($project->id_komoditas == '3' and $project->id_klien == '6')) { ?>
-                      <th colspan="3" class="text-center align-middle">Qty Awal</th>
-                      <th colspan="3" class="text-center align-middle">Qty Akhir</th>
+                      <th colspan="3" class="text-center align-middle hidden-xs">Qty Awal</th>
+                      <th colspan="3" class="text-center align-middle hidden-xs">Qty Akhir</th>
                     <?php } else { ?>
-                      <th colspan="2" class="text-center align-middle">Qty Awal</th>
-                      <th colspan="2" class="text-center align-middle">Qty Akhir</th>
+                      <th colspan="2" class="text-center align-middle hidden-xs">Qty Awal</th>
+                      <th colspan="2" class="text-center align-middle hidden-xs">Qty Akhir</th>
                     <?php } ?>
-                    <th colspan="2" class="text-center align-middle">Susut</th>
+                    <th colspan="2" class="text-center align-middle hidden-xs">Susut</th>
                     <th rowspan="2" class="text-center align-middle">Status</th>
                     <th rowspan="2" class="text-center align-middle" style="width: 120px;">Action</th>
                   </tr>

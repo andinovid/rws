@@ -28,8 +28,8 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered data-table" id="tbl-rekap">
-                <thead class="thead-dark">
+            <table class="table table-bordered table-striped data-table" id="tbl-rekap">
+                <thead>
                   <tr>
                     <th rowspan="2" class="text-center align-middle">#</th>
                     <th rowspan="2" class="text-center align-middle">No Replas</th>
@@ -38,9 +38,9 @@
                     <th rowspan="2" class="text-center align-middle">Supir</th>
                     <th rowspan="2" class="text-center align-middle">Nopol</th>
                     <th rowspan="2" class="text-center align-middle">Tujuan</th>
-                    <th colspan="2" class="text-center align-middle">Qty Awal</th>
-                    <th colspan="2" class="text-center align-middle">Qty Akhir</th>
-                    <th colspan="2" class="text-center align-middle">Susut</th>
+                    <th colspan="2" class="text-center align-middle hidden-xs">Qty Awal</th>
+                    <th colspan="2" class="text-center align-middle hidden-xs">Qty Akhir</th>
+                    <th colspan="2" class="text-center align-middle hidden-xs">Susut</th>
                     <th rowspan="2" class="text-center align-middle">Action</th>
                   </tr>
                   <tr>
