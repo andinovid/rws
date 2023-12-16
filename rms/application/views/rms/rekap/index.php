@@ -41,7 +41,7 @@
                     <th colspan="2" class="text-center align-middle hidden-xs">Qty Awal</th>
                     <th colspan="2" class="text-center align-middle hidden-xs">Qty Akhir</th>
                     <th colspan="2" class="text-center align-middle hidden-xs">Susut</th>
-                    <th rowspan="2" class="text-center align-middle">Action</th>
+                    <!-- <th rowspan="2" class="text-center align-middle">Action</th> -->
                   </tr>
                   <tr>
                     <th class="text-center align-middle">Bag</th>
@@ -77,7 +77,7 @@
                       <td><?php echo number_format($row->m_susut, 0, "", "."); ?> Kg</td>
                       <td><?php echo number_format($row->c_claim, 0, "", "."); ?> Kg</td>
 
-                      <td class="project-actions text-right">
+                      <!-- <td class="project-actions text-right">
                         <a class="btn btn-info btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_rekap; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
                           <i class="fas fa-pencil-alt">
                           </i>
@@ -86,7 +86,7 @@
                           <i class="fas fa-trash">
                           </i>
                         </a>
-                      </td>
+                      </td> -->
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
