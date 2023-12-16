@@ -172,6 +172,10 @@
                     <label for="no_replas">Uang Sangu</label>
                     <input type="text" class="form-control number" name="uang_sangu" id="uang_sangu" placeholder="Uang Sangu">
                   </div>
+                  <div class="form-group">
+                    <label for="no_replas">Biaya Admin</label>
+                    <input type="text" class="form-control number" name="biaya_admin" id="biaya_admin"  placeholder="Biaya Admin">
+                  </div>
                 </div>
               </div>
             </div>
