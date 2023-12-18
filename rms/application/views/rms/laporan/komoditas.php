@@ -69,7 +69,7 @@
                 <hr class=" mt-4">
                 <h2 class="text-center mt-4" style="font-weight: bold;">Laporan Komoditas Periode <?php echo bulan($_GET['bulan']); ?> <?php echo $_GET['tahun']; ?></h2>
                 <div class="row mt-4">
-                  <div class="col-lg-4 col-12">
+                  <div class="col-lg-3 col-12">
                     <!-- small box -->
                     <div class="small-box bg-primary">
                       <div class="inner">
@@ -81,21 +81,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- ./col -->
-                  <div class="col-lg-4 col-12">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                      <div class="inner">
-                        <h3>Rp <?php echo number_format($total->total_pengeluaran_lapangan, 0, "", "."); ?></h3>
-                        <p class="mb-0">Beban Pengeluaran Lapangan</p>
-                      </div>
-                      <div class="icon">
-                        <i class="ion ion-ios-checkmark-outline"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- ./col -->
-                  <div class="col-lg-4 col-12">
+                  <div class="col-lg-3 col-12">
                     <!-- small box -->
                     <div class="small-box bg-warning">
                       <div class="inner">
@@ -113,6 +99,30 @@
                       <div class="inner">
                         <h3>Rp <?php echo number_format($total->total_biaya_claim, 0, "", "."); ?></h3>
                         <p class="mb-0">Beban Biaya Claim</p>
+                      </div>
+                      <div class="icon">
+                        <i class="ion ion-ios-checkmark-outline"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-12">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                      <div class="inner">
+                        <h3>Rp <?php echo number_format($total->total_biaya_penagihan, 0, "", "."); ?></h3>
+                        <p class="mb-0">Beban Penagihan</p>
+                      </div>
+                      <div class="icon">
+                        <i class="ion ion-ios-checkmark-outline"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-12">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                      <div class="inner">
+                        <h3>Rp <?php echo number_format($total->total_pengeluaran_lapangan, 0, "", "."); ?></h3>
+                        <p class="mb-0">Beban Pengeluaran Lapangan</p>
                       </div>
                       <div class="icon">
                         <i class="ion ion-ios-checkmark-outline"></i>
@@ -172,6 +182,7 @@
                       <th>Beban PPh Replas</th>
                       <th>Beban Claim Invoice</th>
                       <th>Beban PPh</th>
+                      <th>Beban Biaya Penagihan</th>
                       <th>Net Profit</th>
                     </tr>
                   </thead>
@@ -187,6 +198,7 @@
                         <td>Rp <?php echo number_format($row->total_pph_replas, 0, "", "."); ?></td>
                         <td>Rp <?php echo number_format($row->total_biaya_claim_invoice, 0, "", "."); ?></td>
                         <td>Rp <?php echo number_format($row->total_pph, 0, "", "."); ?></td>
+                        <td>Rp <?php echo number_format($row->biaya_penagihan, 0, "", "."); ?></td>
                         <td>Rp <?php echo number_format($row->total_keuntungan, 0, "", "."); ?></td>
                       </tr>
                     <?php endforeach; ?>
@@ -200,6 +212,7 @@
                       <td>Rp <?php echo number_format($total->total_potongan_pph_replas, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($total->total_biaya_claim, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($total->total_potongan_pph, 0, "", "."); ?></td>
+                      <td>Rp <?php echo number_format($total->total_biaya_penagihan, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($total->total_bersih, 0, "", "."); ?></td>
                     </tr>
                   </tfoot>

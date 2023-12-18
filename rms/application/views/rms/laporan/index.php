@@ -76,8 +76,12 @@
                       </li>
                       <ul>
                         <li class="d-flex">
-                          <div class="mr-auto">Gross Profit</div>
+                          <div class="mr-auto">Gross Profit Komoditas</div>
                           <div class="gross"><b>Rp <?php echo number_format($komoditas->total_pemasukan, 0, "", "."); ?></b></div>
+                        </li>
+                        <li class="d-flex">
+                          <div class="mr-auto">Net Profit Komoditas Non DO</div>
+                          <div class="gross"><b>Rp <?php echo number_format($non_do->total_keuntungan, 0, "", "."); ?></b></div>
                         </li>
                       </ul>
                       <li>
@@ -104,10 +108,14 @@
                           <div class="mr-auto">Beban PPh Replas</div>
                           <div style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_potongan_pph_replas, 0, "", "."); ?></div>
                         </li>
+                        <li class="d-flex">
+                          <div class="mr-auto">Beban Biaya Penagihan</div>
+                          <div style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_biaya_penagihan, 0, "", "."); ?></div>
+                        </li>
                       </ul>
                       <li class="d-flex">
                         <h3 class="mr-auto">Net Profit Usaha Komoditas</h3>
-                        <div class="profit"><b>Rp <?php echo number_format($komoditas->total_bersih, 0, "", "."); ?></b></div>
+                        <div class="profit"><b>Rp <?php echo number_format($total_komoditas, 0, "", "."); ?></b></div>
                       </li>
                     </ul>
                     <hr>

@@ -93,6 +93,10 @@
                 <div class="float-left">Gross Profit</div>
                 <div class="float-right" style="font-size: 18px;"><b>Rp <?php echo number_format($komoditas->total_pemasukan, 0, "", "."); ?></b></div>
             </li>
+            <li>
+                <div class="float-left">Net Profit Komoditas Non DO</div>
+                <div class="float-right" style="font-size: 18px;"><b>Rp <?php echo number_format($non_do->total_keuntungan, 0, "", "."); ?></b></div>
+            </li>
         </ul>
         <li>
             <h3>Pengeluaran Usaha Komoditas</h3>
@@ -121,7 +125,7 @@
         </ul>
         <li>
             <h3 class="float-left">Net Profit Usaha Komoditas</h3>
-            <div class="float-right" style="font-size: 18px;color:#0ccc48;"><b>Rp <?php echo number_format($komoditas->total_bersih, 0, "", "."); ?></b></div>
+            <div class="float-right" style="font-size: 18px;color:#0ccc48;"><b>Rp <?php echo number_format($total_komoditas, 0, "", "."); ?></b></div>
         </li>
     </ul>
     <div class="clearfix"></div>

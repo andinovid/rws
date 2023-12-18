@@ -28,46 +28,6 @@
                   <h3 class="text-primary"><i class="fas fa-building"></i> <?php echo $project->nama_perusahaan; ?></h3>
                   <br>
                   <div class="row">
-                    <?php if ($project->no_kontrak) { ?>
-                      <div class="col-auto mr-2">
-                        <p class="text-sm mb-0">No Kontrak :
-                          <b class="d-block"><?php echo $project->no_kontrak; ?></b>
-                        </p>
-                      </div>
-                    <?php } ?>
-                    <?php if ($project->no_sto) { ?>
-                      <div class="col-auto mr-2">
-                        <p class="text-sm mb-0">No STO :
-                          <b class="d-block"><?php echo $project->no_sto; ?></b>
-                        </p>
-                      </div>
-                    <?php } ?>
-                    <?php if ($project->no_po) { ?>
-                      <div class="col-auto mr-2">
-                        <p class="text-sm mb-0">No PO :
-                          <b class="d-block"><?php echo $project->no_po; ?></b>
-                        </p>
-                      </div>
-                    <?php } ?>
-                    <?php if ($project->no_do) { ?>
-                      <div class="col-auto mr-2">
-                        <p class="text-sm mb-0">No DO :
-                          <b class="d-block"><?php echo $project->no_do; ?></b>
-                        </p>
-                      </div>
-                    <?php } ?>
-
-                    <div class="col-auto mr-2">
-                      <p class="text-sm mb-0">Komoditas
-                        <b class="d-block"><?php echo $project->komoditas; ?></b>
-                      </p>
-                    </div>
-                    <div class="col-auto mr-2">
-                      <p class="text-sm mb-0">Harga Satuan
-                        <b class="d-block">Rp <?php echo number_format($project->harga_unit, 0, "", "."); ?></b>
-                      </p>
-                    </div>
-
                     <span class="badge <?php if ($project->status == '0') {
                                           echo "bg-secondary";
                                         } elseif ($project->status == '1') {
@@ -79,13 +39,32 @@
                   <hr>
                   <div class="row">
                     <div class="col">
+                      <p class="text-sm">No Kontrak :
+                        <b class="d-block"><?php echo $project->no_kontrak; ?></b>
+                      </p>
+                      <p class="text-sm">No DO :
+                        <b class="d-block"><?php echo $project->no_do; ?></b>
+                      </p>
+                      <p class="text-sm">Komoditas
+                        <b class="d-block"><?php echo $project->komoditas; ?></b>
+                      </p>
+                    </div>
+                    <div class="col">
                       <div class="text-muted">
+                        <p class="text-sm">Harga Satuan
+                          <b class="d-block">Rp <?php echo number_format($project->harga_unit, 0, "", "."); ?></b>
+                        </p>
                         <p class="text-sm">Tanggal Angkut
                           <b class="d-block"><?php echo shortdate_indo($project->tanggal_angkut); ?></b>
                         </p>
                         <p class="text-sm">Toleransi Susut
                           <b class="d-block"><?php echo $project->toleransi_susut; ?> %</b>
                         </p>
+
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="text-muted">
                         <p class="text-sm">Total Susut
                           <b class="d-block"><?php if ($project->total_susut != NULL) {
                                                 echo number_format($project->total_susut, 0, "", ".");
@@ -93,18 +72,7 @@
                                                 echo "-";
                                               }  ?> kg</b>
                         </p>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="text-muted">
 
-                        <p class="text-sm">Total Uang Sangu
-                          <b class="d-block">Rp <?php if ($project->total_uang_sangu != NULL) {
-                                                  echo number_format($project->total_uang_sangu, 0, "", ".");
-                                                } else {
-                                                  echo "0";
-                                                } ?></b>
-                        </p>
                         <p class="text-sm">Claim replas
                           <b class="d-block"><?php if ($project->total_claim_replas != NULL) {
                                                 echo number_format($project->total_claim_replas, 0, "", ".");
@@ -112,49 +80,11 @@
                                                 echo "0";
                                               } ?> Kg</b>
                         </p>
+
                         <p class="text-sm">Penagih
                           <b class="d-block"><?php echo $project->nama_penagih; ?></b>
                         </p>
-
                       </div>
-                    </div>
-                    <div class="col">
-                      <div class="text-muted">
-
-
-
-
-                        <p class="text-sm">Biaya claim replas
-                          <b class="d-block">Rp <?php if ($project->total_biaya_claim_replas != NULL) {
-                                                  echo number_format($project->total_biaya_claim_replas, 0, "", ".");
-                                                } else {
-                                                  echo "0";
-                                                } ?></b>
-                        </p>
-                        <p class="text-sm">Claim invoice
-                          <b class="d-block">Rp <?php if ($project->total_claim_invoice != NULL) {
-                                                  echo number_format($project->total_claim_invoice, 0, "", ".");
-                                                } else {
-                                                  echo "0";
-                                                } ?></b>
-                        </p>
-
-                      </div>
-                    </div>
-
-                    <div class="col">
-
-                      <p class="text-sm">Biaya claim inovice
-                        <b class="d-block">Rp <?php if ($project->total_biaya_claim_invoice != NULL) {
-                                                echo number_format($project->total_biaya_claim_invoice, 0, "", ".");
-                                              } else {
-                                                echo "0";
-                                              } ?></b>
-                      </p>
-
-                      <p class="text-sm">Penagih
-                        <b class="d-block"><?php echo $project->nama_penagih; ?></b>
-                      </p>
                     </div>
                     <div class="col">
                       <div class="text-muted">
@@ -619,7 +549,11 @@
                     <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
                       <option value="0">Pilih supir</option>
                       <?php foreach ($supir as $row) : ?>
-                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?> (<?php if($row->kategori == '1'){echo 'Kantor';}else{ echo 'Vendor';} ?>)</option>
+                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?> (<?php if ($row->kategori == '1') {
+                                                                                              echo 'Kantor';
+                                                                                            } else {
+                                                                                              echo 'Vendor';
+                                                                                            } ?>)</option>
                       <?php endforeach; ?>
                     </select>
                   </div>
@@ -641,11 +575,11 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
-                  
+
 
                 </div>
                 <div class="col-md-6">
-                <div class="form-group">
+                  <div class="form-group">
                     <label>Vendor Pajak</label>
                     <select class="form-control select2" style="width: 100%;" name="vendor_pajak" id="vendor_pajak">
                       <option value="0">Pilih vendor pajak</option>
@@ -925,7 +859,7 @@
     $('#timbang_kebun_kg').val(res)
   })
 
-  
+
   $('#bruto_akhir, #tarra_akhir').on('change keyup', function() {
     var res = $('#bruto_akhir').val() - $('#tarra_akhir').val();
     $('#qty_kirim_kg').val(res)

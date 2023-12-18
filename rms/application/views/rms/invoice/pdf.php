@@ -68,7 +68,7 @@
             <div style="display: inline-table; width:2%; vertical-align:top;">
                 <label style="vertical-align:top;">:</label>
             </div>
-            <div style="display: inline-table; width:50%; vertical-align:top;">
+            <div style="display: inline-table; width:70%; vertical-align:top;">
                 <label style="vertical-align:top;"><?php echo $invoice->remark; ?></label>
             </div>
         </div>
@@ -113,16 +113,16 @@
     <table class="table table-hover" cellpadding="0" style="width:100%; margin-top:20px; cell-margin:0px; border-spacing:0;">
         <thead style="background-color: #EEE;">
             <tr style="border: 1px solid #111;">
-                <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:5%;">No</th>
+                <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:3%;">No</th>
                 <?php if ($invoice->id_komoditas == '1') { ?>
                     <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:10%;">NO. STO</th>
                     <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:10%;">NO. DO</th>
                 <?php } else { ?>
-                    <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:10%;">DESC</th>
+                    <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:40%;">DESC</th>
                 <?php } ?>
                 <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:10%;">QTY</th>
                 <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:10%;">HARGA</th>
-                <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:10%;">TOTAL</th>
+                <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:12%;">TOTAL</th>
             </tr>
         </thead>
         <tbody>
@@ -138,7 +138,7 @@
                         <td style="text-align: center;"><?php echo $row->no_sto; ?></td>
                         <td style="text-align: center;"><?php echo $row->no_do; ?></td>
                     <?php } else { ?>
-                        <td style="text-align: center;"><?php echo $row->deskripsi; ?></td>
+                        <td><?php echo $row->deskripsi; ?></td>
                     <?php } ?>
                     <?php if ($invoice->id_komoditas == '2' and ($invoice->id_klien == '4' || $invoice->id_klien == '5' || $invoice->id_klien == '9' || $invoice->id_klien == '10' || $invoice->id_klien == '16')) { ?>
                         <td style="text-align: center;"><?php echo number_format($row->total_qty_akhir, 0, "", "."); ?> KG</td>

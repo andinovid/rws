@@ -164,7 +164,7 @@ class Rms extends CI_Controller
         $detail = $data->row();
         echo json_encode($detail);
     }
-    
+
 
     public function get_rekap()
     {
@@ -1309,13 +1309,15 @@ class Rms extends CI_Controller
         $data['tahun'] = $tahun;
         $data['komoditas'] = $this->rms_model->get_by_query("SELECT SUM(total_pemasukan_invoice) AS total_pemasukan,SUM(total_pph) AS total_potongan_pph, SUM(total_biaya_claim_invoice) AS total_biaya_claim, SUM(total_pph_replas) AS total_potongan_pph_replas, SUM(pengeluaran_lapangan) AS total_pengeluaran_lapangan, SUM(pengeluaran_replas) AS total_pengeluaran_replas, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_komoditas WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
         $data['transporter'] = $this->rms_model->get_by_query("SELECT SUM(grand_total) AS total_pemasukan, SUM(operasional) AS total_operasional,SUM(total_perbaikan) AS total_biaya_perbaikan, SUM(premi_supir) AS total_premi_supir, SUM(cicilan) AS total_cicilan, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_transporter WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
+        $data['non_do'] = $this->rms_model->get_by_query("SELECT SUM(keuntungan) AS total_keuntungan FROM v_laporan_non_do WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
         $data['keuangan'] = $this->rms_model->get_by_query("SELECT * from v_laporan_keuangan WHERE bulan = '$bulan' AND tahun = '$tahun'")->row();
-        $data['total_net_profit'] = $data['komoditas']->total_bersih + $data['transporter']->total_bersih - $data['keuangan']->operasional_kantor - $data['keuangan']->gaji_karyawan - $data['keuangan']->asuransi_karyawan;
-        
+
+        $data['total_komoditas'] = $data['komoditas']->total_bersih + $data['non_do']->total_keuntungan;
+        $data['total_net_profit'] = $data['komoditas']->total_bersih + $data['transporter']->total_bersih + $data['non_do']->total_keuntungan - $data['keuangan']->operasional_kantor - $data['keuangan']->gaji_karyawan - $data['keuangan']->asuransi_karyawan - $data['keuangan']->atensi;
         $this->load->library('pdf');
         error_reporting(0); // AGAR ERROR MASALAH VERSI PHP TIDAK MUNCUL
         $html = $this->load->view('rms/laporan/laporan_pdf', $data, true);
-        $filename = "LAPORAN LABA RUGI (" . $data['bulan'] . " " . $data['tahun'] .").pdf";
+        $filename = "LAPORAN LABA RUGI (" . $data['bulan'] . " " . $data['tahun'] . ").pdf";
         $this->pdf->createPDF($html, $filename, true);
     }
 
@@ -1327,10 +1329,13 @@ class Rms extends CI_Controller
             $tahun = $_GET["tahun"];
             $data['bulan'] = $_GET["bulan"];
             $data['tahun'] = $_GET["tahun"];
-            $data['komoditas'] = $this->rms_model->get_by_query("SELECT SUM(total_pemasukan_invoice) AS total_pemasukan,SUM(total_pph) AS total_potongan_pph, SUM(total_biaya_claim_invoice) AS total_biaya_claim, SUM(total_pph_replas) AS total_potongan_pph_replas, SUM(pengeluaran_lapangan) AS total_pengeluaran_lapangan, SUM(pengeluaran_replas) AS total_pengeluaran_replas, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_komoditas WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
+            $data['komoditas'] = $this->rms_model->get_by_query("SELECT SUM(total_pemasukan_invoice) AS total_pemasukan,SUM(total_pph) AS total_potongan_pph, SUM(total_biaya_claim_invoice) AS total_biaya_claim, SUM(total_pph_replas) AS total_potongan_pph_replas, SUM(pengeluaran_lapangan) AS total_pengeluaran_lapangan, SUM(pengeluaran_replas) AS total_pengeluaran_replas, SUM(biaya_penagihan) AS total_biaya_penagihan, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_komoditas WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
             $data['transporter'] = $this->rms_model->get_by_query("SELECT SUM(grand_total) AS total_pemasukan, SUM(operasional) AS total_operasional,SUM(total_perbaikan) AS total_biaya_perbaikan, SUM(premi_supir) AS total_premi_supir, SUM(cicilan) AS total_cicilan, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_transporter WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
+            $data['non_do'] = $this->rms_model->get_by_query("SELECT SUM(keuntungan) AS total_keuntungan FROM v_laporan_non_do WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
             $data['keuangan'] = $this->rms_model->get_by_query("SELECT * from v_laporan_keuangan WHERE bulan = '$bulan' AND tahun = '$tahun'")->row();
-            $data['total_net_profit'] = $data['komoditas']->total_bersih + $data['transporter']->total_bersih - $data['keuangan']->operasional_kantor - $data['keuangan']->gaji_karyawan - $data['keuangan']->asuransi_karyawan;
+
+            $data['total_komoditas'] = $data['komoditas']->total_bersih + $data['non_do']->total_keuntungan;
+            $data['total_net_profit'] = $data['komoditas']->total_bersih + $data['transporter']->total_bersih + $data['non_do']->total_keuntungan - $data['keuangan']->operasional_kantor - $data['keuangan']->gaji_karyawan - $data['keuangan']->asuransi_karyawan - $data['keuangan']->atensi;
         }
         $data['content'] = 'rms/laporan/index';
         $this->load->view('rms/includes/template', $data);
@@ -1342,7 +1347,7 @@ class Rms extends CI_Controller
             $bulan = $_GET["bulan"];
             $tahun = $_GET["tahun"];
             $data['laporan'] = $this->rms_model->get("v_laporan_komoditas", "WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->result();
-            $data['total'] = $this->rms_model->get_by_query("SELECT SUM(total_pemasukan_invoice) AS total_pemasukan,SUM(total_pph) AS total_potongan_pph, SUM(total_biaya_claim_invoice) AS total_biaya_claim, SUM(total_pph_replas) AS total_potongan_pph_replas, SUM(pengeluaran_lapangan) AS total_pengeluaran_lapangan, SUM(pengeluaran_replas) AS total_pengeluaran_replas, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_komoditas WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
+            $data['total'] = $this->rms_model->get_by_query("SELECT SUM(total_pemasukan_invoice) AS total_pemasukan,SUM(total_pph) AS total_potongan_pph, SUM(total_biaya_claim_invoice) AS total_biaya_claim, SUM(total_pph_replas) AS total_potongan_pph_replas, SUM(pengeluaran_lapangan) AS total_pengeluaran_lapangan, SUM(pengeluaran_replas) AS total_pengeluaran_replas, SUM(biaya_penagihan) AS total_biaya_penagihan, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_komoditas WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
         }
         $data['content'] = 'rms/laporan/komoditas';
         $this->load->view('rms/includes/template', $data);
@@ -1603,15 +1608,15 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('O3:Q3')->applyFromArray($style_row);
         $excel->getActiveSheet()->getStyle('Q4')->getFont()->setBold(TRUE);
         $excel->getActiveSheet()->getStyle('O3')->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); 
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); 
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15);
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true);
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('Q4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('O3:Q3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12); 
+        $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12);
         $excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(TRUE);
-        
+
         $excel->setActiveSheetIndex(0)->setCellValue('A8', "NO");
         $excel->setActiveSheetIndex(0)->setCellValue('B8', "TGL");
         $excel->setActiveSheetIndex(0)->setCellValue('C8', "QTY AWAL");
@@ -1759,7 +1764,7 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('C' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
         $excel->setActiveSheetIndex(0)->setCellValue('C' . $terbilang, '(' . ucwords(terbilang($detail_kwitansi->grand_total)) . ' Rupiah)');
         $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setItalic(TRUE);
-        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setSize(10); 
+        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setSize(10);
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('G' . $sebesar, 'Sampit, ' . shortdate_indo(date('Y-m-d')));
@@ -1770,7 +1775,7 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('C' . $sebesar . ':' . 'E' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('C' . $terbilang . ':' . 'E' . $terbilang); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setSize(16); 
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setSize(16);
         $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setItalic(TRUE);
 
 
@@ -1947,14 +1952,14 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('Q4')->getFont()->setBold(TRUE);
         $excel->getActiveSheet()->getStyle('Q5')->getFont()->setBold(TRUE);
         $excel->getActiveSheet()->getStyle('Q5')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); 
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); 
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15);
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true);
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('Q4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12); 
+        $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12);
         $excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(TRUE);
-        
+
         $excel->setActiveSheetIndex(0)->setCellValue('A8', "NO");
         $excel->setActiveSheetIndex(0)->setCellValue('B8', "TGL");
         $excel->setActiveSheetIndex(0)->setCellValue('C8', "QTY AWAL");
@@ -2077,7 +2082,7 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('C' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total_transporter, 0, "", "."));
         $excel->setActiveSheetIndex(0)->setCellValue('C' . $terbilang, '(' . ucwords(terbilang($detail_kwitansi->grand_total_transporter)) . ' Rupiah)');
         $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setItalic(TRUE);
-        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setSize(10); 
+        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setSize(10);
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('G' . $sebesar, 'Sampit, ' . shortdate_indo(date('Y-m-d')));
@@ -2088,7 +2093,7 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('C' . $sebesar . ':' . 'E' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('C' . $terbilang . ':' . 'E' . $terbilang); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setSize(16); 
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setSize(16);
         $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setItalic(TRUE);
 
 
@@ -2251,33 +2256,33 @@ class Rms extends CI_Controller
         );
         $excel->setActiveSheetIndex(0)->setCellValue('B1', "CV. RAJA WALI SAMPIT");
         $excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(18); 
+        $excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(18);
 
         $excel->setActiveSheetIndex(0)->setCellValue('B2', "JL. WENGGA JAYA AGUNG JALUR IV NO.378 SAMPIT");
         $excel->getActiveSheet()->getStyle('B2')->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('B2')->getFont()->setSize(16); 
+        $excel->getActiveSheet()->getStyle('B2')->getFont()->setSize(16);
 
         $excel->setActiveSheetIndex(0)->setCellValue('B3', "REKAPITULASI RETASI SOPIR");
         $excel->getActiveSheet()->getStyle('B3')->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('B3')->getFont()->setSize(16); 
+        $excel->getActiveSheet()->getStyle('B3')->getFont()->setSize(16);
 
         $excel->setActiveSheetIndex(0)->setCellValue('Q2', "NAMA SUPIR");
         $excel->getActiveSheet()->getStyle('Q2')->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('Q2')->getFont()->setSize(14); 
+        $excel->getActiveSheet()->getStyle('Q2')->getFont()->setSize(14);
         $excel->getActiveSheet()->getColumnDimension('Q')->setWidth(20); // Set width kolom B
 
         $excel->setActiveSheetIndex(0)->setCellValue('R2', $data->nama_supir);
         $excel->getActiveSheet()->getStyle('R2')->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('R2')->getFont()->setSize(14); 
+        $excel->getActiveSheet()->getStyle('R2')->getFont()->setSize(14);
         $excel->getActiveSheet()->getColumnDimension('R')->setWidth(20); // Set width kolom B
 
         $excel->setActiveSheetIndex(0)->setCellValue('Q3', "NO. POLISI");
         $excel->getActiveSheet()->getStyle('Q3')->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('Q3')->getFont()->setSize(14); 
+        $excel->getActiveSheet()->getStyle('Q3')->getFont()->setSize(14);
 
         $excel->setActiveSheetIndex(0)->setCellValue('R3', "$data->nopol");
         $excel->getActiveSheet()->getStyle('R3')->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('R3')->getFont()->setSize(14); 
+        $excel->getActiveSheet()->getStyle('R3')->getFont()->setSize(14);
 
         $excel->getActiveSheet()->getColumnDimension('A')->setWidth(3);
 
@@ -2285,34 +2290,34 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('B4:B5');
         $excel->getActiveSheet()->getStyle('B4:B5')->applyFromArray($style_header);
         $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15); // Set width kolom B
-        $excel->getActiveSheet()->getStyle('B4')->getFont()->setSize(10); 
+        $excel->getActiveSheet()->getStyle('B4')->getFont()->setSize(10);
 
         $excel->setActiveSheetIndex(0)->setCellValue('C4', "KEGIATAN");
         $excel->getActiveSheet()->mergeCells('C4:C5');
         $excel->getActiveSheet()->getStyle('C4:C5')->applyFromArray($style_header);
         $excel->getActiveSheet()->getColumnDimension('C')->setWidth(25); // Set width kolom B
-        $excel->getActiveSheet()->getStyle('C4')->getFont()->setSize(10); 
+        $excel->getActiveSheet()->getStyle('C4')->getFont()->setSize(10);
 
         $excel->setActiveSheetIndex(0)->setCellValue('D4', "HARGA");
         $excel->setActiveSheetIndex(0)->setCellValue('D5', "SATUAN");
         $excel->getActiveSheet()->getStyle('D4:D5')->applyFromArray($style_header);
         $excel->getActiveSheet()->getColumnDimension('D')->setWidth(15); // Set width kolom B
-        $excel->getActiveSheet()->getStyle('D4')->getFont()->setSize(10); 
+        $excel->getActiveSheet()->getStyle('D4')->getFont()->setSize(10);
 
         $excel->setActiveSheetIndex(0)->setCellValue('E4', "TONASE");
         $excel->getActiveSheet()->mergeCells('E4:F4');
         $excel->getActiveSheet()->getStyle('E4:F4')->applyFromArray($style_header);
-        $excel->getActiveSheet()->getStyle('E4')->getFont()->setSize(10); 
+        $excel->getActiveSheet()->getStyle('E4')->getFont()->setSize(10);
 
         $excel->setActiveSheetIndex(0)->setCellValue('E5', "AWAL");
         $excel->getActiveSheet()->getStyle('E5')->applyFromArray($style_header);
         $excel->getActiveSheet()->getColumnDimension('E')->setWidth(8); // Set width kolom B
-        $excel->getActiveSheet()->getStyle('E5')->getFont()->setSize(10); 
+        $excel->getActiveSheet()->getStyle('E5')->getFont()->setSize(10);
 
         $excel->setActiveSheetIndex(0)->setCellValue('F5', "AKHIR");
         $excel->getActiveSheet()->getStyle('F5')->applyFromArray($style_header);
         $excel->getActiveSheet()->getColumnDimension('F')->setWidth(8); // Set width kolom B
-        $excel->getActiveSheet()->getStyle('F5')->getFont()->setSize(10); 
+        $excel->getActiveSheet()->getStyle('F5')->getFont()->setSize(10);
 
         $excel->setActiveSheetIndex(0)->setCellValue('G4', "SUSUT");
         $excel->getActiveSheet()->mergeCells('G4:G5');
@@ -2731,11 +2736,11 @@ class Rms extends CI_Controller
 
         $excel->setActiveSheetIndex(0)->setCellValue('B4', "KWITANSI");
         $excel->getActiveSheet()->getStyle('B4')->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('B4')->getFont()->setSize(15); 
+        $excel->getActiveSheet()->getStyle('B4')->getFont()->setSize(15);
         $excel->getActiveSheet()->getStyle('B4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->mergeCells('B4:K4'); // Set Merge Cell pada kolom A1 sampai E1
 
-        
+
         $excel->setActiveSheetIndex(0)->setCellValue('B6', "Sudah terima dari");
         $excel->setActiveSheetIndex(0)->setCellValue('C6', ":");
         $excel->setActiveSheetIndex(0)->setCellValue('B7', "Untuk Pembayaran");
@@ -2770,13 +2775,13 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('C17', ":");
         $excel->setActiveSheetIndex(0)->setCellValue('D17', 'Rp ' . number_format($data->total_premi_bersih, 0, "", "."));
         $excel->getActiveSheet()->getStyle('D17')->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('D17')->getFont()->setSize(16); 
+        $excel->getActiveSheet()->getStyle('D17')->getFont()->setSize(16);
 
         $excel->setActiveSheetIndex(0)->setCellValue('B18', "TERBILANG");
         $excel->setActiveSheetIndex(0)->setCellValue('C18', ":");
         $excel->setActiveSheetIndex(0)->setCellValue('D18', '(' . ucwords(terbilang(number_format($data->total_premi_bersih, 0, "", ""))) . ' Rupiah)');
         $excel->getActiveSheet()->getStyle('D18')->getFont()->setItalic(TRUE);
-        $excel->getActiveSheet()->getStyle('D18')->getFont()->setSize(10); 
+        $excel->getActiveSheet()->getStyle('D18')->getFont()->setSize(10);
 
         $excel->setActiveSheetIndex(0)->setCellValue('F20', 'Sampit,');
         $excel->setActiveSheetIndex(0)->setCellValue('F21', 'Diajukan Oleh');
@@ -2915,13 +2920,13 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('G4:K4'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('A2:Q2'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); 
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); 
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15);
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true);
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12); 
+        $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12);
         $excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(TRUE);
-        
+
         $excel->setActiveSheetIndex(0)->setCellValue('A8', "NO");
         $excel->setActiveSheetIndex(0)->setCellValue('B8', "TGL");
         $excel->setActiveSheetIndex(0)->setCellValue('C8', "QTY AWAL");
@@ -3058,7 +3063,7 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('A' . $sebesar . ':' . 'B' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('D' . $sebesar . ':' . 'E' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->getStyle('D' . $sebesar)->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('D' . $sebesar)->getFont()->setSize(16); 
+        $excel->getActiveSheet()->getStyle('D' . $sebesar)->getFont()->setSize(16);
         $excel->getActiveSheet()->getStyle('D' . $sebesar)->getFont()->setItalic(TRUE);
 
 
@@ -3350,8 +3355,8 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('A1', "REKAP $data_project->komoditas $data_project->nama_perusahaan");
         $excel->getActiveSheet()->mergeCells('A1:K1'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); 
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); 
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15);
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true);
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
 
         $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO");
@@ -3840,9 +3845,9 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('A1', "Laporan pajak");
         $excel->getActiveSheet()->mergeCells('A1:E1'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); 
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15);
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
-        
+
         $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO NPWP");
         $excel->setActiveSheetIndex(0)->setCellValue('B3', "NAMA PAJAK");
         $excel->setActiveSheetIndex(0)->setCellValue('C3', "JENIS PAJAK");
@@ -3949,431 +3954,431 @@ class Rms extends CI_Controller
 
 
 
-    public function menu()
-    {
-        $data['product'] = $this->admin_model->get("tbl_menu", "ORDER BY position ASC")->result();
-        $tree = $this->prepareList($data['product']);
+    // public function menu()
+    // {
+    //     $data['product'] = $this->admin_model->get("tbl_menu", "ORDER BY position ASC")->result();
+    //     $tree = $this->prepareList($data['product']);
 
-        $data['li'] = $this->nav($tree);
-        $data['content'] = 'rms/menu/index';
-        $this->load->view('rms/includes/template', $data);
-    }
+    //     $data['li'] = $this->nav($tree);
+    //     $data['content'] = 'rms/menu/index';
+    //     $this->load->view('rms/includes/template', $data);
+    // }
 
-    function prepareList(array $items, $pid = 0)
-    {
-        $output = array();
-        foreach ($items as $item) {
-            if ((int) $item->parent == $pid) {
-                if ($children = $this->prepareList($items, $item->id)) {
-                    $item->children = $children;
-                }
-                $output[] = $item;
-            }
-        }
+    // function prepareList(array $items, $pid = 0)
+    // {
+    //     $output = array();
+    //     foreach ($items as $item) {
+    //         if ((int) $item->parent == $pid) {
+    //             if ($children = $this->prepareList($items, $item->id)) {
+    //                 $item->children = $children;
+    //             }
+    //             $output[] = $item;
+    //         }
+    //     }
 
-        return $output;
-    }
+    //     return $output;
+    // }
 
-    function nav($menu_items, $child = false)
-    {
-        $output = '';
-        if (count($menu_items) > 0) {
-            $output .= ($child === false) ? '<ol class="dd-list">' : '<ol>';
+    // function nav($menu_items, $child = false)
+    // {
+    //     $output = '';
+    //     if (count($menu_items) > 0) {
+    //         $output .= ($child === false) ? '<ol class="dd-list">' : '<ol>';
 
-            foreach ($menu_items as $item) {
-                $output .= '<li class="dd-item" id="' . $item->id . '"  data-id="' . $item->id . '">';
-                $output .= '<div class="dd-handle  box menu-box">' . $item->menu . '</div>';
+    //         foreach ($menu_items as $item) {
+    //             $output .= '<li class="dd-item" id="' . $item->id . '"  data-id="' . $item->id . '">';
+    //             $output .= '<div class="dd-handle  box menu-box">' . $item->menu . '</div>';
 
-                if (isset($item->children) && count($item->children)) {
-                    $output .= '<div class="action-btn-box"><a href="javascript:void(0)" onclick="edit_data(this)" data-title="menu" data-id="' . $item->id . '"  data-tbl="tbl_menu" class="btn-sortable mr-1"><i class="fa fa-edit"></i></a></div>';
-                } else {
-                    $output .= '<div class="action-btn-box"><a href="javascript:void(0)" onclick="edit_data(this)" data-title="menu" data-id="' . $item->id . '"  data-tbl="tbl_menu" class="btn-sortable mr-1"><i class="fa fa-edit"></i></a><a href="javascript:void(0)" onclick="delete_data(this)" data-title="menu" data-id="' . $item->id . '"  data-tbl="tbl_menu" class="btn-sortable"><i class="fa fa-trash-o"></i></a></div>';
-                }
-                //check if there are any children
-                if (isset($item->children) && count($item->children)) {
-                    $output .= $this->nav($item->children, true);
-                }
-                $output .= '</li>';
-            }
-            $output .= '</ol>';
-        }
-        return $output;
-    }
+    //             if (isset($item->children) && count($item->children)) {
+    //                 $output .= '<div class="action-btn-box"><a href="javascript:void(0)" onclick="edit_data(this)" data-title="menu" data-id="' . $item->id . '"  data-tbl="tbl_menu" class="btn-sortable mr-1"><i class="fa fa-edit"></i></a></div>';
+    //             } else {
+    //                 $output .= '<div class="action-btn-box"><a href="javascript:void(0)" onclick="edit_data(this)" data-title="menu" data-id="' . $item->id . '"  data-tbl="tbl_menu" class="btn-sortable mr-1"><i class="fa fa-edit"></i></a><a href="javascript:void(0)" onclick="delete_data(this)" data-title="menu" data-id="' . $item->id . '"  data-tbl="tbl_menu" class="btn-sortable"><i class="fa fa-trash-o"></i></a></div>';
+    //             }
+    //             //check if there are any children
+    //             if (isset($item->children) && count($item->children)) {
+    //                 $output .= $this->nav($item->children, true);
+    //             }
+    //             $output .= '</li>';
+    //         }
+    //         $output .= '</ol>';
+    //     }
+    //     return $output;
+    // }
 
-    public function update_menu_priority()
-    {
-        $data = $this->input->post("product_data");
+    // public function update_menu_priority()
+    // {
+    //     $data = $this->input->post("product_data");
 
-        if (count($data)) {
-            $update = $this->admin_model->update_priority_data($data);
+    //     if (count($data)) {
+    //         $update = $this->admin_model->update_priority_data($data);
 
-            if ($update) {
-                $result['status'] = "success";
-            } else {
-                $result['status'] = "error";
-            }
-        } else {
-            $result['status'] = "error";
-        }
-        echo json_encode($result);
-    }
-
-
-
-
-
-    public function approve_petugas()
-    {
-        $id = $this->input->POST('id');
-        $tbl = $this->input->POST('tbl');
-        $data = array(
-            'status' => '1'
-        );
-        $get_petugas = $this->admin_model->get("tbl_petugas", "WHERE id = '$id'")->row();
-        $email = $get_petugas->email;
-        $delete = $this->admin_model->update($tbl, $data, $id);
-        if ($delete) {
-            $send = $this->email_approve_petugas($email);
-            echo json_encode(array(
-                "status" => TRUE,
-                "target" => TRUE
-            ));
-        }
-    }
-
-    function email_approve_petugas($email)
-    {
-        $config = [
-            'mailtype'  => 'html',
-            'charset'   => 'utf-8',
-            'protocol'  => 'smtp',
-            'smtp_host' => 'smtp.gmail.com',
-            'smtp_user' => 'system.ditjalsus@gmail.com',  // Email gmail
-            'smtp_pass'   => 'andinovid',  // Password gmail
-            'smtp_crypto' => 'ssl',
-            'smtp_port'   => 465,
-            'crlf'    => "\r\n",
-            'newline' => "\r\n",
-        ];
-        $message = '
-                        <html><body>
-						<p>Permohonan anda sebagai petugas daerah telah diapprove, silahkan login melalui link berikut <a href="' . base_url() . 'login/">' . base_url() . 'login/</a></p>
-                        ';
-        $this->load->library('email', $config);
-        $this->email->set_newline("\r\n");
-        $this->email->from('system.ditjalsus@gmail.com', 'Ditjalsus');
-        $this->email->to($email, 'Petugas');
-        $this->email->cc('andi.novid@gmail.com');
-        $this->email->subject('Approval Petugas');
-        $this->email->message($message);
-        $this->email->send();
-        echo $this->email->print_debugger();
-    }
-
-
-    public function pages()
-    {
-        $data['pages'] = $this->admin_model->get("tbl_content", "WHERE category = '1'")->result();
-        $data['content'] = 'rms/pages/index';
-        $this->load->view('rms/includes/template', $data);
-    }
-
-    public function petugas()
-    {
-        $data['petugas'] = $this->admin_model->get_by_query("SELECT a.*, b.nama as kabupaten, c.nama as provinsi FROM tbl_petugas a LEFT JOIN wilayah_kabupaten b ON a.id_kabupaten = b.id LEFT JOIN wilayah_provinsi c ON a.id_provinsi = c.id ORDER BY a.status DESC")->result();
-        $data['content'] = 'rms/petugas/index';
-        $this->load->view('rms/includes/template', $data);
-    }
-
-    public function survey1()
-    {
-        $data['petugas'] = $this->admin_model->get_by_query("SELECT a.*, b.id as id_petugas, b.nama FROM tbl_survey a LEFT JOIN tbl_petugas b ON a.id_petugas = b.id")->result();
-        $data['content'] = 'rms/survey/survey1';
-        $this->load->view('rms/includes/template', $data);
-    }
-    public function survey2()
-    {
-        $data['petugas'] = $this->admin_model->get_by_query("SELECT a.*, b.id as id_petugas, b.nama FROM tbl_survey2 a LEFT JOIN tbl_petugas b ON a.id_petugas = b.id")->result();
-        $data['content'] = 'rms/survey/survey2';
-        $this->load->view('rms/includes/template', $data);
-    }
-    public function survey3()
-    {
-        $data['petugas'] = $this->admin_model->get_by_query("SELECT a.*, b.id as id_petugas, b.nama FROM tbl_survey3 a LEFT JOIN tbl_petugas b ON a.id_petugas = b.id")->result();
-        $data['content'] = 'rms/survey/survey3';
-        $this->load->view('rms/includes/template', $data);
-    }
-
-    public function news()
-    {
-        $data['news'] = $this->admin_model->get_by_query("SELECT * FROM tbl_content WHERE category = '2'")->result();
-        $data['content'] = 'rms/news/index';
-        $this->load->view('rms/includes/template', $data);
-    }
-
-    public function gallery()
-    {
-        $data['gallery'] = $this->admin_model->get_by_query("SELECT * FROM tbl_gallery")->result();
-        $data['content'] = 'rms/gallery/index';
-        $this->load->view('rms/includes/template', $data);
-    }
-
-    public function users()
-    {
-        $data['users'] = $this->admin_model->get_by_query("SELECT * FROM tbl_users")->result();
-        $data['content'] = 'rms/user/index';
-        $this->load->view('rms/includes/template', $data);
-    }
-
-    public function save_news()
-    {
-        $id = $_POST["id"];
-        $category = $_POST["category"];
-        $title = $_POST["title"];
-        $slug = $_POST["slug"];
-        $content = $_POST["content"];
-        $image = $_FILES['image']['name'];
-        $status = $_POST["status"];
-        $time = date("Y-m-d H:i:s");
-
-        if (empty($image)) {
-            $data = array(
-                'title' => $title,
-                'content' => $content,
-                'image' => '',
-                'slug' => $slug,
-                'created_date' => $time,
-                'category' => $category,
-                'status' => $status,
-            );
-            $data2 = array(
-                'title' => $title,
-                'content' => $content,
-                'slug' => $slug,
-                'last_update' => $time,
-                'category' => $category,
-                'status' => $status,
-            );
-        } else {
-            $image = preg_replace("/[^a-zA-Z0-9.]/", "_", $image);
-            $filename = str_replace(' ', '_', time() . $image);
-            $this->load->library('upload');
-            $config['upload_path'] = 'assets/main/uploads/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['file_name'] = $filename;
-            $config['max_size'] = '1000000';
-            $this->upload->initialize($config);
-            if ($this->upload->do_upload('image')) {
-                $data = $this->upload->data();
-            } else {
-                echo $this->upload->display_errors();
-            }
-            $data = array(
-                'title' => $title,
-                'content' => $content,
-                'image' => $filename,
-                'slug' => $slug,
-                'created_date' => $time,
-                'category' => $category,
-                'status' => $status,
-            );
-            $data2 = array(
-                'title' => $title,
-                'content' => $content,
-                'image' => $filename,
-                'slug' => $slug,
-                'last_update' => $time,
-                'category' => $category,
-                'status' => $status,
-            );
-        }
-        if ($id == "") {
-            $save = $this->admin_model->insert("tbl_content", $data);
-            if ($save) {
-                echo json_encode(array(
-                    "status" => TRUE,
-                    "target" => TRUE
-                ));
-            }
-        } else {
-            $save = $this->admin_model->update("tbl_content", $data2, $id);
-            if ($save) {
-                echo json_encode(array(
-                    "status" => TRUE,
-                    "target" => TRUE
-                ));
-            }
-        }
-    }
-
-    public function save_gallery()
-    {
-        $id = $_POST["id"];
-        $title = $_POST["title"];
-        $image = $_FILES['image']['name'];
-        $status = $_POST["status"];
-
-        if (empty($image)) {
-            $data = array(
-                'title' => $title,
-                'image' => '',
-                'status' => $status,
-            );
-            $data2 = array(
-                'title' => $title,
-                'status' => $status,
-            );
-        } else {
-            $image = preg_replace("/[^a-zA-Z0-9.]/", "_", $image);
-            $filename = str_replace(' ', '_', time() . $image);
-            $this->load->library('upload');
-            $config['upload_path'] = 'assets/main/uploads/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['file_name'] = $filename;
-            $config['max_size'] = '1000000';
-            $this->upload->initialize($config);
-            if ($this->upload->do_upload('image')) {
-                $data = $this->upload->data();
-            } else {
-                echo $this->upload->display_errors();
-            }
-            $data = array(
-                'title' => $title,
-                'image' => $filename,
-                'status' => $status,
-            );
-            $data2 = array(
-                'title' => $title,
-                'image' => $filename,
-                'status' => $status,
-            );
-        }
-        if ($id == "") {
-            $save = $this->admin_model->insert("tbl_gallery", $data);
-            if ($save) {
-                echo json_encode(array(
-                    "status" => TRUE,
-                    "target" => TRUE
-                ));
-            }
-        } else {
-            $save = $this->admin_model->update("tbl_gallery", $data2, $id);
-            if ($save) {
-                echo json_encode(array(
-                    "status" => TRUE,
-                    "target" => TRUE
-                ));
-            }
-        }
-    }
-
-    public function save_user()
-    {
-        $id = $_POST["id"];
-        $title = $_POST["name"];
-        $username = $_POST["username"];
-        $password = md5($_POST["password_user"]);
-        $status = $_POST["status"];
-
-        $data = array(
-            'name' => $title,
-            'username' => $username,
-            'password' => $password,
-            'status' => $status,
-        );
-
-        if (empty($password)) {
-            $data2 = array(
-                'name' => $title,
-                'username' => $username,
-                'status' => $status,
-            );
-        } else {
-            $data2 = array(
-                'name' => $title,
-                'username' => $username,
-                'password' => $password,
-                'status' => $status,
-            );
-        }
-        if ($id == "") {
-            $save = $this->admin_model->insert("tbl_users", $data);
-            if ($save) {
-                echo json_encode(array(
-                    "status" => TRUE,
-                    "target" => TRUE
-                ));
-            }
-        } else {
-            $save = $this->admin_model->update("tbl_users", $data2, $id);
-            if ($save) {
-                echo json_encode(array(
-                    "status" => TRUE,
-                    "target" => TRUE
-                ));
-            }
-        }
-    }
-
-
-    public function banner()
-    {
-        $data['content'] = 'rms/banner/index';
-        $this->load->view('rms/includes/template', $data);
-    }
-    public function get_banner()
-    {
-        $data = $this->admin_model->get("tbl_banner", "WHERE id = 1");
-        $detail = $data->result();
-        echo json_encode($detail);
-    }
+    //         if ($update) {
+    //             $result['status'] = "success";
+    //         } else {
+    //             $result['status'] = "error";
+    //         }
+    //     } else {
+    //         $result['status'] = "error";
+    //     }
+    //     echo json_encode($result);
+    // }
 
 
 
 
 
-    public function update_banner()
-    {
-        $id = '1';
-        $title = $_POST["judul"];
-        $description = $_POST["deskripsi"];
-        $label_button = $_POST["label_button"];
-        $file_pedoman = $_FILES['file_video']['name'];
+    // public function approve_petugas()
+    // {
+    //     $id = $this->input->POST('id');
+    //     $tbl = $this->input->POST('tbl');
+    //     $data = array(
+    //         'status' => '1'
+    //     );
+    //     $get_petugas = $this->admin_model->get("tbl_petugas", "WHERE id = '$id'")->row();
+    //     $email = $get_petugas->email;
+    //     $delete = $this->admin_model->update($tbl, $data, $id);
+    //     if ($delete) {
+    //         $send = $this->email_approve_petugas($email);
+    //         echo json_encode(array(
+    //             "status" => TRUE,
+    //             "target" => TRUE
+    //         ));
+    //     }
+    // }
 
-        if (empty($file_pedoman)) {
-            $data = array(
-                'title' => $title,
-                'description' => $description,
-            );
-        } else {
-            $image = preg_replace("/[^a-zA-Z0-9.]/", "_", $file_pedoman);
-            $filename = str_replace(' ', '_', time() . $image);
-            $this->load->library('upload');
-            $config['upload_path'] = 'assets/main/uploads/';
-            $config['file_name'] = $filename;
-            $config['max_size'] = '1000000';
-            $config['allowed_types'] = 'mp4';
-            $this->upload->initialize($config);
-            if ($this->upload->do_upload('file_video')) {
-                $this->upload->data();
-            } else {
-                echo $this->upload->display_errors();
-            }
-            $data = array(
-                'title' => $title,
-                'description' => $description,
-                'image' => $filename,
-                'btn_text' => $label_button,
-                'url' => base_url() . "assets/main/uploads/" . $filename,
-            );
-        }
+    // function email_approve_petugas($email)
+    // {
+    //     $config = [
+    //         'mailtype'  => 'html',
+    //         'charset'   => 'utf-8',
+    //         'protocol'  => 'smtp',
+    //         'smtp_host' => 'smtp.gmail.com',
+    //         'smtp_user' => 'system.ditjalsus@gmail.com',  // Email gmail
+    //         'smtp_pass'   => 'andinovid',  // Password gmail
+    //         'smtp_crypto' => 'ssl',
+    //         'smtp_port'   => 465,
+    //         'crlf'    => "\r\n",
+    //         'newline' => "\r\n",
+    //     ];
+    //     $message = '
+    //                     <html><body>
+    // 					<p>Permohonan anda sebagai petugas daerah telah diapprove, silahkan login melalui link berikut <a href="' . base_url() . 'login/">' . base_url() . 'login/</a></p>
+    //                     ';
+    //     $this->load->library('email', $config);
+    //     $this->email->set_newline("\r\n");
+    //     $this->email->from('system.ditjalsus@gmail.com', 'Ditjalsus');
+    //     $this->email->to($email, 'Petugas');
+    //     $this->email->cc('andi.novid@gmail.com');
+    //     $this->email->subject('Approval Petugas');
+    //     $this->email->message($message);
+    //     $this->email->send();
+    //     echo $this->email->print_debugger();
+    // }
 
-        $save = $this->admin_model->update("tbl_banner", $data, $id);
-        if ($save) {
-            echo json_encode(array(
-                "status" => TRUE,
-                "target" => TRUE
-            ));
-        }
-    }
+
+    // public function pages()
+    // {
+    //     $data['pages'] = $this->admin_model->get("tbl_content", "WHERE category = '1'")->result();
+    //     $data['content'] = 'rms/pages/index';
+    //     $this->load->view('rms/includes/template', $data);
+    // }
+
+    // public function petugas()
+    // {
+    //     $data['petugas'] = $this->admin_model->get_by_query("SELECT a.*, b.nama as kabupaten, c.nama as provinsi FROM tbl_petugas a LEFT JOIN wilayah_kabupaten b ON a.id_kabupaten = b.id LEFT JOIN wilayah_provinsi c ON a.id_provinsi = c.id ORDER BY a.status DESC")->result();
+    //     $data['content'] = 'rms/petugas/index';
+    //     $this->load->view('rms/includes/template', $data);
+    // }
+
+    // public function survey1()
+    // {
+    //     $data['petugas'] = $this->admin_model->get_by_query("SELECT a.*, b.id as id_petugas, b.nama FROM tbl_survey a LEFT JOIN tbl_petugas b ON a.id_petugas = b.id")->result();
+    //     $data['content'] = 'rms/survey/survey1';
+    //     $this->load->view('rms/includes/template', $data);
+    // }
+    // public function survey2()
+    // {
+    //     $data['petugas'] = $this->admin_model->get_by_query("SELECT a.*, b.id as id_petugas, b.nama FROM tbl_survey2 a LEFT JOIN tbl_petugas b ON a.id_petugas = b.id")->result();
+    //     $data['content'] = 'rms/survey/survey2';
+    //     $this->load->view('rms/includes/template', $data);
+    // }
+    // public function survey3()
+    // {
+    //     $data['petugas'] = $this->admin_model->get_by_query("SELECT a.*, b.id as id_petugas, b.nama FROM tbl_survey3 a LEFT JOIN tbl_petugas b ON a.id_petugas = b.id")->result();
+    //     $data['content'] = 'rms/survey/survey3';
+    //     $this->load->view('rms/includes/template', $data);
+    // }
+
+    // public function news()
+    // {
+    //     $data['news'] = $this->admin_model->get_by_query("SELECT * FROM tbl_content WHERE category = '2'")->result();
+    //     $data['content'] = 'rms/news/index';
+    //     $this->load->view('rms/includes/template', $data);
+    // }
+
+    // public function gallery()
+    // {
+    //     $data['gallery'] = $this->admin_model->get_by_query("SELECT * FROM tbl_gallery")->result();
+    //     $data['content'] = 'rms/gallery/index';
+    //     $this->load->view('rms/includes/template', $data);
+    // }
+
+    // public function users()
+    // {
+    //     $data['users'] = $this->admin_model->get_by_query("SELECT * FROM tbl_users")->result();
+    //     $data['content'] = 'rms/user/index';
+    //     $this->load->view('rms/includes/template', $data);
+    // }
+
+    // public function save_news()
+    // {
+    //     $id = $_POST["id"];
+    //     $category = $_POST["category"];
+    //     $title = $_POST["title"];
+    //     $slug = $_POST["slug"];
+    //     $content = $_POST["content"];
+    //     $image = $_FILES['image']['name'];
+    //     $status = $_POST["status"];
+    //     $time = date("Y-m-d H:i:s");
+
+    //     if (empty($image)) {
+    //         $data = array(
+    //             'title' => $title,
+    //             'content' => $content,
+    //             'image' => '',
+    //             'slug' => $slug,
+    //             'created_date' => $time,
+    //             'category' => $category,
+    //             'status' => $status,
+    //         );
+    //         $data2 = array(
+    //             'title' => $title,
+    //             'content' => $content,
+    //             'slug' => $slug,
+    //             'last_update' => $time,
+    //             'category' => $category,
+    //             'status' => $status,
+    //         );
+    //     } else {
+    //         $image = preg_replace("/[^a-zA-Z0-9.]/", "_", $image);
+    //         $filename = str_replace(' ', '_', time() . $image);
+    //         $this->load->library('upload');
+    //         $config['upload_path'] = 'assets/main/uploads/';
+    //         $config['allowed_types'] = 'gif|jpg|png|jpeg';
+    //         $config['file_name'] = $filename;
+    //         $config['max_size'] = '1000000';
+    //         $this->upload->initialize($config);
+    //         if ($this->upload->do_upload('image')) {
+    //             $data = $this->upload->data();
+    //         } else {
+    //             echo $this->upload->display_errors();
+    //         }
+    //         $data = array(
+    //             'title' => $title,
+    //             'content' => $content,
+    //             'image' => $filename,
+    //             'slug' => $slug,
+    //             'created_date' => $time,
+    //             'category' => $category,
+    //             'status' => $status,
+    //         );
+    //         $data2 = array(
+    //             'title' => $title,
+    //             'content' => $content,
+    //             'image' => $filename,
+    //             'slug' => $slug,
+    //             'last_update' => $time,
+    //             'category' => $category,
+    //             'status' => $status,
+    //         );
+    //     }
+    //     if ($id == "") {
+    //         $save = $this->admin_model->insert("tbl_content", $data);
+    //         if ($save) {
+    //             echo json_encode(array(
+    //                 "status" => TRUE,
+    //                 "target" => TRUE
+    //             ));
+    //         }
+    //     } else {
+    //         $save = $this->admin_model->update("tbl_content", $data2, $id);
+    //         if ($save) {
+    //             echo json_encode(array(
+    //                 "status" => TRUE,
+    //                 "target" => TRUE
+    //             ));
+    //         }
+    //     }
+    // }
+
+    // public function save_gallery()
+    // {
+    //     $id = $_POST["id"];
+    //     $title = $_POST["title"];
+    //     $image = $_FILES['image']['name'];
+    //     $status = $_POST["status"];
+
+    //     if (empty($image)) {
+    //         $data = array(
+    //             'title' => $title,
+    //             'image' => '',
+    //             'status' => $status,
+    //         );
+    //         $data2 = array(
+    //             'title' => $title,
+    //             'status' => $status,
+    //         );
+    //     } else {
+    //         $image = preg_replace("/[^a-zA-Z0-9.]/", "_", $image);
+    //         $filename = str_replace(' ', '_', time() . $image);
+    //         $this->load->library('upload');
+    //         $config['upload_path'] = 'assets/main/uploads/';
+    //         $config['allowed_types'] = 'gif|jpg|png|jpeg';
+    //         $config['file_name'] = $filename;
+    //         $config['max_size'] = '1000000';
+    //         $this->upload->initialize($config);
+    //         if ($this->upload->do_upload('image')) {
+    //             $data = $this->upload->data();
+    //         } else {
+    //             echo $this->upload->display_errors();
+    //         }
+    //         $data = array(
+    //             'title' => $title,
+    //             'image' => $filename,
+    //             'status' => $status,
+    //         );
+    //         $data2 = array(
+    //             'title' => $title,
+    //             'image' => $filename,
+    //             'status' => $status,
+    //         );
+    //     }
+    //     if ($id == "") {
+    //         $save = $this->admin_model->insert("tbl_gallery", $data);
+    //         if ($save) {
+    //             echo json_encode(array(
+    //                 "status" => TRUE,
+    //                 "target" => TRUE
+    //             ));
+    //         }
+    //     } else {
+    //         $save = $this->admin_model->update("tbl_gallery", $data2, $id);
+    //         if ($save) {
+    //             echo json_encode(array(
+    //                 "status" => TRUE,
+    //                 "target" => TRUE
+    //             ));
+    //         }
+    //     }
+    // }
+
+    // public function save_user()
+    // {
+    //     $id = $_POST["id"];
+    //     $title = $_POST["name"];
+    //     $username = $_POST["username"];
+    //     $password = md5($_POST["password_user"]);
+    //     $status = $_POST["status"];
+
+    //     $data = array(
+    //         'name' => $title,
+    //         'username' => $username,
+    //         'password' => $password,
+    //         'status' => $status,
+    //     );
+
+    //     if (empty($password)) {
+    //         $data2 = array(
+    //             'name' => $title,
+    //             'username' => $username,
+    //             'status' => $status,
+    //         );
+    //     } else {
+    //         $data2 = array(
+    //             'name' => $title,
+    //             'username' => $username,
+    //             'password' => $password,
+    //             'status' => $status,
+    //         );
+    //     }
+    //     if ($id == "") {
+    //         $save = $this->admin_model->insert("tbl_users", $data);
+    //         if ($save) {
+    //             echo json_encode(array(
+    //                 "status" => TRUE,
+    //                 "target" => TRUE
+    //             ));
+    //         }
+    //     } else {
+    //         $save = $this->admin_model->update("tbl_users", $data2, $id);
+    //         if ($save) {
+    //             echo json_encode(array(
+    //                 "status" => TRUE,
+    //                 "target" => TRUE
+    //             ));
+    //         }
+    //     }
+    // }
+
+
+    // public function banner()
+    // {
+    //     $data['content'] = 'rms/banner/index';
+    //     $this->load->view('rms/includes/template', $data);
+    // }
+    // public function get_banner()
+    // {
+    //     $data = $this->admin_model->get("tbl_banner", "WHERE id = 1");
+    //     $detail = $data->result();
+    //     echo json_encode($detail);
+    // }
+
+
+
+
+
+    // public function update_banner()
+    // {
+    //     $id = '1';
+    //     $title = $_POST["judul"];
+    //     $description = $_POST["deskripsi"];
+    //     $label_button = $_POST["label_button"];
+    //     $file_pedoman = $_FILES['file_video']['name'];
+
+    //     if (empty($file_pedoman)) {
+    //         $data = array(
+    //             'title' => $title,
+    //             'description' => $description,
+    //         );
+    //     } else {
+    //         $image = preg_replace("/[^a-zA-Z0-9.]/", "_", $file_pedoman);
+    //         $filename = str_replace(' ', '_', time() . $image);
+    //         $this->load->library('upload');
+    //         $config['upload_path'] = 'assets/main/uploads/';
+    //         $config['file_name'] = $filename;
+    //         $config['max_size'] = '1000000';
+    //         $config['allowed_types'] = 'mp4';
+    //         $this->upload->initialize($config);
+    //         if ($this->upload->do_upload('file_video')) {
+    //             $this->upload->data();
+    //         } else {
+    //             echo $this->upload->display_errors();
+    //         }
+    //         $data = array(
+    //             'title' => $title,
+    //             'description' => $description,
+    //             'image' => $filename,
+    //             'btn_text' => $label_button,
+    //             'url' => base_url() . "assets/main/uploads/" . $filename,
+    //         );
+    //     }
+
+    //     $save = $this->admin_model->update("tbl_banner", $data, $id);
+    //     if ($save) {
+    //         echo json_encode(array(
+    //             "status" => TRUE,
+    //             "target" => TRUE
+    //         ));
+    //     }
+    // }
 }
