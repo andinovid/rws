@@ -1598,20 +1598,20 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('G5:K5'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('G4:K4'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('A2:Q2'); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
         $excel->getActiveSheet()->getStyle('Q4')->applyFromArray($style_row);
         $excel->getActiveSheet()->getStyle('O3:Q3')->applyFromArray($style_row);
-        $excel->getActiveSheet()->getStyle('Q4')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('O3')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('Q4')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('O3')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); 
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); 
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('Q4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('O3:Q3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12); // Set font size 15 untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(TRUE); // Set bold kolom A1
-        // Buat header tabel nya pada baris ke 3
+        $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12); 
+        $excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(TRUE);
+        
         $excel->setActiveSheetIndex(0)->setCellValue('A8', "NO");
         $excel->setActiveSheetIndex(0)->setCellValue('B8', "TGL");
         $excel->setActiveSheetIndex(0)->setCellValue('C8', "QTY AWAL");
@@ -1758,8 +1758,8 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('A' . $sebesar, 'Sebesar');
         $excel->setActiveSheetIndex(0)->setCellValue('C' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
         $excel->setActiveSheetIndex(0)->setCellValue('C' . $terbilang, '(' . ucwords(terbilang($detail_kwitansi->grand_total)) . ' Rupiah)');
-        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setItalic(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setSize(10); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setItalic(TRUE);
+        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setSize(10); 
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('G' . $sebesar, 'Sampit, ' . shortdate_indo(date('Y-m-d')));
@@ -1769,9 +1769,9 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('A' . $sebesar . ':' . 'B' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('C' . $sebesar . ':' . 'E' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('C' . $terbilang . ':' . 'E' . $terbilang); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setSize(16); // Set font size 15 untuk kolom A1
-        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setItalic(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setSize(16); 
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setItalic(TRUE);
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('G' . $ttd, 'Direkap oleh');
@@ -1808,7 +1808,7 @@ class Rms extends CI_Controller
 
 
         // Set width kolom
-        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(3); // Set width kolom A
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(3);
         $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15); // Set width kolom B
         $excel->getActiveSheet()->getColumnDimension('C')->setWidth(15); // Set width kolom C
         $excel->getActiveSheet()->getColumnDimension('D')->setWidth(15); // Set width kolom D
@@ -1941,20 +1941,20 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('G5:K5'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('G4:K4'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('A2:Q2'); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
         $excel->getActiveSheet()->getStyle('Q4')->applyFromArray($style_row);
         $excel->getActiveSheet()->getStyle('Q5')->applyFromArray($style_row);
-        $excel->getActiveSheet()->getStyle('Q4')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('Q5')->getFont()->setBold(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('Q4')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('Q5')->getFont()->setBold(TRUE);
         $excel->getActiveSheet()->getStyle('Q5')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); 
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); 
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('Q4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12); // Set font size 15 untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(TRUE); // Set bold kolom A1
-        // Buat header tabel nya pada baris ke 3
+        $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12); 
+        $excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(TRUE);
+        
         $excel->setActiveSheetIndex(0)->setCellValue('A8', "NO");
         $excel->setActiveSheetIndex(0)->setCellValue('B8', "TGL");
         $excel->setActiveSheetIndex(0)->setCellValue('C8', "QTY AWAL");
@@ -2076,8 +2076,8 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('A' . $sebesar, 'Sebesar');
         $excel->setActiveSheetIndex(0)->setCellValue('C' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total_transporter, 0, "", "."));
         $excel->setActiveSheetIndex(0)->setCellValue('C' . $terbilang, '(' . ucwords(terbilang($detail_kwitansi->grand_total_transporter)) . ' Rupiah)');
-        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setItalic(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setSize(10); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setItalic(TRUE);
+        $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setSize(10); 
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('G' . $sebesar, 'Sampit, ' . shortdate_indo(date('Y-m-d')));
@@ -2087,9 +2087,9 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('A' . $sebesar . ':' . 'B' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('C' . $sebesar . ':' . 'E' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('C' . $terbilang . ':' . 'E' . $terbilang); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setSize(16); // Set font size 15 untuk kolom A1
-        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setItalic(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setSize(16); 
+        $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setItalic(TRUE);
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('G' . $ttd, 'Direkap oleh');
@@ -2126,7 +2126,7 @@ class Rms extends CI_Controller
 
 
         // Set width kolom
-        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(3); // Set width kolom A
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(3);
         $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15); // Set width kolom B
         $excel->getActiveSheet()->getColumnDimension('C')->setWidth(15); // Set width kolom C
         $excel->getActiveSheet()->getColumnDimension('D')->setWidth(15); // Set width kolom D
@@ -2250,69 +2250,69 @@ class Rms extends CI_Controller
             )
         );
         $excel->setActiveSheetIndex(0)->setCellValue('B1', "CV. RAJA WALI SAMPIT");
-        $excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(18); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(18); 
 
         $excel->setActiveSheetIndex(0)->setCellValue('B2', "JL. WENGGA JAYA AGUNG JALUR IV NO.378 SAMPIT");
-        $excel->getActiveSheet()->getStyle('B2')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('B2')->getFont()->setSize(16); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('B2')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('B2')->getFont()->setSize(16); 
 
         $excel->setActiveSheetIndex(0)->setCellValue('B3', "REKAPITULASI RETASI SOPIR");
-        $excel->getActiveSheet()->getStyle('B3')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('B3')->getFont()->setSize(16); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('B3')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('B3')->getFont()->setSize(16); 
 
         $excel->setActiveSheetIndex(0)->setCellValue('Q2', "NAMA SUPIR");
-        $excel->getActiveSheet()->getStyle('Q2')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('Q2')->getFont()->setSize(14); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('Q2')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('Q2')->getFont()->setSize(14); 
         $excel->getActiveSheet()->getColumnDimension('Q')->setWidth(20); // Set width kolom B
 
         $excel->setActiveSheetIndex(0)->setCellValue('R2', $data->nama_supir);
-        $excel->getActiveSheet()->getStyle('R2')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('R2')->getFont()->setSize(14); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('R2')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('R2')->getFont()->setSize(14); 
         $excel->getActiveSheet()->getColumnDimension('R')->setWidth(20); // Set width kolom B
 
         $excel->setActiveSheetIndex(0)->setCellValue('Q3', "NO. POLISI");
-        $excel->getActiveSheet()->getStyle('Q3')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('Q3')->getFont()->setSize(14); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('Q3')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('Q3')->getFont()->setSize(14); 
 
         $excel->setActiveSheetIndex(0)->setCellValue('R3', "$data->nopol");
-        $excel->getActiveSheet()->getStyle('R3')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('R3')->getFont()->setSize(14); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('R3')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('R3')->getFont()->setSize(14); 
 
-        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(3); // Set width kolom A
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(3);
 
         $excel->setActiveSheetIndex(0)->setCellValue('B4', "TGL");
         $excel->getActiveSheet()->mergeCells('B4:B5');
         $excel->getActiveSheet()->getStyle('B4:B5')->applyFromArray($style_header);
         $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15); // Set width kolom B
-        $excel->getActiveSheet()->getStyle('B4')->getFont()->setSize(10); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('B4')->getFont()->setSize(10); 
 
         $excel->setActiveSheetIndex(0)->setCellValue('C4', "KEGIATAN");
         $excel->getActiveSheet()->mergeCells('C4:C5');
         $excel->getActiveSheet()->getStyle('C4:C5')->applyFromArray($style_header);
         $excel->getActiveSheet()->getColumnDimension('C')->setWidth(25); // Set width kolom B
-        $excel->getActiveSheet()->getStyle('C4')->getFont()->setSize(10); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('C4')->getFont()->setSize(10); 
 
         $excel->setActiveSheetIndex(0)->setCellValue('D4', "HARGA");
         $excel->setActiveSheetIndex(0)->setCellValue('D5', "SATUAN");
         $excel->getActiveSheet()->getStyle('D4:D5')->applyFromArray($style_header);
         $excel->getActiveSheet()->getColumnDimension('D')->setWidth(15); // Set width kolom B
-        $excel->getActiveSheet()->getStyle('D4')->getFont()->setSize(10); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('D4')->getFont()->setSize(10); 
 
         $excel->setActiveSheetIndex(0)->setCellValue('E4', "TONASE");
         $excel->getActiveSheet()->mergeCells('E4:F4');
         $excel->getActiveSheet()->getStyle('E4:F4')->applyFromArray($style_header);
-        $excel->getActiveSheet()->getStyle('E4')->getFont()->setSize(10); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('E4')->getFont()->setSize(10); 
 
         $excel->setActiveSheetIndex(0)->setCellValue('E5', "AWAL");
         $excel->getActiveSheet()->getStyle('E5')->applyFromArray($style_header);
         $excel->getActiveSheet()->getColumnDimension('E')->setWidth(8); // Set width kolom B
-        $excel->getActiveSheet()->getStyle('E5')->getFont()->setSize(10); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('E5')->getFont()->setSize(10); 
 
         $excel->setActiveSheetIndex(0)->setCellValue('F5', "AKHIR");
         $excel->getActiveSheet()->getStyle('F5')->applyFromArray($style_header);
         $excel->getActiveSheet()->getColumnDimension('F')->setWidth(8); // Set width kolom B
-        $excel->getActiveSheet()->getStyle('F5')->getFont()->setSize(10); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('F5')->getFont()->setSize(10); 
 
         $excel->setActiveSheetIndex(0)->setCellValue('G4', "SUSUT");
         $excel->getActiveSheet()->mergeCells('G4:G5');
@@ -2605,8 +2605,8 @@ class Rms extends CI_Controller
         // $excel->setActiveSheetIndex(0)->setCellValue('A' . $sebesar, 'Sebesar');
         // $excel->setActiveSheetIndex(0)->setCellValue('C' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total_transporter, 0, "", "."));
         // $excel->setActiveSheetIndex(0)->setCellValue('C' . $terbilang, '(' . ucwords(terbilang($detail_kwitansi->grand_total_transporter)) . ' Rupiah)');
-        // $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setItalic(TRUE); // Set bold kolom A1
-        // $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setSize(10); // Set font size 15 untuk kolom A1
+        // $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setItalic(TRUE);
+        // $excel->getActiveSheet()->getStyle('C' . $terbilang)->getFont()->setSize(10); 
 
 
         // $excel->setActiveSheetIndex(0)->setCellValue('G' . $sebesar, 'Sampit, ' . shortdate_indo(date('Y-m-d')));
@@ -2616,9 +2616,9 @@ class Rms extends CI_Controller
         // $excel->getActiveSheet()->mergeCells('A' . $sebesar . ':' . 'B' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
         // $excel->getActiveSheet()->mergeCells('C' . $sebesar . ':' . 'E' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
         // $excel->getActiveSheet()->mergeCells('C' . $terbilang . ':' . 'E' . $terbilang); // Set Merge Cell pada kolom A1 sampai E1
-        // $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setBold(TRUE); // Set bold kolom A1
-        // $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setSize(16); // Set font size 15 untuk kolom A1
-        // $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setItalic(TRUE); // Set bold kolom A1
+        // $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setBold(TRUE);
+        // $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setSize(16); 
+        // $excel->getActiveSheet()->getStyle('C' . $sebesar)->getFont()->setItalic(TRUE);
 
 
         // $excel->setActiveSheetIndex(0)->setCellValue('G' . $ttd, 'Direkap oleh');
@@ -2720,63 +2720,63 @@ class Rms extends CI_Controller
                 'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
             )
         );
-        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(3); // Set width kolom A
-        $excel->setActiveSheetIndex(0)->setCellValue('K2', "Lembar 1"); // Set kolom A1 dengan tulisan "DATA SISWA"
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(3);
+        $excel->setActiveSheetIndex(0)->setCellValue('K2', "Lembar 1");
         $excel->getActiveSheet()->getStyle('K2')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('K2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
 
-        $excel->setActiveSheetIndex(0)->setCellValue('K3', "RWS"); // Set kolom A1 dengan tulisan "DATA SISWA"
+        $excel->setActiveSheetIndex(0)->setCellValue('K3', "RWS");
         $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('K3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
 
-        $excel->setActiveSheetIndex(0)->setCellValue('B4', "KWITANSI"); // Set kolom A1 dengan tulisan "DATA SISWA"
-        $excel->getActiveSheet()->getStyle('B4')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('B4')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
+        $excel->setActiveSheetIndex(0)->setCellValue('B4', "KWITANSI");
+        $excel->getActiveSheet()->getStyle('B4')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('B4')->getFont()->setSize(15); 
         $excel->getActiveSheet()->getStyle('B4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->mergeCells('B4:K4'); // Set Merge Cell pada kolom A1 sampai E1
 
-        // Buat header tabel nya pada baris ke 3
-        $excel->setActiveSheetIndex(0)->setCellValue('B6', "Sudah terima dari"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('C6', ":"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('B7', "Untuk Pembayaran"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('D6', "CV. RAJA WALI  SAMPIT"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('D7', "RETASI SOPIR"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('D8', $data->nopol); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('E8', $data->nama_supir); // Set kolom A3 dengan tulisan "NO"
+        
+        $excel->setActiveSheetIndex(0)->setCellValue('B6', "Sudah terima dari");
+        $excel->setActiveSheetIndex(0)->setCellValue('C6', ":");
+        $excel->setActiveSheetIndex(0)->setCellValue('B7', "Untuk Pembayaran");
+        $excel->setActiveSheetIndex(0)->setCellValue('D6', "CV. RAJA WALI  SAMPIT");
+        $excel->setActiveSheetIndex(0)->setCellValue('D7', "RETASI SOPIR");
+        $excel->setActiveSheetIndex(0)->setCellValue('D8', $data->nopol);
+        $excel->setActiveSheetIndex(0)->setCellValue('E8', $data->nama_supir);
 
-        $excel->setActiveSheetIndex(0)->setCellValue('D9', "TOTAL PENDAPATAN"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('K9', 'Rp ' . number_format($data->total_pendapatan, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('D9', "TOTAL PENDAPATAN");
+        $excel->setActiveSheetIndex(0)->setCellValue('K9', 'Rp ' . number_format($data->total_pendapatan, 0, "", "."));
 
-        $excel->setActiveSheetIndex(0)->setCellValue('D10', "TOTAL OPERASIONAL"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('K10', 'Rp ' . number_format($data->total_operasional, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('D10', "TOTAL OPERASIONAL");
+        $excel->setActiveSheetIndex(0)->setCellValue('K10', 'Rp ' . number_format($data->total_operasional, 0, "", "."));
 
-        $excel->setActiveSheetIndex(0)->setCellValue('D11', "TOTAL PENDAPATAN BERSIH"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('K11', 'Rp ' . number_format($data->total_pendapatan_bersih, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('D11', "TOTAL PENDAPATAN BERSIH");
+        $excel->setActiveSheetIndex(0)->setCellValue('K11', 'Rp ' . number_format($data->total_pendapatan_bersih, 0, "", "."));
 
-        $excel->setActiveSheetIndex(0)->setCellValue('D12', "TOTAL PREMI " . $data->premi_supir . "%"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('K12', 'Rp ' . number_format($data->total_premi_supir, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('D12', "TOTAL PREMI " . $data->premi_supir . "%");
+        $excel->setActiveSheetIndex(0)->setCellValue('K12', 'Rp ' . number_format($data->total_premi_supir, 0, "", "."));
 
-        $excel->setActiveSheetIndex(0)->setCellValue('D13', "TOTAL PINJAMAN"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('K13', 'Rp ' . number_format($data->total_pinjaman_supir, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('D13', "TOTAL PINJAMAN");
+        $excel->setActiveSheetIndex(0)->setCellValue('K13', 'Rp ' . number_format($data->total_pinjaman_supir, 0, "", "."));
 
-        $excel->setActiveSheetIndex(0)->setCellValue('D14', "TOTAL PREMI BERSIH"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('K14', 'Rp ' . number_format($data->total_premi_bersih, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('D14', "TOTAL PREMI BERSIH");
+        $excel->setActiveSheetIndex(0)->setCellValue('K14', 'Rp ' . number_format($data->total_premi_bersih, 0, "", "."));
 
-        $excel->setActiveSheetIndex(0)->setCellValue('J16', "JUMLAH"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('K16', 'Rp ' . number_format($data->total_premi_bersih, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
+        $excel->setActiveSheetIndex(0)->setCellValue('J16', "JUMLAH");
+        $excel->setActiveSheetIndex(0)->setCellValue('K16', 'Rp ' . number_format($data->total_premi_bersih, 0, "", "."));
 
 
-        $excel->setActiveSheetIndex(0)->setCellValue('B17', "SEBESAR"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('C17', ":"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('D17', 'Rp ' . number_format($data->total_premi_bersih, 0, "", ".")); // Set kolom A3 dengan tulisan "NO"
-        $excel->getActiveSheet()->getStyle('D17')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('D17')->getFont()->setSize(16); // Set font size 15 untuk kolom A1
+        $excel->setActiveSheetIndex(0)->setCellValue('B17', "SEBESAR");
+        $excel->setActiveSheetIndex(0)->setCellValue('C17', ":");
+        $excel->setActiveSheetIndex(0)->setCellValue('D17', 'Rp ' . number_format($data->total_premi_bersih, 0, "", "."));
+        $excel->getActiveSheet()->getStyle('D17')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('D17')->getFont()->setSize(16); 
 
-        $excel->setActiveSheetIndex(0)->setCellValue('B18', "TERBILANG"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('C18', ":"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('D18', '(' . ucwords(terbilang(number_format($data->total_premi_bersih, 0, "", ""))) . ' Rupiah)'); // Set kolom A3 dengan tulisan "NO"
-        $excel->getActiveSheet()->getStyle('D18')->getFont()->setItalic(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('D18')->getFont()->setSize(10); // Set font size 15 untuk kolom A1
+        $excel->setActiveSheetIndex(0)->setCellValue('B18', "TERBILANG");
+        $excel->setActiveSheetIndex(0)->setCellValue('C18', ":");
+        $excel->setActiveSheetIndex(0)->setCellValue('D18', '(' . ucwords(terbilang(number_format($data->total_premi_bersih, 0, "", ""))) . ' Rupiah)');
+        $excel->getActiveSheet()->getStyle('D18')->getFont()->setItalic(TRUE);
+        $excel->getActiveSheet()->getStyle('D18')->getFont()->setSize(10); 
 
         $excel->setActiveSheetIndex(0)->setCellValue('F20', 'Sampit,');
         $excel->setActiveSheetIndex(0)->setCellValue('F21', 'Diajukan Oleh');
@@ -2812,11 +2812,11 @@ class Rms extends CI_Controller
         // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
 
         // Set width kolom
-        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(25); // Set width kolom A
-        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(2); // Set width kolom A
-        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(25); // Set width kolom A
-        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(15); // Set width kolom A
-        $excel->getActiveSheet()->getColumnDimension('K')->setWidth(20); // Set width kolom A
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(2);
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+        $excel->getActiveSheet()->getColumnDimension('K')->setWidth(20);
 
         // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
         $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
@@ -2914,14 +2914,14 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->mergeCells('G5:K5'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('G4:K4'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('A2:Q2'); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); 
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); 
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
         $excel->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12); // Set font size 15 untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(TRUE); // Set bold kolom A1
-        // Buat header tabel nya pada baris ke 3
+        $excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12); 
+        $excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(TRUE);
+        
         $excel->setActiveSheetIndex(0)->setCellValue('A8', "NO");
         $excel->setActiveSheetIndex(0)->setCellValue('B8', "TGL");
         $excel->setActiveSheetIndex(0)->setCellValue('C8', "QTY AWAL");
@@ -3057,9 +3057,9 @@ class Rms extends CI_Controller
 
         $excel->getActiveSheet()->mergeCells('A' . $sebesar . ':' . 'B' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->mergeCells('D' . $sebesar . ':' . 'E' . $sebesar); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->getStyle('D' . $sebesar)->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('D' . $sebesar)->getFont()->setSize(16); // Set font size 15 untuk kolom A1
-        $excel->getActiveSheet()->getStyle('D' . $sebesar)->getFont()->setItalic(TRUE); // Set bold kolom A1
+        $excel->getActiveSheet()->getStyle('D' . $sebesar)->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('D' . $sebesar)->getFont()->setSize(16); 
+        $excel->getActiveSheet()->getStyle('D' . $sebesar)->getFont()->setItalic(TRUE);
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('G' . $ttd, 'Direkap oleh');
@@ -3096,7 +3096,7 @@ class Rms extends CI_Controller
 
 
         // Set width kolom
-        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(3); // Set width kolom A
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(3);
         $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15); // Set width kolom B
         $excel->getActiveSheet()->getColumnDimension('C')->setWidth(15); // Set width kolom C
         $excel->getActiveSheet()->getColumnDimension('D')->setWidth(15); // Set width kolom D
@@ -3273,7 +3273,6 @@ class Rms extends CI_Controller
         $this->pdf->createPDF($html, $filename, true);
     }
 
-
     function view_invoice($id)
     {
         $data['pembayaran_invoice'] = $this->rms_model->get("tbl_pembayaran_invoice a", "LEFT JOIN tbl_invoice b ON a.id_invoice = b.id WHERE a.id_invoice = '$id'")->result();
@@ -3281,8 +3280,6 @@ class Rms extends CI_Controller
         $data['content'] = 'rms/invoice/view';
         $this->load->view('rms/includes/template', $data);
     }
-
-
 
     public function download_replas($id_project)
     {
@@ -3352,9 +3349,9 @@ class Rms extends CI_Controller
         );
         $excel->setActiveSheetIndex(0)->setCellValue('A1', "REKAP $data_project->komoditas $data_project->nama_perusahaan");
         $excel->getActiveSheet()->mergeCells('A1:K1'); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); 
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setUnderline(true); 
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
 
         $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO");
@@ -3840,17 +3837,17 @@ class Rms extends CI_Controller
                 'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
             )
         );
-        $excel->setActiveSheetIndex(0)->setCellValue('A1', "Laporan pajak"); // Set kolom A1 dengan tulisan "DATA SISWA"
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "Laporan pajak");
         $excel->getActiveSheet()->mergeCells('A1:E1'); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); 
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
-        // Buat header tabel nya pada baris ke 3
-        $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO NPWP"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('B3', "NAMA PAJAK"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('C3', "JENIS PAJAK"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('D3', "TOTAL"); // Set kolom A3 dengan tulisan "NO"
-        $excel->setActiveSheetIndex(0)->setCellValue('E3', "POT PPH"); // Set kolom A3 dengan tulisan "NO"
+        
+        $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO NPWP");
+        $excel->setActiveSheetIndex(0)->setCellValue('B3', "NAMA PAJAK");
+        $excel->setActiveSheetIndex(0)->setCellValue('C3', "JENIS PAJAK");
+        $excel->setActiveSheetIndex(0)->setCellValue('D3', "TOTAL");
+        $excel->setActiveSheetIndex(0)->setCellValue('E3', "POT PPH");
 
 
         $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
@@ -3886,11 +3883,11 @@ class Rms extends CI_Controller
             $numrow++; // Tambah 1 setiap kali looping
         }
         // Set width kolom
-        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(25); // Set width kolom A
-        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(25); // Set width kolom A
-        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(20); // Set width kolom A
-        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(20); // Set width kolom A
-        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(20); // Set width kolom A
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
 
         // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
         $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);

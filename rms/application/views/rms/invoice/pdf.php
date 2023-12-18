@@ -4,7 +4,7 @@
 <head>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta charset="utf-8">
-    <title>Create PDF from View in CodeIgniter Example</title>
+    <title>INVOICE <?php echo $invoice->no_invoice; ?></title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 
     <style>
