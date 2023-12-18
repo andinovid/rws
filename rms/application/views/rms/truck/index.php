@@ -234,11 +234,11 @@
                           <td><?php echo $row->nama_supir; ?></td>
 
                           <td class="project-actions text-right">
-                            <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>truck/view/<?php echo $row->id_truck; ?>" data-toggle="tooltip" data-placement="top" title="Detail Truk">
+                            <a class="btn btn-success btn-sm mb-1" href="<?php echo base_url(); ?>truck/view/<?php echo $row->id_truck; ?>" data-toggle="tooltip" data-placement="top" title="Detail Truk">
                               <i class="fas fa-folder">
                               </i>
                             </a>
-                            <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_truck; ?>)" data-toggle="tooltip" data-placement="top" title="Edit Truk">
+                            <a class="btn btn-success btn-sm mb-1" href="javascript:void(0);" onclick="edit(<?php echo $row->id_truck; ?>)" data-toggle="tooltip" data-placement="top" title="Edit Truk">
                               <i class="fas fa-pencil-alt">
                               </i>
                             </a>

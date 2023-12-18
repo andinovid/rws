@@ -52,7 +52,7 @@
                       <td><?php echo $row->alamat; ?></td>
                       <td><?php echo $row->email; ?></td>
                       <td><?php echo $row->no_tlp; ?></td>
-                      <td class="project-actions text-right">
+                      <td class="project-actions text-right" style="width: 12%;">
                         <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/klien/view/<?php echo $row->id; ?>" data-toggle="tooltip" data-placement="top" title="Detail klien">
                           <i class="fas fa-folder">
                           </i>

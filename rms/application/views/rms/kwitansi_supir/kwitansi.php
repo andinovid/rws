@@ -42,7 +42,7 @@
                     <th>Uang Sangu</th>
                     <th>Total PPh</th>
                     <th>Grand Total</th>
-                    <th></th>
+                    <th style="width: 8%;"></th>
                   </tr>
                 </thead>
                 <tbody>

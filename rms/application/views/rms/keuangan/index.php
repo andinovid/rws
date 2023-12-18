@@ -33,11 +33,11 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Tanggal</th>
+                    <th style="width: 15%;">Tanggal</th>
                     <th>Jenis</th>
-                    <th>Jumlah</th>
+                    <th style="width: 10%;">Jumlah</th>
                     <th>Keterangan</th>
-                    <th></th>
+                    <th style="width: 8%;"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -74,8 +74,8 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th colspan="3"></th>
-                    <th><span style="font-weight: 400;">Saldo :</span> Rp <?php echo number_format($saldo->total, 0, "", "."); ?></th>
+                    <th colspan="3" class="text-right">Saldo :</th>
+                    <th><span style="font-weight: 400;"></span> Rp <?php echo number_format($saldo->total, 0, "", "."); ?></th>
                     <th colspan="2"></th>
                   </tr>
                 </tfoot>

@@ -41,7 +41,7 @@
                     <th>No Pajak</th>
                     <th>Nama Pajak</th>
                     <th>Jumlah Truk</th>
-                    <th></th>
+                    <th style="width: 12%;"></th>
                   </tr>
                 </thead>
                 <tbody>

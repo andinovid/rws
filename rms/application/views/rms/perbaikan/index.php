@@ -33,14 +33,14 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Nopol Truk</th>
-                    <th>Jenis</th>
+                    <th style="width: 10%;">Nopol Truk</th>
+                    <th style="width: 30%;">Jenis</th>
                     <th>Supir</th>
-                    <th>Tanggal Perbaikan</th>
+                    <th style="width: 13%;">Tanggal Perbaikan</th>
                     <th>Jumlah</th>
                     <th>Nota</th>
                     <th>Status</th>
-                    <th></th>
+                    <th style="width: 10%;"></th>
                   </tr>
                 </thead>
                 <tbody>

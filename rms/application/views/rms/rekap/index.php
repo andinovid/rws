@@ -42,7 +42,7 @@
                     <th colspan="2" class="text-center align-middle hidden-xs">Qty Awal</th>
                     <th colspan="2" class="text-center align-middle hidden-xs">Qty Akhir</th>
                     <th colspan="2" class="text-center align-middle hidden-xs">Susut</th>
-                    <th rowspan="2" class="text-center align-middle">Action</th>
+                    <th rowspan="2" class="text-center align-middle" style="width: 8%;">Action</th>
                   </tr>
                   <tr>
                     <th class="text-center align-middle">Bag</th>

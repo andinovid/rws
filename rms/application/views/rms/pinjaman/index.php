@@ -40,7 +40,7 @@
                     <th>Untuk Periode</th>
                     <th>Keterangan</th>
                     <th>Status</th>
-                    <th></th>
+                    <th  style="width: 8%;"></th>
                   </tr>
                 </thead>
                 <tbody>
