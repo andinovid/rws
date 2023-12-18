@@ -59,19 +59,18 @@
               <table class="table table-striped table-valign-middle data-table-default">
                 <thead>
                   <tr>
-                    <th class="align-middle">No Kontrak</th>
+                    <th class="align-middle">No DO</th>
                     <th class="align-middle">Tanggal muat</th>
                     <th class="align-middle">Tanggal bongkar</th>
                     <th class="align-middle">nopol</th>
                     <th class="align-middle">Tujuan</th>
-                    <th class="align-middle">Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   foreach ($rekap as $row) : ?>
                     <tr>
-                      <td><?php echo $row->no_kontrak; ?></td>
+                      <td><?php echo $row->no_do; ?></td>
                       <td>
                         <?php
                         if ($row->tanggal_muat) {
@@ -88,13 +87,7 @@
                       </td>
                       <td><?php echo $row->nopol; ?></td>
                       <td><?php echo $row->nama_tujuan; ?></td>
-                      <td>
-                        <?php if ($row->status == '0') { ?>
-                          <span class="badge badge-warning">Sedang Mengirim</span>
-                        <?php } else { ?>
-                          <span class="badge badge-secondary">Selesai</span>
-                        <?php } ?>
-                      </td>
+                      
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
