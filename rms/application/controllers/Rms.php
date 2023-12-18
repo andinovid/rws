@@ -1307,7 +1307,8 @@ class Rms extends CI_Controller
     {
         $data['bulan'] = bulan($bulan);
         $data['tahun'] = $tahun;
-        $data['komoditas'] = $this->rms_model->get_by_query("SELECT SUM(total_pemasukan_invoice) AS total_pemasukan,SUM(total_pph) AS total_potongan_pph, SUM(total_biaya_claim_invoice) AS total_biaya_claim, SUM(total_pph_replas) AS total_potongan_pph_replas, SUM(pengeluaran_lapangan) AS total_pengeluaran_lapangan, SUM(pengeluaran_replas) AS total_pengeluaran_replas, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_komoditas WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
+        
+        $data['komoditas'] = $this->rms_model->get_by_query("SELECT SUM(total_pemasukan_invoice) AS total_pemasukan,SUM(total_pph) AS total_potongan_pph, SUM(total_biaya_claim_invoice) AS total_biaya_claim, SUM(total_pph_replas) AS total_potongan_pph_replas, SUM(pengeluaran_lapangan) AS total_pengeluaran_lapangan, SUM(pengeluaran_replas) AS total_pengeluaran_replas, SUM(biaya_penagihan) AS total_biaya_penagihan, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_komoditas WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
         $data['transporter'] = $this->rms_model->get_by_query("SELECT SUM(grand_total) AS total_pemasukan, SUM(operasional) AS total_operasional,SUM(total_perbaikan) AS total_biaya_perbaikan, SUM(premi_supir) AS total_premi_supir, SUM(cicilan) AS total_cicilan, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_transporter WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
         $data['non_do'] = $this->rms_model->get_by_query("SELECT SUM(keuntungan) AS total_keuntungan FROM v_laporan_non_do WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
         $data['keuangan'] = $this->rms_model->get_by_query("SELECT * from v_laporan_keuangan WHERE bulan = '$bulan' AND tahun = '$tahun'")->row();

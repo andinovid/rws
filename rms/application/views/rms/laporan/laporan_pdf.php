@@ -122,6 +122,10 @@
                 <div class="float-left">Beban PPh Replas</div>
                 <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_potongan_pph_replas, 0, "", "."); ?></div>
             </li>
+            <li>
+                <div class="float-left">Beban Biaya Penagihan</div>
+                <div class="float-right" style="color:#ff0000;">Rp <?php echo number_format($komoditas->total_biaya_penagihan, 0, "", "."); ?></div>
+            </li>
         </ul>
         <li>
             <h3 class="float-left">Net Profit Usaha Komoditas</h3>
