@@ -23,12 +23,13 @@
             <div class="card-header">
               <h3 class="card-title">Rekapitulasi Data</h3>
               <div class="card-tools mr-1">
-                <button type="button" class="btn btn-block btn-primary btn-sm" onclick="generate_invoice()"><i class="fas fa-print mr-1"></i> Generate Kwitansi</button>
+                <button type="button" class="btn btn-inline btn-success btn-sm" onclick="generate_invoice()"><i class="fas fa-print mr-1"></i> Generate Kwitansi</button>
+                <button type="button" class="btn btn-inline btn-primary btn-sm" onclick="input_replas()"><i class="fas fa-plus mr-1"></i> Input Replas</button>
               </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-            <table class="table table-bordered table-striped data-table" id="tbl-rekap">
+              <table class="table table-bordered table-striped data-table" id="tbl-rekap">
                 <thead>
                   <tr>
                     <th rowspan="2" class="text-center align-middle">#</th>
@@ -41,7 +42,7 @@
                     <th colspan="2" class="text-center align-middle hidden-xs">Qty Awal</th>
                     <th colspan="2" class="text-center align-middle hidden-xs">Qty Akhir</th>
                     <th colspan="2" class="text-center align-middle hidden-xs">Susut</th>
-                    <!-- <th rowspan="2" class="text-center align-middle">Action</th> -->
+                    <th rowspan="2" class="text-center align-middle">Action</th>
                   </tr>
                   <tr>
                     <th class="text-center align-middle">Bag</th>
@@ -77,7 +78,7 @@
                       <td><?php echo number_format($row->m_susut, 0, "", "."); ?> Kg</td>
                       <td><?php echo number_format($row->c_claim, 0, "", "."); ?> Kg</td>
 
-                      <!-- <td class="project-actions text-right">
+                      <td class="project-actions text-right">
                         <a class="btn btn-info btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_rekap; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
                           <i class="fas fa-pencil-alt">
                           </i>
@@ -86,7 +87,7 @@
                           <i class="fas fa-trash">
                           </i>
                         </a>
-                      </td> -->
+                      </td>
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
@@ -163,7 +164,171 @@
     </div>
 
 
+    <div class="modal fade" id="input-replas">
+      <div class="modal-dialog modal-lg">
+        <form id="form_replas" class="form-horizontal" method="post" enctype="multipart/form-data">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Input Replas</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label>Project</label>
+                <select class="form-control select2" style="width: 100%;" name="id_project" id="id_project">
+                  <option value="0">Pilih project</option>
+                  <?php foreach ($project as $row) : ?>
+                    <option value="<?php echo $row->id; ?>"><?php echo $row->no_do; ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+              <hr>
+              <div class="row" id="content-replas">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="hidden" class="form-control" name="id" id="id" placeholder="id">
 
+                    <label for="no_replas">Nomor Replas</label>
+                    <input type="text" class="form-control" id="no_replas" name="no_replas" placeholder="Input nomor replas">
+                  </div>
+
+                  <div class="form-group" id="nomor_tiket">
+                    <label for="no_replas">Nomor Tiket</label>
+                    <input type="text" class="form-control" id="no_tiket" name="no_tiket" placeholder="Input nomor tiket">
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Tanggal Muat</label>
+                    <div class="input-group date reservationdate reservationdate1" data-target-input="nearest">
+                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate1" data-toggle="datetimepicker" name="tanggal_muat" id="tanggal_muat" />
+                      <div class="input-group-append" data-target=".reservationdate1" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Tanggal Bongkar</label>
+                    <div class="input-group date reservationdate reservationdate2" data-target-input="nearest">
+                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate2" data-toggle="datetimepicker" name="tanggal_bongkar" id="tanggal_bongkar" />
+                      <div class="input-group-append" data-target=".reservationdate2" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Supir</label>
+                    <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
+                      <option value="0">Pilih supir</option>
+                      <?php foreach ($supir as $row) : ?>
+                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?> (<?php if ($row->kategori == '1') {
+                                                                                              echo 'Kantor';
+                                                                                            } else {
+                                                                                              echo 'Vendor';
+                                                                                            } ?>)</option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Truck</label>
+                    <select class="form-control select2" style="width: 100%;" name="truck" id="truck">
+                      <option value="0">Pilih truk</option>
+                      <?php foreach ($truck as $row) : ?>
+                        <option value="<?php echo $row->id; ?>"><?php echo $row->nopol; ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+
+
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Tujuan</label>
+                    <select class="form-control select2" style="width: 100%;" name="tujuan" id="tujuan">
+                      <option value="0">Pilih tujuan</option>
+                      <?php foreach ($tujuan as $row) : ?>
+                        <option value="<?php echo $row->id; ?>"><?php echo $row->kode_tujuan; ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Qty Awal</label>
+                    <hr class="mt-1 mb-1">
+                    <div class="row bruto_tarra">
+                      <div class="col-md-4">
+                        <label for="no_replas">Bruto Awal</label>
+                        <input type="text" class="form-control" name="bruto_awal" id="bruto_awal" placeholder="Bruto awal (kg)">
+                      </div>
+                      <div class="col-md-4">
+                        <label for="no_replas">Tarra Awal</label>
+                        <input type="text" class="form-control" name="tarra_awal" id="tarra_awal" placeholder="Tarra awal (kg)">
+                      </div>
+                      <div class="col-md-4">
+                        <label for="no_replas">Netto Awal</label>
+                        <input type="text" class="form-control" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Netto (kg)">
+                      </div>
+                    </div>
+                    <div class="row bag_kg">
+                      <div class="col-md-6">
+                        <label for="no_replas">Bag</label>
+                        <input type="text" class="form-control" name="timbang_kebun_bag" id="timbang_kebun_bag" placeholder="Bag">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="no_replas">Kg</label>
+                        <input type="text" class="form-control number" name="timbang_kebun_kg" id="timbang_kebun_kg" placeholder="Kg">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Qty Akhir</label>
+                    <hr class="mt-1 mb-1">
+                    <div class="row bruto_tarra">
+                      <div class="col-md-4">
+                        <label for="no_replas">Bruto Akhir</label>
+                        <input type="text" class="form-control" name="bruto_akhir" id="bruto_akhir" placeholder="Bruto akhir (kg)">
+                      </div>
+                      <div class="col-md-4">
+                        <label for="no_replas">Tarra Akhir</label>
+                        <input type="text" class="form-control" name="tarra_akhir" id="tarra_akhir" placeholder="Tarra akhir (kg)">
+                      </div>
+                      <div class="col-md-4">
+                        <label for="no_replas">Netto Akhir</label>
+                        <input type="text" class="form-control" placeholder="Netto (kg)" name="qty_kirim_kg" id="qty_kirim_kg">
+                      </div>
+                    </div>
+                    <div class="row bag_kg">
+                      <div class="col-md-6">
+                        <label for="no_replas">Bag</label>
+                        <input type="text" class="form-control" placeholder="Bag" name="qty_kirim_bag" id="qty_kirim_bag">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="no_replas">Kg</label>
+                        <input type="text" class="form-control" placeholder="Kg" name="qty_kirim_kg" id="qty_kirim_kg">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="no_replas">Toleransi Susut (kg)</label>
+                    <input type="text" class="form-control" name="toleransi_susut" id="toleransi_susut" placeholder="Toleransi Susut">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer" style="justify-content: flex-start;">
+              <button type="submit" class="btn btn-primary">Save changes</button>
+              <div class="loading" style="display: none;">
+                <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
+              </div>
+            </div>
+            <div class="container bg-loading noEvents noSelect" style="display: none;">
+              <button class="btn btn-lg btn-warning"><i class="fa fa-spinner glyphicon-refresh-animate"></i><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Please wait...</button>
+            </div>
+        </form>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
 
 
 
@@ -177,6 +342,50 @@
     $('.select-row').click(function() {
       var backgroundColor = $(this).is(":checked") ? "#fff99c;" : "";
       $(this).closest('tr').attr('style', 'background-color: ' + backgroundColor + '');
+    });
+  });
+
+  $('#bruto_awal, #tarra_awal').on('change keyup', function() {
+    var res = $('#bruto_awal').val() - $('#tarra_awal').val();
+    $('#timbang_kebun_kg').val(res)
+  })
+
+  $('#bruto_akhir, #tarra_akhir').on('change keyup', function() {
+    var res = $('#bruto_akhir').val() - $('#tarra_akhir').val();
+    $('#qty_kirim_kg').val(res)
+  })
+
+
+  $(function() {
+    $('#content-replas').hide();
+    $('#id_project').change(function() {
+      var id_project = $('#id_project').val();
+      $.ajax({
+        url: '<?php echo base_url(); ?>rms/cek_project/' + id_project,
+        processData: false,
+        contentType: false,
+        dataType: "JSON",
+        beforeSend: function() {
+        $('.bg-loading').show();
+      },
+        success: function(data) {
+        $('.bg-loading').hide();
+          $('#content-replas').show();
+          if (data.id_klien == '8' || data.id_klien == '9' || data.id_klien == '16') {
+            $('#nomor_tiket').show();
+          } else {
+            $('#nomor_tiket').hide();
+          }
+
+          if (data.id_komoditas == '2' || (data.id_komoditas == '3' && data.id_klien == '6')) {
+            $('.bruto_tarra').show();
+            $('.bag_kg').hide();
+          } else {
+            $('.bruto_tarra').hide();
+            $('.bag_kg').show();
+          }
+        }
+      });
     });
   });
 
@@ -254,8 +463,8 @@
         if (data.status = "true") {
           Swal.fire({
             icon: 'success',
-            title: "Success!",
-            text: "Schedule has been saved.",
+            title: "Berhasil!",
+            text: "Data berhasil disimpan.",
             type: "success"
           }).then((result) => {
             location.reload();
@@ -281,20 +490,43 @@
       dataType: "JSON",
       beforeSend: function() {
         $('#form_replas')[0].reset();
+        
+        $('.bg-loading').show();
       },
       success: function(data) {
+        $('.bg-loading').hide();
         for (var i = 0; i < data.length; i++) {
           $('[name="no_replas"]').val(data[i].no_replas);
-          $('[name="tanggal"]').val(data[i].tanggal_muat);
-          $('[name="tanggal"]').val(data[i].tanggal_bongkar);
+          $('[name="id_project"]').val(data[i].id_project).change();
+
+          if (data[i].id_klien == '8' || data[i].id_klien == '9' || data[i].id_klien == '16') {
+            $('#nomor_tiket').show();
+          } else {
+            $('#nomor_tiket').hide();
+          }
+
+          if (data[i].id_komoditas == '2' || (data[i].id_komoditas == '3' && data[i].id_klien == '6')) {
+            $('.bruto_tarra').show();
+            $('.bag_kg').hide();
+          } else {
+            $('.bruto_tarra').hide();
+            $('.bag_kg').show();
+          }
+          $('[name="no_tiket"]').val(data[i].no_tiket);
+          $('[name="tanggal_muat"]').val(data[i].tanggal_muat);
+          $('[name="tanggal_bongkar"]').val(data[i].tanggal_bongkar);
           $('[name="supir"]').val(data[i].id_supir).change();
           $('[name="truck"]').val(data[i].id_truck).change();
           $('[name="tujuan"]').val(data[i].id_tujuan).change();
+          $('[name="bruto_awal"]').val(data[i].bruto_awal);
+          $('[name="tarra_awal"]').val(data[i].tarra_awal);
+          $('[name="bruto_akhir"]').val(data[i].bruto_akhir);
+          $('[name="tarra_akhir"]').val(data[i].tarra_akhir);
           $('[name="qty_kirim_bag"]').val(data[i].qty_kirim_bag);
           $('[name="qty_kirim_kg"]').val(data[i].qty_kirim_kg);
           $('[name="timbang_kebun_bag"]').val(data[i].timbang_kebun_bag);
           $('[name="timbang_kebun_kg"]').val(data[i].timbang_kebun_kg);
-          $('[name="uang_sangu"]').val(data[i].uang_sangu);
+          $('[name="toleransi_susut"]').val(data[i].toleransi_susut);
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -305,8 +537,8 @@
 
   function delete_data(id) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Hapus data?',
+      text: "Data yang telah dihapus tidak dapat dikembalikan.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -324,8 +556,8 @@
           dataType: "JSON",
           success: function(data) {
             Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
+              'Berhasil!',
+              'Data berhasil dihapus.',
               'success'
             ).then((result) => {
               location.reload();

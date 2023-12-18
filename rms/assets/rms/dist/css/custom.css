@@ -139,3 +139,43 @@
 .btn-warning:hover{
   color: #FFF;
 }
+
+.bg-loading {
+  height: 100%;
+  padding-top: 15%;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  background: rgba(0, 0, 0, .75);
+  z-index: 999;
+}
+
+.noEvents {
+  pointer-events: none;
+}
+.noSelect {
+  -webkit-user-select: none;
+  user-select: none;
+}
+.glyphicon-refresh-animate {
+  -animation: spin .7s infinite linear;
+  -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+  from {
+      -webkit-transform: rotate(0deg);
+  }
+  to {
+      -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+      transform: scale(1) rotate(0deg);
+  }
+  to {
+      transform: scale(1) rotate(360deg);
+  }
+}

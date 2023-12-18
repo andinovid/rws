@@ -99,6 +99,7 @@ class Rms extends CI_Controller
     function rekapitulasi()
     {
         $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE kategori_truck = '1'")->result();
+        $data['project'] = $this->rms_model->get_by_query("SELECT id, no_do FROM tbl_project")->result();
         $data['klien'] = $this->rms_model->get("tbl_klien")->result();
         $data['truck'] = $this->rms_model->get("tbl_truck")->result();
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
@@ -156,6 +157,14 @@ class Rms extends CI_Controller
         $detail = $data->result();
         echo json_encode($detail);
     }
+
+    public function cek_project($id)
+    {
+        $data = $this->rms_model->get_by_query("SELECT id, id_komoditas, id_klien FROM tbl_project WHERE id = $id");
+        $detail = $data->row();
+        echo json_encode($detail);
+    }
+    
 
     public function get_rekap()
     {

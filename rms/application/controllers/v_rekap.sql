@@ -1,6 +1,7 @@
 SELECT
     `b`.`id` AS `id_rekap`,
     `a`.`id` AS `id_project`,
+    `a`.`id_klien` AS `id_klien`,
     `a`.`no_kontrak` AS `no_kontrak`,
     `a`.`no_sto` AS `no_sto`,
     `a`.`no_do` AS `no_do`,
