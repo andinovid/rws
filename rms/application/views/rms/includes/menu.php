@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="index3.html" class="brand-link">
+  <a href="#" class="brand-link">
     <img src="<?php echo base_url() ?>assets/rms/dist/img/logo_icon.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8; margin-top:5px;">
     <span class="brand-text font-weight-bold" style="font-size: 30px;letter-spacing:3px;">RMS APP</span>
     <p class="brand-text font-weight-light" style="font-size: 13px;margin-left:20px;letter-spacing:1px;">Rajawali Management System</p>
@@ -11,10 +11,10 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="<?php echo base_url() ?>assets/rms/dist/img/<?php echo $this->sess->photo; ?>" class="img-circle elevation-2" alt="User Image">
+        <img src="<?php echo base_url() ?>assets/rms/documents/profil/<?php echo $this->sess->photo; ?>" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block"><?php echo $this->sess->name; ?></a>
+        <a href="<?php echo base_url(); ?>profil/<?php echo $this->sess->id; ?>" class="d-block"><?php echo $this->sess->name; ?></a>
       </div>
     </div>
 

@@ -90,4 +90,5 @@ $route['kwitansi-transporter/data'] = 'rms/kwitansi_transporter_data';
 $route['kwitansi-transporter/periode'] = 'rms/kwitansi_transporter_periode';
 $route['rekapitulasi/data'] = 'rms/rekapitulasi';
 $route['rekapitulasi/periode'] = 'rms/rekap_transporter_periode';
+$route['profil/(:any)'] = 'rms/profil/$1';
 

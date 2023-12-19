@@ -3935,8 +3935,64 @@ class Rms extends CI_Controller
         $this->load->view('rms/includes/template', $data);
     }
 
+    
+    function profil($id)
+    {
+        $data['profil'] = $this->rms_model->get("tbl_users", "WHERE id = '$id'")->row();
+        $data['content'] = 'rms/profil/index';
+        $this->load->view('rms/includes/template', $data);
+    }
 
 
+    public function update_profil()
+    {
+        $id = $this->input->POST('id');
+        $nama = $this->input->POST('nama');
+        $email = $this->input->POST('email');
+        $password = $this->input->POST('password');
+        $photo = $_FILES['foto']['name'];
+        
+        
+
+        $data = array(
+            'name' => $nama,
+            'username' => $email,
+            'status' => '1',
+        );
+
+        if (!empty($photo)) {
+            $this->load->library('upload');
+            $foto_preg = preg_replace("/[^a-zA-Z0-9.]/", "_", $photo);
+            $filename_foto = str_replace(' ', '_', time() . $foto_preg);
+            $config['upload_path'] = 'assets/rms/documents/profil/';
+            $config['allowed_types'] = 'pdf|jpg|png|jpeg';
+            $config['file_name'] = $filename_foto;
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('foto')) {
+                $data_foto = $this->upload->data();
+            } else {
+                echo $this->upload->display_errors();
+            }
+            $data += array(
+                'photo' => $filename_foto
+            );
+        }
+
+        if($password != ""){
+            $data += array(
+                'password' => $password
+            );
+        }
+        
+
+        $save = $this->rms_model->update("tbl_users", $data, $id);
+        if ($save) {
+            echo json_encode(array(
+                "status" => TRUE,
+                "target" => TRUE
+            ));
+        }
+    }
 
 
 
