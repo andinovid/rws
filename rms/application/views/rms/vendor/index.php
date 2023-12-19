@@ -52,7 +52,7 @@
                   ?>
                     <tr>
                       <td><?php echo $no; ?></td>
-                      <td><a class="text-dark" href="<?php echo base_url(); ?>rms/vendor/view/<?php echo $row->id; ?>"><u><?php echo $row->nama; ?></u></a></td>
+                      <td><a class="text-dark" href="<?php echo base_url(); ?>vendor/view/<?php echo $row->id; ?>"><u><?php echo $row->nama; ?></u></a></td>
                       <td><?php echo $row->no_rekening; ?></td>
                       <td><?php echo $row->nama_rekening; ?></td>
                       <td><?php echo $row->bank; ?></td>
@@ -61,7 +61,7 @@
                       <td><?php echo $row->nama_pajak; ?></td>
                       <td><?php echo $row->total_truck; ?></td>
                       <td class="project-actions text-right">
-                        <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/vendor/view/<?php echo $row->id; ?>" data-toggle="tooltip" data-placement="top" title="Detail Vendor">
+                        <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>vendor/view/<?php echo $row->id; ?>" data-toggle="tooltip" data-placement="top" title="Detail Vendor">
                           <i class="fas fa-folder">
                           </i>
                         </a>

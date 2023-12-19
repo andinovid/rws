@@ -27,7 +27,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table class="table table-striped table-valign-middle">
+                  <table class="table table-striped table-valign-middle data-table">
                     <thead>
                       <tr>
                         <th class="align-middle">No</th>
@@ -52,11 +52,11 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title mt-2">Riwayat Pengiriman</h3>
+                  <h3 class="card-title mt-2">Riwayat Replas</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table class="table table-striped table-valign-middle">
+                  <table class="table table-striped table-valign-middle data-table">
                     <thead>
                       <tr>
                         <th class="align-middle">No Replas</th>
@@ -65,7 +65,6 @@
                         <th class="align-middle">Komoditas</th>
                         <th class="align-middle">Tujuan</th>
                         <th class="align-middle">Tanggal</th>
-                        <th class="align-middle">status</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -80,9 +79,6 @@
                           <td><?php echo $row->komoditas; ?></td>
                           <td><?php echo $row->nama_tujuan; ?></td>
                           <td><?php echo $row->tanggal_muat; ?></td>
-                          <td>
-                            <span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span>
-                          </td>
                         </tr>
                       <?php endforeach; ?>
                     </tbody>
