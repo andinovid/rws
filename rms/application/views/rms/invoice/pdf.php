@@ -154,7 +154,7 @@
                     <td style="text-align: center;">Rp <?php echo number_format($row->harga_unit, 0, "", "."); ?></td>
                     <td style="text-align: center;">Rp <?php echo number_format($row->total, 0, "", "."); ?></td>
                 </tr>
-                <?php if ($invoice->id_komoditas != '2') { ?>
+                <?php if ($invoice->id_komoditas != '2' AND $invoice->id_komoditas != '1') { ?>
                     <tr>
                         <td></td>
                         <?php if ($invoice->id_komoditas == '1') { ?>

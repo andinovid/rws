@@ -52,7 +52,7 @@
                     $no++;
                   ?>
                     <tr>
-                      <td><input type="checkbox" class="select-row"  name="id[]" value="<?php echo $row->id_rekap; ?>" /></td>
+                      <td><input type="checkbox" class="select-row" name="id[]" value="<?php echo $row->id_rekap; ?>" /></td>
                       <td><?php echo $row->no_do; ?></td>
                       <td><?php echo $row->no_replas; ?></td>
                       <td><?php echo $row->vendor; ?></td>
@@ -112,6 +112,27 @@
                     <input type="hidden" class="form-control" id="id_rekap_invoice" name="id_rekap_invoice">
                     <input type="text" class="form-control" id="no_invoice" name="no_invoice" placeholder="Input Nomor Kwitansi">
                   </div>
+                  <div class="form-group">
+                    <div class="form-group clearfix">
+                      <div class="icheck-success d-inline">
+                        <input type="checkbox" id="tambahan_potongan" onclick="valueChanged()">
+                        <label for="tambahan_potongan">
+                          Tambahan Potongan
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="potongan" style="display: none;">
+                    <div class="form-group">
+                      <label for="nama">Jenis Potongan</label>
+                      <input type="text" class="form-control" id="jenis_potongan" name="jenis_potongan" placeholder="Input Nomor Kwitansi">
+                    </div>
+                    <div class="form-group">
+                      <label for="nama">Jumlah Potongan</label>
+                      <input type="text" class="form-control number" id="jumlah_potongan" name="jumlah_potongan" placeholder="Input Nomor Kwitansi">
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -133,6 +154,12 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
+  function valueChanged() {
+    if ($('#tambahan_potongan').is(":checked"))
+      $("#potongan").show();
+    else
+      $("#potongan").hide();
+  }
   $(function() {
     $('.select-row').click(function() {
       var backgroundColor = $(this).is(":checked") ? "#fff000;" : "";
@@ -143,7 +170,7 @@
   function generate_invoice() {
     var table = $('#tbl-invoice').DataTable();
     event.preventDefault();
-    table.page.len( -1 ).draw();
+    table.page.len(-1).draw();
     var searchIDs = $("#tbl-invoice input:checkbox:checked").map(function() {
       return $(this).val();
     }).get();

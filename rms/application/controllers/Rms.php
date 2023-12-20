@@ -1307,7 +1307,7 @@ class Rms extends CI_Controller
     {
         $data['bulan'] = bulan($bulan);
         $data['tahun'] = $tahun;
-        
+
         $data['komoditas'] = $this->rms_model->get_by_query("SELECT SUM(total_pemasukan_invoice) AS total_pemasukan,SUM(total_pph) AS total_potongan_pph, SUM(total_biaya_claim_invoice) AS total_biaya_claim, SUM(total_pph_replas) AS total_potongan_pph_replas, SUM(pengeluaran_lapangan) AS total_pengeluaran_lapangan, SUM(pengeluaran_replas) AS total_pengeluaran_replas, SUM(biaya_penagihan) AS total_biaya_penagihan, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_komoditas WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
         $data['transporter'] = $this->rms_model->get_by_query("SELECT SUM(grand_total) AS total_pemasukan, SUM(operasional) AS total_operasional,SUM(total_perbaikan) AS total_biaya_perbaikan, SUM(premi_supir) AS total_premi_supir, SUM(cicilan) AS total_cicilan, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_transporter WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
         $data['non_do'] = $this->rms_model->get_by_query("SELECT SUM(keuntungan) AS total_keuntungan FROM v_laporan_non_do WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
@@ -1736,11 +1736,12 @@ class Rms extends CI_Controller
         }
 
         $total = $numrow + 1;
-        $sebesar = $numrow + 3;
-        $terbilang = $numrow + 4;
-        $ttd = $numrow + 4;
-        $ttd_bottom = $ttd + 3;
-        $ttd_periksa = $ttd_bottom + 1;
+        $total2 = $numrow + 2;
+        $sebesar = $numrow + 4;
+        $terbilang = $numrow + 5;
+        $ttd = $numrow + 5;
+        $ttd_bottom = $ttd + 4;
+        $ttd_periksa = $ttd_bottom + 2;
 
 
         $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, 'Total Qty');
@@ -1753,13 +1754,22 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('A' . $numrow . ':' . 'Q' . $numrow)->applyFromArray($style_row);
 
 
+        if ($detail_kwitansi->jenis_potongan) {
+            $excel->setActiveSheetIndex(0)->setCellValue('P' . $total, $detail_kwitansi->jenis_potongan);
+            $excel->setActiveSheetIndex(0)->setCellValue('Q' . $total, 'Rp ' . number_format($detail_kwitansi->jumlah_potongan, 0, "", "."));
+            $excel->getActiveSheet()->getStyle('P' . $total)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('Q' . $total)->applyFromArray($style_row);
 
-
-
-        $excel->setActiveSheetIndex(0)->setCellValue('P' . $total, 'Total');
-        $excel->setActiveSheetIndex(0)->setCellValue('Q' . $total, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
-        $excel->getActiveSheet()->getStyle('P' . $total)->applyFromArray($style_row);
-        $excel->getActiveSheet()->getStyle('Q' . $total)->applyFromArray($style_row);
+            $excel->setActiveSheetIndex(0)->setCellValue('P' . $total2, 'Total');
+            $excel->setActiveSheetIndex(0)->setCellValue('Q' . $total2, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
+            $excel->getActiveSheet()->getStyle('P' . $total2)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('Q' . $total2)->applyFromArray($style_row);
+        } else {
+            $excel->setActiveSheetIndex(0)->setCellValue('P' . $total, 'Total');
+            $excel->setActiveSheetIndex(0)->setCellValue('Q' . $total, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
+            $excel->getActiveSheet()->getStyle('P' . $total)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('Q' . $total)->applyFromArray($style_row);
+        }
 
         $excel->setActiveSheetIndex(0)->setCellValue('A' . $sebesar, 'Sebesar');
         $excel->setActiveSheetIndex(0)->setCellValue('C' . $sebesar, 'Rp ' . number_format($detail_kwitansi->grand_total, 0, "", "."));
@@ -3157,9 +3167,13 @@ class Rms extends CI_Controller
     {
         $id_rekap = $this->input->POST('id_rekap_invoice');
         $no_kwitansi = $this->input->POST('no_invoice');
+        $jenis_potongan = $this->input->POST('jenis_potongan');
+        $jumlah_potongan = $this->input->POST('jumlah_potongan');
         $projectArray = explode(',', $id_rekap);
         $data = array(
             'no_kwitansi' => $no_kwitansi,
+            'jenis_potongan' => $jenis_potongan,
+            'jumlah_potongan' => str_replace('.', '', $jumlah_potongan),
             'status' => '0',
         );
 
@@ -3804,20 +3818,14 @@ class Rms extends CI_Controller
     {
 
         $no_pajak = $this->rms_model->get_by_query("SELECT *, SUM(total) as total_biaya_replas, SUM(pph) as total_pot_pph FROM v_laporan_pajak_replas WHERE Year(tanggal_input) = '$tahun' and Month(tanggal_input) = '$bulan' and jenis_pajak = '$jenis' GROUP BY no_pajak ORDER BY jenis_pajak ASC")->result();
-
-        // Load plugin PHPExcel nya
         include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
-
-        // Panggil class PHPExcel nya
         $excel = new PHPExcel();
-        // Settingan awal fil excel
         $excel->getProperties()->setCreator('My Notes Code')
             ->setLastModifiedBy('My Notes Code')
             ->setTitle("Data Siswa")
             ->setSubject("Siswa")
             ->setDescription("Laporan Semua Data Siswa")
             ->setKeywords("Data Siswa");
-        // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
         $style_col = array(
             'font' => array('bold' => true), // Set font nya jadi bold
             'alignment' => array(
@@ -3935,7 +3943,7 @@ class Rms extends CI_Controller
         $this->load->view('rms/includes/template', $data);
     }
 
-    
+
     function profil($id)
     {
         $data['profil'] = $this->rms_model->get("tbl_users", "WHERE id = '$id'")->row();
@@ -3951,8 +3959,6 @@ class Rms extends CI_Controller
         $email = $this->input->POST('email');
         $password = $this->input->POST('password');
         $photo = $_FILES['foto']['name'];
-        
-        
 
         $data = array(
             'name' => $nama,
@@ -3978,12 +3984,12 @@ class Rms extends CI_Controller
             );
         }
 
-        if($password != ""){
+        if ($password != "") {
             $data += array(
                 'password' => $password
             );
         }
-        
+
 
         $save = $this->rms_model->update("tbl_users", $data, $id);
         if ($save) {
