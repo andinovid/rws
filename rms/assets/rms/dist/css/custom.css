@@ -227,3 +227,8 @@
   margin: auto;
   font-size: 22px;
 }
+
+.user-panel img{
+  height: 2.1rem;
+    width: 2.1rem;
+}

@@ -37,7 +37,7 @@
                                                 </form>
                                             </div>
                                             <div class="avatar-preview">
-                                                <img class="profile-user-img img-responsive img-circle" id="imagePreview" src="<?php echo base_url(); ?>assets/rms/documents/profil/<?php echo $profil->photo; ?>" alt="User profile picture">
+                                                <img class="profile-user-img img-responsive" id="imagePreview" src="<?php echo base_url(); ?>assets/rms/documents/profil/<?php echo $profil->photo; ?>" alt="User profile picture">
                                             </div>
                                         </div>
                                     </div>

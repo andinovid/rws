@@ -81,7 +81,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <button type="submit" class="btn btn-warning">Download Kwitansi</button>
+                  <button type="submit" class="btn btn-primary">Download Kwitansi</button>
                   <div class="loading" style="display: none;">
                     <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
                   </div>

@@ -3986,7 +3986,7 @@ class Rms extends CI_Controller
 
         if ($password != "") {
             $data += array(
-                'password' => $password
+                'password' => md5($password)
             );
         }
 
