@@ -178,7 +178,7 @@
               <div class="form-group">
                 <label>Project</label>
                 <select class="form-control select2" style="width: 100%;" name="id_project" id="id_project">
-                  <option value="0">Pilih project</option>
+                  <option value="0">Pilih No. DO</option>
                   <?php foreach ($project as $row) : ?>
                     <option value="<?php echo $row->id; ?>"><?php echo $row->no_do; ?></option>
                   <?php endforeach; ?>
