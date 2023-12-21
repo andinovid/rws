@@ -3158,7 +3158,7 @@ class Rms extends CI_Controller
 
     function generate_kwitansi()
     {
-        $data['kwitansi'] = $this->rms_model->get_by_query("SELECT id_rekap, no_do, nopol, nama_supir, tanggal_input FROM v_rekap WHERE status = '0'")->result();
+        $data['kwitansi'] = $this->rms_model->get_by_query("SELECT id_rekap, no_do, nopol, nama_supir, tanggal_input FROM v_rekap WHERE status = '0' ORDER BY tanggal_input DESC")->result();
         $data['content'] = 'rms/kwitansi/generate';
         $this->load->view('rms/includes/template', $data);
     }
@@ -3224,7 +3224,7 @@ class Rms extends CI_Controller
 
     function generate_invoice()
     {
-        $data['invoice'] = $this->rms_model->get_by_query("SELECT id_project, no_do, no_kontrak, nama_perusahaan, total_nilai FROM v_project")->result();
+        $data['invoice'] = $this->rms_model->get_by_query("SELECT id_project, no_do, no_kontrak, nama_perusahaan, total_nilai FROM v_project ORDER BY tanggal_input DESC")->result();
         $data['content'] = 'rms/invoice/generate';
         $this->load->view('rms/includes/template', $data);
     }
