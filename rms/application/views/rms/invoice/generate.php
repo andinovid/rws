@@ -33,7 +33,6 @@
                 <thead>
                   <tr>
                     <th id="total_selected"></th>
-                    <th>No</th>
                     <th>No DO</th>
                     <th>Nama Perusahaan</th>
                     <th>Total Nilai</th>
@@ -42,13 +41,10 @@
                 </thead>
                 <tbody>
                   <?php
-                  $no = 0;
                   foreach ($invoice as $row) :
-                    $no++;
                   ?>
                     <tr>
                       <td><input type="checkbox" name="id[]" class="select-row" value="<?php echo $row->id_project; ?>" /></td>
-                      <td><?php echo $no; ?></td>
                       <td><?php echo $row->no_do; ?></td>
                       <td><?php echo $row->nama_perusahaan; ?></td>
                       <td>Rp <?php echo number_format($row->total_nilai, 0, "", "."); ?></td>
@@ -64,7 +60,6 @@
                 <tfoot>
                   <tr>
                     <th></th>
-                    <th>No</th>
                     <th>No DO</th>
                     <th>Nama Perusahaan</th>
                     <th>Total Nilai</th>
