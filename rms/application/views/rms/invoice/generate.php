@@ -50,7 +50,7 @@
                     $no++;
                   ?>
                     <tr>
-                      <td><input type="checkbox" name="id[]" value="<?php echo $row->id_project; ?>" /></td>
+                      <td><input type="checkbox" name="id[]" class="select-row" value="<?php echo $row->id_project; ?>" /></td>
                       <td><?php echo $no; ?></td>
                       <td><?php echo $row->no_do; ?></td>
                       <td><?php echo $row->no_kontrak; ?></td>
@@ -179,6 +179,13 @@
       });
     }
   }
+
+  $(function() {
+    $('.select-row').click(function() {
+      var backgroundColor = $(this).is(":checked") ? "#fff000;" : "";
+      $(this).closest('tr').attr('style', 'background-color: ' + backgroundColor + '');
+    });
+  });
 
 
   $('#form_generate_invoice').on('submit', function(event) {
