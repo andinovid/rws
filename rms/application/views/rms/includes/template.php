@@ -59,7 +59,7 @@
 
         <li class="nav-item">
           <a class="nav-link" href="javascript:window.location.reload(true);" role="button">
-            <img src="<?php echo base_url() ?>assets/rms/dist/img/reload.png" width="20" style="margin-top: -3px;"/>
+            <img src="<?php echo base_url() ?>assets/rms/dist/img/reload.png" width="20" style="margin-top: -3px;" />
           </a>
         </li>
         <li class="nav-item">
@@ -189,6 +189,15 @@
       $('.select2').select2()
       $('.reservationdate').datetimepicker({
         format: 'Y-M-DD'
+      })
+
+      $(".data-table-generate").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": true,
+        "ordering": false,
+        "buttons": false,
+        "paging":false,
       })
 
       $(".data-table-default").DataTable({

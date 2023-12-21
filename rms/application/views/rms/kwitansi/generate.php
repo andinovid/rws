@@ -146,10 +146,20 @@
     $('.select-row').click(function() {
       var backgroundColor = $(this).is(":checked") ? "#fff000;" : "";
       $(this).closest('tr').attr('style', 'background-color: ' + backgroundColor + '');
-      var numberNotChecked = $("input[name='id[]']:checked").length;
-      $('#total_selected').html(numberNotChecked);
+      // var numberNotChecked = $("input[name='id[]']:checked").length;
+      // $('#total_selected').html(numberNotChecked);
     });
   });
+
+  $("input[name='id[]']").click(function() {
+      var table = $("#tbl-invoice").DataTable();
+      var countchecked = table
+        .rows()
+        .nodes()
+        .to$() // Convert to a jQuery object
+        .find("input[name='id[]']:checked").length;
+        $('#total_selected').html(countchecked);
+    });
 
   function generate_invoice() {
     var table = $('#tbl-invoice').DataTable();

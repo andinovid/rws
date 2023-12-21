@@ -34,6 +34,7 @@
                   <tr>
                     <th id="total_selected"></th>
                     <th>No DO</th>
+                    <th>No Kontrak</th>
                     <th>Nama Perusahaan</th>
                     <th>Total Nilai</th>
                     <th></th>
@@ -46,6 +47,7 @@
                     <tr>
                       <td><input type="checkbox" name="id[]" class="select-row" value="<?php echo $row->id_project; ?>" /></td>
                       <td><?php echo $row->no_do; ?></td>
+                      <td><?php echo $row->no_kontrak; ?></td>
                       <td><?php echo $row->nama_perusahaan; ?></td>
                       <td>Rp <?php echo number_format($row->total_nilai, 0, "", "."); ?></td>
                       <td class="project-actions text-right">
@@ -61,6 +63,7 @@
                   <tr>
                     <th></th>
                     <th>No DO</th>
+                    <th>No Kontrak</th>
                     <th>Nama Perusahaan</th>
                     <th>Total Nilai</th>
                     <th></th>
@@ -148,7 +151,7 @@
 
     var table = $('#tbl-invoice').DataTable();
     event.preventDefault();
-    table.page.len( -1 ).draw();
+    table.page.len(-1).draw();
     var searchIDs = $("#tbl-invoice input:checkbox:checked").map(function() {
       return $(this).val();
     }).get();
@@ -170,10 +173,21 @@
     $('.select-row').click(function() {
       var backgroundColor = $(this).is(":checked") ? "#fff000;" : "";
       $(this).closest('tr').attr('style', 'background-color: ' + backgroundColor + '');
-      var numberNotChecked = $("input[name='id[]']:checked").length;
-      $('#total_selected').html(numberNotChecked);
+      // var numberNotChecked = $("input[name='id[]']:checked").length;
+      // $('#total_selected').html(numberNotChecked);
     });
   });
+
+
+    $("input[name='id[]']").click(function() {
+      var table = $("#tbl-invoice").DataTable();
+      var countchecked = table
+        .rows()
+        .nodes()
+        .to$() // Convert to a jQuery object
+        .find("input[name='id[]']:checked").length;
+        $('#total_selected').html(countchecked);
+    });
 
 
   $('#form_generate_invoice').on('submit', function(event) {
