@@ -32,17 +32,11 @@
               <table class="table table-bordered table-striped data-table" id="tbl-invoice">
                 <thead>
                   <tr>
-                    <th></th>
+                    <th id="total_selected"></th>
                     <th>No DO</th>
-                    <th>No Replas</th>
-                    <th>Vendor</th>
                     <th>Nopol</th>
                     <th>Supir</th>
-                    <th>Susut</th>
-                    <th>Claim Susut</th>
-                    <th>Total Claim</th>
-                    <th>Uang Sangu</th>
-                    <th>Total</th>
+                    <th>tanggal</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -54,16 +48,9 @@
                     <tr>
                       <td><input type="checkbox" class="select-row" name="id[]" value="<?php echo $row->id_rekap; ?>" /></td>
                       <td><?php echo $row->no_do; ?></td>
-                      <td><?php echo $row->no_replas; ?></td>
-                      <td><?php echo $row->vendor; ?></td>
                       <td><?php echo $row->nopol; ?></td>
                       <td><?php echo $row->nama_supir; ?></td>
-                      <td><?php echo $row->m_susut; ?></td>
-                      <td><?php echo $row->c_claim; ?></td>
-                      <td>Rp <?php echo number_format($row->total_claim, 0, "", "."); ?></td>
-                      <td>Rp <?php echo number_format($row->uang_sangu, 0, "", "."); ?></td>
-                      <td>Rp <?php echo number_format($row->grand_total, 0, "", "."); ?></td>
-
+                      <td><?php echo shortdate_indo($row->tanggal_input); ?></td>
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
@@ -71,15 +58,10 @@
                   <tr>
                     <th></th>
                     <th>No DO</th>
-                    <th>No Replas</th>
-                    <th>Vendor</th>
                     <th>Nopol</th>
                     <th>Supir</th>
-                    <th>Susut</th>
-                    <th>Claim Susut</th>
-                    <th>Total Claim</th>
-                    <th>Uang Sangu</th>
-                    <th>Total</th>
+                    <th>tanggal</th>
+                    
                   </tr>
                 </tfoot>
               </table>
@@ -164,6 +146,8 @@
     $('.select-row').click(function() {
       var backgroundColor = $(this).is(":checked") ? "#fff000;" : "";
       $(this).closest('tr').attr('style', 'background-color: ' + backgroundColor + '');
+      var numberNotChecked = $("input[name='id[]']:checked").length;
+      $('#total_selected').html(numberNotChecked);
     });
   });
 

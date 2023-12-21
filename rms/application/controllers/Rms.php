@@ -3158,7 +3158,7 @@ class Rms extends CI_Controller
 
     function generate_kwitansi()
     {
-        $data['kwitansi'] = $this->rms_model->get("v_rekap", "WHERE status = '0'")->result();
+        $data['kwitansi'] = $this->rms_model->get_by_query("SELECT id_rekap, no_do, nopol, nama_supir, tanggal_input FROM v_rekap WHERE status = '0'")->result();
         $data['content'] = 'rms/kwitansi/generate';
         $this->load->view('rms/includes/template', $data);
     }

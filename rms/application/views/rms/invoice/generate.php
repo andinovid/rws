@@ -32,7 +32,7 @@
               <table class="table table-bordered table-striped data-table" id="tbl-invoice">
                 <thead>
                   <tr>
-                    <th></th>
+                    <th id="total_selected"></th>
                     <th>No</th>
                     <th>No DO</th>
                     <th>No Kontrak</th>
@@ -184,6 +184,8 @@
     $('.select-row').click(function() {
       var backgroundColor = $(this).is(":checked") ? "#fff000;" : "";
       $(this).closest('tr').attr('style', 'background-color: ' + backgroundColor + '');
+      var numberNotChecked = $("input[name='id[]']:checked").length;
+      $('#total_selected').html(numberNotChecked);
     });
   });
 
