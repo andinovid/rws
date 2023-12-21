@@ -3990,6 +3990,7 @@ class Rms extends CI_Controller
             );
         }
 
+        $this->session->set_userdata('photo', $filename_foto);
 
         $save = $this->rms_model->update("tbl_users", $data, $id);
         if ($save) {
