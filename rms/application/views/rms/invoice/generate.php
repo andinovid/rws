@@ -35,11 +35,8 @@
                     <th id="total_selected"></th>
                     <th>No</th>
                     <th>No DO</th>
-                    <th>No Kontrak</th>
                     <th>Nama Perusahaan</th>
-                    <th>Jumlah Replas</th>
                     <th>Total Nilai</th>
-                    <th>Claim Susut</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -53,11 +50,8 @@
                       <td><input type="checkbox" name="id[]" class="select-row" value="<?php echo $row->id_project; ?>" /></td>
                       <td><?php echo $no; ?></td>
                       <td><?php echo $row->no_do; ?></td>
-                      <td><?php echo $row->no_kontrak; ?></td>
                       <td><?php echo $row->nama_perusahaan; ?></td>
-                      <td><?php echo $row->total_replas; ?></td>
                       <td>Rp <?php echo number_format($row->total_nilai, 0, "", "."); ?></td>
-                      <td>Rp <?php echo number_format($row->total_biaya_claim_invoice, 0, "", "."); ?></td>
                       <td class="project-actions text-right">
                         <a class="btn btn-success btn-sm" target="_blank" href="<?php echo base_url(); ?>project/view/<?php echo $row->id_project; ?>" data-toggle="tooltip" data-placement="top" title="Detail Project">
                           <i class="fas fa-folder">
@@ -72,11 +66,8 @@
                     <th></th>
                     <th>No</th>
                     <th>No DO</th>
-                    <th>No Kontrak</th>
                     <th>Nama Perusahaan</th>
-                    <th>Jumlah Replas</th>
                     <th>Total Nilai</th>
-                    <th>Claim Susut</th>
                     <th></th>
                   </tr>
                 </tfoot>
