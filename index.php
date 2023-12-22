@@ -14,7 +14,7 @@
 <body>
   <section class="page-1">
     <article class="article text-center">
-      <img src="images/logo_depan.png" width="500" class="" />
+      <img src="images/logo_depan.png" width="500" class="logo" alt="raja wali sampit" title="Raja Wali Sampit" />
       <h2>GENERAL CONTRACTOR - TRADING - TRANSPORTER</h2>
     </article>
     <div class="parallax"></div>
@@ -48,35 +48,35 @@
           kami.</p>
         <div class="row mt-5">
           <div class="col">
-            <img src="images/pupuk.png" width="80px" />
+            <img src="images/pupuk.png" width="80px" alt="raja wali sampit" title="Raja Wali Sampit" />
             <h3 class="text-white mt-3">Pupuk</h3>
           </div>
           <div class="col">
-            <img src="images/kernel.png" width="80px" />
+            <img src="images/kernel.png" width="80px" alt="raja wali sampit" title="Raja Wali Sampit" />
             <h3 class="text-white mt-3">Kernel</h3>
           </div>
           <div class="col">
-            <img src="images/cangkang.png" width="80px" />
+            <img src="images/cangkang.png" width="80px" alt="raja wali sampit" title="Raja Wali Sampit" />
             <h3 class="text-white mt-3">Cangkang</h3>
           </div>
           <div class="col">
-            <img src="images/bungkil.png" width="80px" />
+            <img src="images/bungkil.png" width="80px" alt="raja wali sampit" title="Raja Wali Sampit" />
             <h3 class="text-white mt-3">Bungkil</h3>
           </div>
           <div class="col">
-            <img src="images/sawit.png" width="80px" />
+            <img src="images/sawit.png" width="80px" alt="raja wali sampit" title="Raja Wali Sampit" />
             <h3 class="text-white mt-3">Sawit</h3>
           </div>
           <div class="col">
-            <img src="images/bata.png" width="80px" />
+            <img src="images/bata.png" width="80px" alt="raja wali sampit" title="Raja Wali Sampit" />
             <h3 class="text-white mt-3">Bata</h3>
           </div>
           <div class="col">
-            <img src="images/semen.png" width="80px" />
+            <img src="images/semen.png" width="80px" alt="raja wali sampit" title="Raja Wali Sampit" />
             <h3 class="text-white mt-3">Semen</h3>
           </div>
           <div class="col">
-            <img src="images/pasir.png" width="80px" />
+            <img src="images/pasir.png" width="80px" alt="raja wali sampit" title="Raja Wali Sampit" />
             <h3 class="text-white mt-3">Pasir</h3>
           </div>
         </div>
@@ -96,7 +96,7 @@
         <div class="row mt-5">
           <div class="col-md-3">
 
-            <img src="images/logo_depan.png" width="100%" class="" />
+            <img src="images/logo_depan.png" width="100%" class="logo" alt="raja wali sampit" title="Raja Wali Sampit" />
           </div>
           <div class="col-md-8">
             <ul class="p-0 m-0 mt-5">
@@ -110,11 +110,11 @@
               </li>
               <li class="d-flex">
                 <img src="images/mail.png" width="30" height="30"/>
-                <p class="text-white ml-3">info@rajawalisampit.com</p>
+                <p class="text-white ml-3"><a href="mailto:info@rajawalisampit.com">info@rajawalisampit.com</a></p>
               </li>
               <li class="d-flex">
                 <img src="images/web.png" width="30" height="30"/>
-                <p class="text-white ml-3">https://rajawalisampit.com/</p>
+                <p class="text-white ml-3"><a href="https://rajawalisampit.com/">https://rajawalisampit.com/</a></p>
               </li>
             </ul>
           </div>

@@ -1,5 +1,5 @@
 body{
-  line-height: 1.8em;
+  line-height: 1.9em;
 }
 section {
     position: relative;
@@ -19,10 +19,17 @@ article{
   }
   section h1 {
     color: #FFF;
-    font-size: 65px;
+    font-size: 50px;
     font-weight: bold;
     line-height: 64px;
     margin-bottom: 14px;
+  }
+  a{
+    color: #FFF;
+  }
+  a:hover{
+    color: #FFF;
+    text-decoration: underline;
   }
 
   
@@ -52,8 +59,38 @@ article{
   }
   .article h2{
     color: #FFF;
+    font-size: 30px;
+    font-weight: 300;
   }
 
   article h3{
     font-size: 18px;
+  }
+
+  @media (max-width: 576px) {
+    .logo{
+      width: 80%;
+    }
+    section h1 {
+      font-size: 30px;
+      text-align: center;
+    }
+    section{
+      height: auto;
+      padding: 50px 0;
+      background-size: cover;
+    }
+
+    .article h2{
+      font-size: 18px;
+    }
+    .mt-5{
+      margin-top: 1rem !important;
+    }
+    .page-2 > div:nth-of-type(1){
+      height: 100%;
+    }
+    .col{
+      margin-top: 20px;
+    }
   }
