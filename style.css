@@ -1,0 +1,59 @@
+body{
+  line-height: 1.8em;
+}
+section {
+    position: relative;
+    width: 100% !important;
+    height: 100vh;
+    overflow: hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color: #11123e;
+  }
+article{
+  width: 100%;
+  }
+  article p{
+    font-size: 18px;
+  }
+  section h1 {
+    color: #FFF;
+    font-size: 65px;
+    font-weight: bold;
+    line-height: 64px;
+    margin-bottom: 14px;
+  }
+
+  
+  .page-1 > div:nth-of-type(1) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(images/bg2.jpg) no-repeat fixed;
+    background-size: cover;
+  }
+
+  .page-2 > div:nth-of-type(1) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: url(images/komodity.jpg) no-repeat fixed;
+    background-size: cover;
+  }
+
+  .article{
+    position: relative;
+    z-index: 99;
+  }
+  .article h2{
+    color: #FFF;
+  }
+
+  article h3{
+    font-size: 18px;
+  }
