@@ -188,7 +188,7 @@
       var toSection = $(getAttr).offset().top;
       $("html, body").animate({
         scrollTop: toSection
-      }, 1000)
+      }, 700)
     });
   }
   //Call Function
