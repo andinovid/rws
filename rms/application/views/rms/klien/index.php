@@ -32,7 +32,6 @@
               <table class="table table-bordered table-striped data-table">
                 <thead>
                   <tr>
-                    <th>No</th>
                     <th>Nama Klien</th>
                     <th>Alamat</th>
                     <th>Email</th>
@@ -42,12 +41,9 @@
                 </thead>
                 <tbody>
                   <?php
-                  $no = 0;
                   foreach ($klien as $row) :
-                    $no++;
                   ?>
                     <tr>
-                      <td><?php echo $no; ?></td>
                       <td><?php echo $row->nama_perusahaan; ?></td>
                       <td><?php echo $row->alamat; ?></td>
                       <td><?php echo $row->email; ?></td>
@@ -71,7 +67,6 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>No</th>
                     <th>Nama Klien</th>
                     <th>Alamat</th>
                     <th>Email</th>
@@ -201,9 +196,9 @@
       },
       success: function(data) {
         for (var i = 0; i < data.length; i++) {
-          $('[name="nama"]').val(data[i].nama_perusahaan);
+          $('[name="nama_perusahaan"]').val(data[i].nama_perusahaan);
           $('[name="alamat"]').val(data[i].alamat);
-          $('[name="email"]').val(data[i].alamat);
+          $('[name="email"]').val(data[i].email);
           $('[name="no_tlp"]').val(data[i].no_tlp);
         }
       },

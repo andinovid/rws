@@ -24,9 +24,8 @@
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered " id="tbl_replas">
-                  <thead class="thead-dark">
+                  <thead >
                     <tr>
-                      <th class="text-center align-middle">#</th>
                       <th class="text-center align-middle">Tanggal Input</th>
                       <th class="text-center align-middle">Tanggal Input</th>
                       <th class="text-center align-middle">Supir</th>
@@ -43,13 +42,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php $no = 0;
-                    foreach ($rekap as $row) : $no++;
+                    <?php 
+                    foreach ($rekap as $row) : 
                       $old_date = $row->tanggal_input;
                       $old_date_timestamp = strtotime($old_date);
                     ?>
                       <tr>
-                        <td><?php echo $no; ?></td>
                         <td><?php echo date('Y-m-d', $old_date_timestamp); ?></td>
                         <td><?php echo shortdate_indo($row->tanggal_input); ?></td>
                         <td><?php echo $row->nama_supir; ?></td>

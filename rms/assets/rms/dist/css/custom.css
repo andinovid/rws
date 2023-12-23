@@ -242,7 +242,7 @@ table.dataTable tbody tr>.dtfc-fixed-right{
   border-left: 1px solid #DDD;
 }
 
-table.dataTable.nowrap th, table.dataTable.nowrap td {
+table.dataTable td, table.dataTable th {
   white-space: nowrap;
   font-size: 14px;
 }

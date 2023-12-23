@@ -31,7 +31,6 @@
               <table class="table table-bordered table-striped data-table">
                 <thead>
                   <tr>
-                    <th>No</th>
                     <th>No DO</th>
                     <th>No Kontrak</th>
                     <th>Klien</th>
@@ -45,12 +44,9 @@
                 <tbody>
 
                   <?php
-                  $no = 0;
                   foreach ($project as $row) :
-                    $no++;
                   ?>
                     <tr>
-                      <td><?php echo $no; ?></td>
                       <td><a class="text-dark" href="<?php echo base_url(); ?>project/view/<?php echo $row->id_project; ?>"><u><?php echo $row->no_do; ?></u></a></td>
                       <td><?php echo $row->no_kontrak; ?></td>
                       <td><?php echo $row->nama_perusahaan; ?></td>
@@ -98,7 +94,6 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>No</th>
                     <th>No DO</th>
                     <th>No Kontrak</th>
                     <th>Klien</th>
