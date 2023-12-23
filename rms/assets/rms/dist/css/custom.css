@@ -1,3 +1,4 @@
+
 .sidebar-mini .nav-legacy>.nav-item .nav-link .nav-icon, .sidebar-mini-md .nav-legacy>.nav-item .nav-link .nav-icon, .sidebar-mini-xs .nav-legacy>.nav-item .nav-link .nav-icon{
     margin-left: 0px !important;
   }
@@ -231,4 +232,17 @@
 .user-panel img{
   height: 2.1rem;
     width: 2.1rem;
+}
+
+table.dataTable tbody tr>.dtfc-fixed-left{
+  border-right: 1px solid #DDD;
+}
+table.dataTable tbody tr>.dtfc-fixed-right{
+
+  border-left: 1px solid #DDD;
+}
+
+table.dataTable.nowrap th, table.dataTable.nowrap td {
+  white-space: nowrap;
+  font-size: 14px;
 }

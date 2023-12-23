@@ -197,8 +197,8 @@
   $(document).ready(function() {
     $(window).scroll(function() {
       var scroll = $(window).scrollTop();
-      if (scroll > 300) {
-        $(".navbar").css("background", "rgba(0, 0, 0, 0.7)");
+      if (scroll > 200) {
+        $(".navbar").css("background", "rgba(0, 0, 0, 0.8)");
       } else {
         $(".navbar").css("background", "rgba(0, 0, 0, 0)");
       }

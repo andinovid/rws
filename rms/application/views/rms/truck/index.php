@@ -39,10 +39,9 @@
               </ul>
               <div class="tab-content pt-3" id="custom-content-above-tabContent">
                 <div class="tab-pane fade show active" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
-                  <table class="table table-bordered table-striped data-table">
+                  <table class="table data-table-fixed display nowrap">
                     <thead>
                       <tr>
-                        <th>No</th>
                         <th>Nopol</th>
                         <th>Jenis Truk</th>
                         <th>Oddo saat ini</th>
@@ -59,12 +58,9 @@
                     <tbody>
 
                       <?php
-                      $no = 0;
                       foreach ($truck_rws as $row) :
-                        $no++;
                       ?>
                         <tr>
-                          <td><?php echo $no; ?></td>
                           <td><?php echo $row->nopol; ?></td>
                           <td><?php echo $row->jenis_truck; ?></td>
                           <td><img src="<?php echo base_url(); ?>assets/rms/dist/img/dashboard2.png" width="25" class="mr-2" style="margin-top: -3px;"><?php echo number_format($row->oddo_terakhir, 0, "", "."); ?> KM</td>
@@ -234,11 +230,11 @@
                           <td><?php echo $row->nama_supir; ?></td>
 
                           <td class="project-actions text-right">
-                            <a class="btn btn-success btn-sm mb-1" href="<?php echo base_url(); ?>truck/view/<?php echo $row->id_truck; ?>" data-toggle="tooltip" data-placement="top" title="Detail Truk">
+                            <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>truck/view/<?php echo $row->id_truck; ?>" data-toggle="tooltip" data-placement="top" title="Detail Truk">
                               <i class="fas fa-folder">
                               </i>
                             </a>
-                            <a class="btn btn-success btn-sm mb-1" href="javascript:void(0);" onclick="edit(<?php echo $row->id_truck; ?>)" data-toggle="tooltip" data-placement="top" title="Edit Truk">
+                            <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_truck; ?>)" data-toggle="tooltip" data-placement="top" title="Edit Truk">
                               <i class="fas fa-pencil-alt">
                               </i>
                             </a>
@@ -252,7 +248,6 @@
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>No</th>
                         <th>Nopol</th>
                         <th>Jenis Truk</th>
                         <th>Oddo saat ini</th>
