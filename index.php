@@ -61,7 +61,7 @@
   <section class="page-2" id="komoditas">
     <article class="article text-center">
       <div class="container">
-        <img src="images/commodity.png" width="60" />
+        <img src="images/dump-truck.png" width="60" />
         <h1 class="text-center mt-3">
           KOMODITAS ANGKUT
         </h1>
