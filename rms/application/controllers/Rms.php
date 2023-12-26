@@ -123,7 +123,7 @@ class Rms extends CI_Controller
 
     function non_do()
     {
-        $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE non_do = '1'")->result();
+        $data['rekap'] = $this->rms_model->get("v_rekap", "WHERE non_do = '1' ORDER BY tanggal_input DESC")->result();
         $data['klien'] = $this->rms_model->get("tbl_klien")->result();
         $data['truck'] = $this->rms_model->get("tbl_truck")->result();
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
