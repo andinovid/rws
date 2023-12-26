@@ -70,7 +70,7 @@
                           } ?></td>
                       <td><?php echo $row->nama_supir; ?></td>
                       <td><?php echo $row->nopol; ?></td>
-                      <td><?php echo $row->nama_tujuan; ?></td>
+                      <td><?php echo $row->kode_tujuan; ?></td>
                       <td><?php echo number_format($row->timbang_kebun_bag, 0, "", "."); ?></td>
                       <td><?php echo number_format($row->timbang_kebun_kg, 0, "", "."); ?> Kg</td>
                       <td><?php echo number_format($row->qty_kirim_bag, 0, "", "."); ?></td>
