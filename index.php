@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CV Raja Wali Sampit</title>
   <meta name="description" content="CV Raja Wali Sampit adalah perusahaan penyedia jasa angkutan / transporter yang berbasis di Sampit, Kalimantan Tengah.">
-  <meta name="robots" content="noindex,nofollow">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
