@@ -29,12 +29,11 @@
             <!-- /.card-header -->
             <div class="card-body">
 
-              <table class="table table-bordered table-striped data-table">
+              <table class="table data-table">
                 <thead>
                   <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>Foto</th>
                     <th>Qty</th>
                     <th>Harga</th>
                     <th></th>
@@ -49,7 +48,6 @@
                     <tr>
                       <td><?php echo $no; ?></td>
                       <td><?php echo $row->nama; ?></td>
-                      <td><?php if($row->foto){ ?> <img src="<?php echo base_url(); ?>assets/rms/documents/sparepart/<?php echo $row->foto; ?>"/> <?php }else{ ?> <img src="<?php echo base_url(); ?>assets/rms/dist/img/no-photo.jpg"/>  <?php } ?></td>
                       <td><?php echo number_format($row->qty, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($row->harga, 0, "", "."); ?></td>
                       <td class="project-actions text-right">
@@ -69,16 +67,6 @@
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Foto</th>
-                    <th>Qty</th>
-                    <th>Harga</th>
-                    <th></th>
-                  </tr>
-                </tfoot>
               </table>
             </div>
             <!-- /.card-body -->

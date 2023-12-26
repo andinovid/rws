@@ -29,7 +29,7 @@
             <!-- /.card-header -->
             <div class="card-body">
 
-              <table class="table table-bordered table-striped data-table" id="tbl-invoice">
+              <table class="table data-table" id="tbl-invoice">
                 <thead>
                   <tr>
                     <th id="total_selected"></th>

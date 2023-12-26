@@ -29,10 +29,9 @@
             <!-- /.card-header -->
             <div class="card-body">
 
-              <table class="table table-bordered table-striped data-table">
+              <table class="table data-table">
                 <thead>
                   <tr>
-                    <th>No</th>
                     <th style="width: 15%;">Tanggal</th>
                     <th>Jenis</th>
                     <th style="width: 10%;">Jumlah</th>
@@ -42,12 +41,9 @@
                 </thead>
                 <tbody>
                   <?php
-                  $no = 0;
                   foreach ($keuangan as $row) :
-                    $no++;
                   ?>
                     <tr>
-                      <td><?php echo $no; ?></td>
                       <td><?php echo shortdate_indo($row->tanggal); ?></td>
                       <td>
                         <?php if ($row->jenis == '1') { ?>
@@ -74,7 +70,7 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th colspan="3" class="text-right">Saldo :</th>
+                    <th colspan="2" class="text-right">Saldo :</th>
                     <th><span style="font-weight: 400;"></span> Rp <?php echo number_format($saldo->total, 0, "", "."); ?></th>
                     <th colspan="2"></th>
                   </tr>
@@ -98,7 +94,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered table-striped">
+              <table class="table">
                 <thead>
                   <tr>
                     <th>Periode</th>

@@ -23,22 +23,19 @@
             <!-- /.card-header -->
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered " id="tbl_replas">
+                <table class="table " id="tbl_replas">
                   <thead >
                     <tr>
-                      <th class="text-center align-middle">Tanggal Input</th>
-                      <th class="text-center align-middle">Tanggal Input</th>
-                      <th class="text-center align-middle">Supir</th>
-                      <th class="text-center align-middle">Nopol</th>
-                      <th class="text-center align-middle">Komoditas</th>
-                      <th class="text-center align-middle">Tujuan</th>
-                      <th class="text-center align-middle">Qty</th>
-                      <th class="text-center align-middle">Harga</th>
-                      <th class="text-center align-middle">Harga Supir</th>
-                      <th class="text-center align-middle">Uang Sangu</th>
-                      <th class="text-center align-middle">Grand Total</th>
-                      <th class="text-center align-middle">Status</th>
-                      <th class="text-center align-middle" style="width: 10%;"></th>
+                      <th class="align-middle">Supir</th>
+                      <th class="align-middle">Nopol</th>
+                      <th class="align-middle">Komoditas</th>
+                      <th class="align-middle">Tujuan</th>
+                      <th class="align-middle">Qty</th>
+                      <th class="align-middle">Harga</th>
+                      <th class="align-middle">Harga Supir</th>
+                      <th class="align-middle">Uang Sangu</th>
+                      <th class="align-middle">Grand Total</th>
+                      <th class="align-middle"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -48,8 +45,6 @@
                       $old_date_timestamp = strtotime($old_date);
                     ?>
                       <tr>
-                        <td><?php echo date('Y-m-d', $old_date_timestamp); ?></td>
-                        <td><?php echo shortdate_indo($row->tanggal_input); ?></td>
                         <td><?php echo $row->nama_supir; ?></td>
                         <td><?php echo $row->nopol; ?></td>
                         <td><?php echo $row->komoditas; ?></td>
@@ -59,7 +54,6 @@
                         <td><?php echo 'Rp ' . number_format($row->non_do_harga_vendor, 0, "", "."); ?></td>
                         <td><?php echo 'Rp ' . number_format($row->uang_sangu, 0, "", "."); ?></td>
                         <td><?php echo 'Rp ' . number_format($row->grand_total, 0, "", "."); ?></td>
-                        <td><span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php if ($row->status == '0') { ?>Belum dibayar <?php } else { ?> Sudah dibayar <?php } ?></span></td>
                         <td class="project-actions text-right">
 
                           <a class="btn btn-warning btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_rekap; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">

@@ -38,7 +38,7 @@
               </ul>
               <div class="tab-content pt-3" id="custom-content-above-tabContent">
                 <div class="tab-pane fade show active" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
-                  <table class="table table-bordered table-striped data-table">
+                  <table class="table data-table">
                     <thead>
                       <tr>
                         <th>No</th>
@@ -83,21 +83,11 @@
                         </tr>
                       <?php endforeach; ?>
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Telepon</th>
-                        <th>No KTP</th>
-                        <th>No SIM</th>
-                        <th>Kategori</th>
-                        <th></th>
-                      </tr>
-                    </tfoot>
+                    
                   </table>
                 </div>
                 <div class="tab-pane fade show" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
-                  <table class="table table-bordered table-striped data-table">
+                  <table class="table data-table">
                     <thead>
                       <tr>
                         <th>No</th>
@@ -142,17 +132,7 @@
                         </tr>
                       <?php endforeach; ?>
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Telepon</th>
-                        <th>No KTP</th>
-                        <th>No SIM</th>
-                        <th>Kategori</th>
-                        <th></th>
-                      </tr>
-                    </tfoot>
+                    
                   </table>
                 </div>
               </div>

@@ -264,7 +264,37 @@
           "colvis"
         ]
       })
-      var $container = $(".tab-pane");
+
+      $(".data-table-fixed2").DataTable({
+        fixedColumns: {
+          left: 2,
+          right: 1
+        },
+
+        "responsive": true,
+        "scrollCollapse": true,
+        "scrollX": true,
+        "responsive": false,
+        "lengthChange": false,
+        "autoWidth": false,
+        "ordering": false,
+        "pageLength": 20,
+        "buttons": [{
+            extend: 'pdfHtml5',
+            exportOptions: {
+              columns: ':visible'
+            }
+          },
+          {
+            extend: 'excelHtml5',
+            exportOptions: {
+              columns: ':visible'
+            }
+          },
+          "colvis"
+        ]
+      })
+      var $container = $(".fixed-table");
       var $scroller = $(".dataTables_scrollBody");;
 
       bindDragScroll($container, $scroller);

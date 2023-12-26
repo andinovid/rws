@@ -38,7 +38,7 @@
                 </li>
               </ul>
               <div class="tab-content pt-3" id="custom-content-above-tabContent">
-                <div class="tab-pane fade show active" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
+                <div class="tab-pane fade show active fixed-table" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
                   <table class="table data-table-fixed display nowrap">
                     <thead>
                       <tr>
@@ -52,7 +52,7 @@
                         <th>Pajak 5 Tahunan</th>
                         <th>KIR</th>
                         <th>Supir</th>
-                        <th></th>
+                        <th>#</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -246,21 +246,7 @@
                         </tr>
                       <?php endforeach; ?>
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Nopol</th>
-                        <th>Jenis Truk</th>
-                        <th>Oddo saat ini</th>
-                        <th>Oli Mesin</th>
-                        <th>Oli Gardan</th>
-                        <th>Oli Transmisi</th>
-                        <th>Pajak Tahunan</th>
-                        <th>Pajak 5 Tahunan</th>
-                        <th>KIR</th>
-                        <th>Supir</th>
-                        <th></th>
-                      </tr>
-                    </tfoot>
+                    
                   </table>
                 </div>
                 <div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">

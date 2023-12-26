@@ -161,7 +161,7 @@ SELECT
         0
         ELSE
         CASE WHEN CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) > ROUND(CONCAT(`b`.`timbang_kebun_kg` * (`a`.`toleransi_susut` / 100)), 1) THEN 
-        CONCAT(CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - ROUND(CONCAT(`b`.`timbang_kebun_kg` * (`a`.`toleransi_susut` / 100)), 1)) * `a`.`claim` ELSE 0
+            CONCAT(CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - ROUND(CONCAT(`b`.`timbang_kebun_kg` * (`a`.`toleransi_susut` / 100)), 1)) * `a`.`claim` ELSE 0
         END 
     END AS `total_claim_invoice`,
 
@@ -194,7 +194,7 @@ SELECT
         END 
 
     WHEN `a`.`id_komoditas` = '2' THEN
-        CASE WHEN `a`.`id_klien` = '9' || `a`.`id_klien` = '8'
+        CASE WHEN `a`.`id_klien` = '9' || `a`.`id_klien` = '8' THEN
             CASE WHEN CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) > ROUND(CONCAT(`b`.`timbang_kebun_kg` * (`a`.`toleransi_susut` / 100)), 1) THEN 
             CONCAT(`b`.`qty_kirim_kg` * `a`.`harga_unit`) - CONCAT(CONCAT(CONCAT(`b`.`timbang_kebun_kg` - `b`.`qty_kirim_kg`) - ROUND(CONCAT(`b`.`timbang_kebun_kg` * (`a`.`toleransi_susut` / 100)), 1)) * `a`.`claim`) 
             WHEN `a`.`id_klien` = '7' THEN 

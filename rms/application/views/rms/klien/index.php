@@ -29,13 +29,10 @@
             <!-- /.card-header -->
             <div class="card-body">
 
-              <table class="table table-bordered table-striped data-table">
+              <table class="table data-table">
                 <thead>
                   <tr>
                     <th>Nama Klien</th>
-                    <th>Alamat</th>
-                    <th>Email</th>
-                    <th>No TLP</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -45,9 +42,6 @@
                   ?>
                     <tr>
                       <td><?php echo $row->nama_perusahaan; ?></td>
-                      <td><?php echo $row->alamat; ?></td>
-                      <td><?php echo $row->email; ?></td>
-                      <td><?php echo $row->no_tlp; ?></td>
                       <td class="project-actions text-right" style="width: 12%;">
                         <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/klien/view/<?php echo $row->id; ?>" data-toggle="tooltip" data-placement="top" title="Detail klien">
                           <i class="fas fa-folder">
@@ -68,9 +62,6 @@
                 <tfoot>
                   <tr>
                     <th>Nama Klien</th>
-                    <th>Alamat</th>
-                    <th>Email</th>
-                    <th>No TLP</th>
                     <th></th>
                   </tr>
                 </tfoot>

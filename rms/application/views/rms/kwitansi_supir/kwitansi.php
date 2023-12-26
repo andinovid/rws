@@ -28,10 +28,9 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered table-striped" id="tbl_replas">
+              <table class="table " id="tbl_replas">
                 <thead>
                   <tr>
-                    <th>No</th>
                     <th>Nopol</th>
                     <th>Supir</th>
                     <th>Tgl Input</th>
@@ -47,12 +46,9 @@
                 </thead>
                 <tbody>
                   <?php
-                  $no = 0;
                   foreach ($kwitansi as $row) :
-                    $no++;
                   ?>
                     <tr>
-                      <td><?php echo $no; ?></td>
                       <td><?php echo $row->nopol; ?></td>
                       <td><?php echo $row->nama_supir; ?></td>
                       <td><?php echo shortdate_indo($row->tanggal_input); ?></td>

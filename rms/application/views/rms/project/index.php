@@ -28,7 +28,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered table-striped data-table">
+              <table class="table data-table">
                 <thead>
                   <tr>
                     <th>No DO</th>

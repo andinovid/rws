@@ -24,12 +24,11 @@
               <h3 class="card-title">Invoice</h3>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body fixed-table">
 
-              <table class="table table-bordered table-striped data-table" id="tbl-invoice">
+              <table class="table data-table-fixed display nowrap" id="tbl-invoice">
                 <thead>
                   <tr>
-                    <th>No</th>
                     <th>No Invoice</th>
                     <th>Nama Perusahaan</th>
                     <th>Komoditas</th>
@@ -44,12 +43,9 @@
                 </thead>
                 <tbody>
                   <?php
-                  $no = 0;
                   foreach ($invoice as $row) :
-                    $no++;
                   ?>
                     <tr>
-                      <td><?php echo $no; ?></td>
                       <td><?php echo $row->no_invoice; ?></td>
                       <td><?php echo $row->nama_perusahaan; ?></td>
                       <td><?php echo $row->komoditas; ?></td>
@@ -83,21 +79,6 @@
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th>No</th>
-                    <th>No Invoice</th>
-                    <th>Nama Perusahaan</th>
-                    <th>Komoditas</th>
-                    <th>Total Nilai</th>
-                    <th>PPh</th>
-                    <th>PPn</th>
-                    <th>Claim Susut</th>
-                    <th>Grand Total</th>
-                    <th>Status</th>
-                    <th></th>
-                  </tr>
-                </tfoot>
               </table>
             </div>
             <!-- /.card-body -->

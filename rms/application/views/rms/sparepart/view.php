@@ -25,7 +25,10 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
+                  <?php if ($sparepart->foto) { ?> <img src="<?php echo base_url(); ?>assets/rms/documents/sparepart/<?php echo $sparepart->foto; ?>"  style="width: 100%;"/> <?php } else { ?> <img src="<?php echo base_url(); ?>assets/rms/dist/img/no-photo.jpg" style="width: 100%;"/> <?php } ?>
+                </div>
+                <div class="col-md-6">
                   <div class="text-muted">
                     <p class="text-sm">Qty
                       <b class="d-block"><?php echo $sparepart->qty; ?></b>

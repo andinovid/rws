@@ -243,6 +243,18 @@ table.dataTable tbody tr>.dtfc-fixed-right{
 }
 
 table.dataTable td, table.dataTable th {
-  white-space: nowrap;
   font-size: 14px;
+}
+
+::-webkit-scrollbar {
+  width: .4em; 
+  height: 5px;
+}
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb {
+  overflow:visible;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.2); 
 }

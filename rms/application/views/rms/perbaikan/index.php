@@ -29,35 +29,29 @@
             <!-- /.card-header -->
             <div class="card-body">
 
-              <table class="table table-bordered table-striped data-table">
+              <table class="table data-table">
                 <thead>
                   <tr>
-                    <th>No</th>
-                    <th style="width: 10%;">Nopol Truk</th>
-                    <th style="width: 30%;">Jenis</th>
+                    <th>Nopol Truk</th>
                     <th>Supir</th>
-                    <th style="width: 13%;">Tanggal Perbaikan</th>
+                    <th style="width: 30%;">Jenis</th>
+                    <th>Tanggal Perbaikan</th>
                     <th>Jumlah</th>
-                    <th>Nota</th>
                     <th>Status</th>
-                    <th style="width: 10%;"></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
 
                   <?php
-                  $no = 0;
                   foreach ($perbaikan as $row) :
-                    $no++;
                   ?>
                     <tr>
-                      <td><?php echo $no; ?></td>
                       <td><?php echo $row->nopol; ?></td>
-                      <td><?php echo $row->jenis_perbaikan; ?></td>
                       <td><?php echo $row->nama_supir; ?></td>
+                      <td><?php echo $row->jenis_perbaikan; ?></td>
                       <td><?php echo shortdate_indo($row->tanggal_perbaikan); ?></td>
                       <td><?php echo number_format($row->jumlah, 0, "", "."); ?></td>
-                      <td><?php if ($row->nota) { ?> <a href="javascript:void(0);" class="lihat-nota" data-rel="<?php echo base_url(); ?>assets/rms/documents/nota_perbaikan/<?php echo $row->nota; ?>">Lihat nota</a> <?php } else { ?> - <?php } ?></td>
                       <td>
                         <span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span>
                       </td>
@@ -75,19 +69,7 @@
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th>No</th>
-                    <th>Nopol Truk</th>
-                    <th>Jenis</th>
-                    <th>Supir</th>
-                    <th>Tanggal Perbaikan</th>
-                    <th>Jumlah</th>
-                    <th>Nota</th>
-                    <th>Status</th>
-                    <th></th>
-                  </tr>
-                </tfoot>
+                
               </table>
             </div>
             <!-- /.card-body -->

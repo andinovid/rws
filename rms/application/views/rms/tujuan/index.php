@@ -29,10 +29,9 @@
             <!-- /.card-header -->
             <div class="card-body">
 
-              <table class="table table-bordered table-striped data-table">
+              <table class="table data-table">
                 <thead>
                   <tr>
-                    <th>No</th>
                     <th>Kode</th>
                     <th>Nama Perusahaan</th>
                     <th>Harga</th>
@@ -41,12 +40,9 @@
                 </thead>
                 <tbody>
                   <?php
-                  $no = 0;
                   foreach ($tujuan as $row) :
-                    $no++;
                   ?>
                     <tr>
-                      <td><?php echo $no; ?></td>
                       <td><?php echo $row->kode_tujuan; ?></td>
                       <td><?php echo $row->nama_tujuan; ?></td>
                       <td>Rp <?php echo number_format($row->harga, 0, "", "."); ?></td>
@@ -66,7 +62,6 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>No</th>
                     <th>Kode</th>
                     <th>Nama Perusahaan</th>
                     <th>Harga</th>

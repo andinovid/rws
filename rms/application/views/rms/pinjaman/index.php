@@ -29,10 +29,9 @@
             <!-- /.card-header -->
             <div class="card-body">
 
-              <table class="table table-bordered table-striped data-table">
+              <table class="table data-table">
                 <thead>
                   <tr>
-                    <th>No</th>
                     <th>Nopol</th>
                     <th>Supir</th>
                     <th>Jumlah Pinjaman</th>
@@ -45,12 +44,9 @@
                 </thead>
                 <tbody>
                   <?php
-                  $no = 0;
                   foreach ($pinjaman as $row) :
-                    $no++;
                   ?>
                     <tr>
-                      <td><?php echo $no; ?></td>
                       <td><?php echo $row->nopol; ?></td>
                       <td><?php echo $row->nama_supir; ?></td>
                       <td>Rp <?php echo number_format($row->jumlah_pinjaman, 0, "", "."); ?></td>

@@ -28,8 +28,8 @@
               </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
-              <table class="table table-bordered table-striped data-table" id="tbl-rekap">
+            <div class="card-body fixed-table">
+              <table class="table data-table-fixed2 display nowrap" id="tbl-rekap">
                 <thead>
                   <tr>
                     <th rowspan="2" class="text-center align-middle">#</th>

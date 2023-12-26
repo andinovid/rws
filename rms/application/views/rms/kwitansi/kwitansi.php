@@ -36,34 +36,28 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered table-striped data-table">
+              <table class="table data-table">
                 <thead>
                   <tr>
-                    <th>No</th>
                     <th>No Kwitansi</th>
                     <th>Vendor</th>
                     <th>Komoditas</th>
                     <th>Tujuan</th>
                     <th>Jumlah Replas</th>
-                    <th>Total</th>
                     <th>Grand Total</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  $no = 0;
                   foreach ($kwitansi as $row) :
-                    $no++;
                   ?>
                     <tr>
-                      <td><?php echo $no; ?></td>
                       <td><?php echo $row->no_kwitansi; ?></td>
                       <td><?php echo $row->vendor; ?></td>
                       <td><?php echo $row->komoditas; ?></td>
                       <td><?php echo $row->kode_tujuan; ?></td>
                       <td><?php echo $row->total_replas; ?></td>
-                      <td>Rp <?php echo number_format($row->total_kotor_replas, 0, "", "."); ?></td>
                       <td>Rp <?php echo number_format($row->grand_total, 0, "", "."); ?></td>
                       </td>
                       <td class="project-actions text-right">
