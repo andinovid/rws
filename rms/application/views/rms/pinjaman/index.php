@@ -32,8 +32,8 @@
               <table class="table data-table">
                 <thead>
                   <tr>
-                    <th>Nopol</th>
                     <th>Supir</th>
+                    <th>Nopol</th>
                     <th>Jumlah Pinjaman</th>
                     <th>Tanggal</th>
                     <th>Untuk Periode</th>
@@ -47,8 +47,8 @@
                   foreach ($pinjaman as $row) :
                   ?>
                     <tr>
-                      <td><?php echo $row->nopol; ?></td>
                       <td><?php echo $row->nama_supir; ?></td>
+                      <td><?php echo $row->nopol; ?></td>
                       <td>Rp <?php echo number_format($row->jumlah_pinjaman, 0, "", "."); ?></td>
                       <td><?php echo shortdate_indo($row->tanggal); ?></td>
                       <td><?php echo bulan($row->periode_bulan) . ' ' . $row->periode_tahun; ?></td>
