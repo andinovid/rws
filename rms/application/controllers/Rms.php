@@ -3565,6 +3565,12 @@ class Rms extends CI_Controller
             }
         }
 
+        if ($data_project->id_klien == '6') {
+            $excel->setActiveSheetIndex(0)->setCellValue('R3', "TGL BONGKAR");
+            $excel->getActiveSheet()->mergeCells('R3:R4');
+            $excel->getActiveSheet()->getStyle('R3')->applyFromArray($style_col);
+            $excel->getActiveSheet()->getStyle('R4')->applyFromArray($style_col);
+        }
 
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
         $numrow = 5; // Set baris pertama untuk isi tabel adalah baris ke 4
@@ -3627,6 +3633,11 @@ class Rms extends CI_Controller
                     $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->qty_kirim_kg);
                     $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data->m_susut);
                 }
+            }
+            
+            if ($data_project->id_klien == '6') {
+                
+                $excel->setActiveSheetIndex(0)->setCellValue('R' . $numrow, mediumdate_indo($data->tanggal_bongkar));
             }
 
             // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
