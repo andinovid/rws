@@ -83,6 +83,10 @@
                           <div class="mr-auto">Net Profit Komoditas Non DO</div>
                           <div class="gross"><b>Rp <?php echo number_format($non_do->total_keuntungan, 0, "", "."); ?></b></div>
                         </li>
+                        <li class="d-flex">
+                          <div class="mr-auto">Net Profit Potongan Replas</div>
+                          <div class="gross"><b>Rp <?php echo number_format($potongan->total_potongan, 0, "", "."); ?></b></div>
+                        </li>
                       </ul>
                       <li>
                         <h3>Pengeluaran Usaha Komoditas</h3>

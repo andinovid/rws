@@ -1334,9 +1334,11 @@ class Rms extends CI_Controller
             $data['transporter'] = $this->rms_model->get_by_query("SELECT SUM(grand_total) AS total_pemasukan, SUM(operasional) AS total_operasional,SUM(total_perbaikan) AS total_biaya_perbaikan, SUM(premi_supir) AS total_premi_supir, SUM(cicilan) AS total_cicilan, SUM(total_keuntungan) AS total_bersih  FROM v_laporan_transporter WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
             $data['non_do'] = $this->rms_model->get_by_query("SELECT SUM(keuntungan) AS total_keuntungan FROM v_laporan_non_do WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
             $data['keuangan'] = $this->rms_model->get_by_query("SELECT * from v_laporan_keuangan WHERE bulan = '$bulan' AND tahun = '$tahun'")->row();
+            $data['potongan'] = $this->rms_model->get_by_query("SELECT SUM(jumlah_potongan) AS total_potongan FROM v_kwitansi WHERE periode_bulan = '$bulan' AND periode_tahun = '$tahun'")->row();
 
-            $data['total_komoditas'] = $data['komoditas']->total_bersih + $data['non_do']->total_keuntungan;
-            $data['total_net_profit'] = $data['komoditas']->total_bersih + $data['transporter']->total_bersih + $data['non_do']->total_keuntungan - $data['keuangan']->operasional_kantor - $data['keuangan']->gaji_karyawan - $data['keuangan']->asuransi_karyawan - $data['keuangan']->atensi;
+            $data['total_komoditas'] = $data['komoditas']->total_bersih + $data['non_do']->total_keuntungan + $data['potongan']->total_potongan;
+
+            $data['total_net_profit'] = $data['komoditas']->total_bersih + $data['transporter']->total_bersih + $data['non_do']->total_keuntungan  + $data['potongan']->total_potongan - $data['keuangan']->operasional_kantor - $data['keuangan']->gaji_karyawan - $data['keuangan']->asuransi_karyawan - $data['keuangan']->atensi;
         }
         $data['content'] = 'rms/laporan/index';
         $this->load->view('rms/includes/template', $data);

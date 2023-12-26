@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rajawali Management System</title>
 
+  <link rel="icon" type="image/x-icon" href="<?php echo base_url() ?>assets/rms/dist/img/favicon.ico">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
