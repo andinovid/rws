@@ -14,11 +14,14 @@
             -ms-text-size-adjust: 100%
         }
 
+        @page { margin: 10px 20px; }
+
         body {
             margin: 0 auto;
             width: 95%;
             padding: 0;
             font-size: 11px;
+            line-height: 1.2em;
         }
 
         tr,
@@ -35,10 +38,12 @@
 </head>
 
 <body>
-    <img src="https://rms.rajawalisampit.com/assets/rms/dist/img/kop.png" style="width: 100%;">
-    <h1 style="text-align:center;font-size:22px;margin-top:30px;">INVOICE</h1>
+    <div style="text-align: center;">
+    <img src="https://rms.rajawalisampit.com/assets/rms/dist/img/kop.png" style="width: 90%;">
+    </div>
+    <h1 style="text-align:center;font-size:22px;margin-top:10px;">INVOICE</h1>
 
-    <div style="margin-top:30px;">
+    <div style="margin-top:20px;">
         <div style="display: inline-table; width:20%;vertical-align:top;">
             <label style="vertical-align:top;">NO. INVOICE</label>
         </div>
@@ -49,7 +54,7 @@
             <label style="vertical-align:top;"><?php echo $invoice->no_invoice; ?></label>
         </div>
     </div>
-    <div style="margin-top:5px;">
+    <div>
         <div style="display: inline-table; width:20%; vertical-align:top;">
             <label style="vertical-align:top;">KEPADA YTH.</label>
         </div>
@@ -61,7 +66,7 @@
         </div>
     </div>
     <?php if ($invoice->remark) { ?>
-        <div style="margin-top:5px;">
+        <div>
             <div style="display: inline-table; width:20%; vertical-align:top;">
                 <label style=" vertical-align:top; vertical-align:top;">RE</label>
             </div>
@@ -75,7 +80,7 @@
     <?php } ?>
 
     <?php if ($invoice->no_kontrak AND $invoice->id_klien != '6') { ?>
-        <div style="margin-top:5px;">
+        <div>
             <div style="display: inline-table; width:20%;vertical-align:top;">
                 <label style="vertical-align:top;">NO. KONTRAK</label>
             </div>
@@ -93,7 +98,7 @@
     <?php } ?>
 
     <?php if ($invoice->id_komoditas == '2' || $invoice->id_komoditas == '4' || ($invoice->id_komoditas == '3' and $invoice->id_klien == '1') || $invoice->id_klien == '6') { ?>
-        <div style="margin-top:5px;">
+        <div>
             <div style="display: inline-table; width:20%;vertical-align:top;">
                 <label style="vertical-align:top;">NO. DO</label>
             </div>
@@ -110,7 +115,7 @@
         </div>
     <?php } ?>
 
-    <table class="table table-hover" cellpadding="0" style="width:100%; margin-top:20px; cell-margin:0px; border-spacing:0;">
+    <table class="table table-hover" cellpadding="0" style="width:100%; margin-top:10px; cell-margin:0px; border-spacing:0;">
         <thead style="background-color: #EEE;">
             <tr style="border: 1px solid #111;">
                 <th style="border: 1px solid #111;text-align:center; padding-bottom:10px; width:3%;">No</th>
@@ -194,7 +199,7 @@
             </tr>
         </tbody>
     </table>
-    <div style="margin-top:10px;">
+    <div>
         <div style="display: inline-table; width:20%; vertical-align:top;">
             <label style=" vertical-align:top; vertical-align:top;">Total Tagihan</label>
         </div>
@@ -205,7 +210,7 @@
             <label style="vertical-align:top;">Rp <?php echo number_format($invoice->grand_total, 0, "", "."); ?></label>
         </div>
     </div>
-    <div style="margin-top:10px;">
+    <div>
         <div style="display: inline-table; width:20%; vertical-align:top;">
             <label style=" vertical-align:top; vertical-align:top;">Terbilang</label>
         </div>
@@ -216,18 +221,18 @@
             <label style="vertical-align:top;"><?php echo ucwords(terbilang(number_format($invoice->grand_total, 0, "", ""))); ?> Rupiah</label>
         </div>
     </div>
-    <div style="margin-top:10px;">
+    <div>
         <div style="display: inline-table; width:50%;">
             Seluruh pembayaran dapat dilakukan melalui transfer ke :
         </div>
     </div>
     <?php if ($invoice->id_klien == "2" || $invoice->id_klien == "3" || $invoice->id_klien == "6" || $invoice->id_klien == "4" || $invoice->id_klien == "1") { ?>
-        <div style="margin-top:10px;">
+        <div>
             <div style="display: inline-table; width:50%;">
                 Bank Mandiri Kantor Cabang Sampit
             </div>
         </div>
-        <div style="margin-top:10px;">
+        <div style="margin-top:5px;">
             <div style="display: inline-table; width:20%; vertical-align:top;">
                 <label style=" vertical-align:top;">No Rekening</label>
             </div>
@@ -250,12 +255,12 @@
             </div>
         </div>
     <?php } else { ?>
-        <div style="margin-top:10px;">
+        <div>
             <div style="display: inline-table; width:50%;">
                 Bank BRI Kantor Cabang Sampit
             </div>
         </div>
-        <div style="margin-top:10px;">
+        <div>
             <div style="display: inline-table; width:20%; vertical-align:top;">
                 <label style=" vertical-align:top;">No Rekening</label>
             </div>
