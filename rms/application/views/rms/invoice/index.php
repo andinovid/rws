@@ -71,6 +71,10 @@
                             </i>
                           </a>
                         <?php } ?>
+                        <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_invoice; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
+                          <i class="fas fa-pencil-alt">
+                          </i>
+                        </a>
                         <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_invoice(<?php echo $row->id_invoice; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
                           <i class="fas fa-trash">
                           </i>
@@ -96,7 +100,7 @@
         <form action="<?php echo base_url(); ?>rms/cetak_invoice" id="cetak_invoice1" class="form-horizontal" method="post" enctype="multipart/form-data">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Cetak Invoice</h4>
+              <h4 class="modal-title">Edit Invoice</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -234,6 +238,44 @@
         text: "Silahkan pilih invoice yang akan dicetak!"
       });
     }
+  }
+
+  function edit(id) {
+    $('#sparepart-content').show();
+    load_data_sparepart_perbaikan(id);
+    $("#input-perbaikan").modal('show');
+    $('.modal-title').html('Edit perbaikan');
+    $('input[name=id]').val(id);
+    $.ajax({
+      url: "<?php echo base_url(); ?>rms/edit",
+      type: "POST",
+      data: {
+        'id': id,
+        tbl: "tbl_perbaikan"
+      },
+      dataType: "JSON",
+      beforeSend: function() {
+        $('#form_perbaikan')[0].reset();
+      },
+      success: function(data) {
+        for (var i = 0; i < data.length; i++) {
+
+          $('[name="kategori"]').val(data[i].kategori).change();
+          $('[name="truck"]').val(data[i].id_truck).change();
+          $('[name="nopol"]').val(data[i].nopol);
+          $('[name="supir"]').val(data[i].id_supir).change();
+          $('[name="nama_supir"]').val(data[i].nama_supir);
+          $('[name="jenis"]').val(data[i].jenis);
+          $('[name="tanggal"]').val(data[i].tanggal);
+          $('[name="jumlah"]').val($.number(data[i].jumlah).replace(/\,/g, '.'));
+          $('#label-nota').html(data[i].nota);
+          $('[name="status"]').val(data[i].status).change();
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert('Error get data from ajax');
+      }
+    });
   }
 
   $('#form_bayar_invoice').on('submit', function(event) {
