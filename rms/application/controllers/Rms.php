@@ -83,6 +83,27 @@ class Rms extends CI_Controller
         $this->load->view('rms/includes/template', $data);
     }
 
+    function update_oddo()
+    {
+        $id_supir = $this->sess->id_supir;
+        $data['truck'] = $this->rms_model->get("v_truck", "WHERE id_supir = '$id_supir'")->row();
+        $id_truck = $data['truck']->id_truck;
+        $data['oddo'] = $this->rms_model->get("v_update_oddo", "WHERE id_truck = '$id_truck' ORDER BY tanggal DESC")->result();
+        $data['content'] = 'rms/truck/update_oddo';
+        $this->load->view('rms/includes/template', $data);
+    }
+
+    function update_bbm()
+    {
+        $id_supir = $this->sess->id_supir;
+        $data['truck'] = $this->rms_model->get("v_truck", "WHERE id_supir = '$id_supir'")->row();
+        $id_truck = $data['truck']->id_truck;
+        $data['bbm'] = $this->rms_model->get("v_bbm", "WHERE id_truck = '$id_truck' ORDER BY tanggal DESC")->result();
+        $data['content'] = 'rms/truck/update_bbm';
+        $this->load->view('rms/includes/template', $data);
+    }
+
+
     function project()
     {
         $data['project'] = $this->rms_model->get("v_project", "ORDER BY tanggal_input DESC")->result();
@@ -369,6 +390,7 @@ class Rms extends CI_Controller
         }
     }
 
+
     public function delete_invoice()
     {
         $id = $this->input->POST('id');
@@ -535,6 +557,8 @@ class Rms extends CI_Controller
         $this->load->view('rms/includes/template', $data);
     }
 
+    
+
     function view_truck($id_truck)
     {
         $data['truck'] = $this->rms_model->get("v_truck", "WHERE id_truck = $id_truck")->row();
@@ -546,6 +570,8 @@ class Rms extends CI_Controller
         $data['total_perbaikan'] = $this->rms_model->get_by_query("SELECT SUM(jumlah) as total_perbaikan from v_perbaikan WHERE id_truck = $id_truck")->row();
         $data['bbm'] = $this->rms_model->get("v_bbm", "WHERE id_truck = $id_truck ORDER BY tanggal DESC")->result();
         $data['sparepart'] = $this->rms_model->get("tbl_sparepart")->result();
+        
+        $data['oddo'] = $this->rms_model->get("v_update_oddo", "WHERE id_truck = '$id_truck' ORDER BY tanggal DESC")->result();
         $data['content'] = 'rms/truck/view';
         $this->load->view('rms/includes/template', $data);
     }
@@ -568,7 +594,7 @@ class Rms extends CI_Controller
         );
 
         $data_update_truck = array(
-            'bbm_terakhir' => shortdate_indo($tanggal) . ' | ' . $jumlah_liter . 'L ' . ' | ' . $jumlah_harga . ' | ' . $nama_supir,
+            'bbm_terakhir' => shortdate_indo($tanggal) . ' | ' . $jumlah_liter . 'L ' . ' | Rp ' . $jumlah_harga . ' | ' . $nama_supir,
         );
 
         $save = $this->rms_model->update("tbl_truck", $data_update_truck, $truck);
@@ -591,6 +617,68 @@ class Rms extends CI_Controller
             }
         }
     }
+
+    public function save_oddo()
+    {
+        $id = $this->input->POST('id');
+        $id_truck = $this->input->POST('id_truck');
+        $id_supir = $this->input->POST('id_supir');
+        $oddo = $this->input->POST('oddo');
+        $keterangan = $this->input->POST('keterangan');
+
+        $foto_oddo = $_FILES['foto_oddo']['name'];
+
+        $data_array = array(
+            'id_truck' => $id_truck,
+            'id_supir' => $id_supir,
+            'oddo' => $oddo,
+            'keterangan' => $keterangan,
+        );
+
+        if (!empty($foto_oddo)) {
+            $this->load->library('upload');
+            $foto_oddo = preg_replace("/[^a-zA-Z0-9.]/", "_", $foto_oddo);
+            $filename_foto = str_replace(' ', '_', time() . $foto_oddo);
+            $config['upload_path'] = 'assets/rms/documents/oddo/';
+            $config['allowed_types'] = 'pdf|jpg|png|jpeg';
+            $config['file_name'] = $filename_foto;
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('foto_oddo')) {
+                $data = $this->upload->data();
+            } else {
+                echo $this->upload->display_errors();
+            }
+            $data_array += array(
+                'foto' => $filename_foto
+            );
+        }
+
+        $data_update_truck = array(
+            'oddo_terakhir' => $oddo,
+        );
+
+        $this->rms_model->update("tbl_truck", $data_update_truck, $id_truck);
+
+        if ($id == "") {
+            $save = $this->rms_model->insert("tbl_update_oddo", $data_array);
+            if ($save) {
+                echo json_encode(array(
+                    "status" => TRUE,
+                    "target" => TRUE
+                ));
+            }
+        } else {
+            $save = $this->rms_model->update("tbl_update_oddo", $data, $id);
+            if ($save) {
+                echo json_encode(array(
+                    "status" => TRUE,
+                    "target" => TRUE
+                ));
+            }
+        }
+    }
+
+
 
     public function save_truk()
     {
@@ -784,6 +872,7 @@ class Rms extends CI_Controller
         $nama_supir = $this->input->POST('nama_supir');
         $kategori = $this->input->POST('kategori');
         $payer = $this->input->POST('payer');
+        $pic = $this->sess->id;
 
         $nota = $_FILES['nota']['name'];
 
@@ -796,6 +885,7 @@ class Rms extends CI_Controller
             'tanggal' => $tanggal,
             'jumlah' => str_replace('.', '', $jumlah),
             'jenis' => $jenis,
+            'pic' => $pic,
             'status' => $status,
             'payer' => $payer,
         );

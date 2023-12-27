@@ -3,7 +3,9 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">TRUK <?php echo $truck->nopol; ?> | <i class="fas fa-user" style="font-size:76%;"></i> <?php if($profil_supir){ echo $profil_supir->nama;} ?></h1>
+          <h1 class="m-0">TRUK <?php echo $truck->nopol; ?> | <i class="fas fa-user" style="font-size:76%;"></i> <?php if ($profil_supir) {
+                                                                                                                    echo $profil_supir->nama;
+                                                                                                                  } ?></h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -344,13 +346,10 @@
             </div>
 
             <?php if ($truck->kategori == '1') { ?>
-              <div class="col-md-7">
+              <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
                     <h3 class="card-title mt-2">Riwayat Perbaikan Truk</h3>
-                    <div class="card-tools mr-1">
-                      <button type="button" class="btn btn-block btn-primary btn-sm" onclick="input_perbaikan()"><i class="fas fa-plus mr-1"></i> Input</button>
-                    </div>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
@@ -363,7 +362,6 @@
                           <th class="align-middle">Deskripsi</th>
                           <th class="align-middle">Harga</th>
                           <th class="align-middle">status</th>
-                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -394,40 +392,19 @@
                                 <span class="badge badge-success"><?php echo $row->nama_status; ?></span>
                               <?php } ?>
                             </td>
-                            <td class="project-actions text-right">
-                              <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit_perbaikan(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                              </a>
-                              <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_perbaikan(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
-                                <i class="fas fa-trash">
-                                </i>
-                              </a>
-                            </td>
                           </tr>
                         <?php endforeach; ?>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td>Total Perbaikan</td>
-                          <td>Rp <?php echo number_format($total_perbaikan->total_perbaikan, 0, "", "."); ?></td>
-                          <td></td>
-                          <td></td>
-                              </tr>
+
                       </tbody>
                     </table>
                   </div>
                   <!-- /.card-body -->
                 </div>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-6">
                 <div class="card">
                   <div class="card-header">
                     <h3 class="card-title mt-2">Riwayat Pengisian BBM</h3>
-                    <div class="card-tools mr-1">
-                      <button type="button" class="btn btn-block btn-primary btn-sm" onclick="input_riwayat_bbm()"><i class="fas fa-plus mr-1"></i> Input</button>
-                    </div>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
@@ -438,7 +415,6 @@
                           <th class="align-middle">Jumlah liter</th>
                           <th class="align-middle">Jumlah harga</th>
                           <th class="align-middle">Supir</th>
-                          <th class="align-middle"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -451,16 +427,6 @@
                             <td><?php echo $row->jumlah_liter; ?></td>
                             <td>Rp <?php echo number_format($row->jumlah_harga, 0, "", "."); ?></td>
                             <td><?php echo $row->nama_supir; ?></td>
-                            <td class="project-actions text-right">
-                              <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                              </a>
-                              <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_data(<?php echo $row->id; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
-                                <i class="fas fa-trash">
-                                </i>
-                              </a>
-                            </td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>
@@ -469,262 +435,67 @@
                   <!-- /.card-body -->
                 </div>
               </div>
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title mt-2">Riwayat Update Oddo</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table class="table data-table">
+                      <thead>
+                        <tr>
+                          <th>Nopol</th>
+                          <th>Supir</th>
+                          <th>Oddo</th>
+                          <th>Tanggal</th>
+                          <th>Keterangan</th>
+                          <th>Foto</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        <?php
+                        foreach ($oddo as $row) :
+                        ?>
+                          <tr>
+                            <td><?php echo $row->nopol; ?></td>
+                            <td><?php echo $row->nama_supir; ?></td>
+                            <td><?php echo $row->oddo; ?></td>
+                            <td><?php echo shortdate_indo($row->tanggal); ?></td>
+                            <td><?php echo $row->keterangan; ?></td>
+                            <td><a href="#" class="lihat-nota" rel="<?php echo base_url(); ?>assets/rms/documents/oddo/<?php echo $row->foto; ?>">Lihat Foto</a></td>
+                          </tr>
+                        <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             <?php } ?>
           </div>
         </div>
-
-        <!-- /.card -->
       </div>
-      <!-- /.col -->
     </div>
-    <!-- /.row -->
-    <!-- /.container-fluid -->
 
-
-    <div class="modal fade" id="input-pergantian-oli">
+    <div class="modal fade" id="modal-nota">
       <div class="modal-dialog modal-lg">
-        <form id="form_pergantian_oli" class="form-horizontal" method="post" enctype="multipart/form-data">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Input Pergantian Oli</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Supir</label>
-                    <input type="hidden" class="form-control" name="id" id="id">
-                    <input type="hidden" class="form-control" name="truck" id="truck" value="<?php echo $truck->id_truck; ?>">
-                    <input type="hidden" class="form-control" name="kategori" id="kategori" value="2">
-                    <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
-                      <option value="0">Pilih supir</option>
-                      <?php foreach ($supir as $row) : ?>
-                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
-                      <?php endforeach; ?>
-                    </select>
-                    <input type="hidden" class="form-control" id="nama_supir" name="nama_supir">
-                  </div>
-
-                  <div class="form-group">
-                    <label>Deskripsi</label>
-                    <textarea class="form-control" name="jenis" rows="2"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Tanggal perbaikan</label>
-                    <div class="input-group date reservationdate reservationdate1" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate1" data-toggle="datetimepicker" name="tanggal" id="tanggal" />
-                      <div class="input-group-append" data-target=".reservationdate1" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="cicilan">Jumlah</label>
-                    <input type="text" class="form-control number" id="jumlah" name="jumlah" placeholder="Input jumlah biaya perbaikan">
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Foto Nota</label>
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="nota" name="nota">
-                      <label class="custom-file-label" for="nota" id="label-nota">Pilih file pdf/jpg</label>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="kategori">Status</label>
-                    <select id="colorselector" class="form-control" name="status">
-                      <option>Pilih status</option>
-                      <option value="0">Belum dibayar</option>
-                      <option value="1">Sudah dibayar</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer" style="justify-content: flex-start;">
-              <button type="submit" class="btn btn-primary">Save changes</button>
-              <div class="loading" style="display: none;">
-                <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
-              </div>
-            </div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Nota</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-        </form>
+          <div class="modal-body" id="modal-body-nota">
+
+          </div>
+        </div>
         <!-- /.modal-content -->
       </div>
       <!-- /.modal-dialog -->
     </div>
 
-    <div class="modal fade" id="input-perbaikan">
-      <div class="modal-dialog modal-lg">
-        <form id="form_perbaikan" class="form-horizontal" method="post" enctype="multipart/form-data">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Input Perbaikan</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-md-6">
-
-                  <input type="hidden" class="form-control" name="id" id="id">
-                  <input type="hidden" class="form-control" name="truck" id="truck" value="<?php echo $truck->id_truck; ?>">
-                  <input type="hidden" class="form-control" name="kategori" id="kategori" value="1">
-                  <div class="form-group">
-                    <label>Supir</label>
-                    <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
-                      <option value="0">Pilih supir</option>
-                      <?php foreach ($supir as $row) : ?>
-                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
-                      <?php endforeach; ?>
-                    </select>
-                    <input type="hidden" class="form-control" id="nama_supir" name="nama_supir">
-                  </div>
-
-                  <div class="form-group">
-                    <label>Jenis Perbaikan</label>
-                    <textarea class="form-control" name="jenis" rows="2"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="no_replas">Tanggal perbaikan</label>
-                    <div class="input-group date reservationdate reservationdate1" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate1" data-toggle="datetimepicker" name="tanggal" id="tanggal" />
-                      <div class="input-group-append" data-target=".reservationdate1" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-
-                  <div class="form-group">
-                    <label for="cicilan">Jumlah</label>
-                    <input type="text" class="form-control number" id="jumlah" name="jumlah" placeholder="Input jumlah biaya perbaikan">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="no_replas">Foto Nota</label>
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="nota" name="nota">
-                      <label class="custom-file-label" for="nota" id="label-nota">Pilih file pdf/jpg</label>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="kategori">Status</label>
-                    <select id="colorselector" class="form-control" name="status">
-                      <option>Pilih status</option>
-                      <option value="0">Belum dibayar</option>
-                      <option value="1">Sudah dibayar</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="col-md-12" id="sparepart-content">
-                  <hr>
-                  <h3 style="font-size: 1.5rem;">Sparepart Kantor</h3>
-                  <table class="table mt-3" id="perbaikan_sparepart">
-                    <thead class="bg-dark">
-                      <tr>
-                        <th>Nama Sparepart</th>
-                        <th>Jumlah</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <select class="form-control select2" style="width: 100%;" name="sparepart" id="sparepart">
-                            <option value="0">Pilih sparepart</option><?php foreach ($sparepart as $row) : ?><option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option><?php endforeach; ?>
-                          </select>
-                        </td>
-                        <td><input type="text" class="form-control" name="jumlah_sparepart" style="width:100px;" /></td>
-                        <td>
-                          <button type="button" name="btn_add" id="btn_add" class="btn btn-xs btn-success"><i class="fa fa-plus"></i></button>
-                        </td>
-                      </tr>
-                    </tbody>
-                    <tbody id="tbody2">
-
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer" style="justify-content: flex-start;">
-              <button type="submit" class="btn btn-primary">Save changes</button>
-              <div class="loading" style="display: none;">
-                <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
-              </div>
-            </div>
-          </div>
-        </form>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
-
-
-
-    <div class="modal fade" id="input-riwayat-bbm">
-      <div class="modal-dialog modal-md">
-        <form id="form_riwayat_bbm" class="form-horizontal" method="post" enctype="multipart/form-data">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Input Riwayat BBM</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <input type="hidden" class="form-control" name="id" id="id" placeholder="id">
-                <input type="hidden" class="form-control" name="id_truck" id="id_truck" placeholder="id_truck" value="<?php echo $truck->id_truck; ?>">
-                <label for="no_replas">Tanggal Pengisian</label>
-                <div class="input-group date reservationdate" data-target-input="nearest">
-                  <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate" data-toggle="datetimepicker" name="tanggal" id="tanggal" />
-                  <div class="input-group-append" data-target=".reservationdate" data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="no_replas">Jumlah Liter</label>
-                <input type="text" class="form-control" id="jumlah_liter" name="jumlah_liter" placeholder="Input jumlah liter">
-              </div>
-              <div class="form-group">
-                <label for="no_replas">Jumlah Harga</label>
-                <input type="text" class="form-control number" id="jumlah_harga" name="jumlah_harga" placeholder="Input jumlah harga">
-              </div>
-
-              <div class="form-group">
-                <label>Supir</label>
-                <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
-                  <option value="0">Pilih supir</option>
-                  <?php foreach ($supir as $row) : ?>
-                    <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
-                  <?php endforeach; ?>
-                </select>
-                <input type="hidden" class="form-control" id="nama_supir" name="nama_supir">
-              </div>
-
-            </div>
-            <div class="modal-footer" style="justify-content: flex-start;">
-              <button type="submit" class="btn btn-primary">Save changes</button>
-              <div class="loading" style="display: none;">
-                <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
-              </div>
-            </div>
-          </div>
-        </form>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
   </section>
 </div>
 
@@ -735,6 +506,11 @@
     $("#supir").val(0).change();
     $("#input-riwayat-bbm").modal('show');
   }
+  $(".lihat-nota").click(function() {
+    $("#modal-nota").modal('show');
+    var imgUrl = $(this).attr('rel');
+    $("#modal-body-nota").html("<img src='" + imgUrl + "' style='width:100%;'/>");
+  });
   $('#form_riwayat_bbm').on('submit', function(event) {
     event.preventDefault();
     var formData = new FormData($('#form_riwayat_bbm')[0]);

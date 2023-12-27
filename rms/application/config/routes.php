@@ -91,4 +91,6 @@ $route['kwitansi-transporter/periode'] = 'rms/kwitansi_transporter_periode';
 $route['rekapitulasi/data'] = 'rms/rekapitulasi';
 $route['rekapitulasi/periode'] = 'rms/rekap_transporter_periode';
 $route['profil/(:any)'] = 'rms/profil/$1';
+$route['truck/update-oddo'] = 'rms/update_oddo';
+$route['truck/update-bbm'] = 'rms/update_bbm';
 

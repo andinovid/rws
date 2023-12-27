@@ -38,25 +38,45 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>dashboard/" class="nav-link <?php if ($this->uri->segment(2) == "dashboard") { ?>active <?php } ?>">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>update_truck/" class="nav-link <?php if ($this->uri->segment(1) == "update_truck") { ?>active <?php } ?>">
-              <i class="nav-icon fas fa-truck"></i>
+            <a href="<?php echo base_url(); ?>truck/update-oddo" class="nav-link <?php if ($this->uri->segment(2) == "update-oddo") { ?>active <?php } ?>">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Update Truk
+                Update Oddometer
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>bbm/" class="nav-link <?php if ($this->uri->segment(1) == "bbm") { ?>active <?php } ?>">
+            <a href="<?php echo base_url(); ?>truck/update-bbm/" class="nav-link <?php if ($this->uri->segment(2) == "update-bbm") { ?>active <?php } ?>">
               <i class="nav-icon fas fa-gas-pump"></i>
               <p>
-                Riwayat BBM
+                Update BBM
+              </p>
+            </a>
+          </li>
+        </ul>
+        <?php } elseif ($this->sess->role == '2') { ?>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>perbaikan/" class="nav-link <?php if ($this->uri->segment(1) == "perbaikan") { ?>active <?php } ?>">
+              <i class="nav-icon fas fa-tools"></i>
+              <p>
+                Perbaikan
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>sparepart/" class="nav-link <?php if ($this->uri->segment(1) == "sparepart") { ?>active <?php } ?>">
+              <i class="nav-icon fas fa-warehouse"></i>
+              <p>
+                Sparepart
               </p>
             </a>
           </li>
@@ -188,13 +208,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item ">
-                <a href="<?php echo base_url(); ?>rekapitulasi/data" class="nav-link <?php if ($this->uri->segment(1) == "rekapitulasi" AND $this->uri->segment(2) == "data") { ?>active <?php } ?>">
+                <a href="<?php echo base_url(); ?>rekapitulasi/data" class="nav-link <?php if ($this->uri->segment(1) == "rekapitulasi" and $this->uri->segment(2) == "data") { ?>active <?php } ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Rekapitulasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>rekapitulasi/periode" class="nav-link <?php if ($this->uri->segment(1) == "rekapitulasi" AND $this->uri->segment(2) == "periode") { ?>active <?php } ?>">
+                <a href="<?php echo base_url(); ?>rekapitulasi/periode" class="nav-link <?php if ($this->uri->segment(1) == "rekapitulasi" and $this->uri->segment(2) == "periode") { ?>active <?php } ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Rekapitulasi periode</p>
                 </a>
@@ -254,13 +274,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item ">
-                <a href="<?php echo base_url(); ?>kwitansi-transporter/data" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi-transporter" AND $this->uri->segment(2) == "data") { ?>active <?php } ?>">
+                <a href="<?php echo base_url(); ?>kwitansi-transporter/data" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi-transporter" and $this->uri->segment(2) == "data") { ?>active <?php } ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Kwitansi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>kwitansi-transporter/periode" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi-transporter" AND $this->uri->segment(2) == "periode") { ?>active <?php } ?>">
+                <a href="<?php echo base_url(); ?>kwitansi-transporter/periode" class="nav-link <?php if ($this->uri->segment(1) == "kwitansi-transporter" and $this->uri->segment(2) == "periode") { ?>active <?php } ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kwitansi periode</p>
                 </a>
