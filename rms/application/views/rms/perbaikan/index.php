@@ -35,7 +35,7 @@
                 <thead>
                   <?php if ($this->sess->role != '5') { ?>
                     <tr>
-                      <th>Nopol Truk</th>
+                      <th style="width: 20%;">Nopol Truk</th>
                       <th>Supir</th>
                       <th style="width: 30%;">Jenis</th>
                       <th>Tanggal Perbaikan</th>
@@ -58,7 +58,7 @@
 
                     <?php if ($this->sess->role != '5') { ?>
                       <tr>
-                        <td><?php echo $row->nopol; ?></td>
+                        <td style="width: 10%;"><?php echo $row->nopol; ?></td>
                         <td><?php echo $row->nama_supir; ?></td>
                         <td><?php echo $row->jenis_perbaikan; ?></td>
                         <td><?php echo shortdate_indo($row->tanggal_perbaikan); ?></td>
@@ -67,7 +67,7 @@
                           <span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span>
                         </td>
 
-                        <td class="project-actions text-right">
+                        <td class="project-actions text-right" style="width: 7%;">
                           <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fas fa-pencil-alt">
                             </i>
