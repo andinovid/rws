@@ -159,14 +159,10 @@
                     <td style="text-align: center;">Rp <?php echo number_format($row->harga_unit, 0, "", "."); ?></td>
                     <td style="text-align: center;">Rp <?php echo number_format($row->total, 0, "", "."); ?></td>
                 </tr>
-                <?php if ($invoice->id_komoditas != '2' AND $invoice->id_komoditas != '1') { ?>
+                <?php if (($invoice->id_komoditas != '3' AND $invoice->id_klien != '1') OR ($invoice->id_komoditas == '2' AND $invoice->id_klien == '8') OR ($invoice->id_komoditas == '2' AND $invoice->id_klien == '9')) { ?>
                     <tr>
                         <td></td>
-                        <?php if ($invoice->id_komoditas == '1') { ?>
-                            <td colspan="3">Potongan Claim Susut</td>
-                        <?php } else { ?>
                             <td colspan="2">Potongan Claim Susut</td>
-                        <?php } ?>
 
                         <td></td>
                         <td style="text-align: center;">Rp <?php echo number_format($row->total_biaya_susut, 0, "", "."); ?></td>
