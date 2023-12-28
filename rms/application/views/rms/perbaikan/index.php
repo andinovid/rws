@@ -31,7 +31,7 @@
             <!-- /.card-header -->
             <div class="card-body">
 
-              <table class="table data-table">
+              <table class="table data-table-fixed">
                 <thead>
                   <?php if ($this->sess->role != '5') { ?>
                     <tr>
