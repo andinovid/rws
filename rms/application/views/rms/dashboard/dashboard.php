@@ -46,7 +46,7 @@
                 <img src="<?php echo base_url() ?>assets/rms/dist/img/truck.png" style="width: 70%;" /><br>
                 <hr class="mt-2 mb-3">
                 <img src="<?php echo base_url(); ?>assets/rms/dist/img/speedometer.png" width="80">
-                <h2 style="font-weight: bold;"><?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?></h2>
+                <h2 style="font-weight: bold;"><?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?> KM</h2>
                 <hr class="mt-2 mb-3">
               </div>
               <div class="d-flex justify-content-md-between mt-2 mb-2">
@@ -281,6 +281,37 @@
               </div>
               <!-- /.info-box-content -->
             </div>
+          </div>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Perbaikan Bulan Ini</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="width: 57%;">Jenis</th>
+                      <th>Tanggal Perbaikan</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    foreach ($perbaikan as $row) :
+                    ?>
+                      <tr>
+                        <td><?php echo $row->jenis_perbaikan; ?></td>
+                        <td><span class="badge bg-success"><?php echo shortdate_indo($row->tanggal_perbaikan); ?></span></td>
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
           </div>
 
         </div>

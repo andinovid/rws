@@ -31,45 +31,60 @@
 
               <table class="table data-table">
                 <thead>
-                  <tr>
-                    <th>Nopol Truk</th>
-                    <th>Supir</th>
-                    <th style="width: 30%;">Jenis</th>
-                    <th>Tanggal Perbaikan</th>
-                    <th>Jumlah</th>
-                    <th>Status</th>
-                    <th></th>
-                  </tr>
+                  <?php if ($this->sess->role != '5') { ?>
+                    <tr>
+                      <th>Nopol Truk</th>
+                      <th>Supir</th>
+                      <th style="width: 30%;">Jenis</th>
+                      <th>Tanggal Perbaikan</th>
+                      <th>Jumlah</th>
+                      <th>Status</th>
+                      <th></th>
+                    </tr>
+                  <?php } else { ?>
+                    <tr>
+                      <th style="width: 60%;">Jenis</th>
+                      <th>Tanggal Perbaikan</th>
+                    </tr>
+                  <?php } ?>
                 </thead>
                 <tbody>
 
                   <?php
                   foreach ($perbaikan as $row) :
                   ?>
-                    <tr>
-                      <td><?php echo $row->nopol; ?></td>
-                      <td><?php echo $row->nama_supir; ?></td>
-                      <td><?php echo $row->jenis_perbaikan; ?></td>
-                      <td><?php echo shortdate_indo($row->tanggal_perbaikan); ?></td>
-                      <td><?php echo number_format($row->jumlah, 0, "", "."); ?></td>
-                      <td>
-                        <span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span>
-                      </td>
 
-                      <td class="project-actions text-right">
-                        <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
-                          <i class="fas fa-pencil-alt">
-                          </i>
-                        </a>
-                        <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_perbaikan(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
-                          <i class="fas fa-trash">
-                          </i>
-                        </a>
-                      </td>
-                    </tr>
+                    <?php if ($this->sess->role != '5') { ?>
+                      <tr>
+                        <td><?php echo $row->nopol; ?></td>
+                        <td><?php echo $row->nama_supir; ?></td>
+                        <td><?php echo $row->jenis_perbaikan; ?></td>
+                        <td><?php echo shortdate_indo($row->tanggal_perbaikan); ?></td>
+                        <td><?php echo number_format($row->jumlah, 0, "", "."); ?></td>
+                        <td>
+                          <span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span>
+                        </td>
+
+                        <td class="project-actions text-right">
+                          <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                          </a>
+                          <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_perbaikan(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
+                            <i class="fas fa-trash">
+                            </i>
+                          </a>
+                        </td>
+                      </tr>
+                    <?php } else { ?>
+                      <tr>
+                        <td><?php echo $row->jenis_perbaikan; ?></td>
+                        <td><span class="badge bg-success"><?php echo shortdate_indo($row->tanggal_perbaikan); ?></span></td>
+                      </tr>
+                    <?php } ?>
                   <?php endforeach; ?>
                 </tbody>
-                
+
               </table>
             </div>
             <!-- /.card-body -->
@@ -119,7 +134,11 @@
                     <select class="form-control select2" style="width: 100%;" name="supir" id="supir">
                       <option value="0">Pilih supir</option>
                       <?php foreach ($supir as $row) : ?>
-                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?> (<?php if($row->kategori == '1'){echo 'Kantor';}else{ echo 'Vendor';} ?>)</option>
+                        <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?> (<?php if ($row->kategori == '1') {
+                                                                                              echo 'Kantor';
+                                                                                            } else {
+                                                                                              echo 'Vendor';
+                                                                                            } ?>)</option>
                       <?php endforeach; ?>
                     </select>
                     <input type="hidden" class="form-control" id="nama_supir" name="nama_supir">
@@ -258,7 +277,7 @@
     $('#colorselector').change(function() {
       if ($(this).val() == '1') {
         $('#payer').show();
-      }else{
+      } else {
         $('#payer').hide();
       }
     });

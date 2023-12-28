@@ -60,6 +60,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>perbaikan/" class="nav-link <?php if ($this->uri->segment(1) == "perbaikan") { ?>active <?php } ?>">
+              <i class="nav-icon fas fa-tools"></i>
+              <p>
+                Riwayat Perbaikan
+              </p>
+            </a>
+          </li>
         </ul>
         <?php } elseif ($this->sess->role == '4') { ?>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

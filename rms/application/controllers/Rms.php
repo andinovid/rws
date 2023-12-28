@@ -70,6 +70,8 @@ class Rms extends CI_Controller
         if ($this->sess->role == '5') {
             $id_supir = $this->sess->id_supir;
             $data['truck'] = $this->rms_model->get("v_truck", "WHERE id_supir = '$id_supir'")->row();
+            $id_truck = $data['truck']->id_truck;
+            $data['perbaikan'] = $this->rms_model->get("v_perbaikan", "WHERE id_truck='$id_truck' AND periode_bulan = MONTH(CURRENT_DATE())")->result();
         } else {
             $data['all_project'] = $this->rms_model->get("v_project")->num_rows();
             $data['project_on_progress'] = $this->rms_model->get("v_project", "WHERE status = '0' OR status = '1'")->num_rows();
@@ -557,7 +559,7 @@ class Rms extends CI_Controller
         $this->load->view('rms/includes/template', $data);
     }
 
-    
+
 
     function view_truck($id_truck)
     {
@@ -570,7 +572,7 @@ class Rms extends CI_Controller
         $data['total_perbaikan'] = $this->rms_model->get_by_query("SELECT SUM(jumlah) as total_perbaikan from v_perbaikan WHERE id_truck = $id_truck")->row();
         $data['bbm'] = $this->rms_model->get("v_bbm", "WHERE id_truck = $id_truck ORDER BY tanggal DESC")->result();
         $data['sparepart'] = $this->rms_model->get("tbl_sparepart")->result();
-        
+
         $data['oddo'] = $this->rms_model->get("v_update_oddo", "WHERE id_truck = '$id_truck' ORDER BY tanggal DESC")->result();
         $data['content'] = 'rms/truck/view';
         $this->load->view('rms/includes/template', $data);
@@ -813,7 +815,14 @@ class Rms extends CI_Controller
 
     function perbaikan()
     {
-        $data['perbaikan'] = $this->rms_model->get("v_perbaikan")->result();
+        if ($this->sess->role != '5') {
+            $data['perbaikan'] = $this->rms_model->get("v_perbaikan")->result();
+        } else {
+            $id_supir = $this->sess->id_supir;
+            $data['truck'] = $this->rms_model->get("v_truck", "WHERE id_supir = '$id_supir'")->row();
+            $id_truck = $data['truck']->id_truck;
+            $data['perbaikan'] = $this->rms_model->get("v_perbaikan", "WHERE id_truck='$id_truck'")->result();
+        }
         $data['truck'] = $this->rms_model->get("tbl_truck")->result();
         $data['supir'] = $this->rms_model->get("tbl_supir")->result();
         $data['sparepart'] = $this->rms_model->get("tbl_sparepart")->result();
@@ -3726,9 +3735,9 @@ class Rms extends CI_Controller
                     $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data->m_susut);
                 }
             }
-            
+
             if ($data_project->id_klien == '6') {
-                
+
                 $excel->setActiveSheetIndex(0)->setCellValue('R' . $numrow, mediumdate_indo($data->tanggal_bongkar));
             }
 
