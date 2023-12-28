@@ -49,12 +49,9 @@
                 <h2 style="font-weight: bold;"><?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?> KM</h2>
                 <hr class="mt-2 mb-3">
               </div>
-              <div class="d-flex justify-content-md-between mt-2 mb-2">
+              <div class="d-flex justify-content-between mt-2 mb-2">
                 <span class="info-box-number mt-0" style="font-weight:400;"><span class="text-bold">Oli Mesin <?php echo $truck->persentase_penggunaan_oli_mesin; ?>%</span></span>
-                <span class="progress-description">
-                  Kurang <span class="text-bold">
-                    <?php echo number_format($truck->kurang_oli_mesin, 0, "", "."); ?> </span> KM
-                </span>
+                <span class="progress-description">Kurang <span class="text-bold"><?php echo number_format($truck->kurang_oli_mesin, 0, "", "."); ?> </span> KM</span>
               </div>
               <div class="progress progress-xs active">
                 <div class="progress-bar <?php if ($truck->persentase_penggunaan_oli_mesin > '90') {
@@ -67,7 +64,7 @@
                   <span class="sr-only">20% Complete</span>
                 </div>
               </div>
-              <div class="d-flex justify-content-md-between mt-2 mb-2">
+              <div class="d-flex justify-content-between mt-2 mb-2">
                 <span class="info-box-number mt-0" style="font-weight:400;"><span class="text-bold">Oli Gardan <?php echo $truck->persentase_penggunaan_oli_gardan; ?>%</span></span>
                 <span class="progress-description">
                   Kurang <span class="text-bold">
@@ -85,7 +82,7 @@
                   <span class="sr-only">20% Complete</span>
                 </div>
               </div>
-              <div class="d-flex justify-content-md-between mt-2 mb-2">
+              <div class="d-flex justify-content-between mt-2 mb-2">
                 <span class="info-box-number mt-0" style="font-weight:400;"><span class="text-bold">Oli Transmisi <?php echo $truck->persentase_penggunaan_oli_transmisi; ?>%</span></span>
                 <span class="progress-description">
                   Kurang <span class="text-bold">
@@ -408,7 +405,7 @@
                     <div class="info-box-content">
                       <span class="info-box-text text-bold"><?php echo $row->nama_perusahaan; ?></span>
                       <span class="info-box-text"><?php echo $row->no_do; ?></span>
-                      <div class="d-flex justify-content-md-between">
+                      <div class="d-flex justify-content-between">
                         <span class="info-box-number mt-0" style="font-weight:400;"><span class="text-bold"><?php echo $row->persentase_terkirim; ?></span>%</span>
                         <span class="progress-description">
                           Sisa <span class="text-bold">
@@ -454,7 +451,7 @@
                     <img src="<?php echo base_url() ?>assets/rms/dist/img/truck.png" style="width: 70%;" />
                     <h3><?php echo $row->nopol; ?></h3>
                   </div>
-                  <div class="d-flex justify-content-md-between mt-2 mb-2">
+                  <div class="d-flex justify-content-between mt-2 mb-2">
                     <span class="info-box-number mt-0" style="font-weight:400;"><span class="text-bold">Oli Mesin <?php echo $row->persentase_penggunaan_oli_mesin; ?>%</span></span>
                     <span class="progress-description">
                       Kurang <span class="text-bold">
@@ -472,7 +469,7 @@
                       <span class="sr-only">20% Complete</span>
                     </div>
                   </div>
-                  <div class="d-flex justify-content-md-between mt-2 mb-2">
+                  <div class="d-flex justify-content-between mt-2 mb-2">
                     <span class="info-box-number mt-0" style="font-weight:400;"><span class="text-bold">Oli Gardan <?php echo $row->persentase_penggunaan_oli_gardan; ?>%</span></span>
                     <span class="progress-description">
                       Kurang <span class="text-bold">
@@ -490,7 +487,7 @@
                       <span class="sr-only">20% Complete</span>
                     </div>
                   </div>
-                  <div class="d-flex justify-content-md-between mt-2 mb-2">
+                  <div class="d-flex justify-content-between mt-2 mb-2">
                     <span class="info-box-number mt-0" style="font-weight:400;"><span class="text-bold">Oli Transmisi <?php echo $row->persentase_penggunaan_oli_transmisi; ?>%</span></span>
                     <span class="progress-description">
                       Kurang <span class="text-bold">
