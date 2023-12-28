@@ -12,7 +12,7 @@
             <!-- /.card-header -->
             <div class="card-body">
               <div class="text-center mb-5">
-                <img src="<?php echo base_url(); ?>assets/rms/dist/img/gas-station.png" width="100" class="mr-2" style="margin-top: -3px;">
+                <img src="<?php echo base_url(); ?>assets/rms/dist/img/gas-station.png" width="100">
                 <h1 class="mt-3" style="font-weight: 600;"><?php echo $truck->bbm_terakhir; ?></h1>
                 <a href="#" onclick="update_oddo()" class="btn btn-primary mt-3">Update BBM</a>
               </div>

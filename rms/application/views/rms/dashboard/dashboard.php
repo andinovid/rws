@@ -41,10 +41,13 @@
           <div class="col-md-12">
             <div class="card card-body">
               <div class="text-center">
-                <h1><?php echo $truck->nopol; ?></h1>
+                <h1 style="font-weight:bold;" class="mb-1"><?php echo $truck->nopol; ?></h1>
+                <p class="mt-0" style="font-size:18px;">(<?php echo $truck->jenis_truck; ?>)</p>
                 <img src="<?php echo base_url() ?>assets/rms/dist/img/truck.png" style="width: 70%;" /><br>
+                <hr class="mt-2 mb-3">
                 <img src="<?php echo base_url(); ?>assets/rms/dist/img/speedometer.png" width="80">
                 <h2 style="font-weight: bold;"><?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?></h2>
+                <hr class="mt-2 mb-3">
               </div>
               <div class="d-flex justify-content-md-between mt-2 mb-2">
                 <span class="info-box-number mt-0" style="font-weight:400;"><span class="text-bold">Oli Mesin <?php echo $truck->persentase_penggunaan_oli_mesin; ?>%</span></span>
