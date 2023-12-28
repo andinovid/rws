@@ -41,8 +41,10 @@
           <div class="col-md-12">
             <div class="card card-body">
               <div class="text-center">
-                <img src="<?php echo base_url() ?>assets/rms/dist/img/truck.png" style="width: 70%;" />
-                <h3><?php echo $truck->nopol; ?></h3>
+                <h1><?php echo $truck->nopol; ?></h1>
+                <img src="<?php echo base_url() ?>assets/rms/dist/img/truck.png" style="width: 70%;" /><br>
+                <img src="<?php echo base_url(); ?>assets/rms/dist/img/dashboard2.png" width="80">
+                <h2 style="font-weight: bold;"><?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?></h2>
               </div>
               <div class="d-flex justify-content-md-between mt-2 mb-2">
                 <span class="info-box-number mt-0" style="font-weight:400;"><span class="text-bold">Oli Mesin <?php echo $truck->persentase_penggunaan_oli_mesin; ?>%</span></span>
@@ -100,6 +102,132 @@
               </div>
               <hr>
               <p class="mb-0 mt-0"><i class="fas fa-gas-pump dark-grey"></i>&nbsp;&nbsp;<span style="font-size:14px;text-transform:uppercase;"><?php echo $truck->bbm_terakhir; ?></span></p>
+            </div>
+          </div>
+
+
+          <div class="col-md-12">
+            <div class="card card-body">
+              <div class="mb-2">
+                <span class="text-bold d-block">Pajak Tahunan</span>
+                <?php if ($truck->sisa_hari_pajak_tahunan > 0) { ?>
+                  <?php echo shortdate_indo($truck->pajak_tahunan); ?><br>
+                  <small class="badge <?php if ($truck->sisa_hari_pajak_tahunan > 0 and $truck->sisa_hari_pajak_tahunan < '30') {
+                                        echo 'badge-danger';
+                                      } elseif ($truck->sisa_hari_pajak_tahunan >= '30' and $truck->sisa_hari_pajak_tahunan < '60') {
+                                        echo 'badge-warning';
+                                      } else {
+                                        echo 'badge-success';
+                                      } ?>"> Sisa
+                    <?php
+                    $days = $truck->sisa_hari_pajak_tahunan;
+                    $start_date = new DateTime();
+                    $end_date = (new $start_date)->add(new DateInterval("P{$days}D"));
+                    $dd = date_diff($start_date, $end_date);
+                    if ($dd->y != 0 and $dd->m != 0 and $dd->d != 0) {
+                      echo $dd->y . " tahun " . $dd->m . " bulan " . $dd->d . " hari";
+                    } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d != 0) {
+                      echo $dd->m . " bulan " . $dd->d . " hari";
+                    } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d != 0) {
+                      echo $dd->d . " hari";
+                    } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d == 0) {
+                      echo $dd->m . " bulan ";
+                    } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d == 0) {
+                      echo $dd->y . " tahun ";
+                    } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d != 0) {
+                      echo $dd->y . " tahun "  . $dd->d . " hari";
+                    } elseif ($dd->y != 0 and $dd->m != 0 and $dd->d == 0) {
+                      echo $dd->y . " tahun " . $dd->m . " bulan ";
+                    } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d == 0) {
+                      echo "Sudah habis";
+                    }
+                    ?>
+                  </small>
+                <?php } else {
+                  echo "-";
+                } ?>
+              </div>
+              <div class="mt-2 mb-2">
+                <span class="text-bold d-block">Pajak 5 Tahunan</span>
+                <?php if ($truck->sisa_hari_pajak_5_tahunan > 0) { ?>
+                  <?php echo shortdate_indo($truck->pajak_5_tahunan); ?><br>
+                  <small class="badge <?php if ($truck->sisa_hari_pajak_5_tahunan > 0 and $truck->sisa_hari_pajak_5_tahunan < '30') {
+                                        echo 'badge-danger';
+                                      } elseif ($truck->sisa_hari_pajak_5_tahunan >= '30' and $truck->sisa_hari_pajak_5_tahunan < '60') {
+                                        echo 'badge-warning';
+                                      } else {
+                                        echo 'badge-success';
+                                      } ?>">Sisa
+                    <?php
+                    $days = $truck->sisa_hari_pajak_5_tahunan;
+                    $start_date = new DateTime();
+                    $end_date = (new $start_date)->add(new DateInterval("P{$days}D"));
+                    $dd = date_diff($start_date, $end_date);
+                    if ($dd->y != 0 and $dd->m != 0 and $dd->d != 0) {
+                      echo $dd->y . " tahun " . $dd->m . " bulan " . $dd->d . " hari";
+                    } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d != 0) {
+                      echo $dd->m . " bulan " . $dd->d . " hari";
+                    } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d != 0) {
+                      echo $dd->d . " hari";
+                    } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d == 0) {
+                      echo $dd->m . " bulan ";
+                    } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d == 0) {
+                      echo $dd->y . " tahun ";
+                    } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d != 0) {
+                      echo $dd->y . " tahun "  . $dd->d . " hari";
+                    } elseif ($dd->y != 0 and $dd->m != 0 and $dd->d == 0) {
+                      echo $dd->y . " tahun " . $dd->m . " bulan ";
+                    } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d == 0) {
+                      echo "Sudah habis";
+                    }
+                    ?>
+                  </small>
+                <?php } else {
+                  echo "-";
+                } ?>
+              </div>
+
+              <div class="mt-2">
+                <span class="text-bold d-block">KIR</span>
+                <?php if ($truck->sisa_hari_kir > 0) { ?>
+                  <?php echo shortdate_indo($truck->kir_selanjutnya); ?><br>
+                  <small class="badge <?php if ($truck->sisa_hari_kir > 0 and $truck->sisa_hari_kir < '7') {
+                                        echo 'badge-danger';
+                                      } elseif ($truck->sisa_hari_kir >= '7' and $truck->sisa_hari_kir < '30') {
+                                        echo 'badge-warning';
+                                      } else {
+                                        echo 'badge-success';
+                                      } ?>">Sisa
+                    <?php
+                    $days = $truck->sisa_hari_kir;
+                    $start_date = new DateTime();
+                    $end_date = (new $start_date)->add(new DateInterval("P{$days}D"));
+                    $dd = date_diff($start_date, $end_date);
+                    if ($dd->y != 0 and $dd->m != 0 and $dd->d != 0) {
+                      echo $dd->y . " tahun " . $dd->m . " bulan " . $dd->d . " hari";
+                    } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d != 0) {
+                      echo $dd->m . " bulan " . $dd->d . " hari";
+                    } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d != 0) {
+                      echo $dd->d . " hari";
+                    } elseif ($dd->y == 0 and $dd->m != 0 and $dd->d == 0) {
+                      echo $dd->m . " bulan ";
+                    } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d == 0) {
+                      echo $dd->y . " tahun ";
+                    } elseif ($dd->y != 0 and $dd->m == 0 and $dd->d != 0) {
+                      echo $dd->y . " tahun "  . $dd->d . " hari";
+                    } elseif ($dd->y != 0 and $dd->m != 0 and $dd->d == 0) {
+                      echo $dd->y . " tahun " . $dd->m . " bulan ";
+                    } elseif ($dd->y == 0 and $dd->m == 0 and $dd->d == 0) {
+                      echo "Sudah habis";
+                    }
+                    ?>
+                  </small>
+                <?php } else {
+                  echo "-";
+                } ?>
+              </div>
+
+
             </div>
           </div>
 
