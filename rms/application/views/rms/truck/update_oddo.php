@@ -12,7 +12,7 @@
             <!-- /.card-header -->
             <div class="card-body">
               <div class="text-center mb-5">
-                <img src="<?php echo base_url(); ?>assets/rms/dist/img/dashboard2.png" width="100">
+                <img src="<?php echo base_url(); ?>assets/rms/dist/img/speedometer.png" width="100">
                 <h1 style="font-weight: 600;"><?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?> KM</h1>
                 <a href="#" onclick="update_oddo()" class="btn btn-primary mt-3">Update Oddo</a>
               </div>

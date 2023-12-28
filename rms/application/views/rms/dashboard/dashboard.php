@@ -43,7 +43,7 @@
               <div class="text-center">
                 <h1><?php echo $truck->nopol; ?></h1>
                 <img src="<?php echo base_url() ?>assets/rms/dist/img/truck.png" style="width: 70%;" /><br>
-                <img src="<?php echo base_url(); ?>assets/rms/dist/img/dashboard2.png" width="80">
+                <img src="<?php echo base_url(); ?>assets/rms/dist/img/speedometer.png" width="80">
                 <h2 style="font-weight: bold;"><?php echo number_format($truck->oddo_terakhir, 0, "", "."); ?></h2>
               </div>
               <div class="d-flex justify-content-md-between mt-2 mb-2">
