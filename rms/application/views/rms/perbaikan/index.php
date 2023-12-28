@@ -22,9 +22,11 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Data Perbaikan</h3>
+              <?php if ($this->sess->role != '5') { ?>
               <div class="card-tools mr-1">
                 <button type="button" class="btn btn-block btn-primary btn-sm" onclick="input_perbaikan()"><i class="fas fa-plus mr-1"></i> Input Perbaikan</button>
               </div>
+              <?php } ?>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
