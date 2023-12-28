@@ -37,7 +37,7 @@
       <?php if ($this->sess->role == '5') { ?>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>dashboard/" class="nav-link <?php if ($this->uri->segment(2) == "dashboard") { ?>active <?php } ?>">
+            <a href="<?php echo base_url(); ?>dashboard/" class="nav-link <?php if ($this->uri->segment(1) == "dashboard") { ?>active <?php } ?>">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Dashboard

@@ -22,9 +22,9 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3 class="card-title underline pb-3 mb-4 mt-4 card-title float-none">
+            <h3 class="card-title underline pb-3 mt-4 card-title float-none">
               <i class="fas fa-chart-pie mr-1"></i>
-              Status Oli & BBM Truck
+              Status Truck
             </h3>
           </div><!-- /.col -->
         </div><!-- /.row -->
