@@ -43,8 +43,8 @@
                     </tr>
                   <?php } else { ?>
                     <tr>
-                      <th style="width: 60%;">Jenis</th>
-                      <th>Tanggal Perbaikan</th>
+                      <th style="width: 65%;">Jenis</th>
+                      <th>Tanggal</th>
                     </tr>
                   <?php } ?>
                 </thead>

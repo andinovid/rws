@@ -293,8 +293,8 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th style="width: 57%;">Jenis</th>
-                      <th>Tanggal Perbaikan</th>
+                      <th style="width: 65%;">Jenis</th>
+                      <th>Tanggal</th>
                     </tr>
                   </thead>
                   <tbody>
