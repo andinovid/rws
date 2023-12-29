@@ -14,7 +14,9 @@
             -ms-text-size-adjust: 100%
         }
 
-        @page { margin: 10px 20px; }
+        @page {
+            margin: 10px 20px;
+        }
 
         body {
             margin: 0 auto;
@@ -39,7 +41,7 @@
 
 <body>
     <div style="text-align: center;">
-    <img src="https://rms.rajawalisampit.com/assets/rms/dist/img/kop.png" style="width: 90%;">
+        <img src="https://rms.rajawalisampit.com/assets/rms/dist/img/kop.png" style="width: 90%;">
     </div>
     <h1 style="text-align:center;font-size:22px;margin-top:10px;">INVOICE</h1>
 
@@ -79,7 +81,7 @@
         </div>
     <?php } ?>
 
-    <?php if ($invoice->no_kontrak AND $invoice->id_klien != '6') { ?>
+    <?php if ($invoice->no_kontrak and $invoice->id_klien != '6') { ?>
         <div>
             <div style="display: inline-table; width:20%;vertical-align:top;">
                 <label style="vertical-align:top;">NO. KONTRAK</label>
@@ -159,14 +161,16 @@
                     <td style="text-align: center;">Rp <?php echo number_format($row->harga_unit, 0, "", "."); ?></td>
                     <td style="text-align: center;">Rp <?php echo number_format($row->total, 0, "", "."); ?></td>
                 </tr>
-                <?php if (($invoice->id_komoditas != '3' AND $invoice->id_klien != '1') OR ($invoice->id_komoditas == '2' AND $invoice->id_klien == '8') OR ($invoice->id_komoditas == '2' AND $invoice->id_klien == '9')) { ?>
+                <?php if (($invoice->id_komoditas != '3' and $invoice->id_klien != '1') or ($invoice->id_komoditas == '2' and $invoice->id_klien == '8') or ($invoice->id_komoditas == '2' and $invoice->id_klien == '9')) { ?>
+                    <?php if ($invoice->id_komoditas != '1') { ?>
                     <tr>
                         <td></td>
                             <td colspan="2">Potongan Claim Susut</td>
-
+                        
                         <td></td>
                         <td style="text-align: center;">Rp <?php echo number_format($row->total_biaya_susut, 0, "", "."); ?></td>
                     </tr>
+                    <?php } ?>
                 <?php } ?>
             <?php endforeach; ?>
             <tr style="border: none;">

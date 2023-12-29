@@ -35,10 +35,10 @@
                 <thead>
                   <?php if ($this->sess->role != '5') { ?>
                     <tr>
-                      <th style="width: 20%;">Nopol Truk</th>
+                      <th>Nopol</th>
                       <th>Supir</th>
                       <th style="width: 30%;">Jenis</th>
-                      <th>Tanggal Perbaikan</th>
+                      <th>Tanggal</th>
                       <th>Jumlah</th>
                       <th>Status</th>
                       <th></th>
@@ -67,7 +67,7 @@
                           <span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span>
                         </td>
 
-                        <td class="project-actions text-right" style="width: 7%;">
+                        <td class="project-actions text-right" style="width: 10%;">
                           <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_perbaikan; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fas fa-pencil-alt">
                             </i>

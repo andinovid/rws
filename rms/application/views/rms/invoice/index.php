@@ -56,26 +56,26 @@
                       <td>Rp <?php echo number_format($row->grand_total, 0, "", "."); ?></td>
                       <td><span class="badge <?php if ($row->status == '0') { ?>bg-secondary <?php } elseif ($row->status == '1') { ?> bg-warning <?php } else { ?> bg-success <?php } ?>"><?php if ($row->status == '0') { ?> Belum dibayar <?php } elseif ($row->status == '1') { ?> Bayar pokok <?php } else { ?> Lunas <?php } ?></span></td>
                       <td class="project-actions text-right">
-                        <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/cetak_invoice/<?php echo $row->id_invoice; ?>" target="_blank" data-toggle="tooltip" data-placement="top" title="Cetak Invoice">
+                        <a class="btn btn-success btn-sm" href="<?php echo base_url(); ?>rms/cetak_invoice/<?php echo $row->id_invoice; ?>" target="_blank" title="Cetak Invoice">
                           <i class="fas fa-print">
                           </i>
                         </a>
                         <?php if ($row->status != "2") { ?>
-                          <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="bayar_invoice(<?php echo $row->id_invoice; ?>)" data-toggle="tooltip" data-placement="top" title="Bayar Invoice">
+                          <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="bayar_invoice(<?php echo $row->id_invoice; ?>)" title="Bayar Invoice">
                             <i class="fas fa-credit-card">
                             </i>
                           </a>
                         <?php } elseif (($row->status != "0")) { ?>
-                          <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>invoice/view/<?php echo $row->id_invoice; ?>" data-toggle="tooltip" data-placement="top" title="Riwayat Pembayaran Invoice">
+                          <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>invoice/view/<?php echo $row->id_invoice; ?>" title="Riwayat Pembayaran Invoice">
                             <i class="fas fa-clock">
                             </i>
                           </a>
                         <?php } ?>
-                        <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_invoice; ?>)" data-toggle="tooltip" data-placement="top" title="Edit">
+                        <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="edit(<?php echo $row->id_invoice; ?>)" title="Edit">
                           <i class="fas fa-pencil-alt">
                           </i>
                         </a>
-                        <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_invoice(<?php echo $row->id_invoice; ?>)" data-toggle="tooltip" data-placement="top" title="Hapus">
+                        <a class="btn btn-danger btn-sm" href="javascript:void(0);" onclick="delete_invoice(<?php echo $row->id_invoice; ?>)" title="Hapus">
                           <i class="fas fa-trash">
                           </i>
                         </a>

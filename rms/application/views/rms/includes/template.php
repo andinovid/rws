@@ -296,6 +296,7 @@
           "colvis"
         ]
       })
+      
       var $container = $(".fixed-table .dataTables_scroll");
       var $scroller = $(".dataTables_scrollBody");;
 

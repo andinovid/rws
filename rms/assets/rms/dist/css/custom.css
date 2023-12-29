@@ -51,6 +51,10 @@
 }
 
 @media (max-width: 576px) {
+  .project-actions a {
+    display: block;
+    margin-bottom: 3px;
+}
   .dt-buttons{
     display: none;
   }
