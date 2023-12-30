@@ -96,7 +96,7 @@
     <!-- /.container-fluid -->
 
     <div class="modal fade" id="cetak-invoice">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-md">
         <form action="<?php echo base_url(); ?>rms/cetak_invoice" id="cetak_invoice1" class="form-horizontal" method="post" enctype="multipart/form-data">
           <div class="modal-content">
             <div class="modal-header">
@@ -110,16 +110,12 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="nama">Nomor Invoice</label>
-                    <input type="hidden" class="form-control" id="id_project_invoice" name="id_project_invoice">
-                    <input type="text" class="form-control" id="no_invoice" name="no_invoice" placeholder="Input Nomor Invoice">
+                    <input type="hidden" class="form-control" id="id" name="id">
+                    <input type="text" class="form-control" id="no_invoice" name="no_invoice" placeholder="Input Nomor Invoice" disabled>
                   </div>
                   <div class="form-group">
-                    <label for="nama">PPh %</label>
-                    <input type="text" class="form-control" id="pph" name="pph" placeholder="Input PPh">
-                  </div>
-                  <div class="form-group">
-                    <label for="nama">PPn %</label>
-                    <input type="text" class="form-control" id="ppn" name="ppn" placeholder="Input PPn">
+                    <label for="nama">Remark</label>
+                    <textarea class="form-control" id="remark" name="remark" rows="3"></textarea>
                   </div>
                 </div>
               </div>
@@ -220,56 +216,25 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-  function cetak_invoice() {
-
-    event.preventDefault();
-    var searchIDs = $("#tbl-invoice input:checkbox:checked").map(function() {
-      return $(this).val();
-    }).get();
-
-    if (searchIDs != "") {
-      $('[name="id_project_invoice"]').val(searchIDs);
-      $('#cetak_invoice1')[0].reset();
-      $("#cetak-invoice").modal('show');
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Silahkan pilih invoice yang akan dicetak!"
-      });
-    }
-  }
-
   function edit(id) {
-    $('#sparepart-content').show();
-    load_data_sparepart_perbaikan(id);
-    $("#input-perbaikan").modal('show');
-    $('.modal-title').html('Edit perbaikan');
+    $("#cetak-invoice").modal('show');
     $('input[name=id]').val(id);
     $.ajax({
       url: "<?php echo base_url(); ?>rms/edit",
       type: "POST",
       data: {
         'id': id,
-        tbl: "tbl_perbaikan"
+        tbl: "tbl_invoice"
       },
       dataType: "JSON",
       beforeSend: function() {
-        $('#form_perbaikan')[0].reset();
+        $('#cetak_invoice1')[0].reset();
       },
       success: function(data) {
         for (var i = 0; i < data.length; i++) {
 
-          $('[name="kategori"]').val(data[i].kategori).change();
-          $('[name="truck"]').val(data[i].id_truck).change();
-          $('[name="nopol"]').val(data[i].nopol);
-          $('[name="supir"]').val(data[i].id_supir).change();
-          $('[name="nama_supir"]').val(data[i].nama_supir);
-          $('[name="jenis"]').val(data[i].jenis);
-          $('[name="tanggal"]').val(data[i].tanggal);
-          $('[name="jumlah"]').val($.number(data[i].jumlah).replace(/\,/g, '.'));
-          $('#label-nota').html(data[i].nota);
-          $('[name="status"]').val(data[i].status).change();
+          $('[name="no_invoice"]').val(data[i].no_invoice);
+          $('[name="remark"]').val(data[i].remark);
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -344,24 +309,24 @@
 
 
 
-  $('#form_tujuan').on('submit', function(event) {
+  $('#cetak_invoice1').on('submit', function(event) {
     event.preventDefault();
-    var formData = new FormData($('#form_tujuan')[0]);
+    var formData = new FormData($('#cetak_invoice1')[0]);
     $('.loading').show();
     $.ajax({
       type: 'POST',
-      url: '<?php echo base_url(); ?>rms/cetak_invoice/',
+      url: '<?php echo base_url(); ?>rms/update_invoice/',
       data: formData,
       processData: false,
       contentType: false,
       success: function(data) {
-        $('#form_tujuan')[0].reset();
+        $('#cetak_invoice1')[0].reset();
         $('.loading').hide();
         if (data.status = "true") {
           Swal.fire({
             icon: 'success',
-            title: "Success!",
-            text: "Schedule has been saved.",
+            title: "Berhasil!",
+            text: "Data berhasil disimpan.",
             type: "success"
           }).then((result) => {
             location.reload();
@@ -373,33 +338,7 @@
     });
   });
 
-  function edit(id) {
-    $("#input-tujuan").modal('show');
-    $('.modal-title').html('Edit tujuan');
-    $('input[name=id]').val(id);
-    $.ajax({
-      url: "<?php echo base_url(); ?>rms/edit",
-      type: "POST",
-      data: {
-        'id': id,
-        tbl: "tbl_tujuan"
-      },
-      dataType: "JSON",
-      beforeSend: function() {
-        $('#form_tujuan')[0].reset();
-      },
-      success: function(data) {
-        for (var i = 0; i < data.length; i++) {
-          $('[name="kode_tujuan"]').val(data[i].kode_tujuan);
-          $('[name="nama_tujuan"]').val(data[i].nama_tujuan);
-          $('[name="harga"]').val($.number(data[i].harga).replace(/\,/g, '.'));
-        }
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        alert('Error get data from ajax');
-      }
-    });
-  }
+
 
   function delete_invoice(id) {
     Swal.fire({

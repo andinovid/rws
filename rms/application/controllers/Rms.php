@@ -1507,6 +1507,8 @@ class Rms extends CI_Controller
         }
     }
 
+    
+
     public function save_pinjaman()
     {
         $id = $this->input->POST('id');
@@ -3364,6 +3366,23 @@ class Rms extends CI_Controller
         }
         if ($save_invoice) {
 
+            echo json_encode(array(
+                "status" => TRUE,
+                "target" => TRUE
+            ));
+        }
+    }
+
+    public function update_invoice()
+    {
+        $id = $this->input->POST('id');
+        $remark = $this->input->POST('remark');
+        $data = array(
+            'remark' => $remark
+        );
+
+        $save = $this->rms_model->update("tbl_invoice", $data, $id);
+        if ($save) {
             echo json_encode(array(
                 "status" => TRUE,
                 "target" => TRUE
