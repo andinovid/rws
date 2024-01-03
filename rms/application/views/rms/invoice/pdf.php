@@ -161,7 +161,7 @@
                     <td style="text-align: center;">Rp <?php echo number_format($row->harga_unit, 0, "", "."); ?></td>
                     <td style="text-align: center;">Rp <?php echo number_format($row->total, 0, "", "."); ?></td>
                 </tr>
-                <?php if (($invoice->id_komoditas != '3' and $invoice->id_klien != '1') or ($invoice->id_komoditas == '2' and $invoice->id_klien == '8') or ($invoice->id_komoditas == '2' and $invoice->id_klien == '9')) { ?>
+                <?php if (($invoice->id_komoditas != '3' and $invoice->id_klien != '1') or ($invoice->id_komoditas == '2' and $invoice->id_klien == '8') or ($invoice->id_komoditas == '2' and $invoice->id_klien == '9') or ($invoice->id_komoditas == '3' and $invoice->id_klien == '6')) { ?>
                     <?php if ($invoice->id_komoditas != '1') { ?>
                     <tr>
                         <td></td>
