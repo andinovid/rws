@@ -41,7 +41,7 @@
 
 <body>
     <div style="text-align: center;">
-        <img src="https://rms.rajawalisampit.com/assets/rms/dist/img/kop.png" style="width: 90%;">
+        <img src="https://rms.rajawalisampit.com/assets/rms/dist/img/kop.png" style="width: 70%;">
     </div>
     <h1 style="text-align:center;font-size:22px;margin-top:10px;">INVOICE</h1>
 
