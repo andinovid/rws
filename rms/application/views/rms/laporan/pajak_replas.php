@@ -122,7 +122,7 @@
         obj = JSON.parse(data);
         if (obj.status == "TRUE") {
           $('#form_pajak_replas')[0].reset();
-          window.open('<?php echo base_url(); ?>rms/generate_laporan_replas/' + bulan + '/' + tahun + '/' + jenis, '_blank');
+          window.open('<?php echo base_url(); ?>rms/generate_laporan_pajak_replas/' + bulan + '/' + tahun + '/' + jenis, '_blank');
         } else {
           Swal.fire({
             icon: "error",
