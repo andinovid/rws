@@ -27,7 +27,40 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-
+              <form id="form_pajak_replas2" class="form-horizontal" method="post" enctype="multipart/form-data">
+                <div class="row">
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Laporan harian</label>
+                      <div class="input-group date reservationdate reservationdate1" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate1" data-toggle="datetimepicker" name="date" id="date" />
+                        <div class="input-group-append" data-target=".reservationdate1" data-toggle="datetimepicker">
+                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Jenis Pajak</label>
+                      <select class="form-control" style="width: 100%;" name="jenis2" id="jenis2">
+                        <option value="">Pilih jenis pajak</option>
+                        <option value="skb">SKB</option>
+                        <option value="npwp">NPWP</option>
+                        <option value="ktp">KTP</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Generate laporan</button>
+                  <div class="loading2" style="display: none;">
+                    <img src="<?php echo base_url(); ?>assets/rms/dist/img/ajax-loader.gif" />
+                  </div>
+                </div>
+              </form>
+              
+              <hr>
               <form id="form_pajak_replas" class="form-horizontal" method="post" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-md-2">
@@ -123,6 +156,35 @@
         if (obj.status == "TRUE") {
           $('#form_pajak_replas')[0].reset();
           window.open('<?php echo base_url(); ?>rms/generate_laporan_pajak_replas/' + bulan + '/' + tahun + '/' + jenis, '_blank');
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Data tidak ditemukan!"
+          });
+        }
+      }
+    });
+  });
+
+  $('#form_pajak_replas2').on('submit', function(event) {
+    var date = $('#date').val();
+    var jenis2 = $('#jenis2').val();
+    event.preventDefault();
+    var formData = new FormData($('#form_pajak_replas2')[0]);
+    $('.loading2').show();
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo base_url(); ?>rms/cek_laporan_pajak_replas2/',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(data) {
+        $('.loading2').hide();
+        obj = JSON.parse(data);
+        if (obj.status == "TRUE") {
+          $('#form_pajak_replas2')[0].reset();
+          window.open('<?php echo base_url(); ?>rms/generate_laporan_pajak_replas2/' + date + '/' + jenis2, '_blank');
         } else {
           Swal.fire({
             icon: "error",

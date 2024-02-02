@@ -3945,6 +3945,127 @@ class Rms extends CI_Controller
         }
     }
 
+    public function cek_laporan_pajak_replas2()
+    {
+        $date = $this->input->POST('date');
+        $jenis = $this->input->POST('jenis2');
+        $no_pajak = $this->rms_model->get_by_query("SELECT *, SUM(total) as total_biaya_replas, SUM(pph) as total_pot_pph FROM v_laporan_pajak_replas WHERE tanggal_input = '$date' and jenis_pajak = '$jenis' GROUP BY no_pajak ORDER BY jenis_pajak ASC")->result();
+
+        if (!$no_pajak) {
+            echo json_encode(array(
+                "status" => 'FALSE'
+            ));
+        } else {
+            echo json_encode(array(
+                "status" => 'TRUE'
+            ));
+        }
+    }
+
+    public function generate_laporan_pajak_replas2($date, $jenis)
+    {
+        $date_title = shortdate_indo($date);
+        $no_pajak = $this->rms_model->get_by_query("SELECT *, SUM(total) as total_biaya_replas, SUM(pph) as total_pot_pph FROM v_laporan_pajak_replas WHERE tanggal_input = '$date' and jenis_pajak = '$jenis' GROUP BY no_pajak ORDER BY jenis_pajak ASC")->result();
+        include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
+        $excel = new PHPExcel();
+        $excel->getProperties()->setCreator('My Notes Code')
+            ->setLastModifiedBy('My Notes Code')
+            ->setTitle("Data Siswa")
+            ->setSubject("Siswa")
+            ->setDescription("Laporan Semua Data Siswa")
+            ->setKeywords("Data Siswa");
+        $style_col = array(
+            'font' => array('bold' => true), // Set font nya jadi bold
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+            )
+        );
+        // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+        $style_row = array(
+            'alignment' => array(
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+            )
+        );
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "Laporan pajak");
+        $excel->getActiveSheet()->mergeCells('A1:E1'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15);
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
+
+        $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO NPWP");
+        $excel->setActiveSheetIndex(0)->setCellValue('B3', "NAMA PAJAK");
+        $excel->setActiveSheetIndex(0)->setCellValue('C3', "JENIS PAJAK");
+        $excel->setActiveSheetIndex(0)->setCellValue('D3', "TOTAL");
+        $excel->setActiveSheetIndex(0)->setCellValue('E3', "POT PPH");
+
+
+        $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('C3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
+
+        // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
+        $no = 1; // Untuk penomoran tabel, di awal set dengan 1
+        $numrow = 4; // Set baris pertama untuk isi tabel adalah baris ke 4
+        foreach ($no_pajak as $data) { // Lakukan looping pada variabel siswa
+
+            $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $data->no_pajak);
+            $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $data->nama_pajak);
+            $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->jenis_pajak);
+            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, 'Rp ' . number_format($data->total_biaya_replas, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, 'Rp ' . number_format($data->total_pot_pph, 0, "", "."));
+
+            $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row);
+
+            // if ($data->total_jum_replas > '1') {
+
+            //     $cellmerge = 'A' . $numrow . ':A' . $merge;
+            //     $excel->getActiveSheet()->mergeCells($cellmerge); // Set Merge Cell pada kolom A1 sampai E1
+            // }
+
+            $no++; // Tambah 1 setiap kali looping
+            $numrow++; // Tambah 1 setiap kali looping
+        }
+        // Set width kolom
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+
+        // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
+        $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
+        // Set orientasi kertas jadi LANDSCAPE
+        $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+        // Set judul file excel nya
+        $excel->getActiveSheet(0)->setTitle("Laporan Pajak " . $date_title);
+        $excel->setActiveSheetIndex(0);
+        // Proses file excel
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="Laporan Rekap Pajak ' . $jenis . ' ' . $date_title . '.xlsx"'); // Set nama file excel nya
+        header('Cache-Control: max-age=0');
+        $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        $write->save('php://output');
+    }
+
     public function generate_laporan_pajak_replas($bulan, $tahun, $jenis)
     {
 
