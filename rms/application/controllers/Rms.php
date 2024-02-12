@@ -4008,8 +4008,9 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO NPWP");
         $excel->setActiveSheetIndex(0)->setCellValue('B3', "NAMA PAJAK");
         $excel->setActiveSheetIndex(0)->setCellValue('C3', "JENIS PAJAK");
-        $excel->setActiveSheetIndex(0)->setCellValue('D3', "TOTAL");
-        $excel->setActiveSheetIndex(0)->setCellValue('E3', "POT PPH");
+        $excel->setActiveSheetIndex(0)->setCellValue('D3', "VENDOR PENCAIRAN");
+        $excel->setActiveSheetIndex(0)->setCellValue('E3', "TOTAL");
+        $excel->setActiveSheetIndex(0)->setCellValue('F3', "POT PPH");
 
 
         $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
@@ -4017,6 +4018,7 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('C3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('F3')->applyFromArray($style_col);
 
         // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
@@ -4026,14 +4028,16 @@ class Rms extends CI_Controller
             $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $data->no_pajak);
             $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $data->nama_pajak);
             $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->jenis_pajak);
-            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, 'Rp ' . number_format($data->total_biaya_replas, 0, "", "."));
-            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, 'Rp ' . number_format($data->total_pot_pph, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->vendor_pencairan);
+            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, 'Rp ' . number_format($data->total_biaya_replas, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, 'Rp ' . number_format($data->total_pot_pph, 0, "", "."));
 
             $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('F' . $numrow)->applyFromArray($style_row);
 
             // if ($data->total_jum_replas > '1') {
 
@@ -4050,6 +4054,7 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
         $excel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
         $excel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
 
         // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
         $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
@@ -4112,8 +4117,9 @@ class Rms extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO NPWP");
         $excel->setActiveSheetIndex(0)->setCellValue('B3', "NAMA PAJAK");
         $excel->setActiveSheetIndex(0)->setCellValue('C3', "JENIS PAJAK");
-        $excel->setActiveSheetIndex(0)->setCellValue('D3', "TOTAL");
-        $excel->setActiveSheetIndex(0)->setCellValue('E3', "POT PPH");
+        $excel->setActiveSheetIndex(0)->setCellValue('D3', "VENDOR PENCAIRAN");
+        $excel->setActiveSheetIndex(0)->setCellValue('E3', "TOTAL");
+        $excel->setActiveSheetIndex(0)->setCellValue('F3', "POT PPH");
 
 
         $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
@@ -4121,6 +4127,7 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getStyle('C3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('F3')->applyFromArray($style_col);
 
         // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
@@ -4130,14 +4137,16 @@ class Rms extends CI_Controller
             $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $data->no_pajak);
             $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $data->nama_pajak);
             $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->jenis_pajak);
-            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, 'Rp ' . number_format($data->total_biaya_replas, 0, "", "."));
-            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, 'Rp ' . number_format($data->total_pot_pph, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->vendor_pencairan);
+            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, 'Rp ' . number_format($data->total_biaya_replas, 0, "", "."));
+            $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, 'Rp ' . number_format($data->total_pot_pph, 0, "", "."));
 
             $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('F' . $numrow)->applyFromArray($style_row);
 
             // if ($data->total_jum_replas > '1') {
 
@@ -4154,6 +4163,7 @@ class Rms extends CI_Controller
         $excel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
         $excel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
         $excel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
 
         // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
         $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
