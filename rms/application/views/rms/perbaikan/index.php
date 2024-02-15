@@ -39,7 +39,7 @@
                       <th>Supir</th>
                       <th style="width: 30%;">Jenis</th>
                       <th>Tanggal</th>
-                      <th>Tanggal Nota</th>
+                      <th>Tanggal Input</th>
                       <th>Jumlah</th>
                       <th>Status</th>
                       <th></th>
@@ -48,7 +48,7 @@
                     <tr>
                       <th style="width: 65%;">Jenis</th>
                       <th>Tanggal</th>
-                      <th>Tanggal Nota</th>
+                      <th>Tanggal Input</th>
                     </tr>
                   <?php } ?>
                 </thead>
@@ -173,7 +173,7 @@
                     <input type="text" class="form-control number" id="jumlah" name="jumlah" placeholder="Input jumlah biaya perbaikan">
                   </div>
                   <div class="form-group">
-                    <label for="no_replas">Tanggal nota</label>
+                    <label for="no_replas">Tanggal input</label>
                     <div class="input-group date reservationdate reservationdate2" data-target-input="nearest">
                       <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate2" data-toggle="datetimepicker" name="tanggal_nota" id="tanggal2" />
                       <div class="input-group-append" data-target=".reservationdate2" data-toggle="datetimepicker">
