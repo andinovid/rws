@@ -33,6 +33,7 @@
                 <thead>
                   <tr>
                     <th style="width: 15%;">Tanggal</th>
+                    <th style="width: 15%;">Tanggal Input</th>
                     <th>Jenis</th>
                     <th style="width: 10%;">Jumlah</th>
                     <th>Keterangan</th>
@@ -45,6 +46,7 @@
                   ?>
                     <tr>
                       <td><?php echo shortdate_indo($row->tanggal); ?></td>
+                      <td><?php echo shortdate_indo($row->tanggal_input); ?></td>
                       <td>
                         <?php if ($row->jenis == '1') { ?>
                           <span class="badge bg-success">Pemasukan</span>
@@ -70,7 +72,7 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th colspan="2" class="text-right">Saldo :</th>
+                    <th colspan="3" class="text-right">Saldo :</th>
                     <th><span style="font-weight: 400;"></span> Rp <?php echo number_format($saldo->total, 0, "", "."); ?></th>
                     <th colspan="2"></th>
                   </tr>
