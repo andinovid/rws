@@ -874,6 +874,7 @@ class Rms extends CI_Controller
         $truck = $this->input->POST('truck');
         $supir = $this->input->POST('supir');
         $tanggal = $this->input->POST('tanggal');
+        $tanggal_nota = $this->input->POST('tanggal_nota');
         $jenis = $this->input->POST('jenis');
         $jumlah = $this->input->POST('jumlah');
         $status = $this->input->POST('status');
@@ -893,6 +894,7 @@ class Rms extends CI_Controller
             'nama_supir' => $nama_supir,
             'tanggal' => $tanggal,
             'jumlah' => str_replace('.', '', $jumlah),
+            'tanggal_nota' => $tanggal_nota,
             'jenis' => $jenis,
             'pic' => $pic,
             'status' => $status,

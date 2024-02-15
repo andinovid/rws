@@ -39,6 +39,7 @@
                       <th>Supir</th>
                       <th style="width: 30%;">Jenis</th>
                       <th>Tanggal</th>
+                      <th>Tanggal Nota</th>
                       <th>Jumlah</th>
                       <th>Status</th>
                       <th></th>
@@ -47,6 +48,7 @@
                     <tr>
                       <th style="width: 65%;">Jenis</th>
                       <th>Tanggal</th>
+                      <th>Tanggal Nota</th>
                     </tr>
                   <?php } ?>
                 </thead>
@@ -62,6 +64,7 @@
                         <td><?php echo $row->nama_supir; ?></td>
                         <td><?php echo $row->jenis_perbaikan; ?></td>
                         <td><?php echo shortdate_indo($row->tanggal_perbaikan); ?></td>
+                        <td><?php if($row->tanggal_nota != "" || $row->tanggal_nota != NULL){ echo shortdate_indo($row->tanggal_nota); }else{ echo "-"; } ?></td>
                         <td><?php echo number_format($row->jumlah, 0, "", "."); ?></td>
                         <td>
                           <span class="badge <?php if ($row->status == '0') { ?>bg-warning <?php } else { ?> bg-success <?php } ?>"><?php echo $row->nama_status; ?></span>
@@ -82,6 +85,7 @@
                       <tr>
                         <td><?php echo $row->jenis_perbaikan; ?></td>
                         <td><span class="badge bg-success"><?php echo shortdate_indo($row->tanggal_perbaikan); ?></span></td>
+                        <td><?php if($row->tanggal_nota != "" || $row->tanggal_nota != NULL){ echo shortdate_indo($row->tanggal_nota); }else{ echo "-"; } ?></td>
                       </tr>
                     <?php } ?>
                   <?php endforeach; ?>
@@ -159,6 +163,8 @@
                       </div>
                     </div>
                   </div>
+                  
+                  
                 </div>
                 <div class="col-md-6">
 
@@ -166,7 +172,15 @@
                     <label for="cicilan">Jumlah</label>
                     <input type="text" class="form-control number" id="jumlah" name="jumlah" placeholder="Input jumlah biaya perbaikan">
                   </div>
-
+                  <div class="form-group">
+                    <label for="no_replas">Tanggal nota</label>
+                    <div class="input-group date reservationdate reservationdate2" data-target-input="nearest">
+                      <input type="text" class="form-control datetimepicker-input" data-target=".reservationdate2" data-toggle="datetimepicker" name="tanggal_nota" id="tanggal2" />
+                      <div class="input-group-append" data-target=".reservationdate2" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <label for="no_replas">Foto Nota</label>
                     <div class="custom-file">
@@ -371,6 +385,7 @@
           $('[name="nama_supir"]').val(data[i].nama_supir);
           $('[name="jenis"]').val(data[i].jenis);
           $('[name="tanggal"]').val(data[i].tanggal);
+          $('[name="tanggal_nota"]').val(data[i].tanggal_nota);
           $('[name="jumlah"]').val($.number(data[i].jumlah).replace(/\,/g, '.'));
           $('#label-nota').html(data[i].nota);
           $('[name="status"]').val(data[i].status).change();
