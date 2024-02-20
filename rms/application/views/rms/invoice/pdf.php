@@ -226,7 +226,7 @@
             Seluruh pembayaran dapat dilakukan melalui transfer ke :
         </div>
     </div>
-    <?php if ($invoice->id_klien == "2" || $invoice->id_klien == "3" || $invoice->id_klien == "6" || $invoice->id_klien == "4" || $invoice->id_klien == "1" || $invoice->id_klien == "8" || $invoice->id_klien == "9" || $invoice->id_klien == "10") { ?>
+    <?php if ($invoice->id_klien == "2" || $invoice->id_klien == "3" || $invoice->id_klien == "6" || $invoice->id_klien == "4" || $invoice->id_klien == "1" || $invoice->id_klien == "8" || $invoice->id_klien == "9" || $invoice->id_klien == "10" || $invoice->id_klien == "7") { ?>
         <div>
             <div style="display: inline-table; width:50%;">
                 Bank Mandiri Kantor Cabang Sampit
